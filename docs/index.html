@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Incognito · Wedding registration styles</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&amp;display=swap">
+<style>
+:root{--bg:#101011;--bar:#18181a;--line:#2e2e31;--text:#f2efe8;--muted:#a8a6a0;--on:#f2efe8;--on-text:#111}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Archivo,system-ui,sans-serif}
+body{display:flex;flex-direction:column}
+header{background:var(--bar);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
+.title{display:flex;flex-direction:column;gap:2px}
+.title strong{font-size:15px;letter-spacing:.04em}
+.title span{font-size:13px;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav button{height:44px;padding:0 16px;border:1px solid var(--line);background:transparent;color:var(--text);font:600 14px Archivo,system-ui,sans-serif;cursor:pointer;border-radius:2px}
+nav button:hover{border-color:var(--muted)}
+nav button[aria-pressed="true"]{background:var(--on);color:var(--on-text);border-color:var(--on)}
+nav button:focus-visible,a:focus-visible{outline:2px solid #c9a24b;outline-offset:2px}
+.tools{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted)}
+.tools a{color:var(--text)}
+main{flex:1 1 auto;min-height:0}
+iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+</style>
+</head>
+<body>
+<header>
+<div class="title"><strong>INCOGNITO · WEDDING REGISTRATION</strong><span id="desc">Step 1 of sign-up, shown in each style</span></div>
+<nav aria-label="Style">
+<button type="button" data-style="kodak">Kodak</button>
+<button type="button" data-style="silver-birch">Silver Birch</button>
+<button type="button" data-style="tuxedo-park-green">Tuxedo Park · green</button>
+<button type="button" data-style="tuxedo-park-burgundy">Tuxedo Park · burgundy</button>
+</nav>
+<div class="tools"><a id="open" href="styles/kodak.html" target="_blank" rel="noopener">Open full page</a></div>
+</header>
+<main><iframe id="view" title="Style preview" src="styles/kodak.html"></iframe></main>
+<script>
+(function () {
+  var notes = {
+    'kodak': 'Kodak: charcoal, brass and brushed aluminum, with a Rochester feel',
+    'silver-birch': 'Silver Birch: black, silver and ivory, with gold for titles',
+    'tuxedo-park-green': 'Tuxedo Park: bottle-green walls, engraved stationery and gilt',
+    'tuxedo-park-burgundy': 'Tuxedo Park: the burgundy set'
+  };
+  var buttons = document.querySelectorAll('nav button');
+  function show(id, push) {
+    if (!notes[id]) id = 'kodak';
+    document.getElementById('view').src = 'styles/' + id + '.html';
+    document.getElementById('open').href = 'styles/' + id + '.html';
+    document.getElementById('desc').textContent = notes[id];
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.style === id ? 'true' : 'false'); });
+    if (push) history.replaceState(null, '', '#' + id);
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.style, true); }); });
+  show(location.hash.slice(1), false);
+})();
+</script>
+</body>
+</html>
