@@ -154,7 +154,7 @@
 
 <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding-top:22px; border-top:1px solid {{t.fieldLine}};">
 <span style="font-size:14px; color:{{t.cardMuted}};">Under 18? We’ll also ask for a parent’s number before your fitting.</span>
-<button type="button" style="height:54px; padding:0 28px; background:{{t.cardAccent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.cta}}</button>
+<a href="{{t.styleHref}}" style="height:54px; padding:0 28px; box-sizing:border-box; display:inline-flex; align-items:center; background:{{t.cardAccent}}; color:{{t.onAccent}}; text-decoration:none; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase;">{{t.cta}}</a>
 </div>
 </section>
 </main>
@@ -184,7 +184,7 @@ class Component extends DCLogic {
         card: '#1A1816', cardText: '#EEE7D9', cardMuted: '#A39A8B', cardAccent: '#C29E62', onAccent: '#15130F', field: '#0F0E0D', fieldLine: '#38322A', score: '#0F0E0D', radius: '2px', chipRadius: '2px', scheme: 'dark',
         formKicker: 'Start your squad', formTitle: 'Who’s riding with you?', crewLabel: 'Squad name', rerollLabel: 'New name', inviteLabel: 'The squad', addLabel: 'Add to squad',
         dressLabel: 'Your date’s dress', pointsTitle: 'Squad points', cta: 'Start the squad',
-        gameLabel: 'Warm up: play Suit Up', gameHref: 'PromGameKodak.dc.html',
+        gameLabel: 'Warm up: play Suit Up', gameHref: 'PromGameKodak.dc.html', styleHref: 'PromStyleKodak.dc.html',
         crews: ['Squad 85', 'The Night Shift', 'The Stakeout', 'Downtown Crew', 'The Late Edition'],
         goals: ['Squad started', 'Four friends in', 'Everyone measured', 'Fittings booked', 'Suit Up played']
       },
@@ -197,7 +197,7 @@ class Component extends DCLogic {
         card: '#111112', cardText: '#F4F1EA', cardMuted: '#B9BDBF', cardAccent: '#C9A24B', onAccent: '#0A0A0B', field: '#1B1B1D', fieldLine: '#4A4B4E', score: '#0A0A0B', radius: '0', chipRadius: '0', scheme: 'dark',
         formKicker: 'Recruit your crew', formTitle: 'Assemble the team', crewLabel: 'Crew codename', rerollLabel: 'New codename', inviteLabel: 'Field agents', addLabel: 'Recruit',
         dressLabel: 'Your date’s dress (intel)', pointsTitle: 'Mission points', cta: 'Begin the mission',
-        gameLabel: 'Training: play Suit Up', gameHref: 'PromGameBirch.dc.html',
+        gameLabel: 'Training: play Suit Up', gameHref: 'PromGameBirch.dc.html', styleHref: 'PromStyleBirch.dc.html',
         crews: ['Crew Silver Fox', 'Crew Midnight Falcon', 'Crew Velvet Heron', 'Crew Ivory Wolf', 'Crew Black Orchid'],
         goals: ['Crew assembled', 'Four agents recruited', 'All measurements filed', 'Fittings booked', 'Training complete']
       },
@@ -210,7 +210,7 @@ class Component extends DCLogic {
         card: '#F2EAD8', cardText: '#1F1A14', cardMuted: '#4E463A', cardAccent: '#7B2D26', onAccent: '#F2EAD8', field: 'transparent', fieldLine: '#9A9080', score: '#E9DFC8', radius: '0', chipRadius: '20px', scheme: 'light',
         formKicker: 'Open the case', formTitle: 'Name your accomplices', crewLabel: 'The case', rerollLabel: 'Another title', inviteLabel: 'Your accomplices', addLabel: 'Enlist',
         dressLabel: 'Evidence: the dress', pointsTitle: 'Points of deduction', cta: 'Open the case',
-        gameLabel: 'A warm-up case: play Suit Up', gameHref: 'PromGamePark.dc.html',
+        gameLabel: 'A warm-up case: play Suit Up', gameHref: 'PromGamePark.dc.html', styleHref: 'PromStylePark.dc.html',
         crews: ['The Case of the Missing Bow Tie', 'The Case of the Velvet Lapel', 'The Case of the Midnight Corsage', 'The Case of the Vanishing Cufflink', 'The Case of the Crimson Carnation'],
         goals: ['Case opened', 'Four accomplices enlisted', 'Evidence measured', 'Fittings arranged', 'Warm-up case solved']
       }

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prom · measurements</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Plaster&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<style>body{margin:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}</style>
+</helmet>
+<div style="box-sizing:border-box; width:100%; min-height:100vh; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:dark;">
+
+<header style="border-bottom:1px solid {{t.line}}; background:{{t.bar}};">
+<div style="max-width:1320px; margin:0 auto; box-sizing:border-box; padding:16px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
+<span style="display:flex; align-items:baseline; gap:14px;">
+<span style="font-family:{{t.markFont}}; font-weight:{{t.markWeight}}; font-size:26px; letter-spacing:{{t.markTrack}};">{{t.mark}}</span>
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">Prom 2027</span>
+</span>
+<nav aria-label="Prom steps" style="display:flex; flex-wrap:wrap; gap:6px 20px; font-size:15px; font-weight:600;">
+<a href="{{t.links.signup}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.0}}</a>
+<a href="{{t.links.style}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.1}}</a>
+<a href="{{t.links.measure}}" aria-current="page" style="padding:10px 0 8px; color:{{t.text}}; text-decoration:none; border-bottom:2px solid {{t.accent}};">{{t.steps.2}}</a>
+<a href="{{t.links.game}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.3}}</a>
+</nav>
+</div>
+</header>
+
+<main style="max-width:1320px; margin:0 auto; box-sizing:border-box; padding:44px 32px 72px; display:flex; flex-wrap:wrap; gap:36px; align-items:flex-start;">
+
+<aside style="flex:1 1 300px; max-width:400px; display:flex; flex-direction:column; gap:22px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(36px, 4.6vw, 56px); line-height:1; color:{{t.headColor}};">{{t.title}}</h1>
+<p style="margin:0; font-size:18px; line-height:1.5; color:{{t.muted}};">{{t.sub}}</p>
+<div style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid {{t.line}};">
+<div role="img" aria-label="{{countText}}" style="display:grid; grid-template-columns:repeat(10, minmax(0, 1fr)); gap:4px;">
+<sc-for list="{{meter}}" as="q" hint-placeholder-count="10">
+<span style="height:16px; box-sizing:border-box; background:{{q.bg}}; border:1px solid {{t.accent}};"></span>
+</sc-for>
+</div>
+<span aria-live="polite" style="font-size:15px;"><strong style="color:{{t.accent}};">{{countText}}</strong> · +{{points}} points</span>
+</div>
+<p style="margin:0; font-size:15px; line-height:1.5; color:{{t.muted}};">{{t.helper}} <a href="Book.dc.html" style="color:{{t.accent}}; font-weight:600;">Book a visit</a> and we’ll measure you in the shop.</p>
+</aside>
+
+<section aria-labelledby="m-title" style="flex:999 1 580px; min-width:0; box-sizing:border-box; padding:32px 34px; background:{{t.card}}; color:{{t.cardText}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; gap:26px;">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:{{t.cardAccent}};">{{t.formKicker}}</span>
+<h2 id="m-title" style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:34px; line-height:1.05;">{{t.formTitle}}</h2>
+<span style="font-size:15px; color:{{t.cardMuted}};">Grab a soft tape measure and a friend. Tap How? to watch how each one is done.</span>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 18px;">
+<sc-for list="{{fields}}" as="f" hint-placeholder-count="10">
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0; grid-column:{{f.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:24px;">
+<label for="{{f.id}}" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};"><span style="color:{{t.cardAccent}};">{{f.n}}</span> {{f.label}}</label>
+<button type="button" aria-expanded="{{f.open}}" aria-label="{{f.tipAria}}" onClick="{{f.toggle}}" style="height:44px; margin:-10px -8px -10px 0; padding:0 8px; background:transparent; border:0; color:{{t.cardAccent}}; font-family:{{t.body}}; font-size:14px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">{{f.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="{{f.id}}" type="{{f.type}}" step="{{f.step}}" min="0" placeholder="{{f.ph}}" value="{{f.value}}" onChange="{{f.set}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 44px 0 14px; background:{{t.field}}; border:1px solid {{f.bd}}; border-radius:{{t.radius}}; color:{{t.cardText}}; font-family:{{t.body}}; font-size:17px;">
+<span aria-hidden="true" style="position:absolute; right:12px; top:16px; font-size:14px; color:{{t.cardMuted}};">{{f.unit}}</span>
+</div>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}">
+<div style="box-sizing:border-box; width:100%; max-width:420px; margin:0 auto; padding:12px; background:#121110;">
+<dc-import name="HowTo" which="{{f.key}}" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+
+<sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding-top:20px; border-top:1px solid {{t.line}};">
+<span style="font-size:14px; color:{{t.cardMuted}};">Skip anything you’re unsure of. We’ll check your numbers before the order goes in.</span>
+<button type="button" onClick="{{send}}" style="height:54px; padding:0 28px; background:{{t.cardAccent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.sendLabel}}</button>
+</div>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+<div aria-live="polite" style="display:flex; flex-direction:column; gap:10px; padding:18px; border:1px solid {{t.cardAccent}};">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:24px;">{{t.sentTitle}}</span>
+<span style="font-size:15px; color:{{t.cardMuted}};">+{{points}} points for the crew. We’ll text you if anything needs a second look.</span>
+<a href="{{t.links.game}}" style="align-self:flex-start; height:46px; padding:0 18px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid {{t.cardAccent}}; color:{{t.cardText}}; text-decoration:none; font-weight:600; font-size:15px;">{{t.gameLabel}}</a>
+</div>
+</sc-if>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { v: { height: '70', weight: '165', chest: '39', overarm: '', neck: '', sleeve: '', waist: '', hip: '', outseam: '', shoe: '' }, open: { overarm: true }, sent: false };
+  }
+  themes() {
+    const steps = { kodak: ['The squad', 'The look', 'Measurements', 'Suit Up'], birch: ['The crew', 'Your cover', 'Intel', 'Training'], park: ['The case', 'The wardrobe', 'The evidence', 'Warm-up case'] };
+    const link = (k) => ({ signup: 'Prom' + k + '.dc.html', style: 'PromStyle' + k + '.dc.html', measure: 'PromMeasure' + k + '.dc.html', game: 'PromGame' + k + '.dc.html' });
+    return {
+      kodak: {
+        mark: 'INCOGNITO', markFont: 'norman-stencil-fat, Rokkitt, serif', markWeight: 800, markTrack: '.08em', steps: steps.kodak, links: link('Kodak'),
+        kicker: 'Prom 2027 · Measurements', title: 'Get the numbers. Get it right.', sub: 'Ten measurements and you’re done. Every one you send gets the squad closer to the free tux.',
+        helper: 'Would rather a pro did it?', formKicker: 'Your measurements', formTitle: 'Tape out. Let’s go.', sendLabel: 'Send them in', sentTitle: 'Got ’em. Nice work.', gameLabel: 'Play Suit Up while you wait',
+        bg: '#121110', bar: '#0C0B0A', line: '#38322A', text: '#EEE7D9', muted: '#A39A8B', accent: '#C29E62', headColor: '#EEE7D9',
+        head: 'norman-stencil-fat, Rokkitt, serif', headWeight: 800, body: 'Archivo, sans-serif',
+        card: '#1A1816', cardText: '#EEE7D9', cardMuted: '#A39A8B', cardAccent: '#C29E62', onAccent: '#15130F', field: '#0F0E0D', fieldLine: '#38322A', filled: '#8C7247', radius: '2px'
+      },
+      birch: {
+        mark: 'INCOGNITO', markFont: 'Jost, sans-serif', markWeight: 600, markTrack: '.34em', steps: steps.birch, links: link('Birch'),
+        kicker: 'Prom 2027 · Intel', title: 'File your intel.', sub: 'Ten measurements, filed in confidence. The tailor sees them; your crew only sees that you’re done.',
+        helper: 'Prefer a professional debrief?', formKicker: 'Measurement intel', formTitle: 'Your file', sendLabel: 'Transmit', sentTitle: 'Intel received.', gameLabel: 'Training: play Suit Up',
+        bg: '#0A0A0B', bar: '#0A0A0B', line: '#2E2F31', text: '#F4F1EA', muted: '#B9BDBF', accent: '#C9A24B', headColor: '#C9A24B',
+        head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, body: 'Jost, sans-serif',
+        card: '#111112', cardText: '#F4F1EA', cardMuted: '#B9BDBF', cardAccent: '#C9A24B', onAccent: '#0A0A0B', field: '#1B1B1D', fieldLine: '#4A4B4E', filled: '#C9A24B', radius: '0'
+      },
+      park: {
+        mark: 'Incognito', markFont: "vivaldi-mn, 'Playfair Display', Georgia, serif", markWeight: 400, markTrack: '0', steps: steps.park, links: link('Park'),
+        kicker: 'Prom 2027 · The evidence', title: 'Gather the evidence.', sub: 'Ten measurements, taken with care. Every detail matters; that is the whole of the method.',
+        helper: 'Would you rather leave it to a professional?', formKicker: 'The evidence', formTitle: 'Measurements of the subject', sendLabel: 'Submit the evidence', sentTitle: 'The evidence is in.', gameLabel: 'A warm-up case: play Suit Up',
+        bg: '#13241D', bar: '#0E1B16', line: '#2F463A', text: '#F2EAD8', muted: '#A9B39F', accent: '#C6A867', headColor: '#F2EAD8',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, body: "'EB Garamond', Georgia, serif",
+        card: '#F2EAD8', cardText: '#1F1A14', cardMuted: '#4E463A', cardAccent: '#7B2D26', onAccent: '#F2EAD8', field: 'transparent', fieldLine: '#9A9080', filled: '#7B2D26', radius: '0'
+      }
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const T = this.themes();
+    const t = T[this.props.theme] || T.kodak;
+    const F = [
+      ['height', 'Height', 'in', '70', '1'], ['weight', 'Weight', 'lbs', '165', '1'], ['chest', 'Chest', 'in', '40', '0.25'], ['overarm', 'Overarm', 'in', '47', '0.25'],
+      ['neck', 'Neck', 'in', '15.5', '0.25'], ['sleeve', 'Sleeve', 'in', '34', '0.25'], ['waist', 'Waist', 'in', '32', '0.25'], ['hip', 'Hip', 'in', '38', '0.25'],
+      ['outseam', 'Outseam', 'in', '42', '0.25'], ['shoe', 'Shoe size', 'US', '10.5', '0.5']
+    ];
+    const fields = F.map((f, i) => {
+      const open = !!s.open[f[0]];
+      const value = s.v[f[0]];
+      return {
+        key: f[0], id: 'pm-' + f[0], n: String(i + 1).padStart(2, '0'), label: f[1] + (f[0] === 'height' ? ' (total inches)' : ''), unit: f[2], ph: 'e.g. ' + f[3], step: f[4], type: 'number',
+        value: value, bd: value ? t.filled : t.fieldLine, open: open, span: open ? '1 / -1' : 'auto',
+        tipLabel: open ? 'Hide' : 'How?', tipAria: (open ? 'Hide help for ' : 'How to measure ') + f[1].toLowerCase(),
+        toggle: () => this.setState({ open: Object.assign({}, this.state.open, { [f[0]]: !open }) }),
+        set: (e) => this.setState({ v: Object.assign({}, this.state.v, { [f[0]]: e.target.value }) })
+      };
+    });
+    const count = F.filter((f) => s.v[f[0]]).length;
+    return {
+      t: t,
+      fields: fields,
+      meter: F.map((f) => ({ bg: s.v[f[0]] ? t.accent : 'transparent' })),
+      countText: count + ' of 10 in',
+      points: count * 30,
+      notSent: !s.sent,
+      sent: s.sent,
+      send: () => this.setState({ sent: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

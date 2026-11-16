@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prom · pick your look</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Plaster&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="box-sizing:border-box; width:100%; min-height:100vh; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:dark;">
+
+<header style="border-bottom:1px solid {{t.line}}; background:{{t.bar}};">
+<div style="max-width:1320px; margin:0 auto; box-sizing:border-box; padding:16px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
+<span style="display:flex; align-items:baseline; gap:14px;">
+<span style="font-family:{{t.markFont}}; font-weight:{{t.markWeight}}; font-size:26px; letter-spacing:{{t.markTrack}};">{{t.mark}}</span>
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">Prom 2027</span>
+</span>
+<nav aria-label="Prom steps" style="display:flex; flex-wrap:wrap; gap:6px 20px; font-size:15px; font-weight:600;">
+<a href="{{t.links.signup}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.0}}</a>
+<a href="{{t.links.style}}" aria-current="page" style="padding:10px 0 8px; color:{{t.text}}; text-decoration:none; border-bottom:2px solid {{t.accent}};">{{t.steps.1}}</a>
+<a href="{{t.links.measure}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.2}}</a>
+<a href="{{t.links.game}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.3}}</a>
+</nav>
+</div>
+</header>
+
+<main style="max-width:1320px; margin:0 auto; box-sizing:border-box; padding:44px 32px 72px; display:flex; flex-direction:column; gap:30px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 32px;">
+<div style="display:flex; flex-direction:column; gap:10px; max-width:720px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(38px, 5vw, 60px); line-height:1; color:{{t.headColor}};">{{t.title}}</h1>
+<p style="margin:0; font-size:18px; line-height:1.5; color:{{t.muted}};">{{t.sub}}</p>
+</div>
+<div role="group" aria-label="Show" style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="height:44px; padding:0 16px; background:{{f.bg}}; color:{{f.fg}}; border:1px solid {{f.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{f.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start;">
+
+<section aria-label="Inventory" style="flex:999 1 620px; min-width:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(210px, 100%), 1fr)); gap:16px;">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="8">
+<button type="button" aria-pressed="{{it.on}}" onClick="{{it.pick}}" aria-label="{{it.aria}}" style="display:flex; flex-direction:column; gap:0; padding:0; text-align:left; background:{{t.card}}; color:{{t.cardText}}; border:{{it.border}}; border-radius:{{t.radius}}; font-family:{{t.body}}; cursor:pointer; overflow:hidden;">
+<span style="display:block; background:{{t.stage}};">
+<svg aria-hidden="true" viewBox="20 80 320 300" style="display:block; width:100%; height:auto;">
+<path d="M18 440 L28 214 Q34 164 88 148 L146 124 L180 146 L214 124 L272 148 Q326 164 332 214 L342 440 Z" fill="{{it.jacket}}" stroke="{{it.edge}}" stroke-width="2"></path>
+<path d="M154 112 L158 94 L202 94 L206 112 Z" fill="#F4F1EA"></path>
+<path d="M150 112 L210 112 L180 302 Z" fill="#F4F1EA"></path>
+<path d="{{it.lapelL}}" fill="{{it.lapel}}" stroke="{{it.edge}}" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="{{it.lapelR}}" fill="{{it.lapel}}" stroke="{{it.edge}}" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="M180 124 L150 108 L150 140 Z M180 124 L210 108 L210 140 Z" fill="#111"></path>
+<rect x="171" y="115" width="18" height="18" rx="3" fill="#111"></rect>
+<circle cx="180" cy="324" r="8" fill="{{it.lapel}}" stroke="{{it.edge}}" stroke-width="1.5"></circle>
+</svg>
+</span>
+<span style="display:flex; flex-direction:column; gap:6px; padding:14px 16px 16px;">
+<span style="display:flex; justify-content:space-between; align-items:baseline; gap:8px;">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:22px; line-height:1.1;">{{it.name}}</span>
+<span aria-hidden="true" style="flex:0 0 18px; height:18px; box-sizing:border-box; border:1px solid {{t.cardAccent}}; background:{{it.dot}};"></span>
+</span>
+<span style="font-size:14px; line-height:1.4; color:{{t.cardMuted}};">{{it.detail}}</span>
+<span style="display:flex; justify-content:space-between; gap:8px; font-size:13px; font-weight:600;"><span style="color:{{it.stockColor}};">{{it.stock}}</span><span style="color:{{t.cardMuted}};">[PRICE]</span></span>
+<span style="font-size:13px; color:{{t.cardAccent}};">{{it.crewLine}}</span>
+</span>
+</button>
+</sc-for>
+</section>
+
+<aside aria-labelledby="look-h" style="flex:1 1 340px; max-width:420px; box-sizing:border-box; padding:26px; background:{{t.card}}; color:{{t.cardText}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; gap:20px;">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:{{t.cardAccent}};">{{t.lookKicker}}</span>
+<h2 id="look-h" aria-live="polite" style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:30px; line-height:1.05;">{{sel.name}}</h2>
+<span style="font-size:15px; color:{{t.cardMuted}};">{{sel.detail}}</span>
+</div>
+<div style="background:{{t.stage}}; border:1px solid {{t.line}};">
+<svg role="img" aria-label="{{sel.alt}}" viewBox="0 40 360 400" style="display:block; width:100%; height:auto;">
+<path d="M18 440 L28 214 Q34 164 88 148 L146 124 L180 146 L214 124 L272 148 Q326 164 332 214 L342 440 Z" fill="{{sel.jacket}}" stroke="{{sel.edge}}" stroke-width="2"></path>
+<path d="M154 112 L158 94 L202 94 L206 112 Z" fill="#F4F1EA"></path>
+<path d="M150 112 L210 112 L180 302 Z" fill="#F4F1EA"></path>
+<path display="{{sel.longShow}}" d="M172 118 L188 118 L192 132 L186 262 L180 274 L174 262 L168 132 Z" fill="{{sel.tie}}"></path>
+<path display="{{sel.vestShow}}" d="M160 198 L200 198 L180 302 Z" fill="{{sel.tie}}"></path>
+<path display="{{sel.cumShow}}" d="M167 258 L193 258 L187 292 L173 292 Z" fill="{{sel.tie}}"></path>
+<path d="{{sel.lapelL}}" fill="{{sel.lapel}}" stroke="{{sel.edge}}" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="{{sel.lapelR}}" fill="{{sel.lapel}}" stroke="{{sel.edge}}" stroke-width="1.5" stroke-linejoin="round"></path>
+<path display="{{sel.bowShow}}" d="M180 124 L150 108 L150 140 Z M180 124 L210 108 L210 140 Z" fill="{{sel.tie}}"></path>
+<rect display="{{sel.bowShow}}" x="171" y="115" width="18" height="18" rx="3" fill="{{sel.tie}}"></rect>
+<rect display="{{sel.longShow}}" x="171" y="112" width="18" height="16" rx="3" fill="{{sel.tie}}"></rect>
+<path d="M240 258 L294 264" stroke="{{sel.edge}}" stroke-width="3" stroke-linecap="round"></path>
+<path display="{{sel.squareShow}}" d="M244 258 L254 238 L266 259 L278 240 L290 262 Z" fill="{{sel.tie}}"></path>
+<circle cx="180" cy="324" r="8" fill="{{sel.lapel}}" stroke="{{sel.edge}}" stroke-width="1.5"></circle>
+</svg>
+</div>
+
+<div role="radiogroup" aria-labelledby="g-tie" style="display:flex; flex-direction:column; gap:10px;">
+<span id="g-tie" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Tie and vest color</span>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{tieColors}}" as="c" hint-placeholder-count="6">
+<button type="button" role="radio" aria-checked="{{c.on}}" aria-label="{{c.name}}" onClick="{{c.pick}}" style="width:40px; height:40px; padding:0; border-radius:50%; background:{{c.hex}}; border:1px solid rgba(128,128,128,.5); box-shadow:{{c.ring}}; cursor:pointer;"></button>
+</sc-for>
+</div>
+<span style="font-size:14px; color:{{t.cardMuted}};">{{tieNote}}</span>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px;">
+<div role="group" aria-labelledby="g-neck" style="display:flex; flex-direction:column; gap:8px;">
+<span id="g-neck" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Neckwear</span>
+<sc-for list="{{necks}}" as="o" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+<div role="group" aria-labelledby="g-layer" style="display:flex; flex-direction:column; gap:8px;">
+<span id="g-layer" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Layer</span>
+<sc-for list="{{layers}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+
+<label style="display:flex; align-items:center; gap:12px; min-height:44px; font-size:16px; cursor:pointer;"><input type="checkbox" checked="{{shoes}}" onChange="{{toggleShoes}}" style="width:20px; height:20px; margin:0; accent-color:{{t.cardAccent}};">Add matching shoes</label>
+
+<div style="display:flex; flex-direction:column; gap:8px; padding:14px 16px; background:{{t.score}}; border:1px solid {{t.line}};">
+<span style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">{{t.crewLabel}}</span>
+<span style="font-size:15px; line-height:1.45;">{{crewMatch}}</span>
+<div role="img" aria-label="{{crewMatch}}" style="display:flex; gap:4px;">
+<sc-for list="{{crewPips}}" as="p" hint-placeholder-count="5">
+<span style="flex:1 1 0; height:8px; background:{{p.bg}}; border:1px solid {{t.cardAccent}};"></span>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{notLocked}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{lock}}" style="height:56px; background:{{t.cardAccent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.lockLabel}}</button>
+</sc-if>
+<sc-if value="{{locked}}" hint-placeholder-val="{{false}}">
+<div aria-live="polite" style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid {{t.cardAccent}};">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:22px;">{{t.lockedTitle}}</span>
+<span style="font-size:15px; color:{{t.cardMuted}};">+100 points. Next, send your measurements so we can hold your size.</span>
+<a href="{{t.links.measure}}" style="align-self:flex-start; height:46px; padding:0 18px; box-sizing:border-box; display:inline-flex; align-items:center; background:{{t.cardAccent}}; color:{{t.onAccent}}; text-decoration:none; font-weight:700; font-size:14px;">{{t.measureLabel}}</a>
+</div>
+</sc-if>
+<span style="font-size:13px; color:{{t.cardMuted}};">Sample inventory and stock. Prices and availability come from the shop.</span>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { filter: 'all', pick: 'navy', tie: 'date', neck: 'bow', layer: 'vest', shoes: true, locked: false };
+  }
+  themes() {
+    const steps = { kodak: ['The squad', 'The look', 'Measurements', 'Suit Up'], birch: ['The crew', 'Your cover', 'Intel', 'Training'], park: ['The case', 'The wardrobe', 'The evidence', 'Warm-up case'] };
+    const link = (k) => ({ signup: 'Prom' + k + '.dc.html', style: 'PromStyle' + k + '.dc.html', measure: 'PromMeasure' + k + '.dc.html', game: 'PromGame' + k + '.dc.html' });
+    return {
+      kodak: {
+        mark: 'INCOGNITO', markFont: 'norman-stencil-fat, Rokkitt, serif', markWeight: 800, markTrack: '.08em', steps: steps.kodak, links: link('Kodak'),
+        kicker: 'Prom 2027 · The look', title: 'Pick your look. Don’t overthink it.', sub: 'Tap a jacket, match the tie to your date’s dress, and lock it in. The squad sees what you picked.',
+        bg: '#121110', bar: '#0C0B0A', line: '#38322A', text: '#EEE7D9', muted: '#A39A8B', accent: '#C29E62', headColor: '#EEE7D9',
+        head: 'norman-stencil-fat, Rokkitt, serif', headWeight: 800, body: 'Archivo, sans-serif',
+        card: '#1A1816', cardText: '#EEE7D9', cardMuted: '#A39A8B', cardAccent: '#C29E62', onAccent: '#15130F', stage: '#0F0E0D', score: '#0F0E0D', radius: '2px',
+        lookKicker: 'Your look', crewLabel: 'Squad match', lockLabel: 'Lock it in', lockedTitle: 'Locked in. Looking sharp.', measureLabel: 'Send measurements',
+        filterNames: ['Everything', 'Tuxedos', 'Velvet', 'Suits']
+      },
+      birch: {
+        mark: 'INCOGNITO', markFont: 'Jost, sans-serif', markWeight: 600, markTrack: '.34em', steps: steps.birch, links: link('Birch'),
+        kicker: 'Prom 2027 · Your cover', title: 'Choose your cover.', sub: 'Every agent needs the right jacket. Pick yours, match it to your date, and the crew is briefed.',
+        bg: '#0A0A0B', bar: '#0A0A0B', line: '#2E2F31', text: '#F4F1EA', muted: '#B9BDBF', accent: '#C9A24B', headColor: '#C9A24B',
+        head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, body: 'Jost, sans-serif',
+        card: '#111112', cardText: '#F4F1EA', cardMuted: '#B9BDBF', cardAccent: '#C9A24B', onAccent: '#0A0A0B', stage: '#0A0A0B', score: '#0A0A0B', radius: '0',
+        lookKicker: 'Your cover', crewLabel: 'Crew coordination', lockLabel: 'Confirm your cover', lockedTitle: 'Cover confirmed.', measureLabel: 'File your intel',
+        filterNames: ['All covers', 'Black tie', 'Velvet', 'Lounge suits']
+      },
+      park: {
+        mark: 'Incognito', markFont: "vivaldi-mn, 'Playfair Display', Georgia, serif", markWeight: 400, markTrack: '0', steps: steps.park, links: link('Park'),
+        kicker: 'Prom 2027 · The wardrobe', title: 'Examine the wardrobe.', sub: 'Study each jacket, choose the one that fits the facts, and match it to the evidence: your date’s dress.',
+        bg: '#13241D', bar: '#0E1B16', line: '#2F463A', text: '#F2EAD8', muted: '#A9B39F', accent: '#C6A867', headColor: '#F2EAD8',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, body: "'EB Garamond', Georgia, serif",
+        card: '#F2EAD8', cardText: '#1F1A14', cardMuted: '#4E463A', cardAccent: '#7B2D26', onAccent: '#F2EAD8', stage: '#E5DBC4', score: '#E9DFC8', radius: '0',
+        lookKicker: 'Your choice', crewLabel: 'Your accomplices', lockLabel: 'Seal the choice', lockedTitle: 'Sealed. Elementary.', measureLabel: 'Submit the evidence',
+        filterNames: ['The full wardrobe', 'Evening dress', 'Velvet', 'Lounge suits']
+      }
+    };
+  }
+  inventory() {
+    return [
+      { id: 'black', name: 'The Classic', kind: 'tux', hex: '#141414', lapel: 'peak', detail: 'Black tuxedo · satin peak lapel · slim', stock: 'In stock' },
+      { id: 'navy', name: 'The Midnight', kind: 'tux', hex: '#1D2A44', lapel: 'shawl', detail: 'Midnight navy tuxedo · satin shawl collar', stock: 'In stock' },
+      { id: 'white', name: 'The White Jacket', kind: 'tux', hex: '#EDE6D6', lapel: 'shawl', detail: 'Ivory dinner jacket · black trousers', stock: 'Only a few left' },
+      { id: 'burgundy', name: 'Burgundy Velvet', kind: 'velvet', hex: '#5E1F2A', lapel: 'shawl', detail: 'Velvet jacket · black satin shawl collar', stock: 'Only a few left' },
+      { id: 'emerald', name: 'Emerald Velvet', kind: 'velvet', hex: '#1F4D3A', lapel: 'shawl', detail: 'Velvet jacket · black satin shawl collar', stock: 'In stock' },
+      { id: 'charcoal', name: 'Charcoal Suit', kind: 'suit', hex: '#3C3D40', lapel: 'notch', detail: 'Charcoal suit · notch lapel · slim', stock: 'In stock' },
+      { id: 'grey', name: 'Steel Grey Suit', kind: 'suit', hex: '#7F858D', lapel: 'notch', detail: 'Steel grey suit · notch lapel', stock: 'In stock' },
+      { id: 'tan', name: 'Tan Suit', kind: 'suit', hex: '#B38B5D', lapel: 'notch', detail: 'Tan suit · notch lapel · relaxed', stock: 'Order by April 1' }
+    ];
+  }
+  lum(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+  }
+  dress(it) {
+    const LAPEL = {
+      peak: ['M148 114 L180 302 L114 206 L92 166 L130 176 L138 140 Z', 'M212 114 L180 302 L246 206 L268 166 L230 176 L222 140 Z'],
+      shawl: ['M148 114 L180 302 Q112 236 118 170 Q124 132 148 114 Z', 'M212 114 L180 302 Q248 236 242 170 Q236 132 212 114 Z'],
+      notch: ['M148 114 L180 302 L114 206 L104 174 L126 176 L118 160 L138 140 Z', 'M212 114 L180 302 L246 206 L256 174 L234 176 L242 160 L222 140 Z']
+    };
+    const satin = it.kind !== 'suit';
+    const light = this.lum(it.hex) > 0.45;
+    return {
+      jacket: it.hex,
+      lapel: satin ? '#0B0B0C' : it.hex,
+      edge: light ? '#5A5244' : satin ? '#55555A' : 'rgba(238,231,217,.35)',
+      lapelL: LAPEL[it.lapel][0],
+      lapelR: LAPEL[it.lapel][1]
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const T = this.themes();
+    const key = T[this.props.theme] ? this.props.theme : 'kodak';
+    const t = T[key];
+    const INV = this.inventory();
+    const crewPicks = { navy: ['Jayden'], black: ['Tyler', 'Andre'] };
+    const kinds = ['all', 'tux', 'velvet', 'suit'];
+    const filters = kinds.map((k, i) => {
+      const on = s.filter === k;
+      return { label: t.filterNames[i], on: on, bg: on ? t.accent : 'transparent', fg: on ? t.onAccent === '#F2EAD8' ? '#1F1A14' : t.onAccent : t.text, bd: on ? t.accent : t.line, pick: () => this.setState({ filter: k }) };
+    });
+    const items = INV.filter((it) => s.filter === 'all' || it.kind === s.filter).map((it) => {
+      const on = s.pick === it.id;
+      const picks = crewPicks[it.id] || [];
+      return Object.assign(this.dress(it), {
+        name: it.name,
+        detail: it.detail,
+        stock: it.stock,
+        stockColor: it.stock === 'In stock' ? t.cardMuted : t.cardAccent,
+        on: on,
+        aria: it.name + ', ' + it.detail + ', ' + it.stock + (on ? ', selected' : ''),
+        border: on ? '2px solid ' + t.cardAccent : '1px solid ' + t.line,
+        dot: on ? t.cardAccent : 'transparent',
+        crewLine: picks.length ? picks.join(' and ') + (picks.length > 1 ? ' picked this' : ' picked this') : '',
+        pick: () => this.setState({ pick: it.id, locked: false })
+      });
+    });
+    const it = INV.find((x) => x.id === s.pick) || INV[0];
+    const TIES = [['date', 'Match your date: burgundy', '#6B1E2E'], ['black', 'Black', '#111111'], ['silver', 'Silver', '#C9CCCE'], ['gold', 'Gold', '#C9A24B'], ['navy', 'Navy', '#1D2A44'], ['champagne', 'Champagne', '#E6D3A8']];
+    const tie = TIES.find((x) => x[0] === s.tie) || TIES[0];
+    const tieColors = TIES.map((c) => {
+      const on = s.tie === c[0];
+      return { name: c[1], hex: c[2], on: on, ring: on ? '0 0 0 3px ' + t.card + ', 0 0 0 5px ' + t.cardAccent : 'none', pick: () => this.setState({ tie: c[0], locked: false }) };
+    });
+    const seg = (list, k) => list.map((o) => {
+      const on = s[k] === o[0];
+      return { name: o[1], on: on, bg: on ? t.cardAccent : 'transparent', fg: on ? t.onAccent : t.cardText, bd: on ? t.cardAccent : t.line, pick: () => this.setState({ [k]: o[0], locked: false }) };
+    });
+    const d = this.dress(it);
+    const layerName = s.layer === 'vest' ? ', vest' : s.layer === 'cummerbund' ? ', cummerbund' : '';
+    const matching = (crewPicks[it.id] || []).length + 1;
+    return {
+      t: t,
+      filters: filters,
+      items: items,
+      sel: Object.assign(d, {
+        name: it.name,
+        detail: tie[1].replace('Match your date: ', '') + ' ' + (s.neck === 'bow' ? 'bow tie' : 'long tie') + layerName + (s.shoes ? ', matching shoes' : ''),
+        tie: tie[2],
+        bowShow: s.neck === 'bow' ? 'inline' : 'none',
+        longShow: s.neck === 'long' ? 'inline' : 'none',
+        vestShow: s.layer === 'vest' ? 'inline' : 'none',
+        cumShow: s.layer === 'cummerbund' ? 'inline' : 'none',
+        squareShow: 'inline',
+        alt: 'Your look: ' + it.detail + ' with a ' + tie[1].toLowerCase() + ' ' + (s.neck === 'bow' ? 'bow tie' : 'tie')
+      }),
+      tieColors: tieColors,
+      tieNote: s.tie === 'date' ? 'Matched to the burgundy dress from your crew sign-up.' : tie[1] + '. Your date’s dress is burgundy.',
+      necks: seg([['bow', 'Bow tie'], ['long', 'Long tie']], 'neck'),
+      layers: seg([['vest', 'Vest'], ['cummerbund', 'Cummerbund'], ['none', 'Neither']], 'layer'),
+      shoes: s.shoes,
+      toggleShoes: (e) => this.setState({ shoes: e.target.checked, locked: false }),
+      crewMatch: matching > 1 ? matching + ' of 5 in the crew picked ' + it.name + '. Jayden, Tyler and Andre have picked; Chris hasn’t yet.' : 'You’d be the only one in ' + it.name + '. Jayden, Tyler and Andre have picked; Chris hasn’t yet.',
+      crewPips: [1, 2, 3, 4, 5].map((n) => ({ bg: n <= matching ? t.cardAccent : 'transparent' })),
+      locked: s.locked,
+      notLocked: !s.locked,
+      lock: () => this.setState({ locked: true })
+    };
+  }
+}
+</script>
+</body>
+</html>
