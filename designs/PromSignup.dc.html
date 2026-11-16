@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prom crew sign-up</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Plaster&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Pinyon+Script&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="box-sizing:border-box; width:100%; min-height:100vh; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:dark;">
+
+<header style="border-bottom:1px solid {{t.line}}; background:{{t.bar}};">
+<div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:16px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
+<span style="display:flex; align-items:baseline; gap:14px;">
+<span style="font-family:{{t.markFont}}; font-weight:{{t.markWeight}}; font-size:26px; letter-spacing:{{t.markTrack}}; color:{{t.text}};">{{t.mark}}</span>
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">Prom 2027</span>
+</span>
+<span style="font-size:15px; color:{{t.muted}};">Questions? <a href="tel:+15855867846" style="color:{{t.accent}}; font-weight:600;">(585) 586-7846</a></span>
+</div>
+</header>
+
+<main style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:52px 32px 72px; display:flex; flex-wrap:wrap; gap:48px; align-items:flex-start;">
+
+<aside style="flex:1 1 340px; max-width:440px; display:flex; flex-direction:column; gap:26px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(40px, 5.4vw, 64px); line-height:1; color:{{t.headColor}};">{{t.title}}</h1>
+<p style="margin:0; font-size:18px; line-height:1.55; color:{{t.muted}};">{{t.sub}}</p>
+
+<sc-if value="{{is.birch}}" hint-placeholder-val="{{false}}">
+<div style="position:relative; padding:22px 24px; background:#E9E4D8; color:#15130F; font-family:'Courier New', monospace; display:flex; flex-direction:column; gap:10px; overflow:hidden;">
+<span style="position:absolute; right:-10px; top:18px; transform:rotate(-14deg); padding:4px 14px; border:3px solid #B3261E; color:#B3261E; font-family:Jost, sans-serif; font-weight:700; font-size:16px; letter-spacing:.2em;">CLASSIFIED</span>
+<span style="font-size:12px; letter-spacing:.16em;">DOSSIER · PROM 2027</span>
+<span style="font-size:14px;">CREW: <strong>{{crew}}</strong></span>
+<span style="font-size:14px;">AGENT: <strong>{{f.name}}</strong></span>
+<span style="font-size:14px;">OBJECTIVE: <span style="background:#15130F; color:#15130F;">get the whole crew suited</span> {{dayLine}}</span>
+<span style="font-size:14px;">COVER: Black tie. Dress color on file: <strong>{{dress.name}}</strong></span>
+</div>
+</sc-if>
+
+<sc-if value="{{is.park}}" hint-placeholder-val="{{false}}">
+<div style="padding:12px; background:#F2EAD8; color:#1F1A14;">
+<div style="border:3px double #1F1A14; padding:18px 20px; display:flex; flex-direction:column; gap:8px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;">Case file · No. 27</span>
+<span style="font-family:'Pinyon Script', cursive; font-size:30px; line-height:1.1;">{{crew}}</span>
+<span style="font-style:italic; font-size:17px; line-height:1.4; color:#4E463A;">Opened by {{f.name}}. {{dayLine}}</span>
+<span style="display:flex; align-items:center; gap:10px; font-size:16px;"><span aria-hidden="true" style="width:22px; height:22px; border-radius:50%; background:{{dress.hex}}; border:1px solid #1F1A14;"></span>Evidence: a {{dressLower}} gown. Match accordingly.</span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{is.kodak}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; gap:18px; align-items:center;">
+<svg role="img" aria-label="{{badgeLabel}}" width="120" height="140" viewBox="0 0 120 140" style="flex:0 0 120px;">
+<path d="M60 4 L74 16 L96 12 L100 34 L116 50 L106 70 L112 94 L92 104 L84 126 L60 120 L36 126 L28 104 L8 94 L14 70 L4 50 L20 34 L24 12 L46 16 Z" fill="#C29E62" stroke="#8C7247" stroke-width="2"></path>
+<circle cx="60" cy="68" r="34" fill="#1A1816" stroke="#8C7247" stroke-width="2"></circle>
+<text x="60" y="62" text-anchor="middle" font-family="norman-stencil-fat, Rokkitt, serif" font-weight="800" font-size="14" fill="#C29E62">PROM</text>
+<text x="60" y="84" text-anchor="middle" font-family="norman-stencil-fat, Rokkitt, serif" font-weight="800" font-size="20" fill="#EEE7D9">1985</text>
+</svg>
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:norman-stencil-fat, Rokkitt, serif; font-weight:800; font-size:26px; color:#EEE7D9;">{{crew}}</span>
+<span style="font-size:15px; color:#A39A8B;">Squad leader: {{f.name}} · {{dayLine}}</span>
+<span style="font-size:15px; color:#A39A8B;">Date’s dress: <span style="color:#EEE7D9;">{{dress.name}}</span></span>
+</div>
+</div>
+<div aria-hidden="true" style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:4px; padding:8px; background:#0B0A09; border:1px solid #2A2621;">
+<span style="aspect-ratio:3/2; background:#2A2621; box-shadow:inset 0 0 0 2px #0B0A09;"></span>
+<span style="aspect-ratio:3/2; background:#2A2621; outline:2px solid #E86A5E; outline-offset:-4px;"></span>
+<span style="aspect-ratio:3/2; background:#2A2621;"></span>
+<span style="aspect-ratio:3/2; background:#2A2621;"></span>
+</div>
+<span style="font-size:13px; color:#A39A8B;">Contact sheet: the shop circles your look in red grease pencil at the fitting.</span>
+</sc-if>
+
+<a href="{{t.gameHref}}" style="align-self:flex-start; display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 18px; box-sizing:border-box; border:1px solid {{t.accent}}; color:{{t.text}}; text-decoration:none; font-weight:600; font-size:15px;">{{t.gameLabel}}</a>
+</aside>
+
+<section aria-labelledby="crew-title" style="flex:999 1 560px; min-width:0; box-sizing:border-box; padding:34px 36px 30px; background:{{t.card}}; color:{{t.cardText}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; gap:30px;">
+<div style="display:flex; flex-direction:column; gap:8px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:{{t.cardAccent}};">{{t.formKicker}}</span>
+<h2 id="crew-title" style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:36px; line-height:1.05;">{{t.formTitle}}</h2>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap:20px 24px;">
+<div style="display:flex; flex-direction:column; gap:8px;">
+<label for="p-name" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">First name</label>
+<input id="p-name" type="text" autocomplete="given-name" value="{{f.name}}" onChange="{{set.name}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:{{t.field}}; border:1px solid {{t.fieldLine}}; border-radius:{{t.radius}}; color:{{t.cardText}}; font-family:{{t.body}}; font-size:17px;">
+</div>
+<div style="display:flex; flex-direction:column; gap:8px;">
+<label for="p-school" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">School</label>
+<input id="p-school" type="text" value="{{f.school}}" onChange="{{set.school}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:{{t.field}}; border:1px solid {{t.fieldLine}}; border-radius:{{t.radius}}; color:{{t.cardText}}; font-family:{{t.body}}; font-size:17px;">
+</div>
+<div style="display:flex; flex-direction:column; gap:8px;">
+<label for="p-date" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Prom date</label>
+<input id="p-date" type="date" value="{{f.date}}" onChange="{{set.date}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:{{t.field}}; border:1px solid {{t.fieldLine}}; border-radius:{{t.radius}}; color:{{t.cardText}}; font-family:{{t.body}}; font-size:17px; color-scheme:{{t.scheme}};">
+</div>
+<div style="display:flex; flex-direction:column; gap:8px;">
+<label for="p-phone" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Mobile</label>
+<input id="p-phone" type="tel" autocomplete="tel" value="{{f.phone}}" onChange="{{set.phone}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:{{t.field}}; border:1px solid {{t.fieldLine}}; border-radius:{{t.radius}}; color:{{t.cardText}}; font-family:{{t.body}}; font-size:17px;">
+</div>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:10px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">{{t.crewLabel}}</span>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+<span aria-live="polite" style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:28px; line-height:1.1;">{{crew}}</span>
+<button type="button" onClick="{{reroll}}" style="height:44px; padding:0 16px; background:transparent; color:{{t.cardText}}; border:1px solid {{t.fieldLine}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{t.rerollLabel}}</button>
+</div>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:12px;">
+<span id="p-crew" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">{{t.inviteLabel}}</span>
+<ul aria-labelledby="p-crew" style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px;">
+<sc-for list="{{members}}" as="m" hint-placeholder-count="4">
+<li style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 6px 0 14px; border:1px solid {{t.fieldLine}}; border-radius:{{t.chipRadius}}; font-size:15px;">{{m.name}}<button type="button" aria-label="{{m.removeLabel}}" onClick="{{m.remove}}" style="width:30px; height:30px; padding:0; background:transparent; border:0; color:{{t.cardMuted}}; font-size:18px; cursor:pointer;">×</button></li>
+</sc-for>
+</ul>
+<div style="display:flex; gap:8px;">
+<label for="p-add" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">Friend’s first name</label>
+<input id="p-add" type="text" placeholder="Friend’s first name" value="{{draft}}" onChange="{{setDraft}}" style="flex:1 1 auto; min-width:0; box-sizing:border-box; height:46px; padding:0 14px; background:{{t.field}}; border:1px solid {{t.fieldLine}}; border-radius:{{t.radius}}; color:{{t.cardText}}; font-family:{{t.body}}; font-size:16px;">
+<button type="button" onClick="{{addMember}}" style="height:46px; padding:0 18px; background:transparent; color:{{t.cardText}}; border:1px solid {{t.cardAccent}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{t.addLabel}}</button>
+</div>
+<span style="font-size:14px; color:{{t.cardMuted}};">We’ll text each of them a private link. First names only show on the crew board.</span>
+</div>
+
+<div role="radiogroup" aria-labelledby="p-dress" style="display:flex; flex-direction:column; gap:12px;">
+<span id="p-dress" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">{{t.dressLabel}}</span>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{dresses}}" as="d" hint-placeholder-count="10">
+<button type="button" role="radio" aria-checked="{{d.on}}" aria-label="{{d.name}}" onClick="{{d.pick}}" style="width:44px; height:44px; padding:0; border-radius:50%; background:{{d.hex}}; border:1px solid rgba(128,128,128,.5); box-shadow:{{d.ring}}; cursor:pointer;"></button>
+</sc-for>
+</div>
+<span aria-live="polite" style="font-size:15px;">{{dress.name}}. We’ll match the vest and tie to it.</span>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:12px; padding:20px; background:{{t.score}}; border:1px solid {{t.fieldLine}};">
+<div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:22px;">{{t.pointsTitle}}</span>
+<span style="font-size:15px; font-weight:700; color:{{t.cardAccent}};">{{pointsText}}</span>
+</div>
+<div role="img" aria-label="{{pointsText}}" style="height:10px; background:{{t.field}}; border:1px solid {{t.fieldLine}};"><div style="height:100%; width:{{pointsPct}}; background:{{t.cardAccent}};"></div></div>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+<sc-for list="{{goals}}" as="g" hint-placeholder-count="5">
+<li style="display:flex; justify-content:space-between; gap:12px; font-size:15px; color:{{g.color}};"><span>{{g.mark}} {{g.label}}</span><span style="font-variant-numeric:tabular-nums;">+{{g.pts}}</span></li>
+</sc-for>
+</ul>
+<span style="font-size:14px; color:{{t.cardMuted}};">Hit 1,000 and the crew leader’s tux is on us. [OFFER TERMS SET BY THE SHOP]</span>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding-top:22px; border-top:1px solid {{t.fieldLine}};">
+<span style="font-size:14px; color:{{t.cardMuted}};">Under 18? We’ll also ask for a parent’s number before your fitting.</span>
+<button type="button" style="height:54px; padding:0 28px; background:{{t.cardAccent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.cta}}</button>
+</div>
+</section>
+</main>
+
+<footer style="border-top:1px solid {{t.line}};">
+<div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:24px 32px; display:flex; flex-wrap:wrap; gap:10px 40px; justify-content:space-between; font-size:14px; color:{{t.muted}};">
+<span>Incognito Menswear &amp; Tux Shop · 1823 Penfield Rd, Penfield, NY 14526</span>
+<span>Mon, Wed, Thu 12–7 · Fri &amp; Sat 10–5 · Sun 12–5 · Tue closed</span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { name: 'Marcus', school: 'Penfield High School', date: '2027-05-15', phone: '(585) 555-0190', crewIdx: 0, members: ['Jayden', 'Tyler', 'Andre'], draft: '', dress: 'burgundy' };
+  }
+  themes() {
+    return {
+      kodak: {
+        mark: 'INCOGNITO', markFont: 'norman-stencil-fat, Rokkitt, serif', markWeight: 800, markTrack: '.08em',
+        kicker: 'Prom 2027 · The squad', title: 'One night. One shot. Make it count.',
+        sub: 'Start your squad, get everyone measured, and walk out of the shop looking like the toughest guys in the photo.',
+        bg: '#121110', bar: '#0C0B0A', line: '#38322A', text: '#EEE7D9', muted: '#A39A8B', accent: '#C29E62', headColor: '#EEE7D9',
+        head: 'norman-stencil-fat, Rokkitt, serif', headWeight: 800, body: 'Archivo, sans-serif',
+        card: '#1A1816', cardText: '#EEE7D9', cardMuted: '#A39A8B', cardAccent: '#C29E62', onAccent: '#15130F', field: '#0F0E0D', fieldLine: '#38322A', score: '#0F0E0D', radius: '2px', chipRadius: '2px', scheme: 'dark',
+        formKicker: 'Start your squad', formTitle: 'Who’s riding with you?', crewLabel: 'Squad name', rerollLabel: 'New name', inviteLabel: 'The squad', addLabel: 'Add to squad',
+        dressLabel: 'Your date’s dress', pointsTitle: 'Squad points', cta: 'Start the squad',
+        gameLabel: 'Warm up: play Suit Up', gameHref: 'PromGameKodak.dc.html',
+        crews: ['Squad 85', 'The Night Shift', 'The Stakeout', 'Downtown Crew', 'The Late Edition'],
+        goals: ['Squad started', 'Four friends in', 'Everyone measured', 'Fittings booked', 'Suit Up played']
+      },
+      birch: {
+        mark: 'INCOGNITO', markFont: 'Jost, sans-serif', markWeight: 600, markTrack: '.34em',
+        kicker: 'Prom 2027 · Mission briefing', title: 'Your mission: black tie.',
+        sub: 'Recruit your crew, file their measurements, and arrive looking like you were never off duty.',
+        bg: '#0A0A0B', bar: '#0A0A0B', line: '#2E2F31', text: '#F4F1EA', muted: '#B9BDBF', accent: '#C9A24B', headColor: '#C9A24B',
+        head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, body: 'Jost, sans-serif',
+        card: '#111112', cardText: '#F4F1EA', cardMuted: '#B9BDBF', cardAccent: '#C9A24B', onAccent: '#0A0A0B', field: '#1B1B1D', fieldLine: '#4A4B4E', score: '#0A0A0B', radius: '0', chipRadius: '0', scheme: 'dark',
+        formKicker: 'Recruit your crew', formTitle: 'Assemble the team', crewLabel: 'Crew codename', rerollLabel: 'New codename', inviteLabel: 'Field agents', addLabel: 'Recruit',
+        dressLabel: 'Your date’s dress (intel)', pointsTitle: 'Mission points', cta: 'Begin the mission',
+        gameLabel: 'Training: play Suit Up', gameHref: 'PromGameBirch.dc.html',
+        crews: ['Crew Silver Fox', 'Crew Midnight Falcon', 'Crew Velvet Heron', 'Crew Ivory Wolf', 'Crew Black Orchid'],
+        goals: ['Crew assembled', 'Four agents recruited', 'All measurements filed', 'Fittings booked', 'Training complete']
+      },
+      park: {
+        mark: 'Incognito', markFont: "vivaldi-mn, 'Playfair Display', Georgia, serif", markWeight: 400, markTrack: '0',
+        kicker: 'Prom 2027 · A case for the crew', title: 'The game is afoot. So is prom.',
+        sub: 'Gather your crew, lay out the evidence, and solve the oldest mystery of all: what to wear.',
+        bg: '#13241D', bar: '#0E1B16', line: '#2F463A', text: '#F2EAD8', muted: '#A9B39F', accent: '#C6A867', headColor: '#F2EAD8',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, body: "'EB Garamond', Georgia, serif",
+        card: '#F2EAD8', cardText: '#1F1A14', cardMuted: '#4E463A', cardAccent: '#7B2D26', onAccent: '#F2EAD8', field: 'transparent', fieldLine: '#9A9080', score: '#E9DFC8', radius: '0', chipRadius: '20px', scheme: 'light',
+        formKicker: 'Open the case', formTitle: 'Name your accomplices', crewLabel: 'The case', rerollLabel: 'Another title', inviteLabel: 'Your accomplices', addLabel: 'Enlist',
+        dressLabel: 'Evidence: the dress', pointsTitle: 'Points of deduction', cta: 'Open the case',
+        gameLabel: 'A warm-up case: play Suit Up', gameHref: 'PromGamePark.dc.html',
+        crews: ['The Case of the Missing Bow Tie', 'The Case of the Velvet Lapel', 'The Case of the Midnight Corsage', 'The Case of the Vanishing Cufflink', 'The Case of the Crimson Carnation'],
+        goals: ['Case opened', 'Four accomplices enlisted', 'Evidence measured', 'Fittings arranged', 'Warm-up case solved']
+      }
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const T = this.themes();
+    const key = T[this.props.theme] ? this.props.theme : 'kodak';
+    const t = T[key];
+    const set = {};
+    ['name', 'school', 'date', 'phone'].forEach((k) => { set[k] = (e) => this.setState({ [k]: e.target.value }); });
+    const DRESSES = [
+      ['black', 'Black', '#141414'], ['navy', 'Navy', '#1D2A44'], ['burgundy', 'Burgundy', '#6B1E2E'], ['red', 'Red', '#B3261E'],
+      ['emerald', 'Emerald', '#1F6B4A'], ['royal', 'Royal blue', '#2747A8'], ['lilac', 'Lilac', '#B79BD6'], ['blush', 'Blush', '#E8B7B0'],
+      ['champagne', 'Champagne', '#E6D3A8'], ['silver', 'Silver', '#C9CCCE']
+    ];
+    const dresses = DRESSES.map((d) => {
+      const on = s.dress === d[0];
+      return { name: d[1], hex: d[2], on: on, ring: on ? '0 0 0 3px ' + t.card + ', 0 0 0 5px ' + t.cardAccent : 'none', pick: () => this.setState({ dress: d[0] }) };
+    });
+    const dd = DRESSES.find((d) => d[0] === s.dress) || DRESSES[0];
+    const members = s.members.map((m, i) => ({ name: m, removeLabel: 'Remove ' + m, remove: () => this.setState({ members: this.state.members.filter((_, j) => j !== i) }) }));
+    const done = [true, s.members.length >= 4, false, false, false];
+    const pts = [100, 200, 300, 200, 50];
+    const goals = t.goals.map((g, i) => ({ label: g, pts: pts[i], mark: done[i] ? '✓' : '○', color: done[i] ? t.cardText : t.cardMuted }));
+    const total = pts.reduce((a, p, i) => a + (done[i] ? p : 0), 0) + s.members.length * 25;
+    let dayLine = '';
+    const d = new Date(s.date + 'T12:00:00');
+    if (!isNaN(d)) {
+      const days = Math.round((d - new Date(2026, 10, 16, 12)) / 86400000);
+      dayLine = days > 0 ? days + ' days to prom.' : '';
+    }
+    return {
+      t: t,
+      is: { kodak: key === 'kodak', birch: key === 'birch', park: key === 'park' },
+      f: s,
+      set: set,
+      crew: t.crews[s.crewIdx % t.crews.length],
+      reroll: () => this.setState({ crewIdx: s.crewIdx + 1 }),
+      members: members,
+      draft: s.draft,
+      setDraft: (e) => this.setState({ draft: e.target.value }),
+      addMember: () => {
+        const n = this.state.draft.trim();
+        if (!n) return;
+        this.setState({ members: this.state.members.concat([n]), draft: '' });
+      },
+      dresses: dresses,
+      dress: { name: dd[1], hex: dd[2] },
+      dressLower: dd[1].toLowerCase(),
+      goals: goals,
+      pointsText: total + ' of 1,000 points',
+      pointsPct: Math.min(100, Math.round(total / 10)) + '%',
+      dayLine: dayLine,
+      badgeLabel: 'Squad badge for ' + t.crews[s.crewIdx % t.crews.length]
+    };
+  }
+}
+</script>
+</body>
+</html>

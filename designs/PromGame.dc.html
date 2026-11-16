@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Suit Up · prom minigame</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Plaster&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="box-sizing:border-box; width:100%; min-height:100vh; padding:40px 24px 56px; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:dark;">
+<div style="max-width:1120px; margin:0 auto; display:flex; flex-direction:column; gap:28px;">
+
+<header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 24px;">
+<div style="display:flex; flex-direction:column; gap:10px; min-width:0;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(34px, 6vw, 60px); line-height:1; letter-spacing:{{t.headTrack}}; color:{{t.headColor}};">{{t.title}}</h1>
+<p style="margin:0; max-width:620px; font-size:18px; line-height:1.5; color:{{t.muted}};">{{t.sub}}</p>
+</div>
+<div role="timer" aria-live="off" style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+<span style="font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.muted}};">{{t.clockLabel}}</span>
+<span id="suitup-clock" style="font-family:{{t.head}}; font-size:48px; line-height:1; font-variant-numeric:tabular-nums; color:{{t.accent}};">{{clock}}</span>
+<span style="font-size:13px; color:{{t.muted}};">{{penaltyText}}</span>
+</div>
+</header>
+
+<div style="display:flex; flex-wrap:wrap; gap:24px; align-items:stretch;">
+
+<section aria-label="Mannequin" style="flex:1 1 320px; min-width:0; box-sizing:border-box; padding:20px; background:{{t.stage}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; align-items:center; gap:14px;">
+<svg role="img" aria-label="{{stageLabel}}" viewBox="0 0 300 420" style="width:100%; max-width:340px; height:auto; display:block;">
+<ellipse cx="150" cy="402" rx="62" ry="10" fill="{{t.standDark}}"></ellipse>
+<rect x="146" y="250" width="8" height="150" fill="{{t.stand}}"></rect>
+<rect x="138" y="20" width="24" height="30" rx="6" fill="{{t.form}}"></rect>
+<path d="M 95 50 Q 150 38 205 50 L 220 120 Q 212 190 200 250 L 100 250 Q 88 190 80 120 Z" fill="{{t.form}}" stroke="{{t.formLine}}" stroke-width="1.5"></path>
+<path d="M 150 55 L 150 245" stroke="{{t.formLine}}" stroke-width="1" stroke-dasharray="3 4"></path>
+<g display="{{show.shirt}}">
+<path d="M 95 52 L 70 70 L 62 200 L 82 200 L 86 110 Z" fill="#F4F1EA" stroke="#C9C2B2" stroke-width="1"></path>
+<path d="M 205 52 L 230 70 L 238 200 L 218 200 L 214 110 Z" fill="#F4F1EA" stroke="#C9C2B2" stroke-width="1"></path>
+<path d="M 95 50 Q 150 38 205 50 L 220 120 Q 212 190 200 250 L 100 250 Q 88 190 80 120 Z" fill="#F4F1EA" stroke="#C9C2B2" stroke-width="1"></path>
+<path d="M 135 45 L 150 64 L 165 45 L 160 36 L 140 36 Z" fill="#FFFFFF" stroke="#C9C2B2" stroke-width="1"></path>
+<path d="M 150 70 L 150 245" stroke="#D9D2C2" stroke-width="1.5"></path>
+</g>
+<g display="{{show.trousers}}">
+<path d="M 100 248 L 200 248 L 207 336 L 157 336 L 150 292 L 143 336 L 93 336 Z" fill="#141414"></path>
+<path d="M 118 252 L 116 334 M 182 252 L 184 334" stroke="#2B2B2E" stroke-width="2"></path>
+</g>
+<g display="{{show.studs}}">
+<circle cx="150" cy="105" r="4" fill="#15130F" stroke="{{t.metal}}" stroke-width="1.5"></circle>
+<circle cx="150" cy="132" r="4" fill="#15130F" stroke="{{t.metal}}" stroke-width="1.5"></circle>
+<circle cx="150" cy="159" r="4" fill="#15130F" stroke="{{t.metal}}" stroke-width="1.5"></circle>
+</g>
+<g display="{{show.cufflinks}}">
+<circle cx="72" cy="196" r="5" fill="{{t.metal}}"></circle>
+<circle cx="228" cy="196" r="5" fill="{{t.metal}}"></circle>
+</g>
+<g display="{{show.vest}}">
+<path d="M 110 60 L 150 168 L 190 60 L 206 110 Q 204 190 200 250 L 100 250 Q 96 190 94 110 Z" fill="#17171A"></path>
+<circle cx="150" cy="190" r="2.6" fill="{{t.metal}}"></circle>
+<circle cx="150" cy="212" r="2.6" fill="{{t.metal}}"></circle>
+<circle cx="150" cy="234" r="2.6" fill="{{t.metal}}"></circle>
+</g>
+<g display="{{show.bowtie}}">
+<path d="M 150 53 L 129 41 L 129 65 Z M 150 53 L 171 41 L 171 65 Z" fill="{{tieColor}}"></path>
+<rect x="143" y="46" width="14" height="14" rx="3" fill="{{tieColor}}"></rect>
+</g>
+<g display="{{show.jacket}}">
+<path d="M 90 52 L 66 68 L 58 205 L 82 205 L 86 110 Z" fill="#0E0E10"></path>
+<path d="M 210 52 L 234 68 L 242 205 L 218 205 L 214 110 Z" fill="#0E0E10"></path>
+<path d="M 92 50 L 140 44 L 150 200 L 147 262 L 96 256 Q 86 190 82 120 Z" fill="#0E0E10"></path>
+<path d="M 208 50 L 160 44 L 150 200 L 153 262 L 204 256 Q 214 190 218 120 Z" fill="#0E0E10"></path>
+<path d="M 140 44 L 150 200 L 118 130 L 108 96 L 128 100 Z" fill="#050506" stroke="#4A4A50" stroke-width="1"></path>
+<path d="M 160 44 L 150 200 L 182 130 L 192 96 L 172 100 Z" fill="#050506" stroke="#4A4A50" stroke-width="1"></path>
+<circle cx="150" cy="214" r="5" fill="#050506" stroke="#4A4A50" stroke-width="1"></circle>
+</g>
+<g display="{{show.square}}">
+<path d="M 172 128 L 202 124" stroke="#4A4A50" stroke-width="2"></path>
+<path d="M 175 126 L 181 112 L 188 125 L 194 111 L 200 124 Z" fill="{{squareColor}}"></path>
+</g>
+</svg>
+<div role="img" aria-label="{{progressLabel}}" style="display:flex; gap:6px;">
+<sc-for list="{{pips}}" as="p" hint-placeholder-count="8">
+<span style="width:22px; height:8px; background:{{p.bg}}; border:1px solid {{p.bd}};"></span>
+</sc-for>
+</div>
+</section>
+
+<section aria-label="Game" style="flex:1.2 1 360px; min-width:0; box-sizing:border-box; padding:24px; background:{{t.panel}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; gap:20px;">
+
+<sc-if value="{{phase.intro}}" hint-placeholder-val="{{true}}">
+<h2 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:30px; line-height:1.1; color:{{t.headColor}};">{{t.introHead}}</h2>
+<p style="margin:0; font-size:17px; line-height:1.55; color:{{t.muted}};">{{t.introBody}}</p>
+<ul style="margin:0; padding:0 0 0 20px; display:flex; flex-direction:column; gap:8px; font-size:16px; line-height:1.45; color:{{t.text}};">
+<li>Tap the pieces in the order you’d put them on.</li>
+<li>A wrong piece adds two seconds.</li>
+<li>Your best time counts toward your crew’s score.</li>
+</ul>
+<button type="button" onClick="{{start}}" style="align-self:flex-start; height:56px; padding:0 30px; background:{{t.accent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:15px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.startLabel}}</button>
+</sc-if>
+
+<sc-if value="{{phase.play}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+<h2 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:26px; line-height:1.1; color:{{t.headColor}};">{{nextPrompt}}</h2>
+<span aria-live="polite" style="font-size:15px; font-weight:600; color:{{feedbackColor}};">{{feedback}}</span>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap:10px;">
+<sc-for list="{{tray}}" as="it" hint-placeholder-count="8">
+<button type="button" onClick="{{it.pick}}" disabled="{{it.used}}" aria-label="{{it.aria}}" style="min-height:64px; padding:10px 14px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:3px; text-align:left; background:{{it.bg}}; color:{{it.fg}}; border:1px solid {{it.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; cursor:{{it.cursor}}; text-decoration:{{it.deco}};"><span style="font-size:16px; font-weight:600;">{{it.name}}</span><span style="font-size:12px; letter-spacing:.06em; color:{{it.sub}};">{{it.alias}}</span></button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{phase.done}}" hint-placeholder-val="{{false}}">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.doneKicker}}</span>
+<div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:64px; line-height:1; color:{{t.headColor}};">{{finalTime}}</span>
+<span style="font-size:16px; color:{{t.muted}};">{{finalDetail}}</span>
+</div>
+<p style="margin:0; font-size:18px; line-height:1.5;">{{t.rankLead}} <strong style="color:{{t.accent}};">{{rank}}</strong>. {{t.pointsLine}}</p>
+<div style="display:flex; flex-direction:column; gap:0; border-top:1px solid {{t.line}};">
+<span style="padding:12px 0 8px; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:{{t.muted}};">{{t.crewName}} · best times</span>
+<ol style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{board}}" as="b" hint-placeholder-count="5">
+<li style="display:flex; align-items:center; gap:14px; padding:10px 0; border-top:1px solid {{t.line}}; font-size:16px; color:{{b.color}}; font-weight:{{b.weight}};"><span style="width:22px; font-variant-numeric:tabular-nums; color:{{t.muted}};">{{b.place}}</span><span style="flex:1 1 auto;">{{b.name}}</span><span style="font-variant-numeric:tabular-nums;">{{b.time}}</span></li>
+</sc-for>
+</ol>
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:10px;">
+<button type="button" onClick="{{start}}" style="height:52px; padding:0 26px; background:{{t.accent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.againLabel}}</button>
+<a href="{{t.signupHref}}" style="height:52px; padding:0 22px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid {{t.line}}; border-radius:{{t.radius}}; color:{{t.text}}; text-decoration:none; font-weight:600; font-size:15px;">{{t.signupLabel}}</a>
+</div>
+</sc-if>
+
+</section>
+</div>
+
+<p style="margin:0; font-size:13px; color:{{t.muted}};">{{t.footnote}}</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1280,"height":960}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { phase: 'intro', placed: 0, mistakes: 0, startedAt: 0, endedAt: 0, wrong: null, order: [], best: null };
+    this.timer = null;
+  }
+  pieces() {
+    return [
+      { id: 'shirt', name: 'Dress shirt' },
+      { id: 'trousers', name: 'Trousers' },
+      { id: 'studs', name: 'Shirt studs' },
+      { id: 'cufflinks', name: 'Cufflinks' },
+      { id: 'vest', name: 'Vest' },
+      { id: 'bowtie', name: 'Bow tie' },
+      { id: 'jacket', name: 'Jacket' },
+      { id: 'square', name: 'Pocket square' }
+    ];
+  }
+  themes() {
+    return {
+      kodak: {
+        kicker: 'Prom 2027 · The squad', title: 'SUIT UP. MAKE IT QUICK.',
+        sub: 'One night. One shot at the photo. Get dressed before the clock runs out.',
+        bg: '#121110', stage: '#0F0E0D', panel: '#1A1816', line: '#38322A', text: '#EEE7D9', muted: '#A39A8B',
+        accent: '#C29E62', onAccent: '#15130F', headColor: '#EEE7D9', alert: '#E86A5E', radius: '2px',
+        head: "norman-stencil-fat, Rokkitt, serif", headWeight: 800, headTrack: '0', body: 'Archivo, sans-serif',
+        form: '#B9A27A', formLine: '#8C7247', stand: '#6E5B3C', standDark: '#2A2621', metal: '#C29E62',
+        clockLabel: 'On the clock', introHead: 'You’ve got one shot.', introBody: 'The squad’s waiting in the car. Get the tux on, in the right order, fast.',
+        startLabel: 'Hit it', doneKicker: 'Done. Nice work, rookie.', rankLead: 'Rank:', ranks: ['Rookie', 'Regular', 'Legend of the precinct'],
+        pointsLine: '+50 points for the squad.', crewName: 'Squad 85', againLabel: 'Run it back', signupLabel: 'Sign up your squad for prom', signupHref: '#',
+        aliases: { shirt: 'Base layer', trousers: 'The slacks', studs: 'Hardware', cufflinks: 'More hardware', vest: 'The vest', bowtie: 'The tie', jacket: 'The jacket', square: 'Finishing touch' },
+        tie: '#7A1F2E', square: '#F4F1EA',
+        footnote: 'Times are for fun. Your real fitting happens in the shop.'
+      },
+      birch: {
+        kicker: 'Prom 2027 · Mission briefing', title: 'SUIT UP, AGENT',
+        sub: 'Your cover is black tie. Assemble it in the proper order before the clock runs out.',
+        bg: '#0A0A0B', stage: '#111112', panel: '#161617', line: '#2E2F31', text: '#F4F1EA', muted: '#B9BDBF',
+        accent: '#C9A24B', onAccent: '#0A0A0B', headColor: '#C9A24B', alert: '#E0584C', radius: '0',
+        head: "cesso, Plaster, Jost, sans-serif", headWeight: 400, headTrack: '.02em', body: 'Jost, sans-serif',
+        form: '#8F9396', formLine: '#6B6E71', stand: '#B9BDBF', standDark: '#1E1E20', metal: '#C9A24B',
+        clockLabel: 'Mission clock', introHead: 'Your briefing.', introBody: 'Eight pieces of kit. One correct order. Wrong moves cost you time.',
+        startLabel: 'Begin mission', doneKicker: 'Mission complete', rankLead: 'Clearance:', ranks: ['Trainee', 'Field agent', 'Station chief'],
+        pointsLine: '+50 points for your crew.', crewName: 'Crew Silver Fox', againLabel: 'Run it again', signupLabel: 'Brief your crew for prom', signupHref: '#',
+        aliases: { shirt: 'Base cover', trousers: 'Field trousers', studs: 'Signal studs', cufflinks: 'Gold cufflinks', vest: 'Body layer', bowtie: 'Black tie', jacket: 'Dinner jacket', square: 'Signature' },
+        tie: '#0E0E10', square: '#F4F1EA',
+        footnote: 'Times are for fun. Your real fitting happens in the shop.'
+      },
+      park: {
+        kicker: 'Prom 2027 · A case for the crew', title: 'The Case of the Undressed Gentleman',
+        sub: 'Assemble the evidence in its proper order, and swiftly.',
+        bg: '#13241D', stage: '#0E1B16', panel: '#0E1B16', line: '#2F463A', text: '#F2EAD8', muted: '#A9B39F',
+        accent: '#C6A867', onAccent: '#1F1A14', headColor: '#F2EAD8', alert: '#E0806F', radius: '0',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, headTrack: '0', body: "'EB Garamond', Georgia, serif",
+        form: '#D9CDB0', formLine: '#A69A7E', stand: '#8F7440', standDark: '#0A1410', metal: '#C6A867',
+        clockLabel: 'The pocket watch', introHead: 'The facts of the case.', introBody: 'A gentleman must be dressed for the ball. Deduce the proper order. Each error costs two seconds.',
+        startLabel: 'Take the case', doneKicker: 'Case closed', rankLead: 'The verdict:', ranks: ['Constable', 'Inspector', 'Consulting detective'],
+        pointsLine: '+50 points for your crew.', crewName: 'The Penfield Irregulars', againLabel: 'Reopen the case', signupLabel: 'Enlist your crew for prom', signupHref: '#',
+        aliases: { shirt: 'Exhibit A', trousers: 'Exhibit B', studs: 'Exhibit C', cufflinks: 'Exhibit D', vest: 'Exhibit E', bowtie: 'Exhibit F', jacket: 'Exhibit G', square: 'Exhibit H' },
+        tie: '#7B2D26', square: '#F2EAD8',
+        footnote: 'Times are for fun. Your real fitting happens in the shop.'
+      }
+    };
+  }
+  fmt(ms) {
+    return (Math.max(0, ms) / 1000).toFixed(1) + 's';
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      if (this.state.phase !== 'play') return;
+      const el = document.getElementById('suitup-clock');
+      if (el) el.textContent = this.fmt(Date.now() - this.state.startedAt + this.state.mistakes * 2000);
+    }, 100);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  start() {
+    const order = this.pieces().map((p) => p.id);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = order[i];
+      order[i] = order[j];
+      order[j] = tmp;
+    }
+    this.setState({ phase: 'play', placed: 0, mistakes: 0, startedAt: Date.now(), endedAt: 0, wrong: null, order: order });
+  }
+  pick(id) {
+    const s = this.state;
+    if (s.phase !== 'play') return;
+    const seq = this.pieces().map((p) => p.id);
+    if (seq[s.placed] === id) {
+      const placed = s.placed + 1;
+      if (placed === seq.length) {
+        const endedAt = Date.now();
+        const total = endedAt - s.startedAt + s.mistakes * 2000;
+        this.setState({ placed: placed, wrong: null, phase: 'done', endedAt: endedAt, best: s.best === null ? total : Math.min(s.best, total) });
+      } else {
+        this.setState({ placed: placed, wrong: null });
+      }
+    } else {
+      this.setState({ mistakes: s.mistakes + 1, wrong: id });
+    }
+  }
+  renderVals() {
+    const s = this.state;
+    const T = this.themes();
+    const t = T[this.props.theme] || T.kodak;
+    const pieces = this.pieces();
+    const seq = pieces.map((p) => p.id);
+    const on = {};
+    seq.forEach((id, i) => { on[id] = i < s.placed; });
+    const show = {};
+    seq.forEach((id) => { show[id] = on[id] ? 'inline' : 'none'; });
+    const order = s.order.length ? s.order : seq;
+    const tray = order.map((id) => {
+      const p = pieces.find((x) => x.id === id);
+      const used = on[id];
+      const wrong = s.wrong === id;
+      return {
+        name: p.name,
+        alias: t.aliases[id],
+        used: used,
+        aria: p.name + (used ? ', already on' : ''),
+        bg: wrong ? t.alert : used ? 'transparent' : t.stage,
+        fg: wrong ? '#15130F' : used ? t.muted : t.text,
+        sub: wrong ? '#15130F' : t.muted,
+        bd: wrong ? t.alert : used ? t.line : t.accent,
+        deco: used ? 'line-through' : 'none',
+        cursor: used ? 'default' : 'pointer',
+        pick: () => this.pick(id)
+      };
+    });
+    const total = s.phase === 'done' ? s.endedAt - s.startedAt + s.mistakes * 2000 : 0;
+    const rank = total < 12000 ? t.ranks[2] : total < 20000 ? t.ranks[1] : t.ranks[0];
+    const crew = [['Marcus', 11800], ['Jayden', 14200], ['Tyler', 16900], ['Andre', 19500]];
+    if (s.best !== null) crew.push(['You', s.best]);
+    crew.sort((a, b) => a[1] - b[1]);
+    const board = crew.map((c, i) => ({
+      place: i + 1,
+      name: c[0],
+      time: this.fmt(c[1]),
+      color: c[0] === 'You' ? t.accent : t.text,
+      weight: c[0] === 'You' ? 700 : 400
+    }));
+    const next = pieces[s.placed];
+    return {
+      t: t,
+      show: show,
+      tieColor: t.tie,
+      squareColor: t.square,
+      tray: tray,
+      pips: seq.map((id) => ({ bg: on[id] ? t.accent : 'transparent', bd: on[id] ? t.accent : t.line })),
+      progressLabel: s.placed + ' of ' + seq.length + ' pieces on',
+      stageLabel: 'Dress form wearing ' + (s.placed ? pieces.slice(0, s.placed).map((p) => p.name.toLowerCase()).join(', ') : 'nothing yet'),
+      phase: { intro: s.phase === 'intro', play: s.phase === 'play', done: s.phase === 'done' },
+      clock: s.phase === 'done' ? this.fmt(total) : s.phase === 'play' ? this.fmt(Date.now() - s.startedAt + s.mistakes * 2000) : '0.0s',
+      penaltyText: s.mistakes ? s.mistakes + ' wrong · +' + s.mistakes * 2 + 's' : 'No mistakes yet',
+      nextPrompt: next ? 'Piece ' + (s.placed + 1) + ' of ' + seq.length : '',
+      feedback: s.wrong ? 'Not yet. +2s' : s.placed ? 'Good.' : '',
+      feedbackColor: s.wrong ? t.alert : t.accent,
+      finalTime: this.fmt(total),
+      finalDetail: s.mistakes ? s.mistakes + ' wrong piece' + (s.mistakes > 1 ? 's' : '') + ' (+' + s.mistakes * 2 + 's)' : 'Clean run, no mistakes',
+      rank: rank,
+      board: board,
+      start: () => this.start()
+    };
+  }
+}
+</script>
+</body>
+</html>

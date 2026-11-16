@@ -8,6 +8,14 @@ window.SCREEN_GROUPS = [
     ['tuxedo-park-green', 'TuxedoParkSignup', 'Tuxedo Park · green', 'Bottle-green walls, engraved stationery and gilt'],
     ['tuxedo-park-burgundy', 'TuxedoParkBurgundySignup', 'Tuxedo Park · burgundy', 'The Tuxedo Park burgundy set']
   ]],
+  ['Prom', [
+    ['prom-kodak', 'PromKodak', 'Prom · Kodak, the squad', 'Prom crew sign-up in the Kodak style: a 1970s city detective, armed with a camera'],
+    ['prom-silver-birch', 'PromBirch', 'Prom · Silver Birch, the agent', 'Prom crew sign-up in the Silver Birch style: a secret-agent mission briefing'],
+    ['prom-tuxedo-park', 'PromPark', 'Prom · Tuxedo Park, the detective', 'Prom crew sign-up in the Tuxedo Park style: a Victorian consulting detective'],
+    ['suit-up-kodak', 'PromGameKodak', 'Suit Up game · Kodak', 'Minigame: dress the form in the right order against the clock'],
+    ['suit-up-silver-birch', 'PromGameBirch', 'Suit Up game · Silver Birch', 'Minigame: the mission version'],
+    ['suit-up-tuxedo-park', 'PromGamePark', 'Suit Up game · Tuxedo Park', 'Minigame: the case-file version']
+  ]],
   ['Style details', [
     ['silver-birch-details', 'SilverBirch', 'Silver Birch · detail components', 'The small parts of the Silver Birch style'],
     ['tuxedo-park-green-details', 'TuxedoPark', 'Tuxedo Park green · detail components', 'The small parts of Tuxedo Park, green'],

@@ -85,7 +85,14 @@
         var key = a.name.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); });
         cprops[key] = mm ? lookup(scopes, mm[1]) : interp(a.value, scopes);
       });
-      var child = new def.Component(cprops);
+      // Keep each embedded component's instance (and so its state) across re-renders.
+      var key = node.getAttribute('name') + '#' + (importCount++);
+      var child = importCache[key];
+      if (!child) {
+        child = new def.Component(cprops);
+        importCache[key] = child;
+        if (child.componentDidMount) pendingMounts.push(child);
+      }
       child.props = cprops;
       child.__render = currentRender;
       kids(def.tpl, [child.renderVals ? child.renderVals() : {}], out);
@@ -146,6 +153,9 @@
 
   var registry = {};
   var currentRender = null;
+  var importCache = {};
+  var importCount = 0;
+  var pendingMounts = [];
   var seenHead = {};
 
   // Where the focused field sits in the page, so it can be focused again after a re-render.
@@ -227,8 +237,10 @@
       var keep = focusPath(root, document.activeElement);
       var frag = document.createDocumentFragment();
       currentRender = comp.__render;
+      importCount = 0;
       kids(def.tpl, [comp.renderVals ? comp.renderVals() : {}], frag);
       root.replaceChildren(frag);
+      pendingMounts.splice(0).forEach(function (c) { c.componentDidMount(); });
       if (keep) {
         var back = findPath(root, keep);
         if (back && back.focus) {
