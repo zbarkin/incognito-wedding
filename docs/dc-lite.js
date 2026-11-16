@@ -74,6 +74,23 @@
       if (cond) kids(node, scopes, out);
       return;
     }
+    if (tag === 'dc-import') {
+      var def = registry[node.getAttribute('name')];
+      if (!def) return;
+      var cprops = {};
+      Object.keys(def.defaults).forEach(function (k) { cprops[k] = def.defaults[k]; });
+      Array.prototype.forEach.call(node.attributes, function (a) {
+        if (a.name === 'name' || /^hint-/.test(a.name)) return;
+        var mm = a.value.match(WHOLE);
+        var key = a.name.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); });
+        cprops[key] = mm ? lookup(scopes, mm[1]) : interp(a.value, scopes);
+      });
+      var child = new def.Component(cprops);
+      child.props = cprops;
+      child.__render = currentRender;
+      kids(def.tpl, [child.renderVals ? child.renderVals() : {}], out);
+      return;
+    }
     var el = node.namespaceURI === 'http://www.w3.org/2000/svg'
       ? document.createElementNS(node.namespaceURI, node.tagName)
       : document.createElement(tag);
@@ -127,53 +144,103 @@
     });
   }
 
-  function focusKey(el) {
-    if (!el || !el.id) return null;
-    return { id: el.id, start: el.selectionStart, end: el.selectionEnd };
+  var registry = {};
+  var currentRender = null;
+  var seenHead = {};
+
+  // Where the focused field sits in the page, so it can be focused again after a re-render.
+  function focusPath(root, el) {
+    if (!el || el === document.body || !root.contains(el)) return null;
+    var path = [];
+    for (var n = el; n && n !== root; n = n.parentNode) {
+      path.unshift(Array.prototype.indexOf.call(n.parentNode.children, n));
+    }
+    return { path: path, start: el.selectionStart, end: el.selectionEnd };
+  }
+  function findPath(root, keep) {
+    var n = root;
+    for (var i = 0; n && i < keep.path.length; i++) n = n.children[keep.path[i]];
+    return n;
+  }
+
+  function toHead(nodes) {
+    Array.prototype.slice.call(nodes).forEach(function (n) {
+      if (n.nodeType !== 1) return;
+      var key = n.outerHTML;
+      if (seenHead[key]) return;
+      seenHead[key] = true;
+      document.head.appendChild(n.cloneNode(true));
+    });
+  }
+
+  function makeDef(host, scriptEl) {
+    var helmet = host.querySelector('helmet');
+    if (helmet) {
+      toHead(helmet.childNodes);
+      helmet.remove();
+    }
+    var tpl = document.createElement('template');
+    tpl.innerHTML = host.innerHTML;
+    var defaults = {};
+    try {
+      var decl = JSON.parse(scriptEl.getAttribute('data-props') || '{}');
+      Object.keys(decl).forEach(function (k) {
+        if (k.charAt(0) !== '$' && decl[k] && 'default' in decl[k]) defaults[k] = decl[k]['default'];
+      });
+    } catch (e) {}
+    var Component = new Function('DCLogic', scriptEl.textContent + '\n;return Component;')(DCLogic);
+    return { tpl: tpl, defaults: defaults, Component: Component };
+  }
+
+  function importNames(tpl) {
+    return Array.prototype.map.call(tpl.content.querySelectorAll('dc-import'), function (n) {
+      return n.getAttribute('name');
+    });
+  }
+
+  function load(names) {
+    var todo = names.filter(function (n, i) { return n && !registry[n] && names.indexOf(n) === i; });
+    return Promise.all(todo.map(function (name) {
+      return fetch(name + '.dc.html').then(function (r) { return r.text(); }).then(function (text) {
+        var doc = new DOMParser().parseFromString(text, 'text/html');
+        var host = doc.querySelector('x-dc');
+        var scriptEl = doc.querySelector('script[data-dc-script]');
+        if (!host || !scriptEl) return;
+        registry[name] = makeDef(host, scriptEl);
+        return load(importNames(registry[name].tpl));
+      });
+    }));
   }
 
   function mount() {
     var host = document.querySelector('x-dc');
     var scriptEl = document.querySelector('script[data-dc-script]');
     if (!host || !scriptEl) return;
-    var helmet = host.querySelector('helmet');
-    if (helmet) {
-      Array.prototype.slice.call(helmet.childNodes).forEach(function (n) {
-        if (n.nodeType === 1) document.head.appendChild(n);
-      });
-      helmet.remove();
-    }
-    var tpl = document.createElement('template');
-    tpl.innerHTML = host.innerHTML;
-    var props = {};
-    try {
-      var decl = JSON.parse(scriptEl.getAttribute('data-props') || '{}');
-      Object.keys(decl).forEach(function (k) {
-        if (k.charAt(0) !== '$' && decl[k] && 'default' in decl[k]) props[k] = decl[k]['default'];
-      });
-    } catch (e) {}
-    var Component = new Function('DCLogic', scriptEl.textContent + '\n;return Component;')(DCLogic);
-    var comp = new Component(props);
-    comp.props = props;
+    var def = makeDef(host, scriptEl);
+    var comp = new def.Component(def.defaults);
+    comp.props = def.defaults;
     var root = document.createElement('div');
     root.className = 'dc-root';
     host.parentNode.insertBefore(root, host);
     host.remove();
     comp.__render = function () {
-      var keep = focusKey(document.activeElement);
+      var keep = focusPath(root, document.activeElement);
       var frag = document.createDocumentFragment();
-      kids(tpl, [comp.renderVals ? comp.renderVals() : {}], frag);
+      currentRender = comp.__render;
+      kids(def.tpl, [comp.renderVals ? comp.renderVals() : {}], frag);
       root.replaceChildren(frag);
       if (keep) {
-        var back = document.getElementById(keep.id);
-        if (back) {
+        var back = findPath(root, keep);
+        if (back && back.focus) {
           back.focus();
           try { back.setSelectionRange(keep.start, keep.end); } catch (e) {}
         }
       }
     };
-    comp.__render();
-    if (comp.componentDidMount) comp.componentDidMount();
+    load(importNames(def.tpl)).then(function () {
+      comp.__render();
+      if (comp.componentDidMount) comp.componentDidMount();
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);

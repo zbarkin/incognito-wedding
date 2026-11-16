@@ -3,59 +3,137 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Incognito · Wedding registration styles</title>
+<title>Incognito · Wedding party preview</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&amp;display=swap">
 <style>
-:root{--bg:#101011;--bar:#18181a;--line:#2e2e31;--text:#f2efe8;--muted:#a8a6a0;--on:#f2efe8;--on-text:#111}
+:root{--bg:#101011;--bar:#18181a;--line:#2e2e31;--text:#f2efe8;--muted:#a8a6a0;--on:#f2efe8;--on-text:#111;--accent:#c9a24b}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Archivo,system-ui,sans-serif}
 body{display:flex;flex-direction:column}
-header{background:var(--bar);border-bottom:1px solid var(--line);padding:12px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
-.title{display:flex;flex-direction:column;gap:2px}
-.title strong{font-size:15px;letter-spacing:.04em}
+header{background:var(--bar);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+.title{display:flex;flex-direction:column;gap:2px;margin-right:auto}
+.title strong{font-size:14px;letter-spacing:.06em}
 .title span{font-size:13px;color:var(--muted)}
-nav{display:flex;flex-wrap:wrap;gap:6px}
-nav button{height:44px;padding:0 16px;border:1px solid var(--line);background:transparent;color:var(--text);font:600 14px Archivo,system-ui,sans-serif;cursor:pointer;border-radius:2px}
-nav button:hover{border-color:var(--muted)}
-nav button[aria-pressed="true"]{background:var(--on);color:var(--on-text);border-color:var(--on)}
-nav button:focus-visible,a:focus-visible{outline:2px solid #c9a24b;outline-offset:2px}
-.tools{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted)}
-.tools a{color:var(--text)}
-main{flex:1 1 auto;min-height:0}
-iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.field{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+select{height:44px;min-width:280px;max-width:100%;padding:0 12px;background:#0d0d0e;color:var(--text);border:1px solid var(--line);border-radius:2px;font:600 14px Archivo,system-ui,sans-serif}
+.nav{display:flex;gap:6px}
+.nav button,.nav a{height:44px;min-width:44px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:transparent;color:var(--text);font:600 14px Archivo,system-ui,sans-serif;cursor:pointer;border-radius:2px;text-decoration:none}
+.nav button:hover,.nav a:hover{border-color:var(--muted)}
+select:focus-visible,.nav button:focus-visible,.nav a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{flex:1 1 auto;min-height:0;display:flex;justify-content:center;overflow:auto}
+main.desk iframe{width:100%;height:100%}
+main.phone{padding:28px 16px;background:#0a0a0b}
+main.phone iframe{width:390px;max-width:100%;height:844px;flex:0 0 auto;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+iframe{display:block;border:0;background:#121110}
 </style>
 </head>
 <body>
 <header>
-<div class="title"><strong>INCOGNITO · WEDDING REGISTRATION</strong><span id="desc">Step 1 of sign-up, shown in each style</span></div>
-<nav aria-label="Style">
-<button type="button" data-style="kodak">Kodak</button>
-<button type="button" data-style="silver-birch">Silver Birch</button>
-<button type="button" data-style="tuxedo-park-green">Tuxedo Park · green</button>
-<button type="button" data-style="tuxedo-park-burgundy">Tuxedo Park · burgundy</button>
-</nav>
-<div class="tools"><a id="open" href="styles/kodak.html" target="_blank" rel="noopener">Open full page</a></div>
+<div class="title"><strong>INCOGNITO · WEDDING PARTY PREVIEW</strong><span id="desc"></span></div>
+<label class="field" for="pick">Screen
+<select id="pick"></select>
+</label>
+<div class="nav">
+<button type="button" id="prev" aria-label="Previous screen">‹</button>
+<button type="button" id="next" aria-label="Next screen">›</button>
+<a id="open" href="#" target="_blank" rel="noopener">Open full page</a>
+</div>
 </header>
-<main><iframe id="view" title="Style preview" src="styles/kodak.html"></iframe></main>
+<main id="stage" class="desk"><iframe id="view" title="Screen preview"></iframe></main>
 <script>
 (function () {
-  var notes = {
-    'kodak': 'Kodak: charcoal, brass and brushed aluminum, with a Rochester feel',
-    'silver-birch': 'Silver Birch: black, silver and ivory, with gold for titles',
-    'tuxedo-park-green': 'Tuxedo Park: bottle-green walls, engraved stationery and gilt',
-    'tuxedo-park-burgundy': 'Tuxedo Park: the burgundy set'
-  };
-  var buttons = document.querySelectorAll('nav button');
-  function show(id, push) {
-    if (!notes[id]) id = 'kodak';
-    document.getElementById('view').src = 'styles/' + id + '.html';
-    document.getElementById('open').href = 'styles/' + id + '.html';
-    document.getElementById('desc').textContent = notes[id];
-    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.style === id ? 'true' : 'false'); });
-    if (push) history.replaceState(null, '', '#' + id);
+  var groups = [
+    ['Style options · sign-up step 1', [
+      ['kodak', 'Main', 'Kodak', 'Charcoal, brass and brushed aluminum, with a Rochester feel'],
+      ['silver-birch', 'SilverBirchSignup', 'Silver Birch', 'Black, silver and ivory, with Cesso for titles'],
+      ['tuxedo-park-green', 'TuxedoParkSignup', 'Tuxedo Park · green', 'Bottle-green walls, engraved stationery and gilt'],
+      ['tuxedo-park-burgundy', 'TuxedoParkBurgundySignup', 'Tuxedo Park · burgundy', 'The Tuxedo Park burgundy set']
+    ]],
+    ['Style details', [
+      ['silver-birch-details', 'SilverBirch', 'Silver Birch · detail components', 'The small parts of the Silver Birch style'],
+      ['tuxedo-park-green-details', 'TuxedoPark', 'Tuxedo Park green · detail components', 'The small parts of Tuxedo Park, green'],
+      ['tuxedo-park-burgundy-details', 'TuxedoParkBurgundy', 'Tuxedo Park burgundy · detail components', 'The small parts of Tuxedo Park, burgundy']
+    ]],
+    ['Register the wedding party (Kodak style)', [
+      ['step-1', 'Main', '1 · The wedding', 'Sign-up step 1: names, date and venue'],
+      ['step-2', 'Party', '2 · The party', 'Sign-up step 2: who needs a tux or suit'],
+      ['step-3', 'Look', '3 · The look', 'Sign-up step 3: tuxedo or suit, color and details'],
+      ['step-4', 'Book', '4 · Book a visit', 'Sign-up step 4: pick a time to come in']
+    ]],
+    ['Track the party', [
+      ['status', 'Status', 'Party status · groom’s view', 'Where the whole party stands, three weeks after sign-up'],
+      ['groomsman', 'Member', 'Groomsman’s page · phone', 'What a groomsman sees from his invite link', 1],
+      ['measurements', 'Measure', 'Measurements form · phone', 'Entering measurements, with a how-to behind every How? link', 1],
+      ['walkthrough', 'Guide', 'Measuring walkthrough · phone', 'One measurement at a time, with an animation for each', 1]
+    ]],
+    ['How to measure', [
+      ['animations', 'Library', 'All 10 measuring animations', 'Every how-to-measure animation on one page']
+    ]],
+    ['Staff', [
+      ['staff-parties', 'Parties', 'All parties', 'The staff board: every wedding and what needs attention'],
+      ['staff-party', 'PartyAdmin', 'Assess one party', 'One wedding in detail, with automatic measurement checks']
+    ]]
+  ];
+  var list = [];
+  var pick = document.getElementById('pick');
+  groups.forEach(function (g) {
+    var og = document.createElement('optgroup');
+    og.label = g[0];
+    g[1].forEach(function (s) {
+      var o = document.createElement('option');
+      o.value = s[0];
+      o.textContent = s[2];
+      og.appendChild(o);
+      list.push({ id: s[0], file: s[1], name: s[2], note: s[3], phone: !!s[4] });
+    });
+    pick.appendChild(og);
+  });
+  var byFile = {};
+  list.forEach(function (s) { if (!byFile[s.file]) byFile[s.file] = s; });
+  var stage = document.getElementById('stage');
+  var view = document.getElementById('view');
+  var current = null;
+
+  function show(id) {
+    var s = list.filter(function (x) { return x.id === id; })[0] || list[0];
+    current = s;
+    pick.value = s.id;
+    document.getElementById('desc').textContent = s.note;
+    document.getElementById('open').href = 'screens/' + s.file + '.dc.html';
+    stage.className = s.phone ? 'phone' : 'desk';
+    var url = 'screens/' + s.file + '.dc.html';
+    if (!view.contentWindow || view.getAttribute('src') !== url) view.setAttribute('src', url);
+    history.replaceState(null, '', '#' + s.id);
   }
-  buttons.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.style, true); }); });
-  show(location.hash.slice(1), false);
+  function step(d) {
+    var i = list.indexOf(current);
+    show(list[(i + d + list.length) % list.length].id);
+  }
+  pick.addEventListener('change', function () { show(pick.value); });
+  document.getElementById('prev').addEventListener('click', function () { step(-1); });
+  document.getElementById('next').addEventListener('click', function () { step(1); });
+  // Keep the menu in step when a link inside a screen opens another screen.
+  view.addEventListener('load', function () {
+    try {
+      var m = view.contentWindow.location.pathname.match(/([^/]+)\.dc\.html$/);
+      if (!m || (current && current.file === m[1])) return;
+      var s = byFile[m[1]];
+      if (s) {
+        current = s;
+        pick.value = s.id;
+        document.getElementById('desc').textContent = s.note;
+        document.getElementById('open').href = 'screens/' + s.file + '.dc.html';
+        stage.className = s.phone ? 'phone' : 'desk';
+        view.setAttribute('src', 'screens/' + s.file + '.dc.html');
+        history.replaceState(null, '', '#' + s.id);
+      }
+    } catch (e) {}
+  });
+  window.addEventListener('hashchange', function () {
+    var id = location.hash.slice(1);
+    if (!current || current.id !== id) show(id);
+  });
+  show(location.hash.slice(1));
 })();
 </script>
 </body>

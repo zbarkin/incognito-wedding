@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Style C · Tuxedo Park, burgundy · detail components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Pinyon+Script&amp;display=swap">
+<style>
+body{margin:0;background:#3B101C}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tpb-wall{background-color:#3B101C;background-image:radial-gradient(circle at 14px 14px, rgba(198,168,103,.18) 1.3px, rgba(0,0,0,0) 1.9px),linear-gradient(45deg, rgba(0,0,0,0) 49.3%, rgba(198,168,103,.07) 49.3%, rgba(198,168,103,.07) 50.7%, rgba(0,0,0,0) 50.7%),linear-gradient(-45deg, rgba(0,0,0,0) 49.3%, rgba(198,168,103,.07) 49.3%, rgba(198,168,103,.07) 50.7%, rgba(0,0,0,0) 50.7%);background-size:28px 28px}
+.tpb-card{background:radial-gradient(circle at 0 0, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) top left/51% 51% no-repeat,radial-gradient(circle at 100% 0, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) top right/51% 51% no-repeat,radial-gradient(circle at 0 100%, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) bottom left/51% 51% no-repeat,radial-gradient(circle at 100% 100%, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) bottom right/51% 51% no-repeat;color:#1F1A14;color-scheme:light}
+.tpb-ticket{background:radial-gradient(circle at 0 50%, rgba(0,0,0,0) 11px, #F2EAD8 11.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%, rgba(0,0,0,0) 11px, #F2EAD8 11.5px) right/51% 100% no-repeat;color:#1F1A14}
+.tpb-tag{background:#F2EAD8;color:#1F1A14;clip-path:polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%, 0 22px)}
+.tpb-pane{display:block;width:44px;height:58px;box-sizing:border-box;border-radius:22px 22px 2px 2px;border:2px solid #17060B}
+.tpb-lit{background:linear-gradient(#17060B,#17060B) center/2px 100% no-repeat,linear-gradient(#17060B,#17060B) 0 60%/100% 2px no-repeat,#E3A54A;box-shadow:0 0 0 1px #7B4753,0 0 22px rgba(227,165,74,.5)}
+.tpb-now{background:linear-gradient(#17060B,#17060B) center/2px 100% no-repeat,linear-gradient(#17060B,#17060B) 0 60%/100% 2px no-repeat,linear-gradient(to top,#E3A54A 56%,#4A1B27 56%);box-shadow:0 0 0 1px #C6A867,0 0 14px rgba(227,165,74,.3)}
+.tpb-dim{background:linear-gradient(#17060B,#17060B) center/2px 100% no-repeat,linear-gradient(#17060B,#17060B) 0 60%/100% 2px no-repeat,#4A1B27;box-shadow:0 0 0 1px #7B4753}
+.tpb-tix{background:radial-gradient(circle at 0 50%, rgba(0,0,0,0) 7px, #F2EAD8 7.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%, rgba(0,0,0,0) 7px, #F2EAD8 7.5px) right/51% 100% no-repeat;color:#1F1A14}
+.tpb-tix-on{background:radial-gradient(circle at 0 50%, rgba(0,0,0,0) 7px, #C6A867 7.5px) left/51% 100% no-repeat,radial-gradient(circle at 100% 50%, rgba(0,0,0,0) 7px, #C6A867 7.5px) right/51% 100% no-repeat;color:#1F1A14;font-weight:700}
+.tpb-tix-off{background:transparent;color:#C7B5A6;text-decoration:line-through;box-shadow:inset 0 0 0 1px #5E2C37}
+.tpb-line:focus{outline:none;border-bottom:2px solid #7A1F2E !important;background:rgba(122,31,46,.07) !important}
+.tpb-line::placeholder{color:#6A6152;font-style:italic}
+.tpb-btn:hover{background:#7A1F2E !important}
+.tpb-gilt:hover{background:#D9BE82 !important}
+.tpb-out:hover{background:rgba(31,26,20,.08) !important}
+.tpb-link:hover{color:#4A111B !important}
+a:focus-visible,button:focus-visible{outline:2px solid #C6A867;outline-offset:3px}
+.tpb-card a:focus-visible,.tpb-card button:focus-visible{outline-color:#7A1F2E}
+</style>
+</helmet>
+<div class="tpb-wall" style="width:1440px; min-height:2160px; box-sizing:border-box; padding:64px 64px 72px; color:#F2EAD8; font-family:'EB Garamond', Georgia, serif; display:flex; flex-direction:column; gap:56px;">
+
+<header style="display:flex; gap:64px; align-items:flex-start;">
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:38px;">
+
+<div style="display:flex; flex-direction:column; align-items:flex-start; gap:2px;">
+<svg role="img" aria-label="Incognito" width="420" height="84" viewBox="0 0 420 84">
+<path d="M76 30 L18 30 L32 52 L18 74 L76 74 Z" fill="#D9CDB0" stroke="#1F1A14" stroke-width="1.2" stroke-linejoin="round"></path>
+<path d="M344 30 L402 30 L388 52 L402 74 L344 74 Z" fill="#D9CDB0" stroke="#1F1A14" stroke-width="1.2" stroke-linejoin="round"></path>
+<rect x="60" y="14" width="300" height="48" fill="#F2EAD8" stroke="#1F1A14" stroke-width="1.2"></rect>
+<path d="M60 62 L76 62 L76 74 Z" fill="#1F1A14"></path>
+<path d="M360 62 L344 62 L344 74 Z" fill="#1F1A14"></path>
+<rect x="66" y="20" width="288" height="36" fill="none" stroke="#1F1A14" stroke-width=".7"></rect>
+<text x="213" y="47" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="25" letter-spacing="7" fill="#1F1A14">INCOGNITO</text>
+</svg>
+<div style="display:flex; align-items:baseline; gap:16px; padding-left:60px;">
+<span style="font-family:'Pinyon Script', cursive; font-size:32px; line-height:1; color:#C6A867;">Menswear &amp; Tux</span>
+<span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;">Penfield, New York · Established 1985</span>
+</div>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:10px;">
+<span style="display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#C6A867;"></span>Style C · Burgundy set</span>
+<h1 style="margin:0; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:88px; line-height:1; color:#F2EAD8;">Tuxedo Park</h1>
+<p style="margin:0; max-width:640px; font-size:20px; line-height:1.5; color:#C7B5A6;">Burgundy walls, engraved stationery and gilt. Forms sit on paper. Claret for accents on the paper, and lamp amber for anything lit.</p>
+</div>
+
+<ul aria-label="Palette" style="list-style:none; margin:0; padding:0; display:flex; gap:14px;">
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#3B101C; border:1px solid #7B4753;"></span><span style="font-size:16px; font-weight:600;">Burgundy</span><span style="font-size:14px; color:#C7B5A6;">#3B101C</span></li>
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#F2EAD8;"></span><span style="font-size:16px; font-weight:600;">Card stock</span><span style="font-size:14px; color:#C7B5A6;">#F2EAD8</span></li>
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#1F1A14; border:1px solid #7B4753;"></span><span style="font-size:16px; font-weight:600;">Engraver’s ink</span><span style="font-size:14px; color:#C7B5A6;">#1F1A14</span></li>
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#C6A867;"></span><span style="font-size:16px; font-weight:600;">Gilt</span><span style="font-size:14px; color:#C7B5A6;">#C6A867</span></li>
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#7A1F2E; border:1px solid #7B4753;"></span><span style="font-size:16px; font-weight:600;">Claret</span><span style="font-size:14px; color:#C7B5A6;">#7A1F2E</span></li>
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#E3A54A;"></span><span style="font-size:16px; font-weight:600;">Lamp amber</span><span style="font-size:14px; color:#C7B5A6;">#E3A54A</span></li>
+<li style="display:flex; flex-direction:column; gap:6px; width:106px;"><span aria-hidden="true" style="height:64px; background:#C7B5A6;"></span><span style="font-size:16px; font-weight:600;">Stone</span><span style="font-size:14px; color:#C7B5A6;">#C7B5A6</span></li>
+</ul>
+
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:26px 48px; padding-top:26px; border-top:1px solid #5E2C37;">
+<div style="display:flex; flex-direction:column; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;">Playfair Display · titles</span><span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:38px; line-height:1.1;">The whole party, <span style="font-style:italic;">properly</span> dressed.</span></div>
+<div style="display:flex; flex-direction:column; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;">Pinyon Script · names only</span><span style="font-family:'Pinyon Script', cursive; font-size:50px; line-height:1.1; color:#C6A867;">Daniel &amp; Claire</span></div>
+<div style="display:flex; flex-direction:column; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;">EB Garamond Italic · what people write in</span><span style="font-style:italic; font-weight:500; font-size:26px;">The Glass Hall, Rochester</span></div>
+<div style="display:flex; flex-direction:column; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;">EB Garamond · text and tracked caps for labels</span><span style="font-size:18px; line-height:1.5; color:#F2EAD8;">We’ll keep the groom, the groomsmen and both fathers on the same page.</span></div>
+</div>
+
+</div>
+
+<figure class="tpb-card" style="flex:0 0 320px; box-sizing:border-box; margin:0; padding:18px 18px 14px;">
+<svg role="img" aria-label="Engraving-style drawing of a dinner jacket with a claret boutonniere" viewBox="0 0 360 440" style="display:block; width:100%; height:auto;">
+<rect width="360" height="440" fill="#F2EAD8"></rect>
+<path d="{{eng.sky}}" stroke="#1F1A14" stroke-width=".7" opacity=".5" fill="none"></path>
+<path d="M18 440 L28 214 Q34 164 88 148 L146 124 L180 146 L214 124 L272 148 Q326 164 332 214 L342 440 Z" fill="#1F1A14"></path>
+<path d="{{eng.left}}" stroke="#F2EAD8" stroke-width=".9" opacity=".5" fill="none"></path>
+<path d="{{eng.right}}" stroke="#F2EAD8" stroke-width=".9" opacity=".5" fill="none"></path>
+<path d="M154 112 L158 94 L202 94 L206 112 Z" fill="#F2EAD8" stroke="#1F1A14" stroke-width="1"></path>
+<path d="M150 112 L210 112 L180 302 Z" fill="#F2EAD8"></path>
+<path d="M160 150 L174 250 M165 150 L177 240 M200 150 L186 250 M195 150 L183 240" stroke="#1F1A14" stroke-width=".7" opacity=".55" fill="none"></path>
+<circle cx="180" cy="176" r="2.6" fill="#1F1A14"></circle>
+<circle cx="180" cy="206" r="2.6" fill="#1F1A14"></circle>
+<circle cx="180" cy="236" r="2.6" fill="#1F1A14"></circle>
+<path d="M148 114 L180 302 L114 206 L92 166 L130 176 L138 140 Z" fill="#0D0A07" stroke="#F2EAD8" stroke-width="1" stroke-linejoin="round"></path>
+<path d="M212 114 L180 302 L246 206 L268 166 L230 176 L222 140 Z" fill="#0D0A07" stroke="#F2EAD8" stroke-width="1" stroke-linejoin="round"></path>
+<path d="M180 124 L150 108 L150 140 Z" fill="#1F1A14"></path>
+<path d="M180 124 L210 108 L210 140 Z" fill="#1F1A14"></path>
+<rect x="171" y="115" width="18" height="18" rx="3" fill="#1F1A14"></rect>
+<path d="M240 258 L294 264" stroke="#F2EAD8" stroke-width="1.5" stroke-linecap="round"></path>
+<path d="M244 258 L254 238 L266 259 L278 240 L290 262 Z" fill="#F2EAD8" stroke="#1F1A14" stroke-width=".8" stroke-linejoin="round"></path>
+<circle cx="180" cy="326" r="7" fill="#0D0A07" stroke="#F2EAD8" stroke-width="1"></circle>
+<path d="M220 214 Q206 214 200 226 Q214 228 220 214 Z" fill="#F2EAD8"></path>
+<circle cx="230" cy="192" r="12" fill="#7A1F2E" stroke="#F2EAD8" stroke-width="1"></circle>
+<circle cx="230" cy="192" r="4.5" fill="#4A111B"></circle>
+<rect x="1" y="1" width="358" height="438" fill="none" stroke="#1F1A14" stroke-width="2"></rect>
+<rect x="7" y="7" width="346" height="426" fill="none" stroke="#1F1A14" stroke-width=".8"></rect>
+</svg>
+<figcaption style="padding-top:12px; text-align:center; font-style:italic; font-size:16px; line-height:1.4; color:#4E463A;">The dinner jacket, named for Tuxedo Park, N.Y., 1886</figcaption>
+</figure>
+</header>
+
+<div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:24px;">
+
+<section style="background:#270A12; border:1px solid #5E2C37; padding:28px; display:flex; flex-direction:column; gap:24px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#C6A867;"></span>Party ticket</h2>
+<div class="tpb-ticket" style="display:flex; align-items:stretch; min-height:118px;">
+<div style="flex:0 0 122px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:14px 6px 14px 22px;">
+<span style="font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;">Party No.</span>
+<span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:27px; line-height:1;">27·0123</span>
+</div>
+<span aria-hidden="true" style="width:0; margin:14px 0; border-left:1.5px dashed #6A6152;"></span>
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:4px; padding:14px 24px 14px 16px;">
+<span style="font-family:'Pinyon Script', cursive; font-size:31px; line-height:1.05;">Okafor &amp; Whitman</span>
+<span style="font-style:italic; font-size:16px; line-height:1.3; color:#4E463A;">Saturday, the twenty-third of January, 2027</span>
+</div>
+</div>
+</section>
+
+<section style="background:#270A12; border:1px solid #5E2C37; padding:28px; display:flex; flex-direction:column; gap:20px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#C6A867;"></span>Pocket-watch countdown</h2>
+<div style="display:flex; align-items:center; gap:24px;">
+<svg role="img" aria-label="53 days until the wedding" width="150" height="176" viewBox="0 0 150 176" style="flex:0 0 150px;">
+<circle cx="75" cy="13" r="9" fill="none" stroke="#C6A867" stroke-width="3"></circle>
+<rect x="68" y="21" width="14" height="12" rx="2" fill="#C6A867"></rect>
+<circle cx="75" cy="102" r="70" fill="#C6A867"></circle>
+<circle cx="75" cy="102" r="64" fill="#8F7440"></circle>
+<circle cx="75" cy="102" r="61" fill="#F2EAD8"></circle>
+<circle cx="75" cy="102" r="54" fill="none" stroke="#1F1A14" stroke-width="4" stroke-dasharray="0.8 4.855" stroke-dashoffset="0.4"></circle>
+<circle cx="75" cy="102" r="52.5" fill="none" stroke="#1F1A14" stroke-width="7" stroke-dasharray="1.8 25.69" stroke-dashoffset="0.9"></circle>
+<text x="75" y="112" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="700" font-size="46" fill="#1F1A14">53</text>
+<text x="75" y="136" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="22" fill="#7A1F2E">days</text>
+</svg>
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:'Playfair Display', Georgia, serif; font-style:italic; font-size:24px; line-height:1.15;">until the wedding</span>
+<span style="font-size:17px; line-height:1.4; color:#C7B5A6;">Saturday, January 23<br>Ceremony 4:30 PM</span>
+</div>
+</div>
+</section>
+
+<section style="background:#270A12; border:1px solid #5E2C37; padding:28px; display:flex; flex-direction:column; gap:24px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#C6A867;"></span>Fitting tag</h2>
+<div class="tpb-tag" style="padding:14px 26px 20px; display:flex; flex-direction:column; gap:8px;">
+<span aria-hidden="true" style="align-self:center; width:14px; height:14px; border-radius:50%; background:#270A12; box-shadow:0 0 0 2px #A88B50;"></span>
+<span style="font-family:'Pinyon Script', cursive; font-size:32px; line-height:1.1;">Sam Whitman</span>
+<div style="display:flex; align-items:baseline; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;">Coat</span><span aria-hidden="true" style="flex:1 1 auto; border-bottom:1px dotted #6A6152;"></span><span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:20px;">40 Regular</span></div>
+<div style="display:flex; align-items:baseline; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;">Trouser</span><span aria-hidden="true" style="flex:1 1 auto; border-bottom:1px dotted #6A6152;"></span><span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:20px;">34</span></div>
+<div style="display:flex; align-items:baseline; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;">Shirt</span><span aria-hidden="true" style="flex:1 1 auto; border-bottom:1px dotted #6A6152;"></span><span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:20px;">15½ – 34</span></div>
+<div style="display:flex; align-items:baseline; gap:8px;"><span style="font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;">Shoe</span><span aria-hidden="true" style="flex:1 1 auto; border-bottom:1px dotted #6A6152;"></span><span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:20px;">10½</span></div>
+<span style="padding-top:4px; font-style:italic; font-size:15px; color:#4E463A;">From his measurements. Confirm at the fitting.</span>
+</div>
+</section>
+
+<section class="tpb-card" style="padding:30px; display:flex; flex-direction:column; gap:20px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#7A1F2E;"></span>Buttons</h2>
+<button type="button" class="tpb-btn" style="align-self:flex-start; display:inline-flex; align-items:center; gap:14px; height:54px; padding:0 28px; background:#1F1A14; color:#F2EAD8; border:0; border-radius:0; box-shadow:inset 0 0 0 4px #1F1A14, inset 0 0 0 5px #C6A867; font-family:'EB Garamond', Georgia, serif; font-weight:600; font-size:15px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer;">Continue to the party<svg aria-hidden="true" width="28" height="12" viewBox="0 0 28 12" fill="none" stroke="#F2EAD8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h23M20 1.5l5 4.5-5 4.5M4 2.5l3 3.5-3 3.5M8 2.5l3 3.5-3 3.5"></path></svg></button>
+<button type="button" class="tpb-out" style="align-self:flex-start; height:54px; padding:0 28px; background:transparent; color:#1F1A14; border:0; border-radius:0; box-shadow:inset 0 0 0 1px #1F1A14, inset 0 0 0 4px #F2EAD8, inset 0 0 0 5px #1F1A14; font-family:'EB Garamond', Georgia, serif; font-weight:600; font-size:15px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer;">Save &amp; finish later</button>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; padding:14px 16px; background:#3B101C;">
+<button type="button" class="tpb-gilt" style="height:48px; padding:0 22px; background:#C6A867; color:#1F1A14; border:0; border-radius:0; box-shadow:inset 0 0 0 3px #C6A867, inset 0 0 0 4px #1F1A14; font-family:'EB Garamond', Georgia, serif; font-weight:700; font-size:14px; letter-spacing:.16em; text-transform:uppercase; cursor:pointer;">Send reminders</button>
+<span style="font-style:italic; font-size:16px; color:#C7B5A6;">on burgundy</span>
+</div>
+<a href="#" class="tpb-link" style="align-self:flex-start; display:inline-flex; align-items:center; min-height:44px; color:#7A1F2E; font-style:italic; font-size:20px; text-underline-offset:4px;">Not sure yet? Decide in store</a>
+<button type="button" disabled style="align-self:flex-start; height:54px; padding:0 28px; background:#DDD2B8; color:#5A5244; border:0; border-radius:0; font-family:'EB Garamond', Georgia, serif; font-weight:600; font-size:15px; letter-spacing:.16em; text-transform:uppercase;">Pick a time to finish</button>
+</section>
+
+<section class="tpb-card" style="padding:30px; display:flex; flex-direction:column; gap:20px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#7A1F2E;"></span>Registry lines</h2>
+<div style="display:flex; flex-direction:column; gap:2px;">
+<label for="tpb-name" style="font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#4E463A;">Your name</label>
+<input id="tpb-name" class="tpb-line" type="text" value="{{name}}" onChange="{{setName}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 2px; background:transparent; border:0; border-bottom:1px solid #1F1A14; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
+</div>
+<div style="display:flex; flex-direction:column; gap:2px;">
+<label for="tpb-venue" style="font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#7A1F2E;">Venue · being written</label>
+<input id="tpb-venue" type="text" value="The Glass Hall" readonly style="box-sizing:border-box; width:100%; height:46px; padding:0 2px; background:rgba(122,31,46,.07); border:0; border-bottom:2px solid #7A1F2E; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
+</div>
+<div style="display:flex; flex-direction:column; gap:2px;">
+<label for="tpb-role" style="font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#4E463A;">You are the</label>
+<div style="position:relative;">
+<select id="tpb-role" class="tpb-line" style="box-sizing:border-box; width:100%; height:46px; padding:0 30px 0 2px; appearance:none; background:transparent; border:0; border-bottom:1px solid #1F1A14; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
+<option>Groom</option>
+<option>Bride</option>
+<option>Partner</option>
+<option>Parent</option>
+<option>Wedding planner</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A1F2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:6px; top:17px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<div style="display:flex; align-items:center; gap:14px; padding-top:6px;"><span aria-hidden="true" style="flex:1 1 auto; height:1px; background:#1F1A14;"></span><span aria-hidden="true" style="width:8px; height:8px; box-sizing:border-box; transform:rotate(45deg); border:1px solid #1F1A14;"></span><span aria-hidden="true" style="flex:1 1 auto; height:1px; background:#1F1A14;"></span></div>
+</section>
+
+<section class="tpb-card" style="padding:30px; display:flex; flex-direction:column; gap:14px;">
+<h2 style="margin:0 0 6px; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#7A1F2E;"></span>Studs, gaslight, tick and counter</h2>
+<div role="radiogroup" aria-label="Tuxedo or suit" style="display:flex; gap:30px;">
+<sc-for list="{{kinds}}" as="k" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{k.on}}" onClick="{{k.pick}}" style="display:flex; align-items:center; gap:14px; height:44px; padding:0 4px; background:transparent; border:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-size:21px; cursor:pointer;"><span aria-hidden="true" style="width:20px; height:20px; box-sizing:border-box; border-radius:50%; border:{{k.rim}}; background:{{k.fill}}; box-shadow:{{k.ring}};"></span>{{k.label}}</button>
+</sc-for>
+</div>
+<div style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:8px 16px; background:#3B101C; color:#F2EAD8;">
+<span id="tpb-inv" style="font-size:18px;">Text the invites when I finish</span>
+<button type="button" role="switch" aria-checked="{{inv.on}}" aria-labelledby="tpb-inv" onClick="{{inv.toggle}}" style="flex:0 0 auto; display:flex; align-items:center; height:44px; padding:0; background:transparent; border:0; cursor:pointer;"><span aria-hidden="true" style="width:62px; height:34px; box-sizing:border-box; padding:3px; display:flex; justify-content:{{inv.justify}}; background:{{inv.track}}; border:1.5px solid #C6A867; border-radius:17px;"><span style="width:25px; height:25px; border-radius:50%; background:{{inv.globe}}; box-shadow:{{inv.glow}};"></span></span></button>
+</div>
+<button type="button" role="checkbox" aria-checked="{{away.on}}" onClick="{{away.toggle}}" style="align-self:flex-start; display:flex; align-items:center; gap:14px; height:48px; padding:0 4px; background:transparent; border:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-size:21px; cursor:pointer;"><span aria-hidden="true" style="position:relative; width:22px; height:22px; box-sizing:border-box; border:1.5px solid #1F1A14;"><svg display="{{away.check}}" width="34" height="30" viewBox="0 0 34 30" fill="none" stroke="#7A1F2E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:0; top:-13px; overflow:visible;"><path d="M3 20 L9 27 Q16 10 31 2"></path></svg></span>Out of town</button>
+<div role="group" aria-label="People who need a tux or suit" style="align-self:flex-start; display:flex; align-items:center; gap:16px;">
+<button type="button" class="tpb-out" aria-label="One fewer person" onClick="{{dec}}" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:1.5px solid #1F1A14; border-radius:50%; cursor:pointer;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F1A14" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"></path></svg></button>
+<output aria-live="polite" style="min-width:44px; text-align:center; font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:36px; line-height:1;">{{size}}</output>
+<button type="button" class="tpb-out" aria-label="One more person" onClick="{{inc}}" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:1.5px solid #1F1A14; border-radius:50%; cursor:pointer;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F1A14" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+<span style="font-style:italic; font-size:18px; color:#4E463A;">in the party</span>
+</div>
+</section>
+
+<section style="grid-column:span 2; background:#270A12; border:1px solid #5E2C37; padding:28px; display:flex; flex-direction:column; gap:28px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#C6A867;"></span>Sign-up parts and lit-window stage tracker</h2>
+<div class="tpb-card" style="padding:20px 30px 22px;">
+<ol aria-label="Sign-up steps" style="list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:16px;">
+<li style="display:flex; flex-direction:column; gap:2px; padding-top:9px; border-top:1px solid #1F1A14;"><span style="display:flex; align-items:center; gap:8px; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:16px; color:#7A1F2E;">I<svg aria-hidden="true" width="18" height="18" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9.5" fill="#7A1F2E"></circle><circle cx="13" cy="13" r="9.5" fill="none" stroke="#7A1F2E" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 4.874"></circle><path d="M8.5 13.2l3 3 6-6.4" stroke="#F2EAD8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="sr">done</span></span><span style="font-family:'Playfair Display', Georgia, serif; font-size:20px;">The Wedding</span></li>
+<li aria-current="step" style="display:flex; flex-direction:column; gap:2px; padding-top:7px; border-top:3px double #1F1A14;"><span style="font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:16px; color:#7A1F2E;">II</span><span style="font-family:'Playfair Display', Georgia, serif; font-weight:700; font-size:20px;">The Party</span></li>
+<li style="display:flex; flex-direction:column; gap:2px; padding-top:9px; border-top:1px solid #9A9080;"><span style="font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:16px; color:#4E463A;">III</span><span style="font-family:'Playfair Display', Georgia, serif; font-size:20px; color:#4E463A;">The Look</span></li>
+<li style="display:flex; flex-direction:column; gap:2px; padding-top:9px; border-top:1px solid #9A9080;"><span style="font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:16px; color:#4E463A;">IV</span><span style="font-family:'Playfair Display', Georgia, serif; font-size:20px; color:#4E463A;">The Visit</span></li>
+</ol>
+</div>
+<ol aria-label="Party stages" style="list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(8, minmax(0, 1fr)); gap:8px;">
+<sc-for list="{{stages}}" as="st" hint-placeholder-count="8">
+<li style="display:flex; flex-direction:column; align-items:flex-start; gap:12px;">
+<span aria-hidden="true" class="{{st.cls}}"></span>
+<span style="display:flex; flex-direction:column; gap:1px;"><span style="font-weight:600; font-size:17px; line-height:1.2; color:{{st.labelColor}};">{{st.label}}<span class="sr">{{st.sr}}</span></span><span style="font-style:italic; font-size:15px; color:#C7B5A6;">{{st.date}}</span></span>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<section class="tpb-card" style="padding:30px; display:flex; flex-direction:column; gap:22px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#7A1F2E;"></span>Shirt-stud meter</h2>
+<div role="img" aria-label="5 of 9 measured" style="display:flex; gap:15px; padding:4px;">
+<span style="width:20px; height:20px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #6A6258 0, #1F1A14 60%); box-shadow:0 0 0 2px #F2EAD8, 0 0 0 3.5px #A88B50;"></span>
+<span style="width:20px; height:20px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #6A6258 0, #1F1A14 60%); box-shadow:0 0 0 2px #F2EAD8, 0 0 0 3.5px #A88B50;"></span>
+<span style="width:20px; height:20px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #6A6258 0, #1F1A14 60%); box-shadow:0 0 0 2px #F2EAD8, 0 0 0 3.5px #A88B50;"></span>
+<span style="width:20px; height:20px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #6A6258 0, #1F1A14 60%); box-shadow:0 0 0 2px #F2EAD8, 0 0 0 3.5px #A88B50;"></span>
+<span style="width:20px; height:20px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #6A6258 0, #1F1A14 60%); box-shadow:0 0 0 2px #F2EAD8, 0 0 0 3.5px #A88B50;"></span>
+<span style="width:20px; height:20px; box-sizing:border-box; border-radius:50%; border:1px solid #4E463A; background:radial-gradient(circle at 35% 30%, #FFFFFF 0, #EDE4CF 55%, #CFC3A6 100%);"></span>
+<span style="width:20px; height:20px; box-sizing:border-box; border-radius:50%; border:1px solid #4E463A; background:radial-gradient(circle at 35% 30%, #FFFFFF 0, #EDE4CF 55%, #CFC3A6 100%);"></span>
+<span style="width:20px; height:20px; box-sizing:border-box; border-radius:50%; border:1px solid #4E463A; background:radial-gradient(circle at 35% 30%, #FFFFFF 0, #EDE4CF 55%, #CFC3A6 100%);"></span>
+<span style="width:20px; height:20px; box-sizing:border-box; border-radius:50%; border:1px solid #4E463A; background:radial-gradient(circle at 35% 30%, #FFFFFF 0, #EDE4CF 55%, #CFC3A6 100%);"></span>
+</div>
+<p style="margin:0; font-size:19px; line-height:1.45;"><strong style="font-family:'Playfair Display', Georgia, serif; font-weight:700; color:#7A1F2E;">Five of nine</strong> measured. Still waiting on Sam, Luis, Richard and Owen.</p>
+</section>
+
+<section class="tpb-card" style="grid-column:span 2; padding:14px;">
+<div style="border:3px double #1F1A14; padding:22px 28px 16px; display:flex; flex-direction:column; gap:14px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#4E463A;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#7A1F2E;"></span>Dance-card party list with wax seals</h2>
+<ol style="list-style:none; margin:0; padding:0;">
+<li style="display:flex; align-items:center; gap:14px; min-height:54px; border-bottom:1px solid #CFC3A6;">
+<span style="flex:0 0 24px; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:18px; color:#7A1F2E;">1.</span>
+<span style="font-weight:600; font-size:21px;">James Okafor</span>
+<span aria-hidden="true" style="flex:1 1 16px; align-self:flex-end; margin-bottom:17px; border-bottom:1px dotted #6A6152;"></span>
+<span style="font-style:italic; font-size:18px; color:#4E463A;">Best man</span>
+<span style="flex:0 0 142px; display:flex; align-items:center; gap:8px; font-size:17px;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9.5" fill="#7A1F2E"></circle><circle cx="13" cy="13" r="9.5" fill="none" stroke="#7A1F2E" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 4.874"></circle><path d="M8.5 13.2l3 3 6-6.4" stroke="#F2EAD8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>Measured</span>
+<span style="flex:0 0 118px; display:flex; align-items:center; gap:8px; font-size:17px;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9.5" fill="#7A1F2E"></circle><circle cx="13" cy="13" r="9.5" fill="none" stroke="#7A1F2E" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 4.874"></circle><path d="M8.5 13.2l3 3 6-6.4" stroke="#F2EAD8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>Paid</span>
+<span aria-hidden="true" style="flex:0 0 122px;"></span>
+</li>
+<li style="display:flex; align-items:center; gap:14px; min-height:54px; border-bottom:1px solid #CFC3A6;">
+<span style="flex:0 0 24px; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:18px; color:#7A1F2E;">2.</span>
+<span style="font-weight:600; font-size:21px;">Sam Whitman</span>
+<span aria-hidden="true" style="flex:1 1 16px; align-self:flex-end; margin-bottom:17px; border-bottom:1px dotted #6A6152;"></span>
+<span style="font-style:italic; font-size:18px; color:#4E463A;">Groomsman</span>
+<span style="flex:0 0 142px; display:flex; align-items:center; gap:8px; font-size:17px; color:#4E463A;"><span aria-hidden="true" style="width:18px; height:18px; margin:0 2px; box-sizing:border-box; border-radius:50%; border:1.5px dashed #4E463A;"></span>Awaited</span>
+<span style="flex:0 0 118px; display:flex; align-items:center; gap:8px; font-size:17px; color:#4E463A;"><span aria-hidden="true" style="width:18px; height:18px; margin:0 2px; box-sizing:border-box; border-radius:50%; border:1.5px dashed #4E463A;"></span>Due</span>
+<span style="flex:0 0 122px; display:flex; justify-content:flex-end;"><button type="button" aria-label="Send Sam a reminder" style="height:44px; padding:0; background:transparent; border:0; color:#7A1F2E; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-size:18px; text-decoration:underline; text-underline-offset:4px; cursor:pointer;">Send a reminder</button></span>
+</li>
+<li style="display:flex; align-items:center; gap:14px; min-height:54px;">
+<span style="flex:0 0 24px; font-family:'Playfair Display', Georgia, serif; font-style:italic; font-weight:700; font-size:18px; color:#7A1F2E;">3.</span>
+<span style="font-weight:600; font-size:21px;">Ravi Patel</span>
+<span aria-hidden="true" style="flex:1 1 16px; align-self:flex-end; margin-bottom:17px; border-bottom:1px dotted #6A6152;"></span>
+<span style="font-style:italic; font-size:18px; color:#4E463A;">Groomsman</span>
+<span style="flex:0 0 142px; display:flex; align-items:center; gap:8px; font-size:17px;"><span aria-hidden="true" style="width:13px; height:13px; margin:0 5px 0 4px; transform:rotate(45deg); background:#7A1F2E;"></span>Second look</span>
+<span style="flex:0 0 118px; display:flex; align-items:center; gap:8px; font-size:17px;"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9.5" fill="#7A1F2E"></circle><circle cx="13" cy="13" r="9.5" fill="none" stroke="#7A1F2E" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 4.874"></circle><path d="M8.5 13.2l3 3 6-6.4" stroke="#F2EAD8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>Paid</span>
+<span aria-hidden="true" style="flex:0 0 122px;"></span>
+</li>
+</ol>
+<ul aria-label="Status marks" style="list-style:none; margin:0; padding:12px 0 0; border-top:1px solid #1F1A14; display:flex; flex-wrap:wrap; gap:8px 28px; font-size:16px; color:#4E463A;">
+<li style="display:flex; align-items:center; gap:8px;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 26 26"><circle cx="13" cy="13" r="9.5" fill="#7A1F2E"></circle><circle cx="13" cy="13" r="9.5" fill="none" stroke="#7A1F2E" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.1 4.874"></circle><path d="M8.5 13.2l3 3 6-6.4" stroke="#F2EAD8" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>Done, sealed</li>
+<li style="display:flex; align-items:center; gap:8px;"><span aria-hidden="true" style="width:18px; height:18px; box-sizing:border-box; border-radius:50%; border:1.5px dashed #4E463A;"></span>Waiting</li>
+<li style="display:flex; align-items:center; gap:10px;"><span aria-hidden="true" style="width:13px; height:13px; margin-left:3px; transform:rotate(45deg); background:#7A1F2E;"></span>Needs a look</li>
+<li style="display:flex; align-items:center; gap:8px;"><svg aria-hidden="true" width="16" height="20" viewBox="0 0 16 20"><path d="M2 1h12v18l-6-5-6 5Z" fill="#7A1F2E"></path></svg>Overdue</li>
+</ul>
+</div>
+</section>
+
+<section style="background:#270A12; border:1px solid #5E2C37; padding:28px; display:flex; flex-direction:column; gap:22px;">
+<h2 style="margin:0; display:flex; align-items:center; gap:10px; font-weight:600; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#C7B5A6;"><span aria-hidden="true" style="width:6px; height:6px; transform:rotate(45deg); background:#C6A867;"></span>Time tickets</h2>
+<div role="group" aria-label="Open times, Wednesday November 18" style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px;">
+<sc-for list="{{slots}}" as="t" hint-placeholder-count="6">
+<button type="button" class="{{t.cls}}" aria-label="{{t.aria}}" aria-pressed="{{t.on}}" disabled="{{t.taken}}" onClick="{{t.pick}}" style="height:50px; padding:0; border:0; border-radius:0; font-family:'EB Garamond', Georgia, serif; font-size:19px; cursor:{{t.cursor}};">{{t.label}}</button>
+</sc-for>
+</div>
+<span style="font-style:italic; font-size:16px; color:#C7B5A6;">Wednesday, November 18. Struck-through times are taken.</span>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2160}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { kind: 'Tuxedo', invites: true, away: true, size: 9, slot: '5:00', name: 'Daniel Okafor' };
+  }
+  engraving() {
+    let sky = '';
+    for (let y = 12; y < 432; y += 5) sky += 'M 8 ' + y + ' L 352 ' + y + ' ';
+    const top = (x) => {
+      if (x < 92) return 148 + 39 * Math.pow(Math.max(0, 88 - x) / 52, 1.6);
+      if (x < 114) return 166 + (x - 92) * 1.82;
+      return 206 + (x - 114) * 1.455;
+    };
+    let left = '';
+    let right = '';
+    for (let x = 36; x <= 172; x += 8) {
+      const y0 = (top(x) + 7).toFixed(1);
+      left += 'M ' + x + ' ' + y0 + ' L ' + (x - 3) + ' 432 ';
+      right += 'M ' + (360 - x) + ' ' + y0 + ' L ' + (363 - x) + ' 432 ';
+    }
+    return { sky: sky, left: left, right: right };
+  }
+  renderVals() {
+    const s = this.state;
+    const kinds = ['Tuxedo', 'Suit'].map((k) => {
+      const on = s.kind === k;
+      return {
+        label: k,
+        on: on,
+        rim: on ? '0' : '1px solid #4E463A',
+        fill: on ? 'radial-gradient(circle at 35% 30%, #6A6258 0, #1F1A14 60%)' : 'radial-gradient(circle at 35% 30%, #FFFFFF 0, #EDE4CF 55%, #CFC3A6 100%)',
+        ring: on ? '0 0 0 2px #F2EAD8, 0 0 0 3.5px #A88B50' : 'none',
+        pick: () => this.setState({ kind: k })
+      };
+    });
+    const slots = [['12:00', false], ['1:00', false], ['2:00', true], ['4:00', false], ['5:00', false], ['6:00', false]].map((x) => {
+      const on = s.slot === x[0];
+      return {
+        label: x[0] + ' PM',
+        aria: x[0] + ' PM' + (x[1] ? ', taken' : ''),
+        taken: x[1],
+        on: on,
+        cls: x[1] ? 'tpb-tix-off' : on ? 'tpb-tix-on' : 'tpb-tix',
+        cursor: x[1] ? 'default' : 'pointer',
+        pick: () => this.setState({ slot: x[0] })
+      };
+    });
+    const STAGES = [
+      ['Registered', 'Nov 13', 'done'], ['Consultation', 'Nov 18', 'done'], ['Look set', 'Nov 18', 'done'],
+      ['Measuring', '5 of 9 in', 'now'], ['Order', 'By Dec 19', 'next'], ['Fittings', 'Jan 14–20', 'next'],
+      ['Pickup', 'Jan 21', 'next'], ['Return', 'Jan 25', 'next']
+    ];
+    const stages = STAGES.map((st) => {
+      const done = st[2] === 'done';
+      const now = st[2] === 'now';
+      return {
+        label: st[0],
+        date: st[1],
+        cls: 'tpb-pane ' + (done ? 'tpb-lit' : now ? 'tpb-now' : 'tpb-dim'),
+        labelColor: done || now ? '#F2EAD8' : '#C7B5A6',
+        sr: done ? ', done' : now ? ', in progress' : ', coming up'
+      };
+    });
+    return {
+      eng: this.engraving(),
+      name: s.name,
+      setName: (e) => this.setState({ name: e.target.value }),
+      kinds: kinds,
+      slots: slots,
+      stages: stages,
+      inv: {
+        on: s.invites,
+        justify: s.invites ? 'flex-end' : 'flex-start',
+        track: s.invites ? '#3A2E14' : '#17060B',
+        globe: s.invites ? 'radial-gradient(circle at 40% 35%, #FFFFFF 0, #FFE9B0 60%, #F2C766 100%)' : 'radial-gradient(circle at 40% 35%, #E6E0D0 0, #A9A595 70%)',
+        glow: s.invites ? '0 0 0 3px rgba(227,165,74,.3), 0 0 16px rgba(227,165,74,.9)' : 'none',
+        toggle: () => this.setState({ invites: !s.invites })
+      },
+      away: {
+        on: s.away,
+        check: s.away ? 'inline' : 'none',
+        toggle: () => this.setState({ away: !s.away })
+      },
+      size: s.size,
+      inc: () => this.setState({ size: Math.min(40, s.size + 1) }),
+      dec: () => this.setState({ size: Math.max(1, s.size - 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

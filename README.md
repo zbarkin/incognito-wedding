@@ -1,20 +1,21 @@
 # Incognito · Wedding registration styles
 
-A client preview of the wedding party sign-up for Incognito Menswear & Tux Shop, showing step 1 of the sign-up in each of the four styles under review:
+A client preview of the wedding party sign-up and tracking screens for Incognito Menswear & Tux Shop. It includes every screen from the design canvas:
 
-- **Kodak:** charcoal, brass and brushed aluminum
-- **Silver Birch:** black, silver and ivory, with Cesso for titles
-- **Tuxedo Park, green:** bottle-green walls, engraved stationery and gilt
-- **Tuxedo Park, burgundy:** the same, on burgundy
+- **Style options:** step 1 of the sign-up in Kodak, Silver Birch, Tuxedo Park green and Tuxedo Park burgundy, plus each style's detail sheet
+- **Register the wedding party:** the four sign-up steps, in the Kodak style
+- **Track the party:** the groom's status page, and the groomsman's page, measurements form and measuring walkthrough on a phone
+- **How to measure:** all ten measuring animations
+- **Staff:** the parties board and the one-party assessment view
 
-Open `docs/index.html` through a local server, or use the GitHub Pages link. The buttons at the top switch styles, and the form controls work.
+Use the GitHub Pages link, or serve `docs/` locally. The menu at the top picks a screen, the arrows step through them, and links inside the screens move between them. Phone screens show in a phone-sized frame. The form controls work.
 
 ## How it's put together
 
 - `designs/` holds the design files exactly as they are on the design canvas.
-- `scripts/build.mjs` copies them into `docs/styles/` as plain pages.
-- `docs/dc-lite.js` is a small script that runs those design files in an ordinary browser.
-- `docs/index.html` is the style switcher.
+- `scripts/build.mjs` copies them into `docs/screens/` as plain pages, keeping their names so links between screens work.
+- `docs/dc-lite.js` is a small script that runs those design files in an ordinary browser, including the shared measuring animation.
+- `docs/index.html` is the screen menu.
 
 To update after changing a design on the canvas, replace its file in `designs/`, then:
 

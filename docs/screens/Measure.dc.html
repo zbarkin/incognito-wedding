@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your measurements · Sam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#121110}
+a{color:#C9A66B}a:hover{color:#E2C48E}
+.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
+.fld::placeholder{color:#8E8676}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+.btn:hover{background:#D4B47A !important}
+.ghost:hover{border-color:#C9A66B !important}
+a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="width:390px; min-height:2460px; box-sizing:border-box; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-direction:column;">
+
+<header style="background:#0C0B0A; border-bottom:1px solid #2E2923; padding:12px 20px 12px 12px; display:flex; align-items:center; justify-content:space-between;">
+<a href="Member.dc.html" style="display:flex; align-items:center; gap:6px; height:44px; padding:0 8px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"></path></svg>To-do list</a>
+<span aria-label="Incognito Menswear and Tux Shop" role="img" style="display:flex; align-items:stretch;">
+<span style="display:flex; border:1px solid #C9A66B; padding:2px;">
+<span style="display:flex; flex-direction:column; align-items:center; border:1px solid #C9A66B; padding:5px 10px 4px;">
+<span style="font-family:Rokkitt, serif; font-weight:700; font-size:17px; line-height:1; letter-spacing:.16em; color:#EEE7D9;">INCOGNITO</span>
+<span style="margin-top:4px; padding-top:3px; border-top:1px solid #8C7247; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:7.5px; line-height:1; letter-spacing:.34em; color:#C9A66B;">MENSWEAR &amp; TUX</span>
+</span>
+</span>
+<span style="display:flex; align-items:center; margin-left:4px; padding:0 6px; border:1.5px solid #E86A5E; font-family:Rokkitt, serif; font-weight:700; font-size:13px; color:#E86A5E;">1985</span>
+</span>
+</header>
+
+<main style="flex:1 0 auto; padding:26px 20px 32px; display:flex; flex-direction:column; gap:28px;">
+
+<div style="display:flex; flex-direction:column; gap:12px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Due Sat, Dec 12 · 11 days</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:40px; line-height:1; color:#EEE7D9;">Your measurements</h1>
+<p style="margin:0; font-size:16px; line-height:1.5; color:#A39A8B;">Grab a soft tape measure and a friend. Tap <strong style="color:#EEE7D9;">How?</strong> on any line to watch how it’s done. Skip anything you’re unsure of and we’ll follow up before the order goes in.</p>
+<a href="Guide.dc.html" class="ghost" style="display:flex; align-items:center; justify-content:center; gap:10px; height:50px; margin-top:4px; box-sizing:border-box; border:1px solid #C9A66B; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="#C9A66B"><path d="M7 4v16l13-8Z"></path></svg>Walk me through it, one at a time</a>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:10px; padding:16px; background:#1A1816; border:1px solid #38322A;">
+<div role="img" aria-label="{{countText}}" style="display:grid; grid-template-columns:repeat(9, minmax(0, 1fr)); gap:4px;">
+<sc-for list="{{meter}}" as="q" hint-placeholder-count="9">
+<span style="height:22px; box-sizing:border-box; background:{{q.bg}}; border:1px solid {{q.bd}};"></span>
+</sc-for>
+</div>
+<span aria-live="polite" style="font-size:14px; color:#EEE7D9;"><strong style="font-weight:700; color:#C9A66B;">{{countText}}</strong> · {{countHint}}</span>
+</div>
+
+<section aria-labelledby="h-basics" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-basics" style="margin:0; padding-bottom:12px; border-bottom:1px solid #2A2621; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">The basics</h2>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 14px;">
+
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0; grid-column:{{ht.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<span id="l-height" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Height</span>
+<button type="button" aria-expanded="{{ht.open}}" aria-label="{{ht.tipAria}}" onClick="{{ht.toggle}}" style="height:44px; margin:-10px -8px -10px 0; padding:0 8px; background:transparent; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">{{ht.tipLabel}}</button>
+</div>
+<div role="group" aria-labelledby="l-height" style="display:flex; gap:6px;">
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="fld" aria-label="Height, feet" value="{{v.ft}}" onChange="{{setFt}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 22px 0 10px; appearance:none; background:#0F0E0D; border:1px solid #8C7247; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<option value="">ft</option>
+<option value="4">4 ft</option>
+<option value="5">5 ft</option>
+<option value="6">6 ft</option>
+<option value="7">7 ft</option>
+</select>
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:8px; top:19px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="fld" aria-label="Height, inches" value="{{v.inch}}" onChange="{{setInch}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 22px 0 10px; appearance:none; background:#0F0E0D; border:1px solid #8C7247; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<option value="">in</option>
+<option value="0">0 in</option>
+<option value="1">1 in</option>
+<option value="2">2 in</option>
+<option value="3">3 in</option>
+<option value="4">4 in</option>
+<option value="5">5 in</option>
+<option value="6">6 in</option>
+<option value="7">7 in</option>
+<option value="8">8 in</option>
+<option value="9">9 in</option>
+<option value="10">10 in</option>
+<option value="11">11 in</option>
+</select>
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:8px; top:19px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<sc-if value="{{ht.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="height" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0; grid-column:{{wt.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="m-weight" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Weight<span class="sr"> in pounds</span></label>
+<button type="button" aria-expanded="{{wt.open}}" aria-label="{{wt.tipAria}}" onClick="{{wt.toggle}}" style="height:44px; margin:-10px -8px -10px 0; padding:0 8px; background:transparent; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">{{wt.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="m-weight" class="fld" type="number" step="1" min="0" placeholder="e.g. 180" value="{{wt.value}}" onChange="{{wt.set}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 40px 0 14px; background:#0F0E0D; border:1px solid {{wt.bd}}; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<span aria-hidden="true" style="position:absolute; right:12px; top:16px; font-size:14px; color:#8E8676;">lbs</span>
+</div>
+<sc-if value="{{wt.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="weight" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+
+</div>
+
+<div role="group" aria-labelledby="l-fit" style="display:flex; flex-direction:column; gap:10px;">
+<span id="l-fit" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">How you like a jacket to fit</span>
+<div style="display:flex; gap:6px;">
+<sc-for list="{{fits}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="flex:1 1 0; height:48px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:15px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="h-jacket" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-jacket" style="margin:0; padding-bottom:12px; border-bottom:1px solid #2A2621; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Jacket &amp; shirt</h2>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 14px;">
+<sc-for list="{{jacket}}" as="f" hint-placeholder-count="4">
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0; grid-column:{{f.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="{{f.id}}" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">{{f.label}}<span class="sr">{{f.srUnit}}</span></label>
+<button type="button" aria-expanded="{{f.open}}" aria-label="{{f.tipAria}}" onClick="{{f.toggle}}" style="height:44px; margin:-10px -8px -10px 0; padding:0 8px; background:transparent; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">{{f.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="{{f.id}}" class="fld" type="number" step="0.25" min="0" placeholder="{{f.placeholder}}" value="{{f.value}}" onChange="{{f.set}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 34px 0 14px; background:#0F0E0D; border:1px solid {{f.bd}}; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<span aria-hidden="true" style="position:absolute; right:12px; top:16px; font-size:14px; color:#8E8676;">in</span>
+</div>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="{{f.key}}" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<div style="display:flex; flex-direction:column; gap:8px;">
+<label for="m-size" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Jacket size, if you know it</label>
+<input id="m-size" class="fld" type="text" placeholder="e.g. 40R or 42L" value="{{v.jacket}}" onChange="{{setJacket}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+</div>
+</section>
+
+<section aria-labelledby="h-pants" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-pants" style="margin:0; padding-bottom:12px; border-bottom:1px solid #2A2621; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Pants</h2>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 14px;">
+<sc-for list="{{pants}}" as="f" hint-placeholder-count="3">
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0; grid-column:{{f.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="{{f.id}}" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">{{f.label}}<span class="sr">{{f.srUnit}}</span></label>
+<button type="button" aria-expanded="{{f.open}}" aria-label="{{f.tipAria}}" onClick="{{f.toggle}}" style="height:44px; margin:-10px -8px -10px 0; padding:0 8px; background:transparent; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">{{f.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="{{f.id}}" class="fld" type="number" step="0.25" min="0" placeholder="{{f.placeholder}}" value="{{f.value}}" onChange="{{f.set}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 34px 0 14px; background:#0F0E0D; border:1px solid {{f.bd}}; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<span aria-hidden="true" style="position:absolute; right:12px; top:16px; font-size:14px; color:#8E8676;">in</span>
+</div>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="{{f.key}}" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="h-shoes" style="display:flex; flex-direction:column; gap:16px; padding:18px; background:#1A1816; border:1px solid #38322A;">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+<span style="display:flex; flex-direction:column; gap:3px;">
+<h2 id="h-shoes" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:21px; color:#EEE7D9;">I need shoes</h2>
+<span style="font-size:14px; color:#A39A8B;">Matched to the party’s look.</span>
+</span>
+<button type="button" role="switch" aria-checked="{{shoes}}" aria-labelledby="h-shoes" onClick="{{toggleShoes}}" style="flex:0 0 auto; width:64px; height:36px; padding:3px; box-sizing:border-box; display:flex; justify-content:{{sw.justify}}; background:{{sw.track}}; border:1px solid {{sw.border}}; border-radius:18px; cursor:pointer;">
+<span aria-hidden="true" style="width:28px; height:28px; border-radius:50%; background:{{sw.knob}};"></span>
+</button>
+</div>
+<sc-if value="{{shoes}}" hint-placeholder-val="{{true}}">
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px;">
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0;">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="m-shoe" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Shoe size</label>
+<button type="button" aria-expanded="{{sh.open}}" aria-label="{{sh.tipAria}}" onClick="{{sh.toggle}}" style="height:44px; margin:-10px -8px -10px 0; padding:0 8px; background:transparent; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:13px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">{{sh.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<select id="m-shoe" class="fld" value="{{shoeSize}}" onChange="{{setShoeSize}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 32px 0 12px; appearance:none; background:#0F0E0D; border:1px solid #8C7247; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<option>7</option>
+<option>7.5</option>
+<option>8</option>
+<option>8.5</option>
+<option>9</option>
+<option>9.5</option>
+<option>10</option>
+<option>10.5</option>
+<option>11</option>
+<option>11.5</option>
+<option>12</option>
+<option>13</option>
+<option>14</option>
+<option>15</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<div style="display:flex; flex-direction:column; gap:8px; min-width:0;">
+<label for="m-width" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Width</label>
+<div style="position:relative;">
+<select id="m-width" class="fld" value="{{shoeWidth}}" onChange="{{setShoeWidth}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 32px 0 12px; appearance:none; background:#0F0E0D; border:1px solid #8C7247; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<option value="D">Regular (D)</option>
+<option value="E">Wide (E)</option>
+<option value="EE">Extra wide (EE)</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+</div>
+<sc-if value="{{sh.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="shoe" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</sc-if>
+</section>
+
+<section aria-labelledby="h-extra" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-extra" style="margin:0; padding-bottom:12px; border-bottom:1px solid #2A2621; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Before you send</h2>
+<div role="group" aria-labelledby="l-by" style="display:flex; flex-direction:column; gap:10px;">
+<span id="l-by" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Who measured you?</span>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{bys}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="flex:1 1 auto; height:46px; padding:0 14px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex; flex-direction:column; gap:8px;">
+<label for="m-notes" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Anything else? Optional</label>
+<textarea id="m-notes" class="fld" rows="3" placeholder="Athletic build, long arms, between sizes…" value="{{notes}}" onChange="{{setNotes}}" style="box-sizing:border-box; width:100%; min-height:96px; padding:12px 14px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px; line-height:1.5;"></textarea>
+</div>
+</section>
+
+<sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-direction:column; gap:12px;">
+<button type="button" class="btn" onClick="{{send}}" style="height:56px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;">Send to Incognito</button>
+<p style="margin:0; font-size:13px; line-height:1.5; text-align:center; color:#A39A8B;">You can change these until Dec 12. Daniel sees that you’re done, not your numbers.</p>
+</div>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+<div aria-live="polite" style="display:flex; flex-direction:column; gap:14px; padding:20px; border:1px solid #C9A66B; background:#1A1816;">
+<span style="display:flex; align-items:center; gap:10px; font-family:Rokkitt, serif; font-weight:600; font-size:23px; color:#EEE7D9;"><span aria-hidden="true" style="width:28px; height:28px; display:flex; align-items:center; justify-content:center; background:#C29E62;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Got them, Sam.</span>
+<p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">We’ll look them over and text you if anything needs a second look. Next up: your deposit.</p>
+<a href="Member.dc.html" class="ghost" style="display:flex; align-items:center; justify-content:center; height:48px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;">Back to your to-do list</a>
+</div>
+</sc-if>
+
+</main>
+
+<footer style="padding:18px 20px 26px; border-top:1px solid #2A2621; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:12px; color:#A39A8B;">
+<span>Rather we measure you?</span>
+<a href="Book.dc.html" style="color:#C9A66B; font-weight:600;">Book a visit</a>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2460}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      v: { ft: '5', inch: '11', weight: '175', chest: '40', overarm: '', neck: '', sleeve: '', jacket: '', waist: '34', hip: '', outseam: '' },
+      fit: 'classic',
+      by: 'friend',
+      shoes: true,
+      shoeSize: '10.5',
+      shoeWidth: 'D',
+      notes: '',
+      tips: { overarm: true },
+      sent: false
+    };
+  }
+  setV(key) {
+    return (e) => this.setState({ v: Object.assign({}, this.state.v, { [key]: e.target.value }) });
+  }
+  tip(key, label) {
+    const open = !!this.state.tips[key];
+    return {
+      open: open,
+      tipLabel: open ? 'Hide' : 'How?',
+      tipAria: (open ? 'Hide help for ' : 'How to measure ') + label.toLowerCase(),
+      span: open ? '1 / -1' : 'auto',
+      toggle: () => this.setState({ tips: Object.assign({}, this.state.tips, { [key]: !open }) })
+    };
+  }
+  field(key, label, placeholder, tip) {
+    const value = this.state.v[key];
+    return Object.assign(this.tip(key, label), {
+      key: key,
+      id: 'm-' + key,
+      label: label,
+      srUnit: ' in inches',
+      placeholder: placeholder,
+      tip: tip,
+      value: value,
+      bd: value ? '#8C7247' : '#38322A',
+      set: this.setV(key)
+    });
+  }
+  seg(list, key) {
+    return list.map((o) => {
+      const on = this.state[key] === o.id;
+      return {
+        name: o.name, on: on,
+        bg: on ? '#C29E62' : '#0F0E0D',
+        fg: on ? '#15130F' : '#EEE7D9',
+        bd: on ? '#C29E62' : '#38322A',
+        pick: () => this.setState({ [key]: o.id })
+      };
+    });
+  }
+  renderVals() {
+    const s = this.state;
+    const v = s.v;
+    const jacket = [
+      this.field('chest', 'Chest', 'e.g. 40', 'Around the fullest part of your chest, under your arms, with the tape level across your back. Arms down and relaxed.'),
+      this.field('overarm', 'Overarm', 'e.g. 47', 'Around your chest and upper arms together, at the widest point across your shoulders. Arms down at your sides.'),
+      this.field('neck', 'Neck', 'e.g. 15.5', 'Around the base of your neck where a shirt collar sits. Keep one finger under the tape.'),
+      this.field('sleeve', 'Sleeve', 'e.g. 34', 'From the center back of your neck, over your shoulder and down to your wrist bone, arm slightly bent.')
+    ];
+    const pants = [
+      this.field('waist', 'Waist', 'e.g. 34', 'Where you wear dress pants, usually at your belly button. This is not your jeans size.'),
+      this.field('hip', 'Hip', 'e.g. 40', 'Around the fullest part of your seat, feet together.'),
+      this.field('outseam', 'Outseam', 'e.g. 43', 'From your waistline down the outside of your leg to the floor, shoes off.')
+    ];
+    const wt = Object.assign(this.tip('weight', 'Weight'), {
+      value: v.weight,
+      bd: v.weight ? '#8C7247' : '#38322A',
+      tip: 'Your best guess is fine. It helps us check the other numbers.',
+      set: this.setV('weight')
+    });
+    const ht = this.tip('height', 'Height');
+    const sh = this.tip('shoe', 'Shoe size');
+
+    const required = [v.ft && v.inch !== '', v.weight, v.chest, v.overarm, v.neck, v.sleeve, v.waist, v.hip, v.outseam];
+    const count = required.filter(Boolean).length;
+    const left = required.length - count;
+    const meter = required.map((_, i) => ({ bg: i < count ? '#C29E62' : '#0F0E0D', bd: i < count ? '#C29E62' : '#4A4237' }));
+
+    return {
+      v: v,
+      ht: ht,
+      sh: sh,
+      wt: wt,
+      jacket: jacket,
+      pants: pants,
+      setFt: this.setV('ft'),
+      setInch: this.setV('inch'),
+      setJacket: this.setV('jacket'),
+      meter: meter,
+      countText: count + ' of ' + required.length + ' filled in',
+      countHint: left === 0 ? 'all set, send it over' : left + ' to go, or send what you have',
+      fits: this.seg([{ id: 'slim', name: 'Slim' }, { id: 'classic', name: 'Classic' }, { id: 'relaxed', name: 'Relaxed' }], 'fit'),
+      bys: this.seg([{ id: 'self', name: 'Myself' }, { id: 'friend', name: 'A friend' }, { id: 'tailor', name: 'A tailor' }], 'by'),
+      shoes: s.shoes,
+      toggleShoes: () => this.setState({ shoes: !s.shoes }),
+      sw: s.shoes
+        ? { justify: 'flex-end', track: '#C29E62', border: '#C29E62', knob: '#15130F' }
+        : { justify: 'flex-start', track: '#0F0E0D', border: '#4A4237', knob: '#A39A8B' },
+      shoeSize: s.shoeSize,
+      shoeWidth: s.shoeWidth,
+      setShoeSize: (e) => this.setState({ shoeSize: e.target.value }),
+      setShoeWidth: (e) => this.setState({ shoeWidth: e.target.value }),
+      notes: s.notes,
+      setNotes: (e) => this.setState({ notes: e.target.value }),
+      notSent: !s.sent,
+      sent: s.sent,
+      send: () => this.setState({ sent: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

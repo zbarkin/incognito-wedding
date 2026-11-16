@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How to measure · animation set</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#121110}
+.ghost:hover{border-color:#C9A66B !important}
+a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
+</style>
+</helmet>
+<div style="width:1440px; min-height:1400px; box-sizing:border-box; padding:56px 56px 64px; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; display:flex; flex-direction:column; gap:40px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px 40px;">
+<div style="flex:1 1 700px; display:flex; flex-direction:column; gap:14px;">
+<span style="align-self:flex-start; border:1px solid #8C7247; padding:2px;"><span style="display:block; border:1px solid #8C7247; padding:6px 12px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#C9A66B;">Measuring guide · 10 animations</span></span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:52px; line-height:1; color:#EEE7D9;">How to measure</h1>
+<p style="margin:0; max-width:760px; font-size:17px; line-height:1.55; color:#A39A8B;">Each loop draws the tape in red, shows an example reading, then resets. The same animations play in the step-by-step walkthrough and behind every How? link on the measurements form. Readings are Sam’s example numbers.</p>
+</div>
+<button type="button" class="ghost" aria-pressed="{{paused}}" onClick="{{toggle}}" style="display:inline-flex; align-items:center; gap:10px; height:48px; padding:0 20px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:15px; cursor:pointer;">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="#C9A66B"><path d="{{icon}}"></path></svg>{{toggleLabel}}</button>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:48px 28px;">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="10">
+<section style="display:flex; flex-direction:column; gap:14px; min-width:0;">
+<h2 style="margin:0; display:flex; align-items:baseline; gap:10px; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;"><span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#C9A66B;">{{it.n}}</span>{{it.name}}</h2>
+<dc-import name="HowTo" which="{{it.key}}" still="{{paused}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</section>
+</sc-for>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { paused: false };
+  }
+  renderVals() {
+    const list = [
+      ['height', 'Height'], ['weight', 'Weight'], ['chest', 'Chest'], ['overarm', 'Overarm'], ['neck', 'Neck'],
+      ['sleeve', 'Sleeve'], ['waist', 'Waist'], ['hip', 'Hip'], ['outseam', 'Outseam'], ['shoe', 'Shoe size']
+    ];
+    const paused = this.state.paused;
+    return {
+      items: list.map((x, i) => ({ key: x[0], name: x[1], n: String(i + 1).padStart(2, '0') })),
+      paused: paused,
+      toggle: () => this.setState({ paused: !paused }),
+      toggleLabel: paused ? 'Play all' : 'Pause all',
+      icon: paused ? 'M7 4v16l13-8Z' : 'M6 4h4v16H6zM14 4h4v16h-4z'
+    };
+  }
+}
+</script>
+</body>
+</html>
