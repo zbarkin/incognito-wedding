@@ -163,10 +163,13 @@
 <span style="font-size:14px; color:{{t.muted}};">{{t.lookSub}}</span>
 </div>
 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap:18px;">
-<sc-for list="{{t.look}}" as="lk" hint-placeholder-count="4">
-<figure style="margin:0; display:flex; flex-direction:column; gap:10px;">
-<span style="display:block; aspect-ratio:4 / 5; overflow:hidden; background:{{t.bar}}; border:1px solid {{t.line}};"><img src="{{lk.src}}" alt="{{lk.alt}}" loading="lazy" style="display:block; width:100%; height:100%; object-fit:cover; object-position:{{lk.pos}}; filter:{{t.photoFilter}};"></span>
-<figcaption style="display:flex; flex-direction:column; gap:3px;"><span style="font-size:15px; line-height:1.4;">{{lk.caption}}</span><a href="{{lk.page}}" target="_blank" rel="noopener" style="font-size:12px; line-height:1.4; color:{{t.muted}};">{{lk.credit}}</a></figcaption>
+<sc-for list="{{looks}}" as="lk" hint-placeholder-count="4">
+<figure style="position:relative; margin:0; aspect-ratio:4 / 5; overflow:hidden; background:{{t.bar}}; border:1px solid {{t.line}};">
+<img src="{{lk.src}}" alt="{{lk.alt}}" loading="lazy" style="display:block; width:100%; height:100%; object-fit:cover; object-position:{{lk.pos}}; filter:{{t.photoFilter}};">
+<sc-if value="{{lk.open}}" hint-placeholder-val="{{false}}">
+<figcaption id="{{lk.capId}}" style="position:absolute; left:0; right:0; bottom:0; box-sizing:border-box; padding:14px 52px 14px 14px; background:rgba(10,10,11,.86); color:#F4F1EA; display:flex; flex-direction:column; gap:4px;"><span style="font-size:15px; line-height:1.4;">{{lk.caption}}</span><a href="{{lk.page}}" target="_blank" rel="noopener" style="font-size:12px; line-height:1.4; color:#D9D2C2;">{{lk.credit}}</a></figcaption>
+</sc-if>
+<button type="button" aria-expanded="{{lk.open}}" aria-controls="{{lk.capId}}" aria-label="{{lk.btnLabel}}" onClick="{{lk.toggle}}" style="position:absolute; right:10px; bottom:10px; width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center; background:{{lk.btnBg}}; color:{{lk.btnFg}}; border:1px solid rgba(244,241,234,.7); border-radius:50%; font-family:Georgia, serif; font-style:italic; font-weight:700; font-size:16px; line-height:1; cursor:pointer;">{{lk.mark}}</button>
 </figure>
 </sc-for>
 </div>
@@ -186,7 +189,7 @@
 class Component extends DCLogic {
   constructor(...args) {
     super(...args);
-    this.state = { name: 'Marcus', school: 'Penfield High School', date: '2027-05-15', phone: '(585) 555-0190', crewIdx: 0, members: ['Jayden', 'Tyler', 'Andre'], draft: '', dress: 'burgundy' };
+    this.state = { name: 'Marcus', school: 'Penfield High School', date: '2027-05-15', phone: '(585) 555-0190', crewIdx: 0, members: ['Jayden', 'Tyler', 'Andre'], draft: '', dress: 'burgundy', lookOpen: -1 };
   }
   themes() {
     return {
@@ -284,6 +287,7 @@ class Component extends DCLogic {
       pointsText: total + ' of 1,000 points',
       pointsPct: Math.min(100, Math.round(total / 10)) + '%',
       dayLine: dayLine,
+      looks: t.look.map((lk, i) => { const open = s.lookOpen === i; return Object.assign({}, lk, { open: open, capId: 'look-cap-' + i, mark: open ? '×' : 'i', btnLabel: (open ? 'Hide' : 'Show') + ' caption and source', btnBg: open ? '#F4F1EA' : 'rgba(10,10,11,.6)', btnFg: open ? '#0A0A0B' : '#F4F1EA', toggle: () => this.setState({ lookOpen: open ? -1 : i }) }); }),
       badgeLabel: 'Squad badge for ' + t.crews[s.crewIdx % t.crews.length]
     };
   }
