@@ -82,7 +82,7 @@ var P = {
 };
 
 // Where each drawing sits on the form (lined up by eye).
-var AT = { shirt:[0,18], jacket:[-59,18], vest:[18,20], notch:[60,20], peak:[45.7,20], collar:[89,24], bow:[109,48], tie:[123.5,48], studs:[142,74], square:[222,119] };
+var AT = { shirt:[0,18], jacket:[-59,18], vest:[18,20], notch:[60,20], peak:[45.7,20], collar:[89,24], bow:[109,27], tie:[123.5,30], studs:[142,74], square:[222,119] };
 
 var THEMES = [
   { k:'kodak', name:'Kodak', blurb:'Black dinner jacket, brass outlines and stitching, oxblood bow tie.',
@@ -127,8 +127,8 @@ function mine(t) {
   s += '<path d="' + P.form + '" fill="' + t.form + '"' + o(t.formLine) + '/>';
   s += g('shirt', AT.shirt, '<path d="' + P.shirt + '" fill="' + t.shirt + '"' + o(t.shirtLine) + '/>');
   s += g('studs', AT.studs, [[2.06,1.95],[1.95,37.06],[2.06,72.18],[2.06,107.29],[3.65,142.4]].map(function (c) { return '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="2.4" fill="#0B0A09"' + o(t.metal, Math.max(.75, lw)) + '/>'; }).join(''));
-  s += g('collar', AT.collar, '<path d="' + P.collarL + '" fill="' + t.shirt + '"' + o(t.shirtLine) + '/><path d="' + P.collarR + '" fill="' + t.shirt + '"' + o(t.shirtLine) + '/>');
   if (opt.neck === 'long') s += g('tie', AT.tie, '<polygon points="' + P.tieBlade + '" fill="' + t.tie + '"' + o(t.tieShade) + '/><polygon points="' + P.tieKnot + '" fill="' + t.tieShade + '"' + o(t.tieShade) + '/>');
+  s += g('collar', AT.collar, '<path d="' + P.collarL + '" fill="' + t.shirt + '"' + o(t.shirtLine) + '/><path d="' + P.collarR + '" fill="' + t.shirt + '"' + o(t.shirtLine) + '/>');
   if (opt.vest === 'on') s += g('vest', AT.vest, '<path d="' + P.vest + '" fill="' + t.vest + '"' + o(t.line) + '/>' + stitch('M127.94,129.55L123.39,333.7') +
     [148.55,178.65,211.88,247.12,282.36].map(function (y) { return '<circle cx="134.54" cy="' + y + '" r="3.25" fill="#0B0A09"' + o(t.metal, Math.max(.5, lw * .75)) + '/>'; }).join(''));
   if (opt.neck === 'bow') s += g('bow', AT.bow,
