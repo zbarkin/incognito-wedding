@@ -18,7 +18,17 @@
    "images": [
     {
      "src": "img/solid-navy-suit-bhhzc-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-navy-suit-bhhzc-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 41,
+      "hem": 467,
+      "cx": 247,
+      "sw": 299,
+      "hx": 234
+     }
     },
     {
      "src": "img/solid-navy-suit-bhhzc-1.webp",
@@ -445,7 +455,17 @@
    "images": [
     {
      "src": "img/product-5-yd35j-l8s85-1.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/product-5-yd35j-l8s85-1-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 50,
+      "hem": 446,
+      "cx": 246,
+      "sw": 280,
+      "hx": 244
+     }
     },
     {
      "src": "img/product-5-yd35j-l8s85-0.webp",
@@ -872,7 +892,17 @@
    "images": [
     {
      "src": "img/medium-gray-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/medium-gray-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 56,
+      "hem": 451,
+      "cx": 249,
+      "sw": 273,
+      "hx": 250
+     }
     },
     {
      "src": "img/medium-gray-suit-1.webp",
@@ -1298,7 +1328,17 @@
    "images": [
     {
      "src": "img/french-blue-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/french-blue-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 60,
+      "hem": 457,
+      "cx": 248,
+      "sw": 295,
+      "hx": 248
+     }
     },
     {
      "src": "img/french-blue-suit-1.webp",
@@ -1725,7 +1765,17 @@
    "images": [
     {
      "src": "img/solid-camel-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-camel-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 49,
+      "hem": 449,
+      "cx": 234,
+      "sw": 253,
+      "hx": 248
+     }
     },
     {
      "src": "img/solid-camel-suit-1.webp",
@@ -2152,7 +2202,17 @@
    "images": [
     {
      "src": "img/solid-burgundy-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-burgundy-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 59,
+      "hem": 438,
+      "cx": 247,
+      "sw": 269,
+      "hx": 240
+     }
     },
     {
      "src": "img/solid-burgundy-suit-1.webp",
@@ -2585,7 +2645,17 @@
    "images": [
     {
      "src": "img/solid-olive-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-olive-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 64,
+      "hem": 445,
+      "cx": 253,
+      "sw": 270,
+      "hx": 242
+     }
     },
     {
      "src": "img/solid-olive-suit-1.webp",
@@ -2999,7 +3069,17 @@
    "images": [
     {
      "src": "img/solid-brown-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-brown-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 60,
+      "hem": 440,
+      "cx": 248,
+      "sw": 318,
+      "hx": 240
+     }
     },
     {
      "src": "img/solid-brown-suit-1.webp",
@@ -3425,7 +3505,17 @@
    "images": [
     {
      "src": "img/arlan-tux-dinner-jacket-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/arlan-tux-dinner-jacket-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 67,
+      "hem": 460,
+      "cx": 239,
+      "sw": 282,
+      "hx": 242
+     }
     },
     {
      "src": "img/arlan-tux-dinner-jacket-1.webp",
@@ -3491,7 +3581,17 @@
    "images": [
     {
      "src": "img/snow-white-dinner-jacket-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/snow-white-dinner-jacket-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 56,
+      "hem": 459,
+      "cx": 236,
+      "sw": 271,
+      "hx": 235
+     }
     },
     {
      "src": "img/snow-white-dinner-jacket-1.webp",
@@ -3918,7 +4018,17 @@
    "images": [
     {
      "src": "img/off-white-dinner-jacket-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/off-white-dinner-jacket-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 65,
+      "hem": 445,
+      "cx": 255,
+      "sw": 257,
+      "hx": 255
+     }
     },
     {
      "src": "img/off-white-dinner-jacket-1.webp",
@@ -4344,7 +4454,17 @@
    "images": [
     {
      "src": "img/solid-biege-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-biege-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 55,
+      "hem": 438,
+      "cx": 213,
+      "sw": 178,
+      "hx": 237
+     }
     },
     {
      "src": "img/solid-biege-suit-1.webp",
@@ -4782,7 +4902,17 @@
    "images": [
     {
      "src": "img/solid-navy-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-navy-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 41,
+      "hem": 467,
+      "cx": 247,
+      "sw": 299,
+      "hx": 234
+     }
     },
     {
      "src": "img/solid-navy-suit-1.webp",
@@ -5209,7 +5339,17 @@
    "images": [
     {
      "src": "img/hunter-green-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/hunter-green-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 45,
+      "hem": 459,
+      "cx": 250,
+      "sw": 282,
+      "hx": 250
+     }
     },
     {
      "src": "img/hunter-green-suit-1.webp",
@@ -5636,7 +5776,17 @@
    "images": [
     {
      "src": "img/oatmeal-taupe-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/oatmeal-taupe-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 49,
+      "hem": 466,
+      "cx": 240,
+      "sw": 314,
+      "hx": 233
+     }
     },
     {
      "src": "img/oatmeal-taupe-suit-1.webp",
@@ -6062,7 +6212,17 @@
    "images": [
     {
      "src": "img/sterling-gray-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/sterling-gray-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 62,
+      "hem": 460,
+      "cx": 245,
+      "sw": 296,
+      "hx": 239
+     }
     },
     {
      "src": "img/sterling-gray-suit-1.webp",
@@ -6477,7 +6637,17 @@
    "images": [
     {
      "src": "img/solid-light-gray-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/solid-light-gray-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 81,
+      "hem": 444,
+      "cx": 247,
+      "sw": 276,
+      "hx": 238
+     }
     },
     {
      "src": "img/solid-light-gray-suit-1.webp",
@@ -6905,7 +7075,17 @@
    "images": [
     {
      "src": "img/product-1-x2ec7-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/product-1-x2ec7-0-cut.webp",
+     "fig": {
+      "w": 451,
+      "h": 432,
+      "top": 47,
+      "hem": 399,
+      "cx": 224,
+      "sw": 263,
+      "hx": 220
+     }
     },
     {
      "src": "img/product-1-x2ec7-1.webp",
@@ -7332,7 +7512,17 @@
    "images": [
     {
      "src": "img/product-2-tszn4-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/product-2-tszn4-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 58,
+      "hem": 457,
+      "cx": 241,
+      "sw": 301,
+      "hx": 234
+     }
     },
     {
      "src": "img/product-2-tszn4-1.webp",
@@ -7759,7 +7949,17 @@
    "images": [
     {
      "src": "img/product-3-2za6w-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/product-3-2za6w-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 49,
+      "hem": 473,
+      "cx": 253,
+      "sw": 291,
+      "hx": 256
+     }
     },
     {
      "src": "img/product-3-2za6w-1.webp",
@@ -8186,7 +8386,17 @@
    "images": [
     {
      "src": "img/product-5-yd35j-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/product-5-yd35j-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 50,
+      "hem": 446,
+      "cx": 246,
+      "sw": 280,
+      "hx": 244
+     }
     },
     {
      "src": "img/product-5-yd35j-1.webp",
@@ -8612,7 +8822,17 @@
    "images": [
     {
      "src": "img/product-6-3xgh6-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/product-6-3xgh6-0-cut.webp",
+     "fig": {
+      "w": 444,
+      "h": 416,
+      "top": 34,
+      "hem": 395,
+      "cx": 220,
+      "sw": 265,
+      "hx": 216
+     }
     },
     {
      "src": "img/product-6-3xgh6-1.webp",
@@ -9038,7 +9258,17 @@
    "images": [
     {
      "src": "img/blue-sharkskin-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/blue-sharkskin-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 54,
+      "hem": 457,
+      "cx": 249,
+      "sw": 294,
+      "hx": 244
+     }
     },
     {
      "src": "img/blue-sharkskin-suit-1.webp",
@@ -9464,7 +9694,17 @@
    "images": [
     {
      "src": "img/natural-linen-suit-0.webp",
-     "kind": "photo"
+     "kind": "photo",
+     "cut": "img/natural-linen-suit-0-cut.webp",
+     "fig": {
+      "w": 500,
+      "h": 500,
+      "top": 32,
+      "hem": 460,
+      "cx": 240,
+      "sw": 249,
+      "hx": 251
+     }
     },
     {
      "src": "img/natural-linen-suit-1.webp",

@@ -59,6 +59,8 @@ function size(raw) {
   return { label: `${chest}${m[2]}/${waist}W`, chest, len: m[2], waist, fixed: `${chest}${m[2]}/${waist}W` !== raw };
 }
 const LEN = { S: 0, R: 1, L: 2 };
+// Written by scripts/anchors.py from the cut-out photos.
+const ANCHORS = existsSync(join(out, 'anchors.json')) ? JSON.parse(readFileSync(join(out, 'anchors.json'), 'utf8')) : {};
 
 const order = JSON.parse(readFileSync(join(src, 'shop.json'), 'utf8')).items.map((i) => i.fullUrl.split('/').pop());
 const products = [];
@@ -75,7 +77,14 @@ for (const slug of order) {
   const images = imgs.map((im) => {
     const file = `${slug}-${im.k}.webp`;
     if (existsSync(join(src, 'img', `${slug}-${im.k}`))) copyFileSync(join(src, 'img', `${slug}-${im.k}`), join(out, 'img', file));
-    return { src: `img/${file}`, kind: im.swatch ? 'swatch' : 'photo' };
+    const entry = { src: `img/${file}`, kind: im.swatch ? 'swatch' : 'photo' };
+    // Cut-out version (background removed) and its measurements, for the styled mannequins.
+    const key = `${slug}-${im.k}`;
+    if (!im.swatch && existsSync(join(out, 'img', key + '-cut.webp'))) {
+      entry.cut = `img/${key}-cut.webp`;
+      if (ANCHORS[key]) entry.fig = ANCHORS[key];
+    }
+    return entry;
   });
   const variants = (it.variants || []).map((v) => {
     const a = v.attributes || {};

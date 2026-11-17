@@ -53,6 +53,8 @@ window.SCREEN_GROUPS = [
     ['staff-customers', 'StaffCustomers', 'Customers', 'Everyone who’s rented or bought, with sizes and history']
   ]],
   ['Shop', [
-    ['shop', 'Shop', 'The shop', 'Every suit and dinner jacket to buy, with sizes and a cart (checkout not connected yet)']
+    ['shop', 'Shop', 'The shop · Kodak', 'Every suit and dinner jacket to buy, on a retro chrome stand (checkout not connected yet)'],
+    ['shop-silver-birch', 'ShopBirch', 'The shop · Silver Birch', 'The collection on a modern faceted mannequin'],
+    ['shop-tuxedo-park', 'ShopPark', 'The shop · Tuxedo Park', 'The wardrobe on a classic wooden dress form']
   ]]
 ];
