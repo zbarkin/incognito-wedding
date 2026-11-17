@@ -43,7 +43,12 @@ window.SCREEN_GROUPS = [
     ['animations', 'Library', 'All 10 measuring animations', 'Every how-to-measure animation on one page']
   ]],
   ['Staff', [
+    ['staff-today', 'StaffToday', 'Today', 'The day at a glance: appointments, to-dos before close, replies'],
     ['staff-parties', 'Parties', 'All parties', 'The staff board: every wedding and what needs attention'],
-    ['staff-party', 'PartyAdmin', 'Assess one party', 'One wedding in detail, with automatic measurement checks']
+    ['staff-party', 'PartyAdmin', 'Assess one party', 'One wedding in detail, with automatic measurement checks and messages'],
+    ['staff-appointments', 'StaffAppointments', 'Appointments', 'The week’s calendar, with check-in and reminders'],
+    ['staff-orders', 'StaffOrders', 'Orders', 'Rental warehouse orders, from waiting on the party to checked in'],
+    ['staff-pickups', 'StaffPickups', 'Pickups & returns', 'The counter: hand-offs with a checklist, returns with condition check-in'],
+    ['staff-customers', 'StaffCustomers', 'Customers', 'Everyone who’s rented or bought, with sizes and history']
   ]]
 ];

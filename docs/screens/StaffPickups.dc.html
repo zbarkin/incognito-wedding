@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff · Pickups &amp; returns</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#121110}
+a{color:#C9A66B}a:hover{color:#E2C48E}
+.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
+.fld::placeholder{color:#8E8676}
+.btn:hover{background:#D4B47A !important}
+.ghost:hover{border-color:#C9A66B !important}
+.row:hover{background:#1F1C18 !important}
+.nav:hover{background:#1A1816 !important}
+a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-wrap:wrap;">
+
+<dc-import name="StaffNav" current="pickups" hint-size="232px,100%"></dc-import>
+
+<main style="flex:999 1 600px; min-width:0; box-sizing:border-box; padding:32px 40px 56px; display:flex; flex-direction:column; gap:24px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 24px;">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Wednesday, December 2 · Open 12–7</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:42px; line-height:1; color:#EEE7D9;">Pickups &amp; returns</h1>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; min-width:0; max-width:100%;">
+<div role="group" aria-label="Show" style="display:flex; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px;">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="height:38px; padding:0 16px; background:{{t.bg}}; color:{{t.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">{{t.label}} <span style="font-family:Rokkitt, serif; font-weight:700; font-size:16px; margin-left:4px;">{{t.count}}</span></button>
+</sc-for>
+</div>
+<label for="search" class="sr">Search by name or bag number</label>
+<div style="position:relative; flex:1 1 240px; min-width:0; max-width:320px;">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8E8676" stroke-width="2" stroke-linecap="round" style="position:absolute; left:14px; top:15px;"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+<input id="search" class="fld" type="search" placeholder="Name or bag number" value="{{q}}" onChange="{{setQ}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 14px 0 40px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+</div>
+</div>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:14px;">
+<sc-for list="{{tiles}}" as="k" hint-placeholder-count="4">
+<div style="padding:16px 20px; background:#1A1816; border:{{k.border}}; display:flex; flex-direction:column; gap:6px;">
+<span aria-live="polite" style="font-family:Rokkitt, serif; font-weight:700; font-size:40px; line-height:1; color:{{k.numColor}};">{{k.num}}</span>
+<span style="font-size:14px; color:{{k.labelColor}};">{{k.label}}</span>
+<span style="font-size:12px; color:#8E8676;">{{k.sub}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px;">
+
+<section aria-labelledby="list-h" style="flex:999 1 520px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:24px 26px 14px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px; margin-bottom:8px;">
+<h2 id="list-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#EEE7D9;">{{listTitle}}</h2>
+<span style="font-size:13px; color:#A39A8B;">{{listHint}}</span>
+</div>
+
+<sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:8px; padding:20px; margin:8px 0 12px; border:1px dashed #4A4237;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#EEE7D9;">No one matches “{{q}}”</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">Try a last name or a bag number like B-14. {{otherTabHint}}</span>
+<button type="button" class="ghost" onClick="{{clearQ}}" style="align-self:flex-start; height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Clear search</button>
+</div>
+</sc-if>
+
+<sc-for list="{{sections}}" as="sec" hint-placeholder-count="3">
+<div style="margin-top:18px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; padding-bottom:10px;">
+<h3 style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:700; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:{{sec.color}};">{{sec.title}}</h3>
+<span style="font-size:13px; color:#A39A8B;">{{sec.sub}}</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="4">
+<li style="display:flex; flex-wrap:wrap; align-items:center; border-top:1px solid #2A2621; background:{{r.bg}}; border-left:3px solid {{r.bar}};">
+<button type="button" class="row" aria-pressed="{{r.sel}}" onClick="{{r.pick}}" style="flex:1 1 300px; min-width:0; display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; padding:13px 12px; background:transparent; border:0; text-align:left; color:#EEE7D9; font-family:Archivo, sans-serif; cursor:pointer;">
+<span style="flex:1 1 200px; min-width:0; display:flex; flex-direction:column; gap:3px;">
+<span style="font-size:15px; font-weight:700;">{{r.name}}</span>
+<span style="font-size:12px; line-height:1.4; color:#A39A8B;">{{r.role}}</span>
+<sc-if value="{{r.hasNote}}" hint-placeholder-val="{{false}}"><span style="font-size:12px; line-height:1.4; color:{{r.noteColor}};">{{r.note}}</span></sc-if>
+</span>
+<span style="flex:0 0 92px; font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:{{r.bagColor}};">{{r.bag}}</span>
+<span style="flex:0 0 auto; display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{r.pills}}" as="pl" hint-placeholder-count="1">
+<span style="display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 9px; border:1px solid {{pl.bd}}; background:{{pl.bg}}; font-size:12px; font-weight:700; color:{{pl.fg}}; white-space:nowrap;">{{pl.text}}</span>
+</sc-for>
+</span>
+</button>
+<sc-if value="{{r.hasActions}}" hint-placeholder-val="{{false}}">
+<div style="flex:0 0 auto; display:flex; gap:8px; padding:0 12px 12px 12px; margin-left:auto;">
+<sc-for list="{{r.actions}}" as="ac" hint-placeholder-count="2">
+<button type="button" class="ghost" aria-pressed="{{ac.on}}" onClick="{{ac.run}}" style="height:38px; padding:0 14px; background:{{ac.bg}}; color:{{ac.fg}}; border:1px solid {{ac.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">{{ac.label}}<span class="sr"> {{r.name}}</span></button>
+</sc-for>
+</div>
+</sc-if>
+</li>
+</sc-for>
+</ul>
+</div>
+</sc-for>
+</section>
+
+<aside id="panel" aria-label="{{panelLabel}}" style="flex:1 1 340px; min-width:0; max-width:460px; box-sizing:border-box;">
+
+<sc-if value="{{showEmpty}}" hint-placeholder-val="{{false}}">
+<section style="background:#1A1816; border:1px dashed #4A4237; padding:24px; display:flex; flex-direction:column; gap:8px;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Pick someone from the list</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{emptyText}}</span>
+</section>
+</sc-if>
+
+<sc-if value="{{showPickup}}" hint-placeholder-val="{{true}}">
+<section aria-labelledby="hp-h" style="background:#1A1816; border:1px solid #C9A66B; padding:24px; display:flex; flex-direction:column; gap:18px;">
+<div style="display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Hand-off · {{hp.day}}</span>
+<h2 id="hp-h" aria-live="polite" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:30px; line-height:1.05; color:#EEE7D9;">{{hp.name}}</h2>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{hp.role}}</span>
+<span style="font-size:14px; color:#A39A8B;">{{hp.phone}}</span>
+</div>
+<div style="display:flex; align-items:center; gap:12px; padding:12px 14px; background:#0F0E0D; border:1px solid #38322A;">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a2 2 0 0 1 2 2c0 1.2-2 1.6-2 3M12 8 3 15h18Z"></path><path d="M6 15v6h12v-6"></path></svg>
+<span style="display:flex; flex-direction:column; gap:1px;"><span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Bag</span><span style="font-family:Rokkitt, serif; font-weight:700; font-size:22px; color:#EEE7D9;">{{hp.bag}}</span></span>
+<span style="margin-left:auto; display:inline-flex; align-items:center; height:24px; padding:0 9px; border:1px solid {{hp.pill.bd}}; font-size:12px; font-weight:700; color:{{hp.pill.fg}}; white-space:nowrap;">{{hp.pill.text}}</span>
+</div>
+
+<sc-if value="{{hp.notReady}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:10px; padding:14px 16px; border:1px solid #E86A5E; background:#211614;">
+<p style="margin:0; display:flex; gap:10px; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E86A5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 18px; margin-top:1px;"><path d="M12 3 2 21h20Z"></path><path d="M12 10v4M12 17.5v.5"></path></svg><span>{{hp.reason}}</span></p>
+<sc-if value="{{hp.hasFix}}" hint-placeholder-val="{{false}}">
+<button type="button" class="ghost" onClick="{{hp.fix}}" style="align-self:flex-start; height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{hp.fixLabel}}</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{hp.done}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid #8C7247; background:#221F1B;">
+<p style="margin:0; display:flex; align-items:center; gap:8px; font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#C9A66B;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{hp.doneTitle}}</p>
+<sc-for list="{{hp.doneLines}}" as="dl" hint-placeholder-count="3">
+<span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{dl}}</span>
+</sc-for>
+<sc-if value="{{hp.canUndo}}" hint-placeholder-val="{{false}}">
+<button type="button" class="ghost" onClick="{{hp.undo}}" style="align-self:flex-start; height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo hand-off</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{hp.open}}" hint-placeholder-val="{{true}}">
+<fieldset style="margin:0; padding:0; border:0; min-width:0; display:flex; flex-direction:column;">
+<div style="display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:8px;">
+<legend style="padding:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">In the bag · {{hp.tickText}}</legend>
+<button type="button" onClick="{{hp.tickAll}}" disabled="{{hp.lock}}" style="height:30px; padding:0 4px; background:transparent; border:0; color:{{hp.tickAllColor}}; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{hp.tickAllLabel}}</button>
+</div>
+<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<sc-for list="{{hp.items}}" as="it" hint-placeholder-count="8">
+<li style="border-bottom:1px solid #2A2621;">
+<label style="display:flex; align-items:center; gap:12px; min-height:44px; padding:4px 0; cursor:{{it.cursor}}; opacity:{{it.opacity}};">
+<input type="checkbox" checked="{{it.on}}" disabled="{{it.off}}" onChange="{{it.toggle}}" style="width:20px; height:20px; margin:0; accent-color:#C29E62; flex:0 0 20px;">
+<span style="flex:1 1 auto; min-width:0; font-size:15px; color:#EEE7D9;">{{it.label}}</span>
+<span style="flex:0 0 auto; font-family:Rokkitt, serif; font-weight:600; font-size:17px; color:#C9A66B;">{{it.size}}</span>
+</label>
+</li>
+</sc-for>
+</ul>
+</fieldset>
+
+<button type="button" role="switch" aria-checked="{{hp.tried}}" onClick="{{hp.toggleTried}}" style="display:flex; align-items:center; gap:12px; min-height:44px; padding:0; background:transparent; border:0; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; text-align:left; cursor:pointer;">
+<span aria-hidden="true" style="position:relative; flex:0 0 42px; height:24px; box-sizing:border-box; border-radius:12px; background:{{hp.swBg}}; border:1px solid {{hp.swBd}};"><span style="position:absolute; top:3px; left:{{hp.knob}}; width:16px; height:16px; border-radius:50%; background:{{hp.knobBg}};"></span></span>
+<span style="display:flex; flex-direction:column; gap:1px;"><span style="font-weight:600;">Tried on at the counter</span><span style="font-size:12px; color:#A39A8B;">{{hp.triedNote}}</span></span>
+</button>
+
+<div role="group" aria-labelledby="who-l" style="display:flex; flex-direction:column; gap:8px;">
+<span id="who-l" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Who’s picking up</span>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); border:1px solid #38322A; border-radius:2px;">
+<sc-for list="{{hp.whoOpts}}" as="w" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{w.on}}" onClick="{{w.pick}}" style="height:40px; padding:0 8px; background:{{w.bg}}; color:{{w.fg}}; border:0; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{w.label}}</button>
+</sc-for>
+</div>
+<sc-if value="{{hp.isOther}}" hint-placeholder-val="{{false}}">
+<label for="other-name" class="sr">Name of the person picking up</label>
+<input id="other-name" class="fld" type="text" placeholder="Their name, e.g. Mateo Castillo" value="{{hp.other}}" onChange="{{hp.setOther}}" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+<span style="font-size:12px; line-height:1.5; color:#8E8676;">Check their ID. {{hp.firstName}} stays responsible for the return.</span>
+</sc-if>
+</div>
+
+<sc-if value="{{hp.hasReturn}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; gap:12px; padding:12px 14px; border:1px solid #38322A; background:#0F0E0D;">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 20px; margin-top:2px;"><rect x="3" y="5" width="18" height="16" rx="1"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+<span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:15px; font-weight:700; color:#EEE7D9;">Due back {{hp.returnBy}}</span><span style="font-size:13px; line-height:1.5; color:#A39A8B;">Say it out loud. Everything goes back on the hangers, in this bag. We text a reminder the day before.</span></span>
+</div>
+</sc-if>
+<sc-if value="{{hp.isBuy}}" hint-placeholder-val="{{false}}">
+<span style="font-size:13px; line-height:1.5; color:#A39A8B;">Bought, not rented. Nothing comes back.</span>
+</sc-if>
+
+<div style="display:flex; flex-direction:column; gap:6px;">
+<button type="button" class="btn" onClick="{{hp.hand}}" disabled="{{hp.cant}}" style="height:48px; padding:0 18px; background:{{hp.handBg}}; color:{{hp.handFg}}; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.06em; text-transform:uppercase; cursor:{{hp.handCursor}};">Hand over</button>
+<span aria-live="polite" style="font-size:12px; line-height:1.5; color:#A39A8B;">{{hp.handHint}}</span>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{showReturn}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="rp-h" style="background:#1A1816; border:1px solid #C9A66B; padding:24px; display:flex; flex-direction:column; gap:18px;">
+<div style="display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:{{rp.kickerColor}};">Check-in · {{rp.kicker}}</span>
+<h2 id="rp-h" aria-live="polite" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:30px; line-height:1.05; color:#EEE7D9;">{{rp.name}}</h2>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{rp.role}}</span>
+<span style="font-size:14px; color:#A39A8B;">{{rp.phone}} · Bag {{rp.bag}}</span>
+</div>
+
+<sc-if value="{{rp.notOut}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:6px; padding:16px; border:1px dashed #4A4237;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#EEE7D9;">Not picked up yet</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{rp.notOutText}}</span>
+<button type="button" class="ghost" onClick="{{rp.goPickup}}" style="align-self:flex-start; margin-top:4px; height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Open the pickup</button>
+</div>
+</sc-if>
+
+<sc-if value="{{rp.done}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid #8C7247; background:#221F1B;">
+<p style="margin:0; display:flex; align-items:center; gap:8px; font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#C9A66B;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{rp.doneTitle}}</p>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{rp.doneItems}}" as="di" hint-placeholder-count="8">
+<li style="display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-top:1px solid #38322A; font-size:14px;"><span style="color:#EEE7D9;">{{di.label}}</span><span style="font-weight:600; color:{{di.color}};">{{di.cond}}</span></li>
+</sc-for>
+</ul>
+<sc-if value="{{rp.hasDoneNote}}" hint-placeholder-val="{{false}}"><span style="font-size:14px; line-height:1.5; color:#A39A8B;">Note: {{rp.doneNote}}</span></sc-if>
+<sc-if value="{{rp.doneFlag}}" hint-placeholder-val="{{false}}"><span style="font-size:14px; font-weight:600; line-height:1.5; color:#E86A5E;">{{rp.doneFlagText}}</span></sc-if>
+<sc-if value="{{rp.canUndo}}" hint-placeholder-val="{{false}}">
+<button type="button" class="ghost" onClick="{{rp.undo}}" style="align-self:flex-start; height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo check-in</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{rp.open}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{rp.late}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; gap:10px; padding:12px 14px; border:1px solid #E86A5E; background:#211614; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E86A5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 18px; margin-top:1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><span>{{rp.lateText}}</span></div>
+</sc-if>
+<div style="display:flex; flex-direction:column;">
+<span style="margin-bottom:8px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Check each item</span>
+<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<sc-for list="{{rp.items}}" as="it" hint-placeholder-count="8">
+<li style="display:flex; flex-direction:column; gap:8px; padding:10px 0; border-bottom:1px solid #2A2621;">
+<span style="display:flex; justify-content:space-between; gap:12px;"><span id="{{it.id}}" style="font-size:15px; color:#EEE7D9;">{{it.label}}</span><span style="font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:#C9A66B;">{{it.size}}</span></span>
+<span role="group" aria-labelledby="{{it.id}}" style="display:flex; flex-wrap:wrap; gap:4px;">
+<sc-for list="{{it.opts}}" as="o" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="flex:1 1 auto; height:32px; padding:0 9px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer; white-space:nowrap;">{{o.label}}</button>
+</sc-for>
+</span>
+</li>
+</sc-for>
+</ul>
+</div>
+<div style="display:flex; flex-direction:column; gap:6px;">
+<label for="ret-note" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Note</label>
+<textarea id="ret-note" class="fld" rows="2" placeholder="e.g. Wine stain on left cuff" value="{{rp.note}}" onChange="{{rp.setNote}}" style="box-sizing:border-box; width:100%; min-height:68px; padding:10px 12px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; line-height:1.5;"></textarea>
+</div>
+<sc-if value="{{rp.flag}}" hint-placeholder-val="{{false}}">
+<p aria-live="polite" style="margin:0; display:flex; gap:10px; padding:12px 14px; border:1px solid #E86A5E; background:#211614; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E86A5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 18px; margin-top:1px;"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg><span>{{rp.flagText}}</span></p>
+</sc-if>
+<button type="button" class="btn" onClick="{{rp.checkIn}}" style="height:48px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer;">Check in</button>
+<span style="font-size:12px; line-height:1.5; color:#8E8676;">{{rp.summary}}</span>
+</sc-if>
+</section>
+</sc-if>
+
+</aside>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      tab: 'pickups',
+      q: '',
+      selP: 'af',
+      selR: 'bp',
+      ticks: {},
+      tried: {},
+      who: {},
+      other: {},
+      handed: {},
+      fixed: {},
+      contact: {},
+      cond: {},
+      notes: {},
+      checked: {},
+      clock: 161
+    };
+  }
+  tux(coat, pants, shirt, shoes, tie) {
+    return [
+      ['Coat', coat], ['Pants', pants], ['Shirt', shirt], ['Vest', ''], [tie || 'Bow tie', ''],
+      ['Pocket square', ''], ['Studs & cufflinks', ''], ['Shoes', shoes]
+    ];
+  }
+  pickupPeople() {
+    const CR = { party: 'Castillo & Reyes', day: 'thu3', dayLabel: 'Thu, Dec 3', due: 'Mon, Dec 7 by 7 PM', lead: 'Marco T.' };
+    const BL = { party: 'Brennan & Liu', day: 'thu10', dayLabel: 'Thu, Dec 10', due: 'Mon, Dec 14 by 7 PM', lead: 'Jess R.', status: 'notready', reason: 'Not staged yet. The order arrives from the rental warehouse Mon, Dec 7, then Jess fits and bags it.', bag: 'No rack yet' };
+    const blTie = 'Long tie, champagne';
+    return [
+      { id: 'af', name: 'Alan Fitch', role: 'Navy suit, bought Oct 17 · pants hemmed by Lou', day: 'today', dayLabel: 'Today', bag: 'Hook A-03', status: 'staged', buy: true, phone: '(585) 555-0112', lead: 'Marco T.',
+        items: [['Navy suit coat', '40R'], ['Navy suit pants, hemmed', '34 × 30'], ['Garment bag', '']] },
+      { id: 'cm', name: 'Chris Moreau', role: 'Black suit rental · retirement dinner Fri, Dec 4', day: 'today', dayLabel: 'Today', bag: 'Hook A-05', status: 'picked', pickedAt: '12:20 PM', pickedBy: 'Chris himself', triedOn: true, phone: '(585) 555-0127', due: 'Mon, Dec 7 by 7 PM', lead: 'Marco T.',
+        items: [['Coat, black suit', '42R'], ['Pants', '34 × 30'], ['Shirt', '16 / 34'], ['Long tie, black', ''], ['Shoes', '10.5D']] },
+      Object.assign({ id: 'mc', name: 'Mateo Castillo', role: 'Groom', bag: 'Rack B-10', status: 'staged', phone: '(585) 555-0161', items: this.tux('40R', '34 × 32', '15.5 / 34', '10D') }, CR),
+      Object.assign({ id: 'ac', name: 'Andre Castillo', role: 'Groomsman · brother of the groom', bag: 'Rack B-11', status: 'notready', reason: 'Waiting on Lou’s sleeve hem. Coat is still in alterations; check-in today at 4:30.', fix: 'Coat is back from Lou', phone: '(585) 555-0163', items: this.tux('42R', '36 × 32', '16 / 34', '11D') }, CR),
+      Object.assign({ id: 'lr', name: 'Luis Reyes', role: 'Best man', bag: 'Rack B-12', status: 'staged', phone: '(585) 555-0170', items: this.tux('38S', '30 × 30', '15 / 32', '9D') }, CR),
+      Object.assign({ id: 'dr', name: 'Diego Reyes', role: 'Groomsman', bag: 'Rack B-13', status: 'staged', phone: '(585) 555-0174', items: this.tux('40L', '32 × 34', '15.5 / 35', '10.5D') }, CR),
+      Object.assign({ id: 'so', name: 'Sam Ortiz', role: 'Groomsman', bag: 'Rack B-14', status: 'staged', phone: '(585) 555-0179', items: this.tux('44R', '38 × 32', '17 / 34', '12D') }, CR),
+      Object.assign({ id: 'mb', name: 'Marcus Brennan', role: 'Groom', phone: '(585) 555-0181', items: this.tux('42L', '34 × 34', '16 / 35', '11D', blTie) }, BL),
+      Object.assign({ id: 'kl', name: 'Kevin Liu', role: 'Best man', phone: '(585) 555-0184', items: this.tux('38R', '30 × 32', '15 / 33', '9D', blTie) }, BL),
+      Object.assign({ id: 'pb', name: 'Patrick Brennan', role: 'Groomsman', phone: '(585) 555-0186', items: this.tux('44L', '36 × 34', '16.5 / 35', '12D', blTie) }, BL),
+      Object.assign({ id: 'el', name: 'Ethan Liu', role: 'Groomsman', phone: '(585) 555-0189', items: this.tux('38S', '29 × 30', '14.5 / 32', '8.5D', blTie) }, BL),
+      Object.assign({ id: 'cd', name: 'Chris Dolan', role: 'Groomsman', phone: '(585) 555-0192', items: this.tux('40R', '33 × 32', '15.5 / 34', '10D', blTie) }, BL),
+      Object.assign({ id: 'nr', name: 'Nate Ruiz', role: 'Groomsman', phone: '(585) 555-0195', items: this.tux('42R', '35 × 32', '16 / 34', '10.5D', blTie) }, BL)
+    ];
+  }
+  returnPeople() {
+    const DP = { party: 'DeLuca & Price', lead: 'Jess R.', dueLabel: 'Mon, Nov 30' };
+    return [
+      Object.assign({ id: 'bp', name: 'Ben Price', role: 'Groomsman · brother of the bride', bag: 'D-22', phone: '(585) 555-0131', group: 'overdue', items: this.tux('40R', '32 × 32', '15.5 / 33', '10D') }, DP),
+      Object.assign({ id: 'ta', name: 'Tom Avila', role: 'Groomsman', bag: 'D-24', phone: '(585) 555-0158', group: 'overdue', items: this.tux('44R', '38 × 30', '17 / 34', '11.5D') }, DP),
+      Object.assign({ id: 'nd', name: 'Nick DeLuca', role: 'Groom', bag: 'D-19', phone: '(585) 555-0137', group: 'returned', preAt: '12:15 PM', items: this.tux('42R', '34 × 32', '16 / 34', '11D') }, DP),
+      Object.assign({ id: 'rc', name: 'Ryan Cole', role: 'Groomsman', bag: 'D-23', phone: '(585) 555-0144', group: 'returned', preAt: '1:05 PM', items: this.tux('40R', '32 × 30', '15.5 / 34', '10D') }, DP)
+    ];
+  }
+  now() {
+    const m = this.state.clock;
+    const h = 12 + Math.floor(m / 60);
+    const mm = String(m % 60).padStart(2, '0');
+    const t = (h > 12 ? h - 12 : h) + ':' + mm + ' PM';
+    return t;
+  }
+  tick() {
+    return this.state.clock + 1;
+  }
+  setIn(key, id, val) {
+    const next = Object.assign({}, this.state[key]);
+    next[id] = val;
+    const o = {};
+    o[key] = next;
+    return o;
+  }
+  scrollPanel() {
+    setTimeout(() => {
+      if (window.innerWidth < 1180) {
+        const el = document.getElementById('panel');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
+  }
+  renderVals() {
+    const s = this.state;
+    const first = (n) => n.split(' ')[0];
+    const norm = (x) => x.toLowerCase().replace(/[\s\-·]/g, '');
+    const q = norm(s.q || '');
+    const match = (p) => !q || norm(p.name).indexOf(q) >= 0 || norm(p.bag || '').indexOf(q) >= 0 || norm(p.party || '').indexOf(q) >= 0;
+
+    const PICK = this.pickupPeople();
+    const pState = (p) => {
+      if (p.status === 'picked') return 'picked';
+      if (s.handed[p.id]) return 'picked';
+      if (p.status === 'notready' && !s.fixed[p.id]) return 'notready';
+      return 'staged';
+    };
+    const pickedAt = (p) => s.handed[p.id] ? s.handed[p.id].at : p.pickedAt;
+
+    // Returns: DeLuca & Price plus anyone who has picked up a rental due Mon, Dec 7
+    const RET = this.returnPeople();
+    PICK.filter((p) => p.due && p.due.indexOf('Mon, Dec 7') === 0).forEach((p) => {
+      RET.push({ id: 'r-' + p.id, pid: p.id, name: p.name, role: p.role, party: p.party, bag: p.bag.replace(/^(Rack|Hook) /, ''), phone: p.phone, group: 'soon', lead: p.lead, dueLabel: 'Mon, Dec 7', items: p.items });
+    });
+    const rIsOut = (r) => !r.pid || pState(PICK.find((p) => p.id === r.pid)) === 'picked';
+    const rDone = (r) => r.preAt ? { at: r.preAt, cond: {}, note: '', pre: true } : s.checked[r.id];
+    const condOf = (r, i) => ((s.cond[r.id] || {})[i]) || 'good';
+    const COND = { good: ['Good', '#C9A66B'], clean: ['Needs cleaning', '#EEE7D9'], damaged: ['Damaged', '#E86A5E'], missing: ['Missing', '#E86A5E'] };
+
+    // Counts
+    const openPick = PICK.filter((p) => pState(p) !== 'picked');
+    const openRet = RET.filter((r) => !rDone(r));
+    const overdueOpen = RET.filter((r) => r.group === 'overdue' && !rDone(r));
+    let itemsIn = 0;
+    RET.forEach((r) => {
+      const d = rDone(r);
+      if (!d) return;
+      r.items.forEach((_, i) => { if ((d.cond[i] || 'good') !== 'missing') itemsIn += 1; });
+    });
+    const todayLeft = PICK.filter((p) => p.day === 'today' && pState(p) !== 'picked');
+    const tomorrow = PICK.filter((p) => p.day === 'thu3' && pState(p) !== 'picked');
+    const tomorrowNot = tomorrow.filter((p) => pState(p) === 'notready').length;
+
+    const tiles = [
+      { num: todayLeft.length, label: 'Pickups left today', sub: todayLeft.length ? todayLeft.map((p) => p.name).join(', ') : 'All handed over', red: false },
+      { num: tomorrow.length, label: 'Pickups tomorrow', sub: 'Castillo & Reyes' + (tomorrowNot ? ' · ' + tomorrowNot + ' not ready' : ' · all staged'), red: tomorrowNot > 0 },
+      { num: overdueOpen.length, label: 'Returns overdue', sub: overdueOpen.length ? 'DeLuca & Price · due Mon, Nov 30' : 'Nothing late', red: overdueOpen.length > 0, alert: true },
+      { num: itemsIn, label: 'Items checked in today', sub: RET.filter((r) => rDone(r)).length + ' people back', red: false }
+    ].map((k) => ({
+      num: k.num, label: k.label, sub: k.sub,
+      border: k.alert && k.red ? '1.5px solid #E86A5E' : '1px solid #38322A',
+      numColor: k.alert && k.red ? '#E86A5E' : '#EEE7D9',
+      labelColor: k.alert && k.red ? '#EEE7D9' : '#A39A8B'
+    }));
+
+    const tabs = [['pickups', 'Pickups', openPick.length], ['returns', 'Returns', openRet.length]].map((t) => {
+      const on = s.tab === t[0];
+      return { label: t[1], count: t[2], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9',
+        pick: () => this.setState({ tab: t[0] }) };
+    });
+
+    const pill = (text, kind) => {
+      const K = {
+        brass: { fg: '#C9A66B', bd: '#8C7247', bg: 'transparent' },
+        red: { fg: '#E86A5E', bd: '#E86A5E', bg: 'transparent' },
+        grey: { fg: '#A39A8B', bd: '#4A4237', bg: 'transparent' },
+        done: { fg: '#15130F', bd: '#C29E62', bg: '#C29E62' }
+      }[kind];
+      return { text: text, fg: K.fg, bd: K.bd, bg: K.bg };
+    };
+
+    let sections = [];
+    let listTitle = '';
+    let listHint = '';
+    let otherTabHint = '';
+
+    if (s.tab === 'pickups') {
+      listTitle = 'Pickups';
+      listHint = 'Pick a person to hand over their bag';
+      const DAYS = [
+        { key: 'today', title: 'Today · Wed, Dec 2', sub: 'Walk-ins and individuals' },
+        { key: 'thu3', title: 'Thu, Dec 3', sub: 'Castillo & Reyes · 5 people · wedding Sat, Dec 5, Harbor House · Marco T.' },
+        { key: 'thu10', title: 'Thu, Dec 10', sub: 'Brennan & Liu · 6 people · wedding Sat, Dec 12, Mill Street Barn · Jess R.' }
+      ];
+      sections = DAYS.map((d) => {
+        const rows = PICK.filter((p) => p.day === d.key && match(p)).map((p) => {
+          const st = pState(p);
+          const sel = s.selP === p.id;
+          const pills = st === 'picked' ? [pill('Picked up ' + pickedAt(p), 'grey')] : st === 'notready' ? [pill('Not ready', 'red')] : [pill('Staged', 'brass')];
+          const note = st === 'notready' ? (p.id === 'ac' ? 'Waiting on Lou’s sleeve hem · check-in 4:30' : 'Order arrives Mon, Dec 7') : '';
+          return {
+            name: p.name, role: p.role, bag: p.bag, bagColor: st === 'notready' && p.bag.indexOf('No') === 0 ? '#8E8676' : '#C9A66B',
+            hasNote: !!note, note: note, noteColor: '#E86A5E',
+            pills: pills, sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent',
+            hasActions: false, actions: [],
+            pick: () => { this.setState({ selP: p.id }); this.scrollPanel(); }
+          };
+        });
+        const left = PICK.filter((p) => p.day === d.key && pState(p) !== 'picked').length;
+        return { title: d.title, sub: d.sub + ' · ' + left + ' to go', color: '#C9A66B', rows: rows };
+      }).filter((sec) => sec.rows.length);
+      const otherHits = RET.filter(match).length;
+      if (q && otherHits) otherTabHint = otherHits + ' match' + (otherHits > 1 ? 'es' : '') + ' in Returns.';
+    } else {
+      listTitle = 'Returns';
+      listHint = 'Pick a person to check their bag in';
+      const GROUPS = [
+        { key: 'overdue', title: 'Overdue', sub: 'DeLuca & Price · due Mon, Nov 30 · 2 days late · Jess R.', color: '#E86A5E' },
+        { key: 'soon', title: 'Due soon', sub: 'Castillo & Reyes and Chris Moreau · due Mon, Dec 7 by 7 PM', color: '#C9A66B' },
+        { key: 'returned', title: 'Returned today', sub: 'Checked in and back to the rental warehouse rack', color: '#A39A8B' }
+      ];
+      sections = GROUPS.map((g) => {
+        let list = RET.filter((r) => {
+          const d = rDone(r);
+          if (g.key === 'returned') return !!d;
+          return !d && r.group === g.key;
+        }).filter(match);
+        if (g.key === 'returned') list = list.slice().sort((a, b) => (rDone(b).pre ? 0 : 1) - (rDone(a).pre ? 0 : 1));
+        const rows = list.map((r) => {
+          const d = rDone(r);
+          const sel = s.selR === r.id;
+          const out = rIsOut(r);
+          let pills = [];
+          let note = '';
+          if (d) {
+            pills = [pill('Checked in ' + d.at, 'grey')];
+            const bad = r.items.some((_, i) => d.cond[i] === 'damaged' || d.cond[i] === 'missing');
+            if (bad) pills.push(pill('Flagged for ' + first(r.lead), 'red'));
+          } else if (r.group === 'overdue') {
+            pills = [pill('2 days late', 'red')];
+            note = r.phone;
+          } else if (!out) {
+            pills = [pill('Picks up Thu, Dec 3', 'grey')];
+          } else {
+            pills = [pill('Out · due Mon, Dec 7', 'brass')];
+          }
+          const c = s.contact[r.id] || {};
+          const act = (key, label, doneLabel) => {
+            const on = !!c[key];
+            return {
+              label: on ? doneLabel + ' ' + c[key] : label, on: on,
+              bg: on ? '#221F1B' : 'transparent', fg: on ? '#C9A66B' : '#EEE7D9', bd: on ? '#8C7247' : '#4A4237',
+              run: () => {
+                const cur = Object.assign({}, this.state.contact[r.id] || {});
+                if (cur[key]) delete cur[key];
+                else cur[key] = this.now();
+                const o = this.setIn('contact', r.id, cur);
+                o.clock = this.tick();
+                this.setState(o);
+              }
+            };
+          };
+          const showActs = !d && r.group === 'overdue';
+          return {
+            name: r.name, role: (r.party ? r.party + ' · ' : '') + r.role, bag: r.bag, bagColor: '#C9A66B',
+            hasNote: !!note, note: note, noteColor: '#A39A8B',
+            pills: pills, sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent',
+            hasActions: showActs,
+            actions: showActs ? [act('call', 'Call', '✓ Called'), act('text', 'Text', '✓ Texted')] : [],
+            pick: () => { this.setState({ selR: r.id }); this.scrollPanel(); }
+          };
+        });
+        return { title: g.title + ' · ' + rows.length, sub: g.sub, color: g.color, rows: rows };
+      }).filter((sec) => sec.rows.length);
+      const otherHits = PICK.filter(match).length;
+      if (q && otherHits) otherTabHint = otherHits + ' match' + (otherHits > 1 ? 'es' : '') + ' in Pickups.';
+    }
+    const noMatch = sections.length === 0;
+
+    // ----- Hand-off panel
+    const P = PICK.find((p) => p.id === s.selP);
+    let hp = {};
+    const showPickup = s.tab === 'pickups' && !!P;
+    if (P) {
+      const st = pState(P);
+      const ticks = s.ticks[P.id] || {};
+      const lock = st !== 'staged';
+      const allTicked = P.items.every((_, i) => ticks[i]);
+      const nTicked = P.items.filter((_, i) => ticks[i]).length;
+      const who = s.who[P.id] || 'self';
+      const other = s.other[P.id] || '';
+      const tried = !!s.tried[P.id];
+      const needName = who === 'other' && !other.trim();
+      const cant = lock || !allTicked || needName;
+      const h = s.handed[P.id];
+      let doneLines = [];
+      if (st === 'picked') {
+        const by = h ? h.by : P.pickedBy;
+        const tr = h ? h.tried : P.triedOn;
+        doneLines = ['By ' + by + ' · ' + (tr ? 'tried on at the counter' : 'not tried on'), P.items.length + ' items, all ticked off'];
+        if (P.due) doneLines.push('Due back ' + P.due);
+        else doneLines.push('Bought, so nothing to return');
+      }
+      hp = {
+        day: P.dayLabel, name: P.name,
+        role: (P.party ? P.party + ' · ' : '') + P.role,
+        phone: P.phone, bag: P.bag,
+        pill: st === 'picked' ? pill('Picked up ' + pickedAt(P), 'grey') : st === 'notready' ? pill('Not ready', 'red') : pill('Staged', 'brass'),
+        notReady: st === 'notready', reason: P.reason || '',
+        hasFix: st === 'notready' && !!P.fix, fixLabel: P.fix || '',
+        fix: () => this.setState(this.setIn('fixed', P.id, true)),
+        done: st === 'picked', doneTitle: 'Picked up ' + pickedAt(P), doneLines: doneLines,
+        canUndo: !!h,
+        undo: () => this.setState(this.setIn('handed', P.id, null)),
+        open: st !== 'picked', lock: lock,
+        tickText: nTicked + ' of ' + P.items.length + ' ticked',
+        tickAllLabel: allTicked ? 'Clear all' : 'Tick all',
+        tickAllColor: lock ? '#8E8676' : '#C9A66B',
+        tickAll: () => {
+          if (lock) return;
+          const next = {};
+          if (!allTicked) P.items.forEach((_, i) => { next[i] = true; });
+          this.setState(this.setIn('ticks', P.id, next));
+        },
+        items: P.items.map((it, i) => ({
+          label: it[0], size: it[1], on: !!ticks[i], off: lock,
+          cursor: lock ? 'default' : 'pointer', opacity: lock ? 0.55 : 1,
+          toggle: () => {
+            const cur = Object.assign({}, this.state.ticks[P.id] || {});
+            cur[i] = !cur[i];
+            this.setState(this.setIn('ticks', P.id, cur));
+          }
+        })),
+        tried: tried,
+        toggleTried: () => this.setState(this.setIn('tried', P.id, !tried)),
+        swBg: tried ? '#C29E62' : '#0F0E0D', swBd: tried ? '#C29E62' : '#4A4237',
+        knob: tried ? '21px' : '3px', knobBg: tried ? '#15130F' : '#8E8676',
+        triedNote: tried ? 'Fit checked in the fitting room' : 'Coat and pants at least, if there’s time',
+        whoOpts: [['self', first(P.name) + ' himself'], ['other', 'Someone else']].map((w) => {
+          const on = who === w[0];
+          return { label: w[1], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9',
+            pick: () => this.setState(this.setIn('who', P.id, w[0])) };
+        }),
+        isOther: who === 'other', other: other, firstName: first(P.name),
+        setOther: (e) => this.setState(this.setIn('other', P.id, e.target.value)),
+        hasReturn: !!P.due, returnBy: P.due || '', isBuy: !!P.buy,
+        cant: cant,
+        handBg: cant ? '#2A2621' : '#C29E62', handFg: cant ? '#8E8676' : '#15130F', handCursor: cant ? 'not-allowed' : 'pointer',
+        handHint: lock ? 'Can’t hand over until it’s staged.'
+          : !allTicked ? 'Tick off every item as it goes in the bag. ' + (P.items.length - nTicked) + ' to go.'
+          : needName ? 'Add the name of the person picking up.'
+          : 'Everything’s ticked. Hand it over and the row shows the time.',
+        hand: () => {
+          if (cant) return;
+          const o = this.setIn('handed', P.id, { at: this.now(), by: who === 'other' ? other.trim() + ' (for ' + first(P.name) + ')' : first(P.name) + ' himself', tried: tried });
+          o.clock = this.tick();
+          this.setState(o);
+        }
+      };
+    }
+
+    // ----- Check-in panel
+    const R = RET.find((r) => r.id === s.selR);
+    let rp = {};
+    const showReturn = s.tab === 'returns' && !!R;
+    if (R) {
+      const d = rDone(R);
+      const out = rIsOut(R);
+      const bad = R.items.map((it, i) => [it[0], condOf(R, i)]).filter((x) => x[1] === 'damaged' || x[1] === 'missing');
+      const leadText = R.party ? R.lead + ', the party lead' : R.lead + ', who set up the rental';
+      const owner = first(R.name);
+      const note = s.notes[R.id] || '';
+      const clean = R.items.filter((_, i) => condOf(R, i) === 'clean').length;
+      let doneBad = [];
+      if (d) doneBad = R.items.filter((_, i) => d.cond[i] === 'damaged' || d.cond[i] === 'missing');
+      rp = {
+        kicker: d ? 'Done' : R.group === 'overdue' ? '2 days late' : out ? 'Due Mon, Dec 7' : 'Not out yet',
+        kickerColor: !d && R.group === 'overdue' ? '#E86A5E' : '#C9A66B',
+        name: R.name, role: (R.party ? R.party + ' · ' : '') + R.role, phone: R.phone, bag: R.bag,
+        notOut: !d && !out,
+        notOutText: owner + ' picks up Thu, Dec 3. Check-in opens once the bag has gone home with him.',
+        goPickup: () => this.setState({ tab: 'pickups', selP: R.pid }),
+        done: !!d,
+        doneTitle: d ? 'Checked in ' + d.at : '',
+        doneItems: d ? R.items.map((it, i) => {
+          const c = d.cond[i] || 'good';
+          return { label: it[0] + (it[1] ? ' · ' + it[1] : ''), cond: COND[c][0], color: COND[c][1] };
+        }) : [],
+        hasDoneNote: !!(d && d.note), doneNote: d ? d.note : '',
+        doneFlag: doneBad.length > 0,
+        doneFlagText: 'Flagged for ' + leadText + ': ' + doneBad.map((it) => it[0].toLowerCase()).join(', ') + '.',
+        canUndo: !!(d && !d.pre),
+        undo: () => this.setState(this.setIn('checked', R.id, null)),
+        open: !d && out,
+        late: R.group === 'overdue',
+        lateText: 'Due Mon, Nov 30. ' + owner + ' is 2 days late. Thank him for bringing it in.',
+        items: R.items.map((it, i) => {
+          const cur = condOf(R, i);
+          return {
+            id: 'ri-' + R.id + '-' + i, label: it[0], size: it[1],
+            opts: Object.keys(COND).map((k) => {
+              const on = cur === k;
+              const red = k === 'damaged' || k === 'missing';
+              return {
+                label: COND[k][0], on: on,
+                bg: on ? (red ? '#E86A5E' : '#C29E62') : 'transparent',
+                fg: on ? '#15130F' : '#A39A8B',
+                bd: on ? (red ? '#E86A5E' : '#C29E62') : '#38322A',
+                pick: () => {
+                  const next = Object.assign({}, this.state.cond[R.id] || {});
+                  next[i] = k;
+                  this.setState(this.setIn('cond', R.id, next));
+                }
+              };
+            })
+          };
+        }),
+        note: note,
+        setNote: (e) => this.setState(this.setIn('notes', R.id, e.target.value)),
+        flag: bad.length > 0,
+        flagText: bad.map((x) => x[0] + ': ' + COND[x[1]][0].toLowerCase()).join(' · ') + '. Checking in will flag this for ' + leadText + '.',
+        summary: (R.items.length - bad.length - clean) + ' good' + (clean ? ' · ' + clean + ' to cleaning' : '') + (bad.length ? ' · ' + bad.length + ' flagged' : '') + '. Good items go back on the rack for the rental warehouse.',
+        checkIn: () => {
+          const cond = {};
+          R.items.forEach((_, i) => { cond[i] = condOf(R, i); });
+          const o = this.setIn('checked', R.id, { at: this.now(), cond: cond, note: note.trim() });
+          o.clock = this.tick();
+          this.setState(o);
+        }
+      };
+    }
+
+    return {
+      tabs: tabs, tiles: tiles, q: s.q,
+      setQ: (e) => this.setState({ q: e.target.value }),
+      clearQ: () => this.setState({ q: '' }),
+      listTitle: listTitle, listHint: listHint, sections: sections, noMatch: noMatch, otherTabHint: otherTabHint,
+      panelLabel: s.tab === 'pickups' ? 'Hand-off' : 'Check-in',
+      showEmpty: !showPickup && !showReturn,
+      emptyText: s.tab === 'pickups' ? 'Their bag, item checklist and return date show up here.' : 'Their items show up here to check one by one.',
+      showPickup: showPickup, hp: hp,
+      showReturn: showReturn, rp: rp
+    };
+  }
+}
+</script>
+</body>
+</html>

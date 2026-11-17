@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff · Customers</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#121110}
+a{color:#C9A66B}a:hover{color:#E2C48E}
+.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
+.fld::placeholder{color:#8E8676}
+.btn:hover{background:#D4B47A !important}
+.ghost:hover{border-color:#C9A66B !important}
+.row:hover{background:#1F1C18 !important}
+.nav:hover{background:#1A1816 !important}
+a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-wrap:wrap;">
+
+<dc-import name="StaffNav" current="customers" hint-size="232px,100%"></dc-import>
+
+<main style="flex:999 1 600px; min-width:0; box-sizing:border-box; padding:32px clamp(16px, 3vw, 40px) 56px; display:flex; flex-direction:column; gap:24px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 24px;">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Wednesday, December 2 · Open 12–7</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:42px; line-height:1; color:#EEE7D9;">Customers</h1>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; min-width:0; max-width:100%;">
+<label for="search" class="sr">Search customers by name, phone or email</label>
+<div style="position:relative; flex:1 1 260px; min-width:0; max-width:100%;">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8E8676" stroke-width="2" stroke-linecap="round" style="position:absolute; left:14px; top:15px;"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+<input id="search" class="fld" type="search" placeholder="Name, phone or email" value="{{q}}" onChange="{{setQ}}" style="box-sizing:border-box; width:340px; max-width:100%; height:46px; padding:0 14px 0 40px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+</div>
+<button type="button" class="btn" onClick="{{toggleAdd}}" aria-expanded="{{adding}}" style="display:inline-flex; align-items:center; gap:8px; height:46px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; white-space:nowrap;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add customer</button>
+</div>
+</div>
+
+<sc-if value="{{adding}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="add-h" style="background:#1A1816; border:1px solid #8C7247; padding:20px 24px; display:flex; flex-direction:column; gap:14px;">
+<h2 id="add-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">New customer</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px 14px;">
+<label style="display:flex; flex-direction:column; gap:6px; font-size:13px; color:#A39A8B;">Full name
+<input class="fld" type="text" value="{{form.name}}" onChange="{{form.setName}}" placeholder="e.g. Chris Adeyemi" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid {{form.nameBd}}; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;"></label>
+<label style="display:flex; flex-direction:column; gap:6px; font-size:13px; color:#A39A8B;">Mobile phone
+<input class="fld" type="tel" value="{{form.phone}}" onChange="{{form.setPhone}}" placeholder="(585) 555-0100" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;"></label>
+<label style="display:flex; flex-direction:column; gap:6px; font-size:13px; color:#A39A8B;">Email
+<input class="fld" type="email" value="{{form.email}}" onChange="{{form.setEmail}}" placeholder="name@example.com" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;"></label>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;">
+<span style="font-size:13px; color:#A39A8B;">Prefers</span>
+<div role="group" aria-label="Contact preference" style="display:flex; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px;">
+<sc-for list="{{form.prefs}}" as="p" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{p.on}}" onClick="{{p.pick}}" style="height:34px; padding:0 14px; background:{{p.bg}}; color:{{p.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{p.label}}</button>
+</sc-for>
+</div>
+<span style="flex:1 1 auto;"></span>
+<sc-if value="{{form.err}}" hint-placeholder-val="{{false}}"><span role="alert" style="font-size:13px; color:#E86A5E;">Add a name first.</span></sc-if>
+<button type="button" class="ghost" onClick="{{toggleAdd}}" style="height:40px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Cancel</button>
+<button type="button" class="btn" onClick="{{form.save}}" style="height:40px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;">Save customer</button>
+</div>
+</section>
+</sc-if>
+
+<div role="group" aria-label="Show customers" style="display:flex; flex-wrap:wrap; gap:8px;">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 14px; background:{{f.bg}}; color:{{f.fg}}; border:1px solid {{f.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">{{f.label}}<span style="font-family:Rokkitt, serif; font-weight:700; font-size:15px; color:{{f.countFg}};">{{f.count}}</span></button>
+</sc-for>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px;">
+
+<section aria-labelledby="list-h" style="flex:1 1 380px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:20px 0 6px;">
+<div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:0 20px 12px; border-bottom:1px solid #38322A;">
+<h2 id="list-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#EEE7D9;">{{listTitle}}</h2>
+<span aria-live="polite" style="font-size:13px; color:#A39A8B;">{{listCount}}</span>
+</div>
+<sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+<div style="padding:28px 20px; display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+<p style="margin:0; font-size:15px; color:#EEE7D9;">No one matches “{{q}}”.</p>
+<p style="margin:0; font-size:14px; line-height:1.5; color:#A39A8B;">Try a last name, the last 4 digits of a phone number, or clear the filter.</p>
+<button type="button" class="ghost" onClick="{{clearAll}}" style="height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Show everyone</button>
+</div>
+</sc-if>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+<li style="border-bottom:1px solid #2A2621;">
+<button type="button" class="row" aria-pressed="{{r.on}}" onClick="{{r.pick}}" style="display:flex; gap:14px; align-items:flex-start; width:100%; box-sizing:border-box; padding:14px 20px 14px 17px; background:{{r.bg}}; border:0; border-left:3px solid {{r.edge}}; color:#EEE7D9; text-align:left; font-family:Archivo, sans-serif; cursor:pointer;">
+<span aria-hidden="true" style="flex:0 0 38px; height:38px; box-sizing:border-box; border-radius:50%; border:1px solid {{r.ringBd}}; display:flex; align-items:center; justify-content:center; font-family:Rokkitt, serif; font-weight:600; font-size:14px; color:#C9A66B;">{{r.initials}}</span>
+<span style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:5px;">
+<span style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:2px 12px;">
+<span style="font-size:16px; font-weight:700; color:#EEE7D9;">{{r.name}}</span>
+<span style="font-size:12px; color:#8E8676;"><span class="sr">Last visit </span>{{r.lastVisit}}</span>
+</span>
+<span style="font-size:13px; color:#A39A8B;">{{r.phone}}</span>
+<span style="font-size:13px; line-height:1.4; color:{{r.eventFg}};">{{r.event}}</span>
+<sc-if value="{{r.hasTags}}" hint-placeholder-val="{{true}}">
+<span style="display:flex; flex-wrap:wrap; gap:4px; margin-top:2px;">
+<sc-for list="{{r.tags}}" as="t" hint-placeholder-count="2">
+<span style="display:inline-flex; align-items:center; height:22px; padding:0 8px; border:1px solid {{t.bd}}; background:{{t.bg}}; font-size:11px; font-weight:700; color:{{t.fg}}; white-space:nowrap;">{{t.text}}</span>
+</sc-for>
+</span>
+</sc-if>
+</span>
+</button>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<section id="profile" aria-labelledby="prof-h" style="flex:1.5 1 480px; min-width:0; box-sizing:border-box; display:flex; flex-direction:column; gap:16px; scroll-margin-top:16px;">
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:22px 24px; display:flex; flex-direction:column; gap:16px;">
+<div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start;">
+<span aria-hidden="true" style="flex:0 0 60px; height:60px; box-sizing:border-box; border-radius:50%; border:1.5px solid #C29E62; display:flex; align-items:center; justify-content:center; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#C9A66B;">{{c.initials}}</span>
+<div style="flex:1 1 220px; min-width:0; display:flex; flex-direction:column; gap:6px;">
+<h2 id="prof-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:32px; line-height:1.05; color:#EEE7D9;">{{c.name}}</h2>
+<span style="font-size:13px; color:#A39A8B;">{{c.since}}</span>
+<sc-if value="{{c.hasTags}}" hint-placeholder-val="{{true}}">
+<span style="display:flex; flex-wrap:wrap; gap:4px;">
+<sc-for list="{{c.tags}}" as="t" hint-placeholder-count="3">
+<span style="display:inline-flex; align-items:center; height:24px; padding:0 9px; border:1px solid {{t.bd}}; background:{{t.bg}}; font-size:12px; font-weight:700; color:{{t.fg}}; white-space:nowrap;">{{t.text}}</span>
+</sc-for>
+</span>
+</sc-if>
+</div>
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:8px;">
+<a href="{{c.sms}}" class="ghost" style="display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 14px; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:13px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.6A8 8 0 1 1 21 12z"></path></svg>Text</a>
+<a href="{{c.mail}}" class="ghost" style="display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 14px; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:13px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"></rect><path d="m3 7 9 6 9-6"></path></svg>Email</a>
+<a href="StaffAppointments.dc.html" class="ghost" style="display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 14px; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:13px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="1"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Book appointment</a>
+<button type="button" class="btn" onClick="{{c.startRental}}" disabled="{{c.started}}" style="display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 16px; background:{{c.startBg}}; color:{{c.startFg}}; border:1px solid {{c.startBd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>{{c.startLabel}}</button>
+</div>
+<sc-if value="{{c.started}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin:0; padding:10px 12px; background:#221F1B; border-left:3px solid #C29E62; font-size:14px; line-height:1.5; color:#EEE7D9;">Rental draft started for {{c.first}}. {{c.startNote}}</p>
+</sc-if>
+</div>
+
+<sc-if value="{{c.hasAlert}}" hint-placeholder-val="{{true}}">
+<div role="note" style="background:#1A1816; border:1.5px solid {{c.alert.bd}}; padding:16px 20px; display:flex; flex-wrap:wrap; gap:12px 16px; align-items:center;">
+<span aria-hidden="true" style="flex:0 0 10px; height:10px; background:{{c.alert.bd}}; border-radius:50%;"></span>
+<div style="flex:1 1 260px; min-width:0; display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:700; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:{{c.alert.fg}};">{{c.alert.level}}</span>
+<span style="font-size:15px; font-weight:700; color:#EEE7D9;">{{c.alert.title}}</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{c.alert.text}}</span>
+</div>
+<sc-if value="{{c.alert.open}}" hint-placeholder-val="{{true}}">
+<button type="button" class="ghost" onClick="{{c.alert.act}}" style="flex:0 0 auto; height:40px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">{{c.alert.action}}</button>
+</sc-if>
+<sc-if value="{{c.alert.done}}" hint-placeholder-val="{{false}}">
+<span role="status" style="flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#C9A66B;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{c.alert.doneText}}</span>
+</sc-if>
+</div>
+</sc-if>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:20px 22px; display:flex; flex-direction:column; gap:12px;">
+<h3 style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Contact</h3>
+<dl style="margin:0; display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; flex-direction:column; gap:2px;"><dt style="font-size:12px; color:#8E8676;">Mobile</dt><dd style="margin:0; font-size:15px; color:#EEE7D9;">{{c.phone}}</dd></div>
+<div style="display:flex; flex-direction:column; gap:2px; min-width:0;"><dt style="font-size:12px; color:#8E8676;">Email</dt><dd style="margin:0; font-size:15px; color:#EEE7D9; overflow-wrap:anywhere;">{{c.email}}</dd></div>
+<div style="display:flex; flex-direction:column; gap:2px;"><dt style="font-size:12px; color:#8E8676;">Best way to reach</dt><dd style="margin:0; font-size:15px; color:#C9A66B; font-weight:600;">{{c.prefers}}</dd></div>
+<sc-if value="{{c.hasAlt}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:2px;"><dt style="font-size:12px; color:#8E8676;">{{c.altLabel}}</dt><dd style="margin:0; font-size:14px; line-height:1.5; color:#EEE7D9;">{{c.alt}}</dd></div>
+</sc-if>
+</dl>
+</div>
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:20px 22px; display:flex; flex-direction:column; gap:10px;">
+<h3 style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Current rental</h3>
+<sc-if value="{{c.hasEvent}}" hint-placeholder-val="{{true}}">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:22px; line-height:1.1; color:#EEE7D9;">{{c.ev.title}}</span>
+<span style="font-size:14px; color:#C9A66B; font-weight:600;">{{c.ev.role}}</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{c.ev.when}}</span>
+<sc-if value="{{c.ev.hasStatus}}" hint-placeholder-val="{{true}}">
+<span style="align-self:flex-start; display:inline-flex; align-items:center; min-height:24px; padding:2px 9px; border:1px solid {{c.ev.statusBd}}; font-size:12px; font-weight:700; color:{{c.ev.statusFg}};">{{c.ev.status}}</span>
+</sc-if>
+<ul style="list-style:none; margin:2px 0 0; padding:0; display:flex; flex-direction:column; gap:6px;">
+<sc-for list="{{c.ev.lines}}" as="l" hint-placeholder-count="2">
+<li style="display:flex; gap:8px; font-size:14px; line-height:1.45; color:#EEE7D9;"><span aria-hidden="true" style="flex:0 0 5px; height:5px; margin-top:8px; background:#8C7247;"></span><span style="min-width:0;">{{l}}</span></li>
+</sc-for>
+</ul>
+<sc-if value="{{c.ev.hasLink}}" hint-placeholder-val="{{true}}">
+<a href="{{c.ev.href}}" style="align-self:flex-start; margin-top:4px; font-size:14px; font-weight:600;">{{c.ev.linkText}} →</a>
+</sc-if>
+</sc-if>
+<sc-if value="{{c.noEvent}}" hint-placeholder-val="{{false}}">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#A39A8B;">No open rentals</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{c.noEventText}}</span>
+</sc-if>
+</div>
+
+</div>
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:20px 22px; display:flex; flex-direction:column; gap:14px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 14px;">
+<h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Measurements on file</h3>
+<span style="font-size:13px; color:#A39A8B;">{{c.measBy}}</span>
+</div>
+<sc-if value="{{c.measOld}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; padding:10px 12px; background:#221F1B; border-left:3px solid #E86A5E; font-size:14px; line-height:1.5; color:#EEE7D9;">{{c.measOldText}}</p>
+</sc-if>
+<sc-if value="{{c.measWarn}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; padding:10px 12px; background:#221F1B; border-left:3px solid #C29E62; font-size:14px; line-height:1.5; color:#EEE7D9;">{{c.measWarnText}}</p>
+</sc-if>
+<sc-if value="{{c.hasMeas}}" hint-placeholder-val="{{true}}">
+<dl style="margin:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(104px, 1fr)); gap:1px; background:#2A2621; border:1px solid #2A2621;">
+<sc-for list="{{c.meas}}" as="m" hint-placeholder-count="10">
+<div style="background:{{m.bg}}; padding:10px 12px; display:flex; flex-direction:column; gap:3px;">
+<dt style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#8E8676;">{{m.k}}</dt>
+<dd style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:19px; color:{{m.fg}};">{{m.v}}</dd>
+</div>
+</sc-for>
+</dl>
+<div style="display:flex; flex-direction:column; gap:8px;">
+<h4 style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Suggested sizes</h4>
+<div style="display:flex; flex-wrap:wrap; gap:8px;">
+<sc-for list="{{c.sizes}}" as="z" hint-placeholder-count="5">
+<span style="display:inline-flex; flex-direction:column; gap:1px; padding:8px 12px; background:#221F1B; border:1px solid #4A4237; min-width:72px;"><span style="font-size:11px; color:#8E8676;">{{z.k}}</span><span style="font-size:15px; font-weight:700; color:#EEE7D9;">{{z.v}}</span></span>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{c.noMeas}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; font-size:14px; line-height:1.5; color:#A39A8B;">Nothing on file yet. Book a measuring appointment, or send the at-home measuring link.</p>
+</sc-if>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:20px 22px; display:flex; flex-direction:column; gap:12px;">
+<h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">History</h3>
+<sc-if value="{{c.hasHistory}}" hint-placeholder-val="{{true}}">
+<ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{c.history}}" as="h" hint-placeholder-count="4">
+<li style="display:flex; gap:14px;">
+<span style="flex:0 0 44px; font-family:Rokkitt, serif; font-weight:700; font-size:17px; color:{{h.yearFg}}; padding-top:1px;">{{h.year}}</span>
+<span aria-hidden="true" style="flex:0 0 12px; display:flex; flex-direction:column; align-items:center;"><span style="width:10px; height:10px; margin-top:6px; box-sizing:border-box; border-radius:50%; border:2px solid {{h.dotBd}}; background:{{h.dotBg}};"></span><span style="flex:1 1 auto; width:1px; background:{{h.lineBg}};"></span></span>
+<span style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:2px; padding-bottom:16px;">
+<span style="font-size:15px; font-weight:700; color:#EEE7D9;">{{h.what}}</span>
+<span style="font-size:13px; line-height:1.45; color:#A39A8B;">{{h.detail}}</span>
+</span>
+</li>
+</sc-for>
+</ol>
+</sc-if>
+<sc-if value="{{c.noHistory}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; font-size:14px; color:#A39A8B;">First time with us.</p>
+</sc-if>
+</div>
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:20px 22px; display:flex; flex-direction:column; gap:12px;">
+<h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Preferences</h3>
+<sc-if value="{{c.hasPrefs}}" hint-placeholder-val="{{true}}">
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;">
+<sc-for list="{{c.prefs}}" as="p" hint-placeholder-count="3">
+<li style="display:flex; gap:10px; font-size:14px; line-height:1.45; color:#EEE7D9;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 14px; margin-top:3px;"><path d="M20 6 9 17l-5-5"></path></svg><span style="min-width:0;">{{p}}</span></li>
+</sc-for>
+</ul>
+</sc-if>
+<sc-if value="{{c.noPrefs}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; font-size:14px; color:#A39A8B;">None noted yet. Ask at the first fitting.</p>
+</sc-if>
+<h4 style="margin:6px 0 0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Rentals</h4>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{c.rentals}}" as="x" hint-placeholder-count="2">
+<li style="display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-top:1px solid #2A2621; font-size:14px;"><span style="min-width:0; color:#EEE7D9;">{{x.what}}</span><span style="flex:0 0 auto; color:{{x.fg}}; font-size:13px;">{{x.when}}</span></li>
+</sc-for>
+</ul>
+<sc-if value="{{c.noRentals}}" hint-placeholder-val="{{false}}"><p style="margin:0; font-size:14px; color:#8E8676;">No rentals yet.</p></sc-if>
+<h4 style="margin:6px 0 0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Purchases</h4>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{c.purchases}}" as="x" hint-placeholder-count="1">
+<li style="display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-top:1px solid #2A2621; font-size:14px;"><span style="min-width:0; color:#EEE7D9;">{{x.what}}</span><span style="flex:0 0 auto; color:#A39A8B; font-size:13px;">{{x.when}}</span></li>
+</sc-for>
+</ul>
+<sc-if value="{{c.noPurchases}}" hint-placeholder-val="{{false}}"><p style="margin:0; font-size:14px; color:#8E8676;">Nothing bought yet.</p></sc-if>
+</div>
+
+</div>
+
+<div style="background:#1A1816; border:1px solid #38322A; padding:20px 22px; display:flex; flex-direction:column; gap:12px;">
+<h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Staff notes</h3>
+<label for="note-input" class="sr">Add a staff note about {{c.name}}</label>
+<textarea id="note-input" class="fld" rows="2" placeholder="Add a note for the team…" value="{{draft}}" onChange="{{setDraft}}" style="box-sizing:border-box; width:100%; min-height:72px; padding:10px 12px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; line-height:1.5;"></textarea>
+<div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+<span style="font-size:12px; color:#8E8676;">Notes are only seen by staff. Signed as Marco T.</span>
+<button type="button" class="ghost" onClick="{{addNote}}" disabled="{{noDraft}}" style="height:40px; padding:0 16px; background:transparent; color:{{noteBtnFg}}; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Add note</button>
+</div>
+<ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{c.notes}}" as="n" hint-placeholder-count="3">
+<li style="display:flex; gap:12px; padding:12px 0; border-top:1px solid #2A2621;">
+<span aria-hidden="true" style="flex:0 0 30px; height:30px; box-sizing:border-box; border-radius:50%; border:1px solid #8C7247; display:flex; align-items:center; justify-content:center; font-family:Rokkitt, serif; font-weight:600; font-size:12px; color:#C9A66B;">{{n.who}}</span>
+<span style="display:flex; flex-direction:column; gap:3px; min-width:0;">
+<span style="font-size:12px; color:#A39A8B;">{{n.by}}</span>
+<span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{n.text}}</span>
+</span>
+</li>
+</sc-for>
+</ol>
+<sc-if value="{{c.noNotes}}" hint-placeholder-val="{{false}}"><p style="margin:0; font-size:14px; color:#8E8676;">No notes yet.</p></sc-if>
+</div>
+
+</section>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2200}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { q: '', filter: 'all', sel: 'daniel', adding: false, form: { name: '', phone: '', email: '', pref: 'text', err: false }, extra: [], draft: '', notes: {}, handled: {}, started: {} };
+  }
+  renderVals() {
+    const s = this.state;
+    const TODAY = Date.UTC(2026, 11, 2);
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const DAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const parse = (iso) => { const p = iso.split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2]); };
+    const ago = (iso) => Math.round((TODAY - parse(iso)) / 86400000);
+    const fmt = (iso) => {
+      const t = parse(iso); const d = new Date(t); const n = ago(iso);
+      if (n === 0) return 'Today';
+      if (n === 1) return 'Yesterday';
+      if (d.getUTCFullYear() === 2026) return DAY[d.getUTCDay()] + ', ' + MON[d.getUTCMonth()] + ' ' + d.getUTCDate();
+      return MON[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+    };
+    const OW = 'PartyAdmin.dc.html';
+    const ALL = 'Parties.dc.html';
+    const M = (h, w, ch, oa, wa, hi, sl, nk, os, ins, sh) => [['Height', h], ['Weight', w], ['Chest', ch], ['Overarm', oa], ['Waist', wa], ['Hips', hi], ['Sleeve', sl], ['Neck', nk], ['Outseam', os], ['Inseam', ins], ['Shoe', sh]];
+    const Z = (coat, pants, shirt, vest, shoe) => [['Coat', coat], ['Pants', pants], ['Shirt', shirt], ['Vest', vest], ['Shoes', shoe]];
+
+    const BASE = [
+      {
+        id: 'daniel', name: 'Daniel Okafor', phone: '(585) 555-0142', email: 'daniel.okafor@example.com', pref: 'text', since: 2016, lv: '2026-11-14', lvNote: '',
+        wedding: true, prom: true, repeat: true, tags: ['Groom', 'Repeat', 'Prom 2016'],
+        ev: { title: 'Okafor & Whitman', role: 'Groom · midnight navy tux, 42L', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Measured · deposit paid', tone: 'brass', href: OW, linkText: 'Open party', lines: ['Everyone else is in black peak lapel; Daniel stands apart in midnight navy.', 'Order goes in by Sat, Dec 19 · fittings Jan 14–20 · pickup Thu, Jan 21 · return Mon, Jan 25.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        meas: { date: '2026-11-14', by: 'Marco T.', where: 'in store', rows: M('6′1″', '185 lb', '41½″', '49″', '34″', '40″', '34″', '16″', '44″', '32″', '11 D') },
+        sizes: Z('42L slim', '34 waist', '16 / 34', 'M', '11 D'),
+        history: [
+          ['2016', 'Prom · Penfield High', 'His first tux, from us: black notch lapel, black bow tie. Came in with his mom.'],
+          ['2022', 'Groomsman for a friend', 'Chris Adeyemi & Leah Moore, Aug 2022. Rented a charcoal suit with a silver tie.'],
+          ['2024', 'Bought a navy suit', 'Two-piece, slim cut. Lou took in the waist ½″.'],
+          ['2027', 'Groom · Okafor & Whitman', 'Wedding Sat, Jan 23 at the Woodcliff. 9 in the party.', true]
+        ],
+        rentals: [['Groom tux, midnight navy', 'Jan 2027 · booked', true], ['Groomsman suit, charcoal', 'Aug 2022'], ['Prom tux, black notch lapel', 'May 2016']],
+        purchases: [['Navy suit, two-piece', 'Mar 2024 · $495'], ['White dress shirts (2)', 'Mar 2024 · $98']],
+        prefs: ['Likes a slimmer fit through the coat and pants', 'Wears 11 D shoes', 'No pleats', 'Prefers a text over a call'],
+        notes: [['MT', 'Marco T. · Sat, Nov 14', 'Tried the midnight navy in 42L slim and loved it. Sleeve might want ¼″ off at the fitting.'], ['JR', 'Jess R. · Sun, Oct 18', 'Came in with Sam Whitman (bride’s brother) for the consultation. He was our prom kid in 2016 — his mom still has the photo from the shop.']]
+      },
+      {
+        id: 'james', name: 'James Okafor', phone: '(585) 555-0187', email: 'james.okafor@example.com', pref: 'text', since: 2019, lv: '2026-11-21',
+        wedding: true, prom: true, repeat: true, tags: ['Best man', 'Repeat', 'Prom 2019'],
+        ev: { title: 'Okafor & Whitman', role: 'Best man · black peak lapel, 44R', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Measured · deposit paid', tone: 'brass', href: OW, linkText: 'Open party', lines: ['Daniel’s younger brother. Helping chase the groomsmen who haven’t sent numbers.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        meas: { date: '2026-11-21', by: 'Jess R.', where: 'in store', rows: M('6′2″', '205 lb', '43½″', '52″', '36″', '42″', '35″', '16½″', '45″', '33″', '12 D') },
+        sizes: Z('44R', '36 waist', '16½ / 35', 'L', '12 D'),
+        history: [['2019', 'Prom · Penfield High', 'Rented a black shawl lapel with a navy bow tie.'], ['2027', 'Best man · Okafor & Whitman', 'His brother Daniel’s wedding, Sat, Jan 23.', true]],
+        rentals: [['Best man tux, black peak lapel', 'Jan 2027 · booked', true], ['Prom tux, black shawl lapel', 'May 2019']],
+        purchases: [],
+        prefs: ['Regular fit, room in the shoulders', 'Wears 12 D'],
+        notes: [['JR', 'Jess R. · Sat, Nov 21', 'Easy measure. Said he’ll get Theo and Ravi in before the 12th.']]
+      },
+      {
+        id: 'ravi', name: 'Ravi Patel', phone: '(716) 555-0119', email: 'ravi.patel@example.com', pref: 'text', since: 2026, lv: '2026-11-25', lvNote: ' · online',
+        wedding: true, prom: false, repeat: false, tags: ['Groomsman'],
+        ev: { title: 'Okafor & Whitman', role: 'Groomsman · black peak lapel', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Numbers need a second look', tone: 'red', href: OW, linkText: 'Open party', lines: ['Sent his measurements from home on Wed, Nov 25.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        alert: { id: 'ravi', level: 'Review', red: false, title: 'Overarm looks off', text: 'He wrote 19″ for overarm, which is closer to a neck-to-wrist number. Everything else lines up with a 40R.', action: 'Ask him to come in', doneText: 'Texted to book a 10-minute re-measure' },
+        meas: { date: '2026-11-25', by: 'Ravi (at home)', where: 'online form', rows: M('5′10″', '165 lb', '39″', '19″', '32″', '38″', '33″', '15½″', '42″', '31″', '10 D'), flag: 'Overarm' },
+        sizes: Z('40R', '32 waist', '15½ / 33', 'M', '10 D'),
+        history: [['2027', 'Groomsman · Okafor & Whitman', 'College roommate of Daniel’s. First time with us.', true]],
+        rentals: [['Groomsman tux, black peak lapel', 'Jan 2027 · booked', true]],
+        purchases: [], prefs: [],
+        notes: []
+      },
+      {
+        id: 'sam', name: 'Sam Whitman', phone: '(585) 555-0166', email: 'sam.whitman@example.com', pref: 'text', since: 2023, lv: '2026-10-18',
+        wedding: true, prom: true, repeat: true, tags: ['Groomsman', 'Prom 2023', 'Repeat'],
+        ev: { title: 'Okafor & Whitman', role: 'Groomsman · bride’s brother', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Not measured yet', tone: 'grey', href: OW, linkText: 'Open party', lines: ['Has old numbers from prom, but needs fresh ones for the wedding.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        meas: { date: '2023-04-22', by: 'Jess R.', where: 'in store', rows: M('5′11″', '160 lb', '38″', '47″', '30″', '37″', '33″', '15″', '42″', '31″', '10½ D') },
+        sizes: Z('38R', '30 waist', '15 / 33', 'S', '10½ D'),
+        history: [['2023', 'Prom · Penfield High', 'Black shawl lapel with a burgundy bow tie. Crew of 6.'], ['2026', 'Came along to a consultation', 'With Daniel Okafor on Sun, Oct 18.'], ['2027', 'Groomsman · Okafor & Whitman', 'His sister’s wedding, Sat, Jan 23.', true]],
+        rentals: [['Groomsman tux, black peak lapel', 'Jan 2027 · booked', true], ['Prom tux, black shawl lapel', 'May 2023']],
+        purchases: [], prefs: ['Likes a slimmer fit'],
+        notes: [['JR', 'Jess R. · Sun, Oct 18', 'Filled out since prom. Definitely re-measure, don’t order off the 2023 numbers.']]
+      },
+      {
+        id: 'victor', name: 'Victor Okafor', phone: '(585) 555-0102', email: 'victor.okafor@example.com', pref: 'email', since: 2016, lv: '2024-03-09',
+        wedding: true, prom: false, repeat: true, tags: ['Father of the groom', 'Repeat'],
+        ev: { title: 'Okafor & Whitman', role: 'Father of the groom · black peak lapel', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Not measured yet', tone: 'grey', href: OW, linkText: 'Open party', lines: ['Daniel’s dad. Asked for a classic cut, not the slim one.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        meas: { date: '2022-08-06', by: 'Marco T.', where: 'in store', rows: M('5′11″', '210 lb', '44″', '51″', '40″', '44″', '33½″', '17″', '43″', '30″', '11 E') },
+        sizes: Z('44R classic', '40 waist', '17 / 34', 'L', '11 E'),
+        history: [['2022', 'Bought a charcoal suit', 'For a friend’s wedding, Aug 2022.'], ['2024', 'Bought a sport coat', 'Navy blazer, 44R.'], ['2027', 'Father of the groom', 'Okafor & Whitman, Sat, Jan 23.', true]],
+        rentals: [['Tux, black peak lapel', 'Jan 2027 · booked', true]],
+        purchases: [['Charcoal suit, two-piece', 'Aug 2022 · $525'], ['Navy blazer', 'Mar 2024 · $345']],
+        prefs: ['Classic fit, room in the seat', 'Wide-width shoes (11 E)', 'Prefers email; doesn’t text'],
+        notes: []
+      },
+      {
+        id: 'luis', name: 'Luis Romero', phone: '(312) 555-0148', email: 'luis.romero@example.com', pref: 'email', since: 2026, lv: '2026-11-20', lvNote: ' · by mail',
+        wedding: true, prom: false, repeat: false, tags: ['Groomsman', 'Out of town'],
+        ev: { title: 'Okafor & Whitman', role: 'Groomsman · lives in Chicago', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Measured by a Chicago tailor', tone: 'brass', href: OW, linkText: 'Open party', lines: ['Can’t make the Jan 14–20 fittings. Flying in Wed, Jan 20; same-day fitting at pickup Thu, Jan 21.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        meas: { date: '2026-11-20', by: 'a tailor in Chicago', where: 'sent by email', rows: M('6′0″', '178 lb', '40″', '48″', '33″', '39″', '34″', '15½″', '44″', '32″', '11 D') },
+        sizes: Z('40L', '33 waist', '15½ / 34', 'M', '11 D'),
+        history: [['2027', 'Groomsman · Okafor & Whitman', 'First time with us.', true]],
+        rentals: [['Groomsman tux, black peak lapel', 'Jan 2027 · booked', true]],
+        purchases: [], prefs: ['Email only during work hours (Central time)'],
+        notes: [['MT', 'Marco T. · Fri, Nov 20', 'Numbers from his tailor look solid. Have Lou on hand Thu, Jan 21 in case the hem needs a quick fix.']]
+      },
+      {
+        id: 'theo', name: 'Theo Marsh', phone: '(585) 555-0123', email: 'theo.marsh@example.com', pref: 'text', since: 2026, lv: '2026-11-24', lvNote: ' · online',
+        wedding: true, prom: false, repeat: false, tags: ['Groomsman'],
+        ev: { title: 'Okafor & Whitman', role: 'Groomsman · black peak lapel', when: 'Sat, Jan 23 · Woodcliff Hotel & Spa, Fairport', status: 'Numbers need a second look', tone: 'red', href: OW, linkText: 'Open party', lines: ['Sent measurements from home on Tue, Nov 24.'] },
+        listEvent: 'Okafor & Whitman · Sat, Jan 23',
+        alert: { id: 'theo', level: 'Review', red: false, title: 'Sleeve looks long', text: 'He wrote 37″ for a 5′9″ frame. Probably measured from the neck instead of the shoulder.', action: 'Ask him to come in', doneText: 'Texted to book a 10-minute re-measure' },
+        meas: { date: '2026-11-24', by: 'Theo (at home)', where: 'online form', rows: M('5′9″', '170 lb', '40″', '48″', '33″', '39″', '37″', '15½″', '41″', '30″', '9½ D'), flag: 'Sleeve' },
+        sizes: Z('40S', '33 waist', '15½ / 32', 'M', '9½ D'),
+        history: [['2027', 'Groomsman · Okafor & Whitman', 'First time with us.', true]],
+        rentals: [['Groomsman tux, black peak lapel', 'Jan 2027 · booked', true]],
+        purchases: [], prefs: [], notes: []
+      },
+      {
+        id: 'ben', name: 'Ben Price', phone: '(585) 555-0151', email: 'ben.price@example.com', pref: 'text', since: 2026, lv: '2026-11-25',
+        wedding: true, prom: false, repeat: false, tags: ['Groom', 'Late return'],
+        ev: { title: 'DeLuca & Price', role: 'Groom · black notch lapel, 40R', when: 'Wedding was Fri, Nov 27 · The Lantern Room, Pittsford', status: 'Return due Mon, Nov 30 · 2 days late', tone: 'red', href: ALL, linkText: 'See in Wedding parties', lines: ['Still out: coat 40R, pants 33, white shirt 15½ / 33, black vest, black bow tie, pocket square, studs & cufflinks, black patent shoes 10 D.', 'Tom Avila (groomsman) is also still out.'] },
+        listEvent: 'DeLuca & Price · 2 days late',
+        alert: { id: 'ben', level: 'Overdue', red: true, title: 'Tux 2 days late', text: 'Due back Mon, Nov 30. Texted Monday evening, no reply. Jess left a voicemail today at 12:15.', action: 'Text a reminder', doneText: 'Reminder texted at 2:40 PM' },
+        meas: { date: '2026-09-12', by: 'Jess R.', where: 'in store', rows: M('5′10″', '172 lb', '39½″', '48″', '33″', '39″', '33″', '15½″', '42″', '31″', '10 D') },
+        sizes: Z('40R', '33 waist', '15½ / 33', 'M', '10 D'),
+        history: [['2026', 'Wedding consultation', 'With Maria DeLuca, Sat, Sep 12. Measured the same day.'], ['2026', 'Groom · DeLuca & Price', 'Fri, Nov 27 at The Lantern Room. Picked up Wed, Nov 25.'], ['2026', 'Return overdue', 'Due Mon, Nov 30. Not back yet.', true]],
+        rentals: [['Groom tux, black notch lapel', 'Out · 2 days late', true, true]],
+        purchases: [],
+        prefs: ['Classic fit', 'Wears 10 D (tried 10½, too loose)', 'Text first; rarely picks up calls'],
+        notes: [['JR', 'Jess R. · Today, 12:15', 'Called, got voicemail. Maria (bride) says they flew back from Aruba last night and the garment bag is in Ben’s car. Expect it Thursday.'], ['JR', 'Jess R. · Mon, Nov 30', 'Return day: 4 of 6 back. Ben and Tom still out. Texted both at 6:45 PM.'], ['MT', 'Marco T. · Wed, Nov 25', 'Pickup went smooth. Swapped Ben to 10 D shoes after he tried the 10½.']]
+      },
+      {
+        id: 'tom', name: 'Tom Avila', phone: '(585) 555-0153', email: 'tom.avila@example.com', pref: 'text', since: 2026, lv: '2026-11-25',
+        wedding: true, prom: false, repeat: false, tags: ['Groomsman', 'Late return'],
+        ev: { title: 'DeLuca & Price', role: 'Groomsman · black notch lapel, 42R', when: 'Wedding was Fri, Nov 27 · The Lantern Room, Pittsford', status: 'Return due Mon, Nov 30 · 2 days late', tone: 'red', href: ALL, linkText: 'See in Wedding parties', lines: ['Full rental still out, including shoes 11 D.'] },
+        listEvent: 'DeLuca & Price · 2 days late',
+        alert: { id: 'tom', level: 'Overdue', red: true, title: 'Tux 2 days late', text: 'Due back Mon, Nov 30. Texted Monday evening, no reply yet.', action: 'Text a reminder', doneText: 'Reminder texted at 2:40 PM' },
+        meas: { date: '2026-10-03', by: 'Jess R.', where: 'in store', rows: M('6′0″', '190 lb', '42″', '50″', '35″', '41″', '34″', '16″', '44″', '32″', '11 D') },
+        sizes: Z('42R', '35 waist', '16 / 34', 'L', '11 D'),
+        history: [['2026', 'Groomsman · DeLuca & Price', 'Fri, Nov 27. Return overdue.', true]],
+        rentals: [['Groomsman tux, black notch lapel', 'Out · 2 days late', true, true]],
+        purchases: [], prefs: [], notes: [['JR', 'Jess R. · Mon, Nov 30', 'Not back. Texted at 6:45 PM.']]
+      },
+      {
+        id: 'mateo', name: 'Mateo Castillo', phone: '(585) 555-0141', email: 'mateo.castillo@example.com', pref: 'text', since: 2026, lv: '2026-11-21',
+        wedding: true, prom: false, repeat: false, tags: ['Groom'],
+        ev: { title: 'Castillo & Reyes', role: 'Groom · black shawl lapel', when: 'Sat, Dec 5 · Harbor House, Webster', status: 'Pickup tomorrow, Thu, Dec 3', tone: 'brass', href: ALL, linkText: 'See in Wedding parties', lines: ['4 of 5 ready to go. Andre’s sleeve hem is still with Lou (check-in today 4:30).', 'Returns due Mon, Dec 7.'] },
+        listEvent: 'Castillo & Reyes · pickup Thu, Dec 3',
+        meas: { date: '2026-10-03', by: 'Jess R.', where: 'in store', rows: M('5′9″', '168 lb', '39″', '47″', '32″', '38″', '32½″', '15½″', '41″', '30″', '9½ D') },
+        sizes: Z('39S', '32 waist', '15½ / 32', 'M', '9½ D'),
+        history: [['2026', 'Groom · Castillo & Reyes', 'Sat, Dec 5 at Harbor House. Final fitting Sat, Nov 21.', true]],
+        rentals: [['Groom tux, black shawl lapel', 'Pickup Thu, Dec 3', true]],
+        purchases: [['Cufflinks, onyx (to keep)', 'Nov 2026 · $45']],
+        prefs: ['Likes a slimmer fit', 'Wants pants with no break'],
+        notes: [['JR', 'Jess R. · Sat, Nov 21', 'Final fitting done. Bought the onyx cufflinks to keep.']]
+      },
+      {
+        id: 'andre', name: 'Andre Castillo', phone: '(585) 555-0144', email: 'andre.castillo@example.com', pref: 'text', since: 2026, lv: '2026-11-21',
+        wedding: true, prom: false, repeat: false, tags: ['Groomsman'],
+        ev: { title: 'Castillo & Reyes', role: 'Groomsman · groom’s brother', when: 'Sat, Dec 5 · Harbor House, Webster', status: 'Sleeve hem with Lou', tone: 'red', href: ALL, linkText: 'See in Wedding parties', lines: ['Pickup Thu, Dec 3 with the rest of the party.'] },
+        listEvent: 'Castillo & Reyes · pickup Thu, Dec 3',
+        alert: { id: 'andre', level: 'Today 4:30', red: true, title: 'Sleeve hem not back yet', text: 'Lou is shortening the coat sleeves ½″. Alteration check booked today at 4:30 so it’s ready for tomorrow’s pickup.', action: 'Mark hem ready', doneText: 'Hem marked ready' },
+        meas: { date: '2026-10-03', by: 'Jess R.', where: 'in store', rows: M('5′8″', '175 lb', '41″', '49″', '34″', '40″', '31½″', '16″', '40″', '29″', '9 D') },
+        sizes: Z('41S', '34 waist', '16 / 32', 'L', '9 D'),
+        history: [['2026', 'Groomsman · Castillo & Reyes', 'Sat, Dec 5. Sleeves going ½″ shorter.', true]],
+        rentals: [['Groomsman tux, black shawl lapel', 'Pickup Thu, Dec 3', true]],
+        purchases: [], prefs: ['Shorter arms: always check sleeve length'], notes: [['JR', 'Jess R. · Sat, Nov 21', 'Sleeves too long by about ½″. Sent to Lou.']]
+      },
+      {
+        id: 'brennan', name: 'Marcus Brennan', phone: '(585) 555-0161', email: 'marcus.brennan@example.com', pref: 'email', since: 2026, lv: '2026-12-02',
+        wedding: true, prom: false, repeat: false, tags: ['Groom'],
+        ev: { title: 'Brennan & Liu', role: 'Groom · charcoal tux', when: 'Sat, Dec 12 · Mill Street Barn, Victor', status: 'Fitted today', tone: 'brass', href: ALL, linkText: 'See in Wedding parties', lines: ['Order arrives Mon, Dec 7 · pickup Thu, Dec 10.', '3 of his 6 still need to book a fitting by Wed, Dec 9.'] },
+        listEvent: 'Brennan & Liu · Sat, Dec 12',
+        meas: { date: '2026-10-24', by: 'Jess R.', where: 'in store', rows: M('6′3″', '200 lb', '42″', '51″', '35″', '41″', '35½″', '16½″', '46″', '34″', '12 D') },
+        sizes: Z('42XL', '35 waist', '16½ / 36', 'L', '12 D'),
+        history: [['2026', 'Groom · Brennan & Liu', 'Sat, Dec 12. Fitting with Jess today at 12:00.', true]],
+        rentals: [['Groom tux, charcoal', 'Pickup Thu, Dec 10', true]],
+        purchases: [], prefs: ['Tall: always order XL length', 'Prefers email for scheduling'],
+        notes: [['JR', 'Jess R. · Today, 12:30', 'Fitting went well. Sample 42XL fits; no alterations needed.']]
+      },
+      {
+        id: 'kwame', name: 'Kwame Osei', phone: '(585) 555-0171', email: 'kwame.osei@example.com', pref: 'text', since: 2026, lv: '2026-11-07',
+        wedding: true, prom: false, repeat: false, tags: ['Groom'],
+        ev: { title: 'Hartman & Osei', role: 'Groom · black peak lapel, ivory vest', when: 'Sat, Jan 9 · St. Anne’s, Brighton', status: 'Order blocked: 2 deposits missing', tone: 'red', href: ALL, linkText: 'See in Wedding parties', lines: ['All 7 measured. Order is due Sat, Dec 5.'] },
+        listEvent: 'Hartman & Osei · Sat, Jan 9',
+        meas: { date: '2026-11-07', by: 'Marco T.', where: 'in store', rows: M('6′0″', '182 lb', '41″', '49″', '33″', '40″', '34″', '16″', '44″', '32″', '11 D') },
+        sizes: Z('41L', '33 waist', '16 / 34', 'M', '11 D'),
+        history: [['2027', 'Groom · Hartman & Osei', 'Sat, Jan 9 at St. Anne’s.', true]],
+        rentals: [['Groom tux, black peak lapel', 'Jan 2027 · booked', true]],
+        purchases: [], prefs: ['Likes an ivory vest with the black'],
+        notes: [['MT', 'Marco T. · Sat, Nov 7', 'He’s nudging the 2 groomsmen who owe deposits.']]
+      },
+      {
+        id: 'jordan', name: 'Jordan Pike', phone: '(585) 555-0181', email: 'jordan.pike@example.com', pref: 'email', since: 2026, lv: '2026-11-19',
+        wedding: false, prom: false, individual: true, repeat: false, tags: ['Individual'],
+        ev: { title: 'Black-tie gala', role: 'Rental · black shawl lapel, bow tie', when: 'Sat, Dec 12 · pickup Thu, Dec 10 · return Mon, Dec 14', status: 'Paid in full', tone: 'brass', lines: ['Shawl lapel, white shirt with studs, black bow tie, patent shoes.'] },
+        listEvent: 'Black-tie gala · Sat, Dec 12',
+        meas: { date: '2026-11-19', by: 'Marco T.', where: 'in store', rows: M('5′11″', '176 lb', '40″', '48″', '33″', '39″', '33½″', '15½″', '43″', '31½″', '10½ D') },
+        sizes: Z('40R', '33 waist', '15½ / 34', 'M', '10½ D'),
+        history: [['2026', 'Rental for a black-tie gala', 'Sat, Dec 12. Walked in Thu, Nov 19.', true]],
+        rentals: [['Tux, black shawl lapel', 'Pickup Thu, Dec 10', true]],
+        purchases: [], prefs: ['Asked about buying if he ends up needing it twice a year'],
+        notes: [['MT', 'Marco T. · Thu, Nov 19', 'Mentioned he has two galas a year. Good candidate to buy a tux instead next time.']]
+      },
+      {
+        id: 'alan', name: 'Alan Fitch', phone: '(585) 555-0186', email: 'alan.fitch@example.com', pref: 'call', since: 2019, lv: '2026-10-22',
+        wedding: false, prom: false, individual: true, repeat: true, tags: ['Repeat', 'Hem ready'],
+        ev: null, listEvent: 'No open rentals · hem ready for pickup',
+        noEventText: 'Bought a navy suit in October. Lou finished the pants hem; it’s on the pickup rack.',
+        alert: { id: 'alan', level: 'Ready', red: false, title: 'Pants hem ready for pickup', text: 'Navy suit pants, hemmed 1¼″ with a slight break. On the pickup rack since Sat, Nov 28.', action: 'Let him know', doneText: 'Called and left a message' },
+        meas: { date: '2026-10-22', by: 'Lou', where: 'in store', rows: M('5′10″', '190 lb', '42″', '50″', '37″', '42″', '33″', '16½″', '41″', '29½″', '10 D') },
+        sizes: Z('42R', '37 waist', '16½ / 33', 'L', '10 D'),
+        history: [['2019', 'Bought a sport coat', 'Brown herringbone, 42R.'], ['2026', 'Bought a navy suit', 'Thu, Oct 22. Pants hem with Lou.', true]],
+        rentals: [],
+        purchases: [['Navy suit, two-piece', 'Oct 2026 · $545'], ['Sport coat, brown herringbone', 'Nov 2019 · $325']],
+        prefs: ['Classic fit, slight break on the pants', 'Prefers a phone call', 'Usually stops in Saturday mornings'],
+        notes: [['MT', 'Marco T. · Thu, Oct 22', 'Retiring in the spring. Bought the navy suit for his party.']]
+      },
+      {
+        id: 'hill', name: 'Marcus Hill', phone: '(585) 555-0191', email: 'marcus.hill@example.com', pref: 'text', since: 2026, lv: '2026-11-28',
+        wedding: false, prom: true, repeat: true, tags: ['Prom 2027', 'Crew lead', 'Repeat'],
+        alt: 'Denise Hill (mom) · (585) 555-0192 · pays and gets the receipts by email', altLabel: 'Parent',
+        ev: { title: 'Penfield High prom', role: 'Crew lead · senior prom', when: 'Sat, May 15, 2027', status: 'Sign-ups just opened · 3 of 8 in', tone: 'brass', href: 'PromSignup.dc.html', linkText: 'Open the crew sign-up page', lines: ['Signed up: Marcus, Jaylen Brooks, Owen Park. 5 more friends invited.', 'Crew is leaning black tux with burgundy bow ties. Vote closes Fri, Jan 15.', 'Plan: group measuring in March, pickup Thu, May 13.'] },
+        listEvent: 'Penfield High prom · May 15, 2027',
+        meas: { date: '2026-04-11', by: 'Jess R.', where: 'in store', rows: M('6′0″', '158 lb', '38″', '46″', '30″', '36″', '34½″', '15″', '44″', '33″', '11½ D') },
+        measWarn: 'Taken about 8 months ago, for junior prom. He’s 17 and still growing — re-measure at the March group measuring.',
+        sizes: Z('38L', '30 waist', '15 / 35', 'S', '11½ D'),
+        history: [['2026', 'Junior prom · Penfield High', 'Rented a black shawl lapel with a silver vest, Apr 2026. Brought 2 friends.'], ['2026', 'Signed up as crew lead', 'Sat, Nov 28. Senior prom crew page opened.'], ['2027', 'Senior prom · Penfield High', 'Sat, May 15, 2027.', true]],
+        rentals: [['Senior prom tux, crew look', 'May 2027 · crew forming', true], ['Junior prom tux, black shawl lapel', 'Apr 2026']],
+        purchases: [],
+        prefs: ['Likes a slimmer fit', 'Wears 11½ D', 'Text Marcus; email receipts to his mom'],
+        notes: [['MT', 'Marco T. · Sat, Nov 28', 'Set up the crew page with him. Asked about a group price — told him we’ll sort it once the crew is set.'], ['JR', 'Jess R. · Sat, Apr 11', 'Junior prom fitting. Mom (Denise) paid; she wants receipts by email.']]
+      }
+    ];
+
+    const extra = s.extra.map((x) => ({ id: x.id, name: x.name, phone: x.phone || 'No phone yet', email: x.email || 'No email yet', pref: x.pref, since: 2026, lv: '2026-12-02', wedding: false, prom: false, individual: true, repeat: false, tags: ['New'], ev: null, listEvent: 'No open rentals', noEventText: 'Just added today. Start a rental or book a measuring appointment.', meas: null, sizes: [], history: [], rentals: [], purchases: [], prefs: [], notes: [] }));
+    const C = extra.concat(BASE);
+
+    const TAG = (t) => {
+      if (t === 'Late return') return { text: t, fg: '#E86A5E', bd: '#E86A5E', bg: 'transparent' };
+      if (t === 'Groom' || t === 'Best man' || t === 'Crew lead') return { text: t, fg: '#C9A66B', bd: '#8C7247', bg: 'transparent' };
+      if (t === 'Repeat') return { text: t, fg: '#15130F', bd: '#C29E62', bg: '#C29E62' };
+      return { text: t, fg: '#A39A8B', bd: '#4A4237', bg: 'transparent' };
+    };
+    const initials = (n) => n.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase();
+
+    const q = s.q.trim().toLowerCase();
+    const qd = q.replace(/\D/g, '');
+    const match = (c) => !q || c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || (qd.length >= 2 && c.phone.replace(/\D/g, '').includes(qd));
+    const searched = C.filter(match);
+    const FILTERS = [
+      { id: 'all', label: 'All', test: () => true },
+      { id: 'wedding', label: 'Wedding parties', test: (c) => c.wedding },
+      { id: 'prom', label: 'Prom', test: (c) => c.prom },
+      { id: 'individual', label: 'Individual', test: (c) => c.individual },
+      { id: 'repeat', label: 'Repeat customers', test: (c) => c.repeat }
+    ];
+    const active = FILTERS.find((f) => f.id === s.filter) || FILTERS[0];
+    const list = searched.filter(active.test).slice().sort((a, b) => parse(b.lv) - parse(a.lv));
+    const filters = FILTERS.map((f) => {
+      const on = f.id === active.id;
+      return { label: f.label, count: searched.filter(f.test).length, on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', bd: on ? '#C29E62' : '#4A4237', countFg: on ? '#15130F' : '#C9A66B', pick: () => this.setState({ filter: f.id }) };
+    });
+
+    const pick = (id) => {
+      this.setState({ sel: id, draft: '' });
+      try {
+        if (window.innerWidth < 1000) setTimeout(() => { const el = document.getElementById('profile'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 40);
+      } catch (e) {}
+    };
+    const rows = list.map((c) => {
+      const on = c.id === s.sel;
+      const late = c.tags.indexOf('Late return') >= 0;
+      return {
+        name: c.name, phone: c.phone, initials: initials(c.name),
+        lastVisit: fmt(c.lv) + (c.lvNote || ''),
+        event: c.listEvent || 'No open rentals',
+        eventFg: late ? '#E86A5E' : c.ev ? '#EEE7D9' : '#8E8676',
+        tags: c.tags.map(TAG), hasTags: c.tags.length > 0,
+        on: on, bg: on ? '#221F1B' : 'transparent', edge: on ? '#C29E62' : 'transparent', ringBd: on ? '#C29E62' : '#8C7247',
+        pick: () => pick(c.id)
+      };
+    });
+
+    const cur = C.find((c) => c.id === s.sel) || C[0];
+    const first = cur.name.split(' ')[0];
+    const PREF = { text: 'Prefers text', email: 'Prefers email', call: 'Prefers a phone call' };
+    const TONE = { red: ['#E86A5E', '#E86A5E'], brass: ['#C9A66B', '#8C7247'], grey: ['#A39A8B', '#4A4237'] };
+    let ev = null;
+    if (cur.ev) {
+      const t = TONE[cur.ev.tone] || TONE.grey;
+      ev = { title: cur.ev.title, role: cur.ev.role, when: cur.ev.when, status: cur.ev.status || '', hasStatus: !!cur.ev.status, statusFg: t[0], statusBd: t[1], lines: cur.ev.lines || [], hasLink: !!cur.ev.href, href: cur.ev.href || '#', linkText: cur.ev.linkText || '' };
+    }
+    let alert = null;
+    if (cur.alert) {
+      const done = !!s.handled[cur.alert.id];
+      alert = { level: done ? 'Handled' : cur.alert.level, title: cur.alert.title, text: cur.alert.text, action: cur.alert.action, doneText: cur.alert.doneText, open: !done, done: done, fg: done ? '#A39A8B' : cur.alert.red ? '#E86A5E' : '#C9A66B', bd: done ? '#4A4237' : cur.alert.red ? '#E86A5E' : '#8C7247', act: () => this.setState({ handled: Object.assign({}, s.handled, { [cur.alert.id]: true }) }) };
+    }
+    const m = cur.meas;
+    const mAge = m ? ago(m.date) : 0;
+    const ageText = (n) => n < 31 ? n + ' days ago' : n < 365 ? Math.round(n / 30.4) + ' months ago' : (Math.floor(n / 365) === 1 ? 'over a year ago' : 'over ' + Math.floor(n / 365) + ' years ago');
+    const measOld = !!m && mAge > 365;
+    const myNotes = (s.notes[cur.id] || []).concat(cur.notes.map((n) => ({ who: n[0], by: n[1], text: n[2] })));
+    const hist = cur.history.map((h, i, arr) => ({ year: h[0], what: h[1], detail: h[2], yearFg: h[3] ? '#C9A66B' : '#A39A8B', dotBd: h[3] ? '#C29E62' : '#8C7247', dotBg: h[3] ? '#C29E62' : '#1A1816', lineBg: i < arr.length - 1 ? '#4A4237' : 'transparent' }));
+    const started = !!s.started[cur.id];
+    const digits = cur.phone.replace(/\D/g, '');
+
+    const c = {
+      name: cur.name, first: first, initials: initials(cur.name),
+      since: cur.since === 2026 && !cur.repeat ? 'New this year' : 'Customer since ' + cur.since,
+      tags: cur.tags.map(TAG), hasTags: cur.tags.length > 0,
+      phone: cur.phone, email: cur.email, prefers: PREF[cur.pref] || 'Prefers text',
+      hasAlt: !!cur.alt, alt: cur.alt || '', altLabel: cur.altLabel || '',
+      sms: digits ? 'sms:+1' + digits.slice(-10) : '#', mail: cur.email.indexOf('@') > 0 ? 'mailto:' + cur.email : '#',
+      hasEvent: !!ev, noEvent: !ev, ev: ev || { lines: [] }, noEventText: cur.noEventText || 'Nothing booked right now.',
+      hasAlert: !!alert, alert: alert || {},
+      hasMeas: !!m, noMeas: !m,
+      measBy: m ? 'Taken ' + fmt(m.date) + ' by ' + m.by + ' · ' + m.where + ' · ' + ageText(mAge) : 'Not measured yet',
+      measOld: measOld,
+      measOldText: m ? 'These are from ' + fmt(m.date) + ', ' + ageText(mAge) + '. Re-measure before anything gets ordered.' : '',
+      measWarn: !!cur.measWarn && !measOld, measWarnText: cur.measWarn || '',
+      meas: m ? m.rows.map((r) => { const bad = m.flag === r[0]; return { k: r[0], v: r[1] + (bad ? ' ?' : ''), fg: bad ? '#E86A5E' : '#EEE7D9', bg: bad ? '#2A1A17' : '#1A1816' }; }) : [],
+      sizes: cur.sizes.map((z) => ({ k: z[0], v: z[1] })),
+      history: hist, hasHistory: hist.length > 0, noHistory: hist.length === 0,
+      prefs: cur.prefs, hasPrefs: cur.prefs.length > 0, noPrefs: cur.prefs.length === 0,
+      rentals: cur.rentals.map((r) => ({ what: r[0], when: r[1], fg: r[3] ? '#E86A5E' : r[2] ? '#C9A66B' : '#A39A8B' })), noRentals: cur.rentals.length === 0,
+      purchases: cur.purchases.map((p) => ({ what: p[0], when: p[1] })), noPurchases: cur.purchases.length === 0,
+      notes: myNotes, noNotes: myNotes.length === 0,
+      startNote: m ? 'Sizes are filled in from the measurements on file; pick the look and dates next.' : 'No measurements yet, so book a measuring appointment before ordering.',
+      started: started, startLabel: started ? 'Rental draft started' : 'Start a rental',
+      startBg: started ? 'transparent' : '#C29E62', startFg: started ? '#C9A66B' : '#15130F', startBd: started ? '#8C7247' : '#C29E62',
+      startRental: () => this.setState({ started: Object.assign({}, s.started, { [cur.id]: true }) })
+    };
+
+    const f = s.form;
+    const setForm = (patch) => this.setState({ form: Object.assign({}, s.form, patch) });
+    const form = {
+      name: f.name, phone: f.phone, email: f.email, err: f.err, nameBd: f.err ? '#E86A5E' : '#38322A',
+      setName: (e) => setForm({ name: e.target.value, err: false }),
+      setPhone: (e) => setForm({ phone: e.target.value }),
+      setEmail: (e) => setForm({ email: e.target.value }),
+      prefs: [['text', 'Text'], ['email', 'Email'], ['call', 'Call']].map((p) => { const on = f.pref === p[0]; return { label: p[1], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', pick: () => setForm({ pref: p[0] }) }; }),
+      save: () => {
+        const name = f.name.trim();
+        if (!name) { setForm({ err: true }); return; }
+        const id = 'new' + (s.extra.length + 1);
+        this.setState({ extra: [{ id: id, name: name, phone: f.phone.trim(), email: f.email.trim(), pref: f.pref }].concat(s.extra), sel: id, adding: false, q: '', filter: 'all', draft: '', form: { name: '', phone: '', email: '', pref: 'text', err: false } });
+      }
+    };
+
+    const draftTrim = s.draft.trim();
+    return {
+      q: s.q,
+      setQ: (e) => this.setState({ q: e.target.value }),
+      clearAll: () => this.setState({ q: '', filter: 'all' }),
+      adding: s.adding,
+      toggleAdd: () => this.setState({ adding: !s.adding, form: Object.assign({}, s.form, { err: false }) }),
+      form: form,
+      filters: filters,
+      listTitle: active.id === 'all' ? 'Everyone' : active.label,
+      listCount: list.length === 1 ? '1 customer' : list.length + ' customers',
+      empty: list.length === 0,
+      rows: rows,
+      c: c,
+      draft: s.draft,
+      noDraft: !draftTrim,
+      noteBtnFg: draftTrim ? '#EEE7D9' : '#8E8676',
+      setDraft: (e) => this.setState({ draft: e.target.value }),
+      addNote: () => {
+        if (!draftTrim) return;
+        const prev = s.notes[cur.id] || [];
+        this.setState({ draft: '', notes: Object.assign({}, s.notes, { [cur.id]: [{ who: 'MT', by: 'Marco T. · Today, 2:40', text: draftTrim }].concat(prev) }) });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

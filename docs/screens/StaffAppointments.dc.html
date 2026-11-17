@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff · Appointments</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#121110}
+a{color:#C9A66B}a:hover{color:#E2C48E}
+.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
+.fld::placeholder{color:#8E8676}
+.btn:hover{background:#D4B47A !important}
+.ghost:hover{border-color:#C9A66B !important}
+.row:hover{background:#1F1C18 !important}
+.nav:hover{background:#1A1816 !important}
+a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-wrap:wrap;">
+
+<dc-import name="StaffNav" current="appts" hint-size="232px,100%"></dc-import>
+
+<main style="flex:999 1 600px; min-width:0; box-sizing:border-box; padding:32px clamp(16px, 4vw, 40px) 56px; display:flex; flex-direction:column; gap:24px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 24px;">
+<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Wednesday, December 2 · Open 12–7</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:42px; line-height:1; color:#EEE7D9;">Appointments</h1>
+</div>
+<a href="Book.dc.html" class="btn" style="display:inline-flex; align-items:center; gap:8px; height:46px; padding:0 18px; background:#C29E62; color:#15130F; text-decoration:none; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>New appointment</a>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;">
+<div role="group" aria-label="Change week" style="display:flex; gap:6px;">
+<button type="button" class="ghost" onClick="{{prevWeek}}" disabled="{{prevOff}}" aria-label="Previous week" style="width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:1px solid #4A4237; border-radius:2px; cursor:{{prevCursor}}; opacity:{{prevOpacity}};"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EEE7D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"></path></svg></button>
+<button type="button" class="ghost" onClick="{{thisWeek}}" disabled="{{thisOff}}" style="height:40px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:{{thisCursor}}; opacity:{{thisOpacity}};">This week</button>
+<button type="button" class="ghost" onClick="{{nextWeek}}" disabled="{{nextOff}}" aria-label="Next week" style="width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:1px solid #4A4237; border-radius:2px; cursor:{{nextCursor}}; opacity:{{nextOpacity}};"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EEE7D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"></path></svg></button>
+</div>
+<div style="display:flex; flex-direction:column; gap:2px;">
+<h2 aria-live="polite" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; line-height:1.1; color:#EEE7D9;">{{weekLabel}}</h2>
+<span style="font-size:13px; color:#A39A8B;">{{weekNote}}</span>
+</div>
+</div>
+<div role="group" aria-label="Show appointments for" style="display:flex; flex-wrap:wrap; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px;">
+<sc-for list="{{staffFilters}}" as="f" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="height:36px; padding:0 14px; background:{{f.bg}}; color:{{f.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{f.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px;">
+
+<section aria-labelledby="cal-h" style="flex:999 1 640px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:20px 22px 18px; display:flex; flex-direction:column; gap:14px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 16px;">
+<h2 id="cal-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Week calendar</h2>
+<ul aria-label="Appointment types" style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px 14px;">
+<sc-for list="{{legend}}" as="lg" hint-placeholder-count="6">
+<li style="display:flex; align-items:center; gap:6px; font-size:12px; color:#A39A8B;"><span aria-hidden="true" style="width:10px; height:10px; background:{{lg.bg}}; border-left:3px solid {{lg.color}};"></span>{{lg.label}}</li>
+</sc-for>
+</ul>
+</div>
+
+<div style="overflow-x:auto; border:1px solid #2A2621; background:#151311;">
+<div style="min-width:700px;">
+
+<div aria-hidden="true" style="display:grid; grid-template-columns:{{gridCols}}; border-bottom:1px solid #38322A; background:#1A1816;">
+<span></span>
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+<span style="display:flex; flex-direction:column; gap:2px; padding:10px 8px; border-left:1px solid #2A2621; background:{{d.headBg}}; min-width:0;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:{{d.headLabel}};">{{d.dow}}</span>
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1; color:{{d.headFg}}; white-space:nowrap;">{{d.date}}</span>
+<span style="font-size:11px; color:{{d.hoursColor}}; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{d.hours}}</span>
+</span>
+</sc-for>
+</div>
+
+<div style="display:grid; grid-template-columns:{{gridCols}}; padding:10px 0;">
+<div aria-hidden="true" style="position:relative; height:{{colH}};">
+<sc-for list="{{hourLabels}}" as="hl" hint-placeholder-count="10">
+<span style="position:absolute; right:8px; top:{{hl.top}}; font-size:11px; line-height:14px; color:#8E8676; white-space:nowrap;">{{hl.label}}</span>
+</sc-for>
+</div>
+<sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+<div role="group" aria-label="{{d.aria}}" style="position:relative; height:{{colH}}; min-width:0; border-left:1px solid #2A2621; background-color:{{d.colBg}}; background-image:linear-gradient(to bottom, #2A2621 1px, transparent 1px), linear-gradient(to bottom, rgba(56,50,42,.45) 1px, transparent 1px); background-size:100% {{hourPx}}, 100% {{hourPx}}; background-position:0 0, 0 {{halfPx}};">
+<sc-for list="{{d.shades}}" as="sh" hint-placeholder-count="2">
+<div aria-hidden="true" style="position:absolute; left:0; right:0; top:{{sh.top}}; height:{{sh.h}}; z-index:1; background-color:#131110; background-image:repeating-linear-gradient(135deg, rgba(238,231,217,.045) 0 6px, transparent 6px 12px); display:flex; justify-content:center; padding-top:10px; box-sizing:border-box;">
+<sc-if value="{{sh.showLabel}}" hint-placeholder-val="{{true}}"><span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#8E8676; writing-mode:{{sh.mode}};">{{sh.label}}</span></sc-if>
+</div>
+</sc-for>
+<sc-for list="{{d.blocks}}" as="b" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{b.sel}}" aria-label="{{b.aria}}" onClick="{{b.pick}}" style="position:absolute; top:{{b.top}}; height:{{b.h}}; left:calc({{b.left}} + 3px); width:calc({{b.width}} - 6px); z-index:2; box-sizing:border-box; display:flex; flex-direction:column; align-items:stretch; gap:1px; padding:3px 6px 3px 6px; overflow:hidden; text-align:left; background:{{b.bg}}; border:0; border-left:3px solid {{b.color}}; border-radius:2px; box-shadow:{{b.shadow}}; color:#EEE7D9; font-family:Archivo, sans-serif; cursor:pointer; opacity:{{b.opacity}};">
+<span style="display:flex; align-items:center; gap:4px; font-size:11px; line-height:14px; font-weight:600; color:{{b.timeColor}}; white-space:nowrap; overflow:hidden;"><sc-if value="{{b.showCheck}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="{{b.color}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 11px;"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{b.time}}<span style="overflow:hidden; text-overflow:ellipsis;">{{b.tag}}</span></span>
+<span style="font-size:12px; line-height:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-decoration:{{b.strike}};">{{b.title}}</span>
+<sc-if value="{{b.tall}}" hint-placeholder-val="{{true}}"><span style="font-size:11px; line-height:14px; color:#A39A8B; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{b.sub}}</span></sc-if>
+</button>
+</sc-for>
+<sc-if value="{{d.isToday}}" hint-placeholder-val="{{false}}">
+<div aria-hidden="true" style="position:absolute; left:0; right:0; top:{{nowTop}}; height:2px; z-index:3; background:#E86A5E; pointer-events:none;">
+<span style="position:absolute; left:-4px; top:-3px; width:8px; height:8px; border-radius:50%; background:#E86A5E;"></span>
+<span style="position:absolute; right:3px; top:-17px; padding:0 4px; background:#E86A5E; color:#15130F; font-size:10px; font-weight:700; line-height:14px; border-radius:1px;">Now 2:40</span>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+
+</div>
+</div>
+<p style="margin:0; font-size:12px; color:#8E8676;">Striped areas are outside shop hours. Pick an appointment to see the details.</p>
+</section>
+
+<aside id="appt-detail" aria-label="Appointment details and open slots" style="flex:1 1 340px; min-width:0; display:flex; flex-direction:column; gap:24px;">
+
+<section aria-labelledby="sel-h" style="background:#1A1816; border:1px solid {{sel.border}}; padding:24px; display:flex; flex-direction:column; gap:16px;">
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px;">
+<span style="display:inline-flex; align-items:center; gap:6px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:{{sel.color}};"><span aria-hidden="true" style="width:10px; height:10px; background:{{sel.bg}}; border-left:3px solid {{sel.color}};"></span>{{sel.typeLabel}}</span>
+<span style="display:inline-flex; align-items:center; height:22px; padding:0 8px; border:1px solid {{sel.statusBd}}; font-size:11px; font-weight:700; color:{{sel.statusFg}};">{{sel.status}}</span>
+</div>
+<h2 id="sel-h" aria-live="polite" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:30px; line-height:1.05; color:#EEE7D9;">{{sel.title}}</h2>
+<span style="font-size:14px; line-height:1.4; color:#A39A8B;">{{sel.who}}</span>
+</div>
+
+<dl style="margin:0; display:flex; flex-direction:column;">
+<sc-for list="{{sel.rows}}" as="r" hint-placeholder-count="5">
+<div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:9px 0; border-bottom:1px solid #2A2621;">
+<dt style="font-size:13px; color:#A39A8B;">{{r.label}}</dt>
+<dd style="margin:0; font-size:14px; font-weight:600; color:#EEE7D9; text-align:right;">{{r.value}}</dd>
+</div>
+</sc-for>
+</dl>
+
+<div style="display:flex; flex-direction:column; gap:6px;">
+<h3 style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Notes</h3>
+<p style="margin:0; font-size:14px; line-height:1.5; color:#EEE7D9;">{{sel.notes}}</p>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:8px;">
+<h3 style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Have ready</h3>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+<sc-for list="{{sel.ready}}" as="rd" hint-placeholder-count="3">
+<li style="display:flex; gap:10px; font-size:14px; line-height:1.45; color:#EEE7D9;"><span aria-hidden="true" style="flex:0 0 12px; height:12px; margin-top:4px; box-sizing:border-box; border:1px solid #8C7247;"></span><span>{{rd}}</span></li>
+</sc-for>
+</ul>
+</div>
+
+<sc-if value="{{sel.isDone}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; display:flex; align-items:center; gap:8px; padding:12px 14px; background:#0F0E0D; border:1px solid #38322A; font-size:14px; font-weight:600; color:#C9A66B;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 15px;"><path d="M20 6 9 17l-5-5"></path></svg>{{sel.doneNote}}</p>
+</sc-if>
+
+<sc-if value="{{sel.isCancelled}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; background:#211614; border:1px solid #E86A5E;">
+<span style="font-size:14px; line-height:1.45; color:#EEE7D9;">Cancelled just now. {{sel.cancelText}}</span>
+<button type="button" class="ghost" onClick="{{sel.undoCancel}}" style="height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo</button>
+</div>
+</sc-if>
+
+<sc-if value="{{sel.actionable}}" hint-placeholder-val="{{true}}">
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px;">
+<button type="button" class="{{sel.checkClass}}" aria-pressed="{{sel.checkedIn}}" onClick="{{sel.toggleCheck}}" disabled="{{sel.checkOff}}" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; height:42px; padding:0 12px; background:{{sel.checkBg}}; color:{{sel.checkFg}}; border:1px solid {{sel.checkBd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:{{sel.checkCursor}};"><sc-if value="{{sel.checkedIn}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{sel.checkLabel}}</button>
+<button type="button" class="ghost" aria-pressed="{{sel.reminded}}" onClick="{{sel.toggleRemind}}" style="display:inline-flex; align-items:center; justify-content:center; gap:6px; height:42px; padding:0 12px; background:transparent; color:{{sel.remindFg}}; border:1px solid {{sel.remindBd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;"><sc-if value="{{sel.reminded}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{sel.remindLabel}}</button>
+<button type="button" class="ghost" aria-expanded="{{sel.reschedOpen}}" onClick="{{sel.toggleResched}}" style="height:42px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Reschedule</button>
+<button type="button" class="ghost" onClick="{{sel.askCancel}}" style="height:42px; padding:0 12px; background:transparent; color:#E86A5E; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Cancel</button>
+</div>
+<sc-if value="{{sel.checkHint}}" hint-placeholder-val="{{false}}"><span style="font-size:12px; color:#8E8676;">Check in opens on the day of the appointment.</span></sc-if>
+
+<sc-if value="{{sel.reminded}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-size:12px; color:#A39A8B;">Texted {{sel.phone}} just now</span>
+<div style="align-self:flex-start; max-width:92%; padding:10px 14px; background:#2B2620; border-radius:16px 16px 16px 4px; font-size:14px; line-height:1.5; color:#EEE7D9; overflow-wrap:anywhere;">{{sel.remindText}}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{sel.reschedOpen}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:8px; padding:12px 14px; background:#0F0E0D; border:1px solid #38322A;">
+<span style="font-size:13px; line-height:1.45; color:#A39A8B;">{{sel.reschedHead}}</span>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{sel.reschedSlots}}" as="rs" hint-placeholder-count="3">
+<li style="display:inline-flex; align-items:center; height:30px; padding:0 10px; border:1px solid #8C7247; font-size:13px; font-weight:600; color:#C9A66B;">{{rs}}</li>
+</sc-for>
+</ul>
+<span style="font-size:12px; color:#8E8676;">Call or text {{sel.firstName}} to pick one. Booking the new time frees this one.</span>
+</div>
+</sc-if>
+
+<sc-if value="{{sel.confirming}}" hint-placeholder-val="{{false}}">
+<div role="alert" style="display:flex; flex-direction:column; gap:10px; padding:14px 16px; background:#211614; border:1px solid #E86A5E;">
+<span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{sel.confirmText}}</span>
+<div style="display:flex; flex-wrap:wrap; gap:8px;">
+<button type="button" onClick="{{sel.doCancel}}" style="height:38px; padding:0 14px; background:#B8322A; color:#EEE7D9; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;">Yes, cancel it</button>
+<button type="button" class="ghost" onClick="{{sel.keep}}" style="height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Keep it</button>
+</div>
+</div>
+</sc-if>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{noSel}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:8px; padding:18px; border:1px dashed #4A4237;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Pick an appointment</span>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">Click any block on the calendar to see who’s coming, what to have ready, and to check them in or move it.</span>
+</div>
+</sc-if>
+</section>
+
+<section aria-labelledby="slots-h" style="background:#1A1816; border:1px solid #38322A; padding:22px 24px; display:flex; flex-direction:column; gap:12px;">
+<div style="display:flex; flex-direction:column; gap:4px;">
+<h2 id="slots-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">Open slots</h2>
+<span style="font-size:13px; line-height:1.4; color:#A39A8B;">{{slotsNote}}</span>
+</div>
+<ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{slotDays}}" as="sd" hint-placeholder-count="4">
+<li style="display:flex; flex-direction:column; gap:8px; padding:12px 0; border-top:1px solid #2A2621;">
+<span style="font-size:14px; font-weight:700; color:#EEE7D9;">{{sd.label}} <span style="font-weight:400; color:#A39A8B;">· {{sd.hours}}</span></span>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+<sc-for list="{{sd.staff}}" as="ss" hint-placeholder-count="3">
+<li style="display:flex; align-items:flex-start; gap:10px;">
+<span aria-hidden="true" style="flex:0 0 26px; height:26px; box-sizing:border-box; border-radius:50%; border:1px solid #8C7247; display:flex; align-items:center; justify-content:center; font-family:Rokkitt, serif; font-weight:600; font-size:11px; color:#C9A66B;">{{ss.initials}}</span>
+<span class="sr">{{ss.name}}:</span>
+<span style="display:flex; flex-wrap:wrap; gap:5px; min-width:0;">
+<sc-for list="{{ss.ranges}}" as="rg" hint-placeholder-count="2">
+<span style="display:inline-flex; align-items:center; height:26px; padding:0 8px; background:#0F0E0D; border:1px solid #38322A; font-size:13px; font-weight:600; color:#EEE7D9; white-space:nowrap;">{{rg}}</span>
+</sc-for>
+<sc-if value="{{ss.none}}" hint-placeholder-val="{{false}}"><span style="display:inline-flex; align-items:center; height:26px; font-size:13px; color:#8E8676;">Booked up</span></sc-if>
+</span>
+</li>
+</sc-for>
+</ul>
+</li>
+</sc-for>
+</ol>
+<span style="font-size:12px; color:#8E8676;">Gaps of 45 minutes or more. Fittings and measuring go to Jess or Marco; alterations to Lou.</span>
+</section>
+
+</aside>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { week: 0, staff: 'all', sel: 't3', checkedIn: {}, reminded: {}, resched: {}, confirming: null, cancelled: {} };
+  }
+  appts() {
+    // w: week offset from Mon Nov 30, d: 0 = Mon, start/len in minutes
+    const A = (id, w, d, h, m, len, type, staff, title, who, extra) => Object.assign({ id: id, w: w, d: d, start: h * 60 + m, len: len, type: type, staff: staff, title: title, who: who }, extra || {});
+    return [
+      // Week of Nov 23
+      A('p1', -1, 0, 13, 0, 60, 'fitting', 'jess', 'DeLuca & Price', 'Final fittings · 4 groomsmen', { party: 'Party of 6 · Fri, Nov 27', phone: '(585) 555-0112', notes: 'Ben Price’s vest let out half an inch. Everyone else fit off the rack.', ready: ['Party rack, tagged by name', 'Pins and chalk'], doneNote: 'Done · all four fit' }),
+      A('p2', -1, 0, 16, 30, 45, 'consult', 'marco', 'Hartman & Osei', 'Look review · Will Hartman, groom', { party: 'Party of 7 · Sat, Jan 9', phone: '(585) 555-0128', notes: 'Settled on charcoal notch lapel with burgundy ties.', ready: ['Charcoal and black swatch books'], doneNote: 'Done · look set' }),
+      A('p3', -1, 2, 14, 0, 60, 'pickup', 'jess', 'DeLuca & Price', 'Party pickup · all 6', { party: 'Party of 6 · Fri, Nov 27', phone: '(585) 555-0112', notes: 'Returns due Mon, Nov 30.', ready: ['6 garment bags', 'Return cards'], doneNote: 'Done · all 6 picked up' }),
+      A('p4', -1, 2, 17, 0, 45, 'fitting', 'jess', 'Castillo & Reyes', 'Mateo & Andre Castillo', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0150', notes: 'Andre’s sleeves run long. Pinned and sent to Lou.', ready: ['Both coats', 'Sleeve pins'], doneNote: 'Done · Andre’s coat went to Lou' }),
+      A('p5', -1, 4, 11, 0, 60, 'fitting', 'jess', 'Castillo & Reyes', 'Luis Reyes, Diego Reyes, Sam Ortiz', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0154', notes: 'All three fit. Sam swapped to a 10.5 shoe.', ready: ['3 coats and pants', 'Shoe sizes 10–11'], doneNote: 'Done · all fit' }),
+      A('p6', -1, 5, 10, 30, 45, 'alter', 'lou', 'Castillo & Reyes', 'Andre Castillo · sleeve hem', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0151', notes: 'Took sleeves up ¾″. Check-in booked for Wed at 4:30.', ready: ['Andre’s coat from the workroom'], doneNote: 'Done · hem started' }),
+      A('p7', -1, 5, 13, 0, 60, 'consult', 'marco', 'Morales & Kim', 'Look consultation · Ricky Morales', { party: 'Party of 10 · Sat, Apr 24', phone: '(585) 555-0163', notes: 'Light grey suits, no vests. Group measuring set for Wed, Dec 2.', ready: ['Grey swatch book'], doneNote: 'Done · look set' }),
+      A('p8', -1, 6, 13, 0, 45, 'consult', 'jess', 'Penfield High prom', 'Marcus Hill, crew lead', { party: 'Prom · Sat, May 15, 2027', phone: '(585) 555-0190', notes: 'First look at prom styles. He’s getting his crew to sign up.', ready: ['Prom lookbook'], doneNote: 'Done · sign-ups started' }),
+
+      // This week, Nov 30 – Dec 6
+      A('m1', 0, 0, 12, 30, 30, 'ret', 'marco', 'DeLuca & Price', '4 of 6 tuxes returned', { party: 'Party of 6 · Fri, Nov 27', phone: '(585) 555-0112', notes: 'Ben Price and Tom Avila didn’t come in. Both are now 2 days late.', ready: ['Return checklist', 'Bags for the rental warehouse'], doneNote: 'Done · 4 checked back in, 2 still out' }),
+      A('m2', 0, 0, 13, 30, 30, 'alter', 'lou', 'Alan Fitch', 'Navy suit · try-on after hem', { party: 'Bought in October · own suit', phone: '(585) 555-0181', notes: 'Pant hem a touch long on the left. Lou is redoing it for Thursday.', ready: ['Alan’s navy suit'], doneNote: 'Done · left hem being redone' }),
+      A('m3', 0, 0, 16, 0, 45, 'consult', 'marco', 'Penfield High prom', 'Marcus Hill + 3', { party: 'Prom · Sat, May 15, 2027', phone: '(585) 555-0190', notes: 'Crew of 4 likes black with white jackets for two of them.', ready: ['Prom lookbook', 'White dinner jacket sample'], doneNote: 'Done · 4 signed up' }),
+      A('m4', 0, 0, 17, 30, 45, 'group', 'jess', 'Hartman & Osei', 'Last 2 groomsmen measured', { party: 'Party of 7 · Sat, Jan 9', phone: '(585) 555-0128', notes: 'All 7 measured now. Still waiting on 2 deposits before the order.', ready: ['Measuring tape and sheet'], doneNote: 'Done · all 7 measured' }),
+
+      A('t1', 0, 2, 12, 0, 45, 'fitting', 'jess', 'Brennan & Liu', 'Marcus Brennan, groom', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0131', notes: 'Groom fitting in a sample 40R while the order comes from the rental warehouse.', ready: ['Sample 40R coat', 'Navy vest'], doneNote: 'Done · checked in 11:56, size confirmed' }),
+      A('t2', 0, 2, 13, 0, 60, 'consult', 'marco', 'Sullivan & Grant', 'New party · Ryan Sullivan & Ava Grant', { party: 'Party of 6 · Sat, Mar 20', phone: '(585) 555-0158', notes: 'First visit. Leaning toward navy with a light tie for the beach-side venue.', ready: ['Lookbook', 'Navy and grey swatches'], doneNote: 'Done · checked in 12:58, party created' }),
+      A('t3', 0, 2, 15, 0, 60, 'fitting', 'jess', 'Brennan & Liu', '2 groomsmen · Kevin Liu, Matt Brennan', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0134', notes: 'Wedding is in 10 days. Ask them to nudge the 3 who haven’t booked a fitting.', ready: ['Sample coats 38R and 42L', 'Navy vests', 'Pins and chalk'] }),
+      A('t4', 0, 2, 16, 30, 30, 'alter', 'lou', 'Castillo & Reyes', 'Andre Castillo · sleeve hem check-in', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0151', notes: 'Pickup is tomorrow. If the sleeves are right, the coat goes straight to the pickup rack.', ready: ['Andre’s coat from the workroom', 'Steamer warmed up'] }),
+      A('t5', 0, 2, 17, 0, 90, 'group', 'jess', 'Morales & Kim', '4 groomsmen measured', { party: 'Party of 10 · Sat, Apr 24', phone: '(585) 555-0163', notes: 'Four come together after work. Three more booked for Sunday.', ready: ['2 tapes and 4 measuring sheets', 'Light grey sample coat'] }),
+
+      A('h1', 0, 3, 12, 30, 30, 'pickup', 'marco', 'Castillo & Reyes', 'Mateo & Andre Castillo', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0150', notes: 'Groom and brother pick up early. Returns due Mon, Dec 7.', ready: ['2 garment bags, tagged', 'Return cards'] }),
+      A('h2', 0, 3, 14, 0, 45, 'fitting', 'jess', 'Jordan Pike', 'Black-tie gala, Sat, Dec 12 · rental', { party: 'Single rental', phone: '(585) 555-0177', notes: 'Wants a shawl lapel. First time renting with us.', ready: ['Shawl lapel samples 40–42', 'Black bow ties'] }),
+      A('h3', 0, 3, 15, 30, 30, 'pickup', 'lou', 'Alan Fitch', 'Navy suit · hem done', { party: 'Bought in October · own suit', phone: '(585) 555-0181', notes: 'Paid in full. Left hem redone after Monday’s try-on.', ready: ['Alan’s suit, pressed and bagged'] }),
+      A('h4', 0, 3, 17, 30, 45, 'pickup', 'marco', 'Castillo & Reyes', 'Luis Reyes, Diego Reyes, Sam Ortiz', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0154', notes: 'Rest of the party. Sam is in a 10.5 shoe.', ready: ['3 garment bags, tagged', 'Shoes in bags', 'Return cards'] }),
+
+      A('f1', 0, 4, 11, 0, 60, 'fitting', 'jess', 'Brennan & Liu', 'Held for the 3 unbooked groomsmen', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0131', notes: 'Jess is holding this hour for anyone who hasn’t booked. Release it Thursday night if no one takes it.', ready: ['Sample coats 38R–44L'] }),
+      A('f2', 0, 4, 13, 30, 45, 'consult', 'marco', 'Peter Haas', 'Buying a charcoal suit', { party: 'Single purchase', phone: '(585) 555-0172', notes: 'Needs it for a job interview Dec 14. Hem and sleeves likely.', ready: ['Charcoal suits 40R–42R', 'Lou’s schedule for the hem'] }),
+      A('f3', 0, 4, 15, 30, 45, 'consult', 'jess', 'Penfield High prom', 'Devon Clark + 2', { party: 'Prom · Sat, May 15, 2027', phone: '(585) 555-0193', notes: 'Crew of 3. Want matching colored vests.', ready: ['Prom lookbook', 'Vest color card'] }),
+
+      A('s1', 0, 5, 10, 30, 60, 'fitting', 'jess', 'Brennan & Liu', 'Held for unbooked groomsmen', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0131', notes: 'Second hold for the 3 who haven’t booked. Last chance before the order lands Monday.', ready: ['Sample coats 38R–44L'] }),
+      A('s2', 0, 5, 11, 0, 45, 'group', 'marco', 'Okafor & Whitman', 'Sam Whitman & Owen, ring bearer', { party: 'Party of 9 · Sat, Jan 23', phone: '(585) 555-0166', notes: 'Owen is 7, boys’ sizing. Measure Sam too, he hasn’t sent numbers.', ready: ['Boys’ size chart', 'Measuring sheets for 2'] }),
+      A('s3', 0, 5, 13, 0, 45, 'consult', 'jess', 'Penfield High prom', 'Nate Russo + 4', { party: 'Prom · Sat, May 15, 2027', phone: '(585) 555-0196', notes: 'Crew of 5. One wants to buy instead of rent.', ready: ['Prom lookbook', 'Buy vs. rent price sheet'] }),
+
+      A('u1', 0, 6, 12, 30, 45, 'consult', 'marco', 'Penfield High prom', 'Eli Brooks + 1', { party: 'Prom · Sat, May 15, 2027', phone: '(585) 555-0198', notes: 'Two friends coming with a parent.', ready: ['Prom lookbook'] }),
+      A('u2', 0, 6, 14, 0, 60, 'consult', 'jess', 'Nguyen & Abbott', 'Kyle Nguyen & Megan Abbott', { party: 'Party of 8 · Sat, Feb 13', phone: '(585) 555-0145', notes: 'Wedding at The Lantern Room. They sent photos of a dusty blue palette.', ready: ['Lookbook', 'Blue and grey swatches', 'Party sign-up link'] }),
+      A('u3', 0, 6, 15, 30, 60, 'group', 'jess', 'Morales & Kim', '3 more groomsmen', { party: 'Party of 10 · Sat, Apr 24', phone: '(585) 555-0163', notes: 'Second measuring night. Gets them to 9 of 10.', ready: ['Measuring sheets for 3'] }),
+
+      // Week of Dec 7
+      A('n1', 1, 0, 12, 0, 60, 'ret', 'marco', 'Castillo & Reyes', 'Party return · all 5', { party: 'Party of 5 · Sat, Dec 5', phone: '(585) 555-0150', notes: 'Check shoes and studs. Everything goes back to the rental warehouse Tuesday.', ready: ['Return checklist', 'Warehouse bags'] }),
+      A('n2', 1, 0, 15, 0, 45, 'fitting', 'jess', 'Brennan & Liu', 'Try-on · order arrived', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0131', notes: 'Order comes in from the rental warehouse this morning.', ready: ['Party rack'] }),
+      A('n3', 1, 2, 14, 0, 60, 'fitting', 'jess', 'Brennan & Liu', 'Last fitting day', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0131', notes: 'Fittings close today.', ready: ['Party rack', 'Pins and chalk'] }),
+      A('n4', 1, 3, 16, 0, 60, 'pickup', 'jess', 'Brennan & Liu', 'Party pickup · all 6', { party: 'Party of 6 · Sat, Dec 12', phone: '(585) 555-0131', notes: 'Returns due Mon, Dec 14.', ready: ['6 garment bags', 'Return cards'] }),
+      A('n5', 1, 3, 17, 30, 30, 'pickup', 'marco', 'Jordan Pike', 'Gala rental', { party: 'Single rental', phone: '(585) 555-0177', notes: 'Gala is Saturday.', ready: ['Jordan’s bag', 'Return card'] }),
+      A('n8', 1, 4, 14, 30, 30, 'alter', 'lou', 'Peter Haas', 'Charcoal suit · hem and sleeves', { party: 'Single purchase', phone: '(585) 555-0172', notes: 'Interview is Mon, Dec 14. Final try-on, then it goes home with him.', ready: ['Peter’s suit, pressed'] }),
+      A('n6', 1, 4, 13, 0, 45, 'consult', 'marco', 'Penfield High prom', 'Liam Foster + 3', { party: 'Prom · Sat, May 15, 2027', phone: '(585) 555-0186', notes: 'Crew of 4.', ready: ['Prom lookbook'] }),
+      A('n7', 1, 5, 11, 0, 45, 'group', 'marco', 'Okafor & Whitman', 'Richard Whitman, father of the bride', { party: 'Party of 9 · Sat, Jan 23', phone: '(585) 555-0175', notes: 'Booked after a phone call. Measurements are due today.', ready: ['Measuring sheet'] })
+    ];
+  }
+  renderVals() {
+    const s = this.state;
+    const PX = 1.2, START = 600, END = 1140, NOW = 880;
+    const px = (n) => (n * PX) + 'px';
+    const TYPES = {
+      consult: { label: 'Consultation', c: '#C29E62', bg: 'rgba(194,158,98,.2)' },
+      group: { label: 'Group measuring', c: '#7FA6C9', bg: 'rgba(127,166,201,.18)' },
+      fitting: { label: 'Fitting', c: '#8FB07A', bg: 'rgba(143,176,122,.18)' },
+      alter: { label: 'Alteration check', c: '#D98A5F', bg: 'rgba(217,138,95,.18)' },
+      pickup: { label: 'Pickup', c: '#B79AD8', bg: 'rgba(183,154,216,.18)' },
+      ret: { label: 'Return', c: '#A39A8B', bg: 'rgba(163,154,139,.18)' }
+    };
+    const STAFF = { marco: { name: 'Marco T.', initials: 'MT' }, jess: { name: 'Jess R.', initials: 'JR' }, lou: { name: 'Lou', initials: 'L' } };
+    const HOURS = [[720, 1140], null, [720, 1140], [720, 1140], [600, 1020], [600, 1020], [720, 1020]];
+    const DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const DOWL = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const dateOf = (w, d) => new Date(2026, 10, 30 + w * 7 + d);
+    const short = (w, d) => { const x = dateOf(w, d); return MON[x.getMonth()] + ' ' + x.getDate(); };
+    const hoursFor = (w, d) => {
+      const x = dateOf(w, d);
+      if (x.getMonth() === 10 && x.getDate() === 26) return null; // Thanksgiving
+      return HOURS[d];
+    };
+    const fmt = (m) => { const h = Math.floor(m / 60), mm = m % 60; return ((h + 11) % 12 + 1) + ':' + String(mm).padStart(2, '0'); };
+    const ap = (m) => (m >= 720 ? 'PM' : 'AM');
+    const range = (a, b) => fmt(a) + '–' + fmt(b);
+    const hrs = (o) => { const f = (m) => { const h = (Math.floor(m / 60) + 11) % 12 + 1; return m % 60 ? fmt(m) : String(h); }; return f(o[0]) + '–' + f(o[1]); };
+    const lenText = (n) => n < 60 ? n + ' min' : n % 60 ? Math.floor(n / 60) + ' hr ' + (n % 60) + ' min' : (n / 60) + (n === 60 ? ' hour' : ' hours');
+    const isToday = (a) => a.w === 0 && a.d === 2;
+    const isPast = (a) => a.w < 0 || (a.w === 0 && (a.d < 2 || (a.d === 2 && a.start + a.len <= NOW)));
+    const ALL = this.appts();
+    const live = ALL.filter((a) => !s.cancelled[a.id]);
+    const inFilter = (a) => s.staff === 'all' || a.staff === s.staff;
+    const firstName = (a) => {
+      const w = a.who.replace(/^.*·\s*/, '').split(/[ ,&+]/)[0];
+      return /^[A-Z][a-z]+$/.test(w) && w !== 'Held' && w !== 'Party' && w !== 'New' ? w : a.title.split(' ')[0];
+    };
+
+    // Free time per staff member per day
+    const free = (w, d, staff) => {
+      const o = hoursFor(w, d);
+      if (!o) return [];
+      if (w < 0 || (w === 0 && d < 2)) return [];
+      let from = o[0];
+      if (w === 0 && d === 2) from = Math.max(from, 885);
+      const busy = live.filter((a) => a.w === w && a.d === d && a.staff === staff).sort((x, y) => x.start - y.start);
+      const out = [];
+      let cur = from;
+      busy.forEach((b) => { if (b.start > cur) out.push([cur, Math.min(b.start, o[1])]); cur = Math.max(cur, b.start + b.len); });
+      if (cur < o[1]) out.push([cur, o[1]]);
+      return out.filter((g) => g[1] > g[0]);
+    };
+
+    // Week + columns
+    const w = s.week;
+    const weekAppts = ALL.filter((a) => a.w === w && inFilter(a));
+    const COL = (END - START) * PX;
+    const days = DOW.map((dn, d) => {
+      const o = hoursFor(w, d);
+      const today = w === 0 && d === 2;
+      const thanks = !o && d !== 1;
+      const shades = [];
+      if (!o) shades.push({ top: '0px', h: COL + 'px', showLabel: true, label: thanks ? 'Closed · Thanksgiving' : 'Closed', mode: 'vertical-rl' });
+      else {
+        if (o[0] > START) shades.push({ top: '0px', h: px(o[0] - START), showLabel: false, label: '', mode: 'horizontal-tb' });
+        if (o[1] < END) shades.push({ top: px(o[1] - START), h: px(END - o[1]), showLabel: (END - o[1]) >= 60, label: 'Closed', mode: 'horizontal-tb' });
+      }
+      const list = weekAppts.filter((a) => a.d === d).sort((x, y) => x.start - y.start);
+      // lanes for overlaps
+      let cluster = [], lanes = [], clusterEnd = -1;
+      const flush = () => { cluster.forEach((c) => { c._n = lanes.length; }); cluster = []; lanes = []; };
+      list.forEach((a) => {
+        if (a.start >= clusterEnd) { flush(); clusterEnd = -1; }
+        let li = lanes.findIndex((e) => e <= a.start);
+        if (li < 0) { li = lanes.length; lanes.push(0); }
+        lanes[li] = a.start + a.len;
+        a._lane = li;
+        cluster.push(a);
+        clusterEnd = Math.max(clusterEnd, a.start + a.len);
+      });
+      flush();
+      const blocks = list.map((a) => {
+        const T = TYPES[a.type];
+        const past = isPast(a);
+        const canc = !!s.cancelled[a.id];
+        const ci = !!s.checkedIn[a.id];
+        const sel = s.sel === a.id;
+        const n = a._n || 1;
+        const tag = canc ? ' · Cancelled' : past ? ' · Done' : ci ? ' · Here' : '';
+        return {
+          top: px(a.start - START), h: px(a.len),
+          left: (a._lane * 100 / n) + '%', width: (100 / n) + '%',
+          bg: canc ? 'transparent' : T.bg, color: T.c,
+          shadow: sel ? '0 0 0 2px #E2C48E' : canc ? 'inset 0 0 0 1px #4A4237' : 'none',
+          opacity: canc ? 0.6 : past ? 0.55 : 1,
+          timeColor: past || canc ? '#A39A8B' : '#C9A66B',
+          showCheck: past || ci,
+          time: fmt(a.start), tag: tag,
+          title: a.title, sub: a.who + ' · ' + STAFF[a.staff].name,
+          strike: canc ? 'line-through' : 'none',
+          tall: a.len >= 45,
+          sel: sel,
+          aria: fmt(a.start) + ' ' + ap(a.start) + ', ' + T.label + ', ' + a.title + ', ' + a.who + ', with ' + STAFF[a.staff].name + (past ? ', done' : '') + (canc ? ', cancelled' : '') + (ci ? ', checked in' : ''),
+          pick: () => {
+            this.setState({ sel: a.id, confirming: null });
+            setTimeout(() => {
+              const el = document.getElementById('appt-detail');
+              if (el && el.getBoundingClientRect().top > window.innerHeight * 0.6) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 0);
+          }
+        };
+      });
+      return {
+        dow: dn,
+        date: short(w, d),
+        hours: o ? (today ? 'Today · ' + hrs(o) : hrs(o)) : 'Closed',
+        hoursColor: today ? '#C9A66B' : o ? '#8E8676' : '#A39A8B',
+        headBg: today ? '#221F1B' : 'transparent',
+        headLabel: today ? '#C9A66B' : '#A39A8B',
+        headFg: today ? '#C9A66B' : o ? '#EEE7D9' : '#8E8676',
+        colBg: today ? 'rgba(194,158,98,.06)' : 'transparent',
+        aria: DOWL[d] + ', ' + short(w, d) + (o ? '' : ', closed') + ', ' + blocks.length + ' appointments',
+        shades: shades,
+        blocks: blocks,
+        isToday: today
+      };
+    });
+    const gridCols = '52px ' + DOW.map((_, d) => (hoursFor(w, d) ? 'minmax(86px, 1fr)' : 'minmax(58px, .5fr)')).join(' ');
+    const hourLabels = [];
+    for (let m = START; m <= END; m += 60) hourLabels.push({ top: (px(m - START).replace('px', '') - 7) + 'px', label: ((m / 60 + 11) % 12 + 1) + ' ' + ap(m) });
+
+    const WEEKS = { '-1': 'Nov 23 – 29', '0': 'Nov 30 – Dec 6', '1': 'Dec 7 – 13' };
+    const liveWeek = weekAppts.filter((a) => !s.cancelled[a.id]);
+    const leftToday = live.filter((a) => isToday(a) && !isPast(a) && inFilter(a)).length;
+    const weekNote = w === 0
+      ? liveWeek.length + ' appointments · ' + leftToday + ' left today'
+      : w < 0 ? 'Last week · ' + liveWeek.length + ' appointments, all done' : 'Next week · ' + liveWeek.length + ' booked so far';
+
+    const staffFilters = [['all', 'Everyone'], ['marco', 'Marco'], ['jess', 'Jess'], ['lou', 'Lou']].map((f) => {
+      const on = s.staff === f[0];
+      return { label: f[1], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', pick: () => this.setState({ staff: f[0] }) };
+    });
+    const go = (n) => () => this.setState({ week: n, sel: n === 0 ? 't3' : null, confirming: null });
+
+    // Selected appointment
+    const A = ALL.find((a) => a.id === s.sel && a.w === w);
+    let sel = { border: '#38322A' };
+    if (A) {
+      const T = TYPES[A.type];
+      const past = isPast(A);
+      const canc = !!s.cancelled[A.id];
+      const ci = !!s.checkedIn[A.id];
+      const rem = !!s.reminded[A.id];
+      const today = isToday(A);
+      const fn = firstName(A);
+      const dayName = isToday(A) ? 'today' : A.w === 0 && A.d === 3 ? 'tomorrow' : DOWL[A.d] + ', ' + short(A.w, A.d);
+      // reschedule suggestions: next 3 gaps for this staff that fit the length
+      const sugg = [];
+      for (let ww = 0; ww <= 1 && sugg.length < 3; ww++) {
+        for (let dd = ww === 0 ? 2 : 0; dd < 7 && sugg.length < 3; dd++) {
+          free(ww, dd, A.staff).forEach((g) => {
+            if (sugg.length < 3 && g[1] - g[0] >= A.len && !(ww === A.w && dd === A.d && g[0] === A.start)) {
+              sugg.push((ww === 0 && dd === 2 ? 'Today' : DOW[dd] + ' ' + short(ww, dd)) + ' · ' + fmt(g[0]) + ' ' + ap(g[0]));
+            }
+          });
+        }
+      }
+      const status = canc ? 'Cancelled' : past ? 'Done' : ci ? 'Checked in' : today ? 'Today' : 'Booked';
+      sel = {
+        border: canc ? '#4A4237' : '#C9A66B',
+        typeLabel: T.label, color: T.c, bg: T.bg,
+        status: status,
+        statusFg: canc ? '#E86A5E' : past ? '#A39A8B' : '#C9A66B',
+        statusBd: canc ? '#E86A5E' : past ? '#4A4237' : '#8C7247',
+        title: A.title,
+        who: A.who,
+        rows: [
+          { label: 'When', value: DOW[A.d] + ', ' + short(A.w, A.d) + ' · ' + range(A.start, A.start + A.len) + ' ' + ap(A.start + A.len) },
+          { label: 'Length', value: lenText(A.len) },
+          { label: 'Staff', value: STAFF[A.staff].name },
+          { label: /^Party|^Prom/.test(A.party) ? 'Party' : 'Customer', value: A.party },
+          { label: 'Phone', value: A.phone }
+        ],
+        notes: A.notes,
+        ready: A.ready,
+        phone: A.phone,
+        firstName: fn,
+        isDone: past && !canc,
+        doneNote: A.doneNote || 'Done',
+        isCancelled: canc,
+        cancelText: 'We texted ' + fn + ' and the time is open again.',
+        undoCancel: () => this.setState({ cancelled: Object.assign({}, s.cancelled, { [A.id]: false }) }),
+        actionable: !past && !canc,
+        checkedIn: ci,
+        checkOff: !today,
+        checkHint: !today,
+        checkClass: ci ? 'ghost' : today ? 'btn' : '',
+        checkBg: ci ? '#221F1B' : today ? '#C29E62' : '#2A2621',
+        checkFg: ci ? '#C9A66B' : today ? '#15130F' : '#8E8676',
+        checkBd: ci ? '#C9A66B' : today ? '#C29E62' : '#2A2621',
+        checkCursor: today ? 'pointer' : 'not-allowed',
+        checkLabel: ci ? 'Checked in' : 'Check in',
+        toggleCheck: () => { if (today) this.setState({ checkedIn: Object.assign({}, s.checkedIn, { [A.id]: !ci }) }); },
+        reminded: rem,
+        remindLabel: rem ? 'Reminder sent' : 'Text a reminder',
+        remindFg: rem ? '#C9A66B' : '#EEE7D9',
+        remindBd: rem ? '#8C7247' : '#4A4237',
+        remindText: 'Hi ' + fn + ', it’s ' + STAFF[A.staff].name.split(' ')[0] + ' at Incognito Menswear. See you ' + dayName + ' at ' + fmt(A.start) + ' ' + ap(A.start) + ' for your ' + T.label.toLowerCase() + ', 1823 Penfield Rd. Need to move it? Reply here or call (585) 586-7846.',
+        toggleRemind: () => this.setState({ reminded: Object.assign({}, s.reminded, { [A.id]: !rem }) }),
+        reschedOpen: !!s.resched[A.id],
+        toggleResched: () => this.setState({ resched: Object.assign({}, s.resched, { [A.id]: !s.resched[A.id] }), confirming: null }),
+        reschedHead: sugg.length ? 'Next open times for ' + STAFF[A.staff].name + ' that fit ' + lenText(A.len) + ':' : 'No open times for ' + STAFF[A.staff].name + ' in the next two weeks.',
+        reschedSlots: sugg,
+        confirming: s.confirming === A.id,
+        confirmText: 'Cancel the ' + fmt(A.start) + ' ' + T.label.toLowerCase() + ' for ' + A.title + '? We’ll text ' + fn + ' at ' + A.phone + ' that it’s cancelled.',
+        askCancel: () => this.setState({ confirming: A.id }),
+        keep: () => this.setState({ confirming: null }),
+        doCancel: () => this.setState({ confirming: null, cancelled: Object.assign({}, s.cancelled, { [A.id]: true }), resched: Object.assign({}, s.resched, { [A.id]: false }) })
+      };
+    }
+
+    // Open slots: rest of today + next 3 open days
+    const slotDayKeys = [[0, 2], [0, 3], [0, 4], [0, 5]];
+    const staffKeys = s.staff === 'all' ? ['jess', 'marco', 'lou'] : [s.staff];
+    const slotDays = slotDayKeys.map((k) => {
+      const o = hoursFor(k[0], k[1]);
+      return {
+        label: k[1] === 2 ? 'Today · Wed, Dec 2' : DOWL[k[1]] + ', ' + short(k[0], k[1]),
+        hours: k[1] === 2 ? 'from 2:45' : 'open ' + hrs(o),
+        staff: staffKeys.map((sk) => {
+          const ranges = free(k[0], k[1], sk).filter((g) => g[1] - g[0] >= 45).map((g) => range(g[0], g[1]));
+          return { initials: STAFF[sk].initials, name: STAFF[sk].name, ranges: ranges, none: ranges.length === 0 };
+        })
+      };
+    });
+    const slotsNote = s.staff === 'all' ? 'Next few days, for when a customer calls.' : 'Next few days for ' + STAFF[s.staff].name;
+
+    return {
+      weekLabel: WEEKS[String(w)],
+      weekNote: weekNote,
+      prevWeek: go(w - 1), nextWeek: go(w + 1), thisWeek: go(0),
+      prevOff: w <= -1, nextOff: w >= 1, thisOff: w === 0,
+      prevCursor: w <= -1 ? 'default' : 'pointer', nextCursor: w >= 1 ? 'default' : 'pointer', thisCursor: w === 0 ? 'default' : 'pointer',
+      prevOpacity: w <= -1 ? 0.4 : 1, nextOpacity: w >= 1 ? 0.4 : 1, thisOpacity: w === 0 ? 0.5 : 1,
+      staffFilters: staffFilters,
+      legend: Object.keys(TYPES).map((k) => ({ label: TYPES[k].label, color: TYPES[k].c, bg: TYPES[k].bg })),
+      gridCols: gridCols,
+      colH: COL + 'px',
+      hourPx: (60 * PX) + 'px',
+      halfPx: (30 * PX) + 'px',
+      hourLabels: hourLabels,
+      days: days,
+      nowTop: px(NOW - START),
+      hasSel: !!A,
+      noSel: !A,
+      sel: sel,
+      slotDays: slotDays,
+      slotsNote: slotsNote
+    };
+  }
+}
+</script>
+</body>
+</html>

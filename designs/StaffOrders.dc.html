@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff · Orders</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#121110}
+a{color:#C9A66B}a:hover{color:#E2C48E}
+.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
+.fld::placeholder{color:#8E8676}
+.btn:hover{background:#D4B47A !important}
+.ghost:hover{border-color:#C9A66B !important}
+.row:hover{background:#1F1C18 !important}
+.nav:hover{background:#1A1816 !important}
+a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-wrap:wrap;">
+
+<dc-import name="StaffNav" current="orders" hint-size="232px,100%"></dc-import>
+
+<main style="flex:999 1 600px; min-width:0; box-sizing:border-box; padding:32px 40px 56px; display:flex; flex-direction:column; gap:24px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 24px;">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Wednesday, December 2 · Rental warehouse and shop orders</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:42px; line-height:1; color:#EEE7D9;">Orders</h1>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; min-width:0;">
+<label for="search" class="sr">Search orders by party or name</label>
+<div style="position:relative; max-width:100%;">
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8E8676" stroke-width="2" stroke-linecap="round" style="position:absolute; left:14px; top:15px;"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+<input id="search" class="fld" type="search" placeholder="Search by party or name" value="{{q}}" onChange="{{setQ}}" style="box-sizing:border-box; width:320px; max-width:100%; height:46px; padding:0 14px 0 40px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+</div>
+</div>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px;">
+<sc-for list="{{summary}}" as="sm" hint-placeholder-count="3">
+<div style="padding:18px 20px; background:#1A1816; border:{{sm.border}}; display:flex; flex-direction:column; gap:6px; min-width:0;">
+<span style="font-family:Rokkitt, serif; font-weight:700; font-size:44px; line-height:1; color:{{sm.numColor}};">{{sm.num}}</span>
+<span style="font-size:14px; font-weight:600; color:#EEE7D9;">{{sm.label}}</span>
+<span style="font-size:13px; line-height:1.4; color:#A39A8B;">{{sm.sub}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px;">
+
+<section aria-labelledby="list-h" style="flex:999 1 560px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:22px 24px 8px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px; margin-bottom:16px;">
+<h2 id="list-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#EEE7D9;">{{listTitle}}</h2>
+<div role="group" aria-label="Show orders" style="display:flex; flex-wrap:wrap; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px; max-width:100%;">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 12px; background:{{t.bg}}; color:{{t.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">{{t.label}}<span style="min-width:20px; height:20px; padding:0 5px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background:{{t.cBg}}; color:{{t.cFg}}; font-size:11px; font-weight:700;">{{t.count}}</span></button>
+</sc-for>
+</div>
+</div>
+<div style="position:relative; overflow-x:auto;">
+<div style="min-width:980px;">
+<div aria-hidden="true" style="display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .85fr) minmax(0, .5fr) minmax(0, 1.05fr) minmax(0, 1.7fr); gap:14px; padding:0 12px 10px 15px; border-bottom:1px solid #38322A; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
+<span>Order</span><span>Party or customer</span><span>Event</span><span>Order by</span><span>Pieces</span><span>Status</span><span>Next step</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+<li style="border-bottom:1px solid #2A2621;">
+<button type="button" class="row" aria-pressed="{{r.sel}}" onClick="{{r.pick}}" style="width:100%; display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .85fr) minmax(0, .5fr) minmax(0, 1.05fr) minmax(0, 1.7fr); gap:14px; align-items:center; padding:14px 12px; text-align:left; background:{{r.bg}}; border:0; border-left:3px solid {{r.bar}}; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:14px; cursor:pointer;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:#C9A66B;">{{r.no}}</span>
+<span style="display:flex; flex-direction:column; gap:2px; min-width:0;"><span style="font-size:15px; font-weight:700;">{{r.party}}</span><span style="font-size:12px; color:#A39A8B;">{{r.kind}}</span></span>
+<span style="display:flex; flex-direction:column; gap:2px;"><span>{{r.event}}</span><span style="font-size:12px; color:#A39A8B;">{{r.eventSub}}</span></span>
+<span style="display:flex; flex-direction:column; gap:2px;"><span style="color:{{r.dlColor}};">{{r.deadline}}</span><span style="font-size:12px; color:{{r.dlSubColor}};">{{r.dlSub}}</span></span>
+<span style="display:flex; flex-direction:column; gap:2px;"><span style="font-family:Rokkitt, serif; font-weight:600; font-size:17px;">{{r.pieces}}</span><span style="font-size:12px; color:#A39A8B;">{{r.piecesSub}}</span></span>
+<span style="display:flex; flex-direction:column; gap:6px;">
+<span aria-hidden="true" style="display:flex; gap:3px;">
+<sc-for list="{{r.cells}}" as="c" hint-placeholder-count="6">
+<span style="flex:0 0 auto; width:14px; height:11px; box-sizing:border-box; background:{{c.bg}}; border:1px solid {{c.bd}};"></span>
+</sc-for>
+</span>
+<span style="font-size:12px; font-weight:600; color:{{r.stageColor}};"><span class="sr">Status: </span>{{r.stageName}}</span>
+</span>
+<span style="font-size:13px; line-height:1.45; color:{{r.nextColor}};"><span class="sr">Next step: </span>{{r.next}}</span>
+</button>
+</li>
+</sc-for>
+</ul>
+<sc-if value="{{noRows}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; padding:28px 12px; font-size:14px; color:#A39A8B;">{{noRowsText}}</p>
+</sc-if>
+</div>
+</div>
+</section>
+
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{true}}">
+<aside aria-labelledby="d-h" style="flex:1 1 400px; max-width:560px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #C9A66B; padding:24px; display:flex; flex-direction:column; gap:22px;">
+
+<div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">{{d.no}} · {{d.kind}}</span>
+<h2 id="d-h" aria-live="polite" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:30px; line-height:1.05; color:#EEE7D9;">{{d.party}}</h2>
+<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{d.meta}}</span>
+<span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{d.look}}</span>
+</div>
+<button type="button" class="ghost" onClick="{{d.close}}" aria-label="Close order details" style="flex:0 0 auto; width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:1px solid #4A4237; border-radius:2px; cursor:pointer;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EEE7D9" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</div>
+
+<ol aria-label="Order status" style="list-style:none; margin:0; padding:14px; display:flex; flex-wrap:wrap; gap:12px 6px; background:#0F0E0D; border:1px solid #38322A;">
+<sc-for list="{{d.steps}}" as="st" hint-placeholder-count="6">
+<li style="flex:1 1 64px; min-width:0; display:flex; flex-direction:column; gap:6px;">
+<span aria-hidden="true" style="height:24px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{st.bg}}; border:{{st.bd}}; font-family:Rokkitt, serif; font-weight:700; font-size:13px; color:{{st.fg}};">{{st.mark}}</span>
+<span style="font-size:12px; font-weight:600; line-height:1.25; color:{{st.labelColor}};">{{st.label}}<span class="sr">{{st.sr}}</span></span>
+<span style="font-size:11px; line-height:1.3; color:#8E8676;">{{st.sub}}</span>
+</li>
+</sc-for>
+</ol>
+
+<sc-if value="{{d.hasNote}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin:0; display:flex; gap:10px; align-items:flex-start; padding:12px 14px; border:1px solid #8C7247; background:#1F1B15; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 16px; margin-top:3px;"><path d="M20 6 9 17l-5-5"></path></svg><span>{{d.note}}</span></p>
+</sc-if>
+
+<section aria-labelledby="blk-h" style="display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+<h3 id="blk-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Before the order</h3>
+<span style="font-size:13px; font-weight:600; color:{{d.blockColor}};">{{d.blockSummary}}</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<sc-for list="{{d.checks}}" as="ck" hint-placeholder-count="4">
+<li style="display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-bottom:1px solid #2A2621;">
+<span aria-hidden="true" style="flex:0 0 18px; height:18px; margin-top:1px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{ck.boxBg}}; border:1px solid {{ck.boxBd}}; border-radius:2px;"><sc-if value="{{ck.done}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
+<span style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:3px;">
+<span style="font-size:14px; line-height:1.4; color:{{ck.color}};"><span class="sr">{{ck.sr}}</span><span style="font-weight:700;">{{ck.who}}</span> {{ck.text}}</span>
+<sc-if value="{{ck.hasSub}}" hint-placeholder-val="{{true}}"><span style="font-size:12px; line-height:1.4; color:{{ck.subColor}};">{{ck.sub}}</span></sc-if>
+</span>
+<span style="flex:0 0 auto; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px;">
+<sc-for list="{{ck.actions}}" as="ac" hint-placeholder-count="1">
+<button type="button" class="ghost" onClick="{{ac.run}}" style="height:32px; padding:0 10px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer; white-space:nowrap;">{{ac.label}}<span class="sr"> {{ac.sr}}</span></button>
+</sc-for>
+</span>
+</li>
+</sc-for>
+</ul>
+<sc-if value="{{d.showOrderActions}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding-top:4px;">
+<button type="button" class="btn" onClick="{{d.place}}" disabled="{{d.placeOff}}" style="height:46px; padding:0 18px; background:{{d.placeBg}}; color:{{d.placeFg}}; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:{{d.placeCursor}};">Place order</button>
+<sc-if value="{{d.showLinks}}" hint-placeholder-val="{{true}}">
+<button type="button" class="ghost" onClick="{{d.sendLinks}}" style="height:46px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #8C7247; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{d.linksLabel}}</button>
+</sc-if>
+<span style="flex:1 1 100%; font-size:12px; line-height:1.5; color:#A39A8B;">{{d.placeHelp}}</span>
+</div>
+</sc-if>
+</section>
+
+<sc-if value="{{d.showShipped}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+<button type="button" class="ghost" onClick="{{d.markShipped}}" style="height:44px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #8C7247; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Mark shipped</button>
+<span style="font-size:12px; color:#A39A8B;">When the rental warehouse sends the shipping notice.</span>
+</div>
+</sc-if>
+<sc-if value="{{d.showReceived}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+<button type="button" class="btn" onClick="{{d.markReceived}}" style="height:46px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;">Mark received</button>
+<span style="font-size:12px; line-height:1.5; color:#A39A8B;">When the boxes are in the back room. Then check in each piece.</span>
+</div>
+</sc-if>
+
+<sc-if value="{{d.showCheckin}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="ci-h" style="display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+<h3 id="ci-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Check in pieces</h3>
+<span aria-live="polite" style="font-size:13px; font-weight:700; color:{{d.ciColor}};">{{d.ciText}}</span>
+</div>
+<span aria-hidden="true" style="display:block; height:4px; background:#2A2621;"><span style="display:block; height:4px; width:{{d.ciPct}}; background:#C29E62;"></span></span>
+<div style="display:flex; flex-wrap:wrap; gap:8px;">
+<button type="button" class="ghost" onClick="{{d.checkAll}}" style="height:34px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">{{d.checkAllLabel}}</button>
+</div>
+<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<sc-for list="{{d.ciGroups}}" as="g" hint-placeholder-count="5">
+<li style="padding:10px 0; border-bottom:1px solid #2A2621; display:flex; flex-direction:column; gap:8px;">
+<div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+<span style="font-size:14px; font-weight:700; color:#EEE7D9;">{{g.name}} <span style="font-weight:400; font-size:12px; color:#A39A8B;">{{g.count}}</span></span>
+<sc-if value="{{g.canAll}}" hint-placeholder-val="{{true}}"><button type="button" class="ghost" onClick="{{g.all}}" style="height:28px; padding:0 8px; background:transparent; color:#C9A66B; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:11px; cursor:pointer;">All {{g.total}}<span class="sr"> for {{g.name}}</span></button></sc-if>
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{g.pieces}}" as="pc" hint-placeholder-count="7">
+<label style="display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:0 9px; box-sizing:border-box; background:{{pc.bg}}; border:1px solid {{pc.bd}}; border-radius:2px; font-size:12px; font-weight:600; color:{{pc.fg}}; cursor:pointer;">
+<input type="checkbox" checked="{{pc.on}}" onChange="{{pc.toggle}}" style="width:15px; height:15px; margin:0; accent-color:#C29E62;">
+{{pc.label}}<span class="sr"> for {{g.name}}</span>
+</label>
+</sc-for>
+</div>
+</li>
+</sc-for>
+</ul>
+</section>
+</sc-if>
+
+<sc-if value="{{d.hasAlts}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="alt-h" style="display:flex; flex-direction:column; gap:8px;">
+<h3 id="alt-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">At alterations</h3>
+<sc-for list="{{d.alts}}" as="al" hint-placeholder-count="1">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; padding:12px 14px; border:1px solid {{al.bd}}; background:{{al.bg}};">
+<span style="flex:1 1 220px; min-width:0; display:flex; flex-direction:column; gap:3px;">
+<span style="font-size:14px; font-weight:700; color:#EEE7D9;">{{al.what}}</span>
+<span style="font-size:13px; line-height:1.45; color:#A39A8B;">{{al.text}}</span>
+</span>
+<sc-if value="{{al.open}}" hint-placeholder-val="{{true}}"><button type="button" class="ghost" onClick="{{al.run}}" style="height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">Back from Lou</button></sc-if>
+</div>
+</sc-for>
+</section>
+</sc-if>
+
+<sc-if value="{{d.hasOuts}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="out-h" style="display:flex; flex-direction:column; gap:8px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+<h3 id="out-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Back from the party</h3>
+<span style="font-size:13px; font-weight:700; color:{{d.outColor}};">{{d.outText}}</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<sc-for list="{{d.outs}}" as="ot" hint-placeholder-count="6">
+<li style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:10px 0; border-bottom:1px solid #2A2621;">
+<span style="flex:1 1 160px; min-width:0; display:flex; flex-direction:column; gap:2px;"><span style="font-size:14px; font-weight:700; color:#EEE7D9;">{{ot.name}}</span><span style="font-size:12px; color:{{ot.color}};">{{ot.status}}</span></span>
+<sc-if value="{{ot.open}}" hint-placeholder-val="{{false}}">
+<button type="button" class="ghost" onClick="{{ot.remind}}" style="height:32px; padding:0 10px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">{{ot.remindLabel}}<span class="sr"> {{ot.name}}</span></button>
+<button type="button" class="ghost" onClick="{{ot.back}}" style="height:32px; padding:0 10px; background:transparent; color:#C9A66B; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">Mark returned<span class="sr"> for {{ot.name}}</span></button>
+</sc-if>
+</li>
+</sc-for>
+</ul>
+</section>
+</sc-if>
+
+<sc-if value="{{d.hasPickup}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="pu-h" style="display:flex; flex-direction:column; gap:10px; padding:14px; border:1px solid #38322A; background:#0F0E0D;">
+<h3 id="pu-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Pickup</h3>
+<span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{d.pickupText}}</span>
+<sc-if value="{{d.pickupOpen}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-wrap:wrap; gap:8px;">
+<button type="button" class="ghost" onClick="{{d.pickupRemind}}" style="height:38px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{d.pickupRemindLabel}}</button>
+<button type="button" class="btn" onClick="{{d.pickupDone}}" style="height:38px; padding:0 14px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;">Mark picked up</button>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<section aria-labelledby="li-h" style="display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+<h3 id="li-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Line items</h3>
+<span style="font-size:13px; color:#A39A8B;">{{d.liSummary}}</span>
+</div>
+<div style="position:relative; overflow-x:auto; min-width:0; max-width:100%; border-top:1px solid #2A2621;">
+<div style="min-width:580px; font-size:13px;">
+<div aria-hidden="true" style="display:grid; grid-template-columns:minmax(0, 1.7fr) minmax(0, .6fr) minmax(0, .8fr) minmax(0, .8fr) minmax(0, .45fr) minmax(0, .75fr) minmax(0, .65fr); gap:10px; padding:9px 0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#A39A8B;">
+<span>Person</span><span>Coat</span><span>Pant</span><span>Shirt</span><span>Vest</span><span>Neckwear</span><span>Shoes</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{d.people}}" as="pp" hint-placeholder-count="6">
+<li style="display:grid; grid-template-columns:minmax(0, 1.7fr) minmax(0, .6fr) minmax(0, .8fr) minmax(0, .8fr) minmax(0, .45fr) minmax(0, .75fr) minmax(0, .65fr); gap:10px; align-items:center; padding:9px 0; border-top:1px solid #2A2621; color:{{pp.color}};">
+<span style="display:flex; flex-direction:column; gap:1px; min-width:0;"><span style="font-size:14px; font-weight:700; color:#EEE7D9;">{{pp.name}}</span><span style="font-size:11px; color:#A39A8B;">{{pp.role}}</span></span>
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:15px;"><span class="sr">Coat </span>{{pp.coat}}</span>
+<span><span class="sr">Pant </span>{{pp.pant}}</span>
+<span><span class="sr">Shirt </span>{{pp.shirt}}</span>
+<span><span class="sr">Vest </span>{{pp.vest}}</span>
+<span><span class="sr">Neckwear </span>{{pp.tie}}</span>
+<span><span class="sr">Shoes </span>{{pp.shoe}}</span>
+</li>
+</sc-for>
+</ul>
+</div>
+</div>
+<span style="font-size:12px; line-height:1.5; color:#8E8676;">Pant is waist × length. Shirt is neck / sleeve.</span>
+</section>
+
+<section aria-labelledby="dl-h" style="display:flex; flex-direction:column; gap:8px;">
+<h3 id="dl-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Delivery</h3>
+<dl style="margin:0; display:flex; flex-direction:column; border-top:1px solid #2A2621;">
+<sc-for list="{{d.delivery}}" as="dv" hint-placeholder-count="3">
+<div style="display:flex; flex-wrap:wrap; gap:4px 16px; padding:9px 0; border-bottom:1px solid #2A2621;">
+<dt style="flex:0 0 110px; font-size:13px; color:#A39A8B;">{{dv.label}}</dt>
+<dd style="flex:1 1 200px; min-width:0; margin:0; font-size:14px; line-height:1.45; color:#EEE7D9;">{{dv.value}}</dd>
+</div>
+</sc-for>
+</dl>
+</section>
+
+<section aria-labelledby="log-h" style="display:flex; flex-direction:column; gap:6px;">
+<h3 id="log-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">History</h3>
+<ol style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{d.log}}" as="lg" hint-placeholder-count="3">
+<li style="display:flex; gap:12px; padding:8px 0; border-bottom:1px solid #2A2621; font-size:13px; line-height:1.45;"><span style="flex:0 0 72px; color:#C9A66B; font-weight:600;">{{lg.when}}</span><span style="flex:1 1 auto; min-width:0; color:#A39A8B;">{{lg.what}}</span></li>
+</sc-for>
+</ol>
+<sc-if value="{{d.hasPartyLink}}" hint-placeholder-val="{{false}}"><a href="PartyAdmin.dc.html" style="align-self:flex-start; font-size:13px; font-weight:600;">Open the party page</a></sc-if>
+</section>
+
+</aside>
+</sc-if>
+
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    const orders = this.seed();
+    orders.forEach((o) => { if (o.fullCheckin) { o.checkin = {}; this.keys(o).forEach((k) => { o.checkin[k] = true; }); } });
+    this.state = { tab: 'all', q: '', sel: 'hartman', orders: orders };
+  }
+  seed() {
+    const P = (name, role, coat, waist, len, neck, sleeve, vest, tie, shoe) => ({ name, role, coat, waist, len, neck, sleeve, vest, tie, shoe });
+    const B = (id, kind, who, text, sub) => ({ id, kind, who, text, sub: sub || '', done: false, sent: '' });
+    return [
+      {
+        id: 'hartman', no: 'IC-27-0109', party: 'Hartman & Osei', kind: 'Wedding rental', staff: 'Marco T.',
+        venue: 'St. Anne’s, Brighton', event: 'Sat, Jan 9', eventSub: '38 days out', deadline: 'Sat, Dec 5', dlDays: 3, thisWeek: true,
+        look: 'Charcoal tuxedo, shawl lapel · black vest · black bow tie',
+        stage: 0, rental: true, partyLink: true,
+        people: [
+          P('Will Hartman', 'Groom', '40R', 33, 32, '15½', '34', 'M', 'Bow tie', '10 D'),
+          P('Kwame Osei', 'Groom', '42L', 34, 34, '16', '35', 'L', 'Bow tie', '11.5 D'),
+          P('Jake Hartman', 'Best man', '40R', 32, 32, '15½', '34', 'M', 'Bow tie', '10.5 D'),
+          P('Yaw Mensah', 'Best man', '44R', 36, 31, '17', '34', 'L', 'Bow tie', '11 E'),
+          P('Kofi Osei', 'Groomsman · Kwame’s brother', '42R', 34, 33, '16', '34', 'L', 'Bow tie', '11 D'),
+          P('Danny Kessler', 'Groomsman · Will’s cousin', '38S', 30, 29, '15', '32', 'S', 'Bow tie', '9 D'),
+          P('Chris Albright', 'Groomsman', '46R', 38, 32, '17½', '35', 'XL', 'Bow tie', '12 D')
+        ],
+        doneChecks: ['All 7 measured · checked by Marco Nov 28', 'Look set · charcoal shawl, bow ties', '5 of 7 deposits paid'],
+        blockers: [
+          B('kofi', 'deposit', 'Kofi Osei', 'deposit not paid', 'Kwame’s brother · (585) 555-0131 · link opened Nov 30, not paid'),
+          B('danny', 'deposit', 'Danny Kessler', 'deposit not paid', 'Will’s cousin · (585) 555-0158 · no reply to Nov 25 text')
+        ],
+        dates: ['', 'By Sat, Dec 5', '', 'About Jan 4', 'About Jan 6', ''],
+        delivery: [['Order by', 'Sat, Dec 5 to hold the charcoal shawl in all 7 sizes'], ['Ships', 'About Mon, Jan 4 from the rental warehouse'], ['Arrives', 'About Wed, Jan 6 · fittings after that'], ['Tracking', 'Not placed yet']],
+        placed: { ship: 'Mon, Jan 4', arrive: 'Wed, Jan 6', conf: 'RW-48213', placedSub: 'Today' },
+        log: [['Nov 30', 'Deposit link opened by Kofi Osei, not paid'], ['Nov 28', 'Measurements reviewed by Marco T., all 7 good'], ['Nov 25', 'Deposit reminder texted to Kofi and Danny']]
+      },
+      {
+        id: 'okafor', no: 'IC-27-0123', party: 'Okafor & Whitman', kind: 'Wedding rental', staff: 'Marco T.',
+        venue: 'Woodcliff Hotel & Spa, Fairport', event: 'Sat, Jan 23', eventSub: '52 days out', deadline: 'Sat, Dec 19', dlDays: 17, thisWeek: false,
+        look: 'Black tuxedo, peak lapel · groom in midnight navy · black vest and bow tie',
+        stage: 0, rental: true, partyLink: true,
+        people: [
+          P('Daniel Okafor', 'Groom · midnight navy', '42L', 34, 32, '16', '34½', 'L', 'Bow tie', '11 D'),
+          P('James Okafor', 'Best man', '40R', 32, 31, '15½', '33½', 'M', 'Bow tie', '10 D'),
+          P('Theo Marsh', 'Groomsman', '38R', 31, 30, '15', '37', 'M', 'Bow tie', '9.5 D'),
+          P('Sam Whitman', 'Groomsman', null),
+          P('Ravi Patel', 'Groomsman', '38R', 30, 30, '15', '33', 'S', 'Bow tie', '9 D'),
+          P('Luis Romero', 'Groomsman · Chicago', null),
+          P('Victor Okafor', 'Father of the groom', '44R', 40, 30, '17', '34', 'XL', 'Bow tie', '11 E'),
+          P('Richard Whitman', 'Father of the bride', null),
+          P('Owen Whitman', 'Ring bearer · age 7', null)
+        ],
+        doneChecks: ['5 of 9 measured', '4 of 9 deposits paid', 'Look set · midnight navy 42L on hold for Daniel'],
+        blockers: [
+          B('m-sam', 'measure', 'Sam Whitman', 'measurements not in', 'Opened his invite Nov 19, hasn’t started'),
+          B('m-luis', 'measure', 'Luis Romero', 'measurements not in', 'Chicago · at-home guide sent Nov 18'),
+          B('m-rich', 'measure', 'Richard Whitman', 'measurements not in', 'Invite not opened · try a call'),
+          B('m-owen', 'measure', 'Owen Whitman', 'measurements not in', 'Boys’ sizing · come in with Sam'),
+          B('d-theo', 'deposit', 'Theo Marsh', 'deposit not paid', ''),
+          B('d-sam', 'deposit', 'Sam Whitman', 'deposit not paid', ''),
+          B('d-luis', 'deposit', 'Luis Romero', 'deposit not paid', ''),
+          B('d-rich', 'deposit', 'Richard Whitman', 'deposit not paid', ''),
+          B('d-owen', 'deposit', 'Owen Whitman', 'deposit not paid', 'Through Sam Whitman')
+        ],
+        dates: ['Due Dec 12', 'By Sat, Dec 19', '', 'About Jan 11', 'About Jan 13', ''],
+        delivery: [['Order by', 'Sat, Dec 19'], ['Ships', 'About Mon, Jan 11 from the rental warehouse'], ['Arrives', 'About Wed, Jan 13 · fittings Jan 14–20'], ['Tracking', 'Not placed yet']],
+        placed: { ship: 'Mon, Jan 11', arrive: 'Wed, Jan 13', conf: 'RW-48236', placedSub: 'Today' },
+        log: [['Nov 27', 'Ravi Patel’s measurements came in'], ['Nov 21', 'Victor Okafor measured in store by Jess R.'], ['Nov 18', 'Midnight navy 42L requested for the groom']]
+      },
+      {
+        id: 'jordan', no: 'IC-26-1212-S', party: 'Jordan Pike', kind: 'Single rental · black-tie gala', staff: 'Marco T.',
+        venue: 'Black-tie gala', event: 'Sat, Dec 12', eventSub: '10 days out', deadline: 'Sat, Dec 5', dlDays: 3, thisWeek: true,
+        look: 'Black tuxedo, satin peak lapel · white wing-collar shirt · black bow tie',
+        stage: 0, rental: true,
+        people: [P('Jordan Pike', 'Customer · (585) 555-0174', '40R', 32, 32, '15½', '34', 'M', 'Bow tie', '10.5 D')],
+        doneChecks: ['Measured in store Nov 29 · Jess R.', 'Deposit paid Nov 29', 'Look set'],
+        blockers: [],
+        dates: ['Nov 29', 'Ready now', '', 'Mon, Dec 7', 'Wed, Dec 9', ''],
+        delivery: [['Order by', 'Sat, Dec 5'], ['Ships', 'Mon, Dec 7 if placed this week'], ['Arrives', 'Wed, Dec 9 · pickup Thu, Dec 10'], ['Tracking', 'Not placed yet']],
+        placed: { ship: 'Mon, Dec 7', arrive: 'Wed, Dec 9', conf: 'RW-48219', placedSub: 'Today' },
+        log: [['Nov 29', 'Measured and deposit paid at the counter']]
+      },
+      {
+        id: 'brennan', no: 'IC-26-1212', party: 'Brennan & Liu', kind: 'Wedding rental', staff: 'Jess R.',
+        venue: 'Mill Street Barn, Victor', event: 'Sat, Dec 12', eventSub: '10 days out', deadline: 'Wed, Nov 25', dlDays: -7, thisWeek: false,
+        look: 'Heather grey suit, notch lapel · grey vest · burgundy long tie',
+        stage: 3, rental: true, arriving: 'Mon, Dec 7', placedOn: 'Wed, Nov 25', partyLink: true,
+        people: [
+          P('Marcus Brennan', 'Groom', '40L', 33, 34, '16', '35', 'M', 'Long tie', '11 D'),
+          P('Patrick Brennan', 'Best man', '42R', 34, 32, '16', '34', 'L', 'Long tie', '10.5 D'),
+          P('Eli Novak', 'Groomsman', '38R', 31, 31, '15', '33', 'S', 'Long tie', '9.5 D'),
+          P('Chris Duffy', 'Groomsman', '46R', 40, 30, '17½', '34', 'XL', 'Long tie', '12 E'),
+          P('Nate Liu', 'Groomsman · bride’s brother', '36S', 29, 29, '14½', '32', 'S', 'Long tie', '8.5 D'),
+          P('Aaron Shapiro', 'Groomsman', '40R', 32, 32, '15½', '34', 'M', 'Long tie', '10 D')
+        ],
+        doneChecks: ['All 6 measured', 'All 6 deposits paid', 'Placed Wed, Nov 25'],
+        blockers: [],
+        dates: ['', '', 'Nov 25', 'Dec 1', 'Mon, Dec 7', ''],
+        delivery: [['Placed', 'Wed, Nov 25 · confirmation RW-47902'], ['Shipped', 'Tue, Dec 1 · 2 boxes, garment bags'], ['Tracking', 'On the truck · left the rental warehouse Tue night'], ['Arrives', 'Mon, Dec 7 · fittings through Wed, Dec 9 · pickup Thu, Dec 10']],
+        log: [['Dec 1', 'Shipped from the rental warehouse, 2 boxes'], ['Nov 25', 'Placed by Jess R. · RW-47902']]
+      },
+      {
+        id: 'castillo', no: 'IC-26-1205', party: 'Castillo & Reyes', kind: 'Wedding rental', staff: 'Marco T.',
+        venue: 'Harbor House, Webster', event: 'Sat, Dec 5', eventSub: '3 days out', deadline: 'Wed, Nov 11', dlDays: -21, thisWeek: false,
+        look: 'Black tuxedo, notch lapel · black vest · black bow tie',
+        stage: 4, rental: true, fullCheckin: true, placedOn: 'Wed, Nov 11', pickupOn: 'Thu, Dec 3', partyLink: true,
+        people: [
+          P('Mateo Castillo', 'Groom', '40R', 32, 32, '15½', '34', 'M', 'Bow tie', '10 D'),
+          P('Andre Castillo', 'Groomsman', '42L', 34, 33, '16', '35', 'L', 'Bow tie', '11 D'),
+          P('Luis Reyes', 'Groomsman', '38R', 30, 30, '15', '33', 'S', 'Bow tie', '9 D'),
+          P('Diego Reyes', 'Groomsman', '44R', 36, 31, '16½', '34', 'L', 'Bow tie', '11.5 D'),
+          P('Sam Ortiz', 'Groomsman', '40S', 32, 29, '15½', '32', 'M', 'Bow tie', '9.5 D')
+        ],
+        doneChecks: ['All 5 measured', 'All 5 deposits paid', 'Placed Wed, Nov 11'],
+        blockers: [],
+        alts: [{ id: 'andre', what: 'Andre Castillo · coat', text: 'Sleeve hem with Lou. Alteration check today at 4:30, pickup tomorrow.', done: false }],
+        dates: ['', '', 'Nov 11', 'Nov 25', 'Nov 30', 'Nov 30'],
+        delivery: [['Placed', 'Wed, Nov 11 · confirmation RW-47611'], ['Shipped', 'Wed, Nov 25'], ['Arrived', 'Mon, Nov 30 · checked in by Jess R.'], ['Pickup', 'Thu, Dec 3 · returns due Mon, Dec 7']],
+        log: [['Nov 30', 'All 35 pieces checked in by Jess R.'], ['Nov 30', 'Andre’s coat to Lou for a sleeve hem'], ['Nov 25', 'Shipped from the rental warehouse']]
+      },
+      {
+        id: 'deluca', no: 'IC-26-1127', party: 'DeLuca & Price', kind: 'Wedding rental · returns', staff: 'Jess R.',
+        venue: 'The Lantern Room, Pittsford', event: 'Fri, Nov 27', eventSub: '5 days ago', deadline: 'Wed, Oct 28', dlDays: -35, thisWeek: false,
+        look: 'Black tuxedo, notch lapel · black vest · black bow tie',
+        stage: 4, rental: true, fullCheckin: true, placedOn: 'Wed, Oct 28', partyLink: true,
+        people: [
+          P('Nick DeLuca', 'Groom', '40R', 32, 31, '15½', '34', 'M', 'Bow tie', '10 D'),
+          P('Joe DeLuca', 'Best man', '42R', 34, 32, '16', '34', 'L', 'Bow tie', '10.5 D'),
+          P('Ben Price', 'Groomsman', '44L', 36, 34, '16½', '36', 'L', 'Bow tie', '12 D'),
+          P('Tom Avila', 'Groomsman', '38R', 30, 30, '15', '33', 'S', 'Bow tie', '9 D'),
+          P('Mike Russo', 'Groomsman', '42R', 35, 31, '16', '34', 'L', 'Bow tie', '11 D'),
+          P('Sean Price', 'Groomsman', '40S', 32, 29, '15½', '32', 'M', 'Bow tie', '9.5 D')
+        ],
+        doneChecks: ['All 6 measured', 'All 6 deposits paid', 'Placed Wed, Oct 28'],
+        blockers: [],
+        outs: [
+          { name: 'Nick DeLuca', back: true, when: 'Mon, Nov 30' }, { name: 'Joe DeLuca', back: true, when: 'Mon, Nov 30' },
+          { name: 'Ben Price', back: false, phone: '(585) 555-0193' }, { name: 'Tom Avila', back: false, phone: '(585) 555-0127' },
+          { name: 'Mike Russo', back: true, when: 'Sat, Nov 28' }, { name: 'Sean Price', back: true, when: 'Mon, Nov 30' }
+        ],
+        dates: ['', '', 'Oct 28', 'Nov 18', 'Nov 23', 'Nov 23'],
+        delivery: [['Placed', 'Wed, Oct 28 · confirmation RW-47288'], ['Arrived', 'Mon, Nov 23 · checked in by Jess R.'], ['Returns due', 'Mon, Nov 30 from the party'], ['Ships back', 'Fri, Dec 4 to the rental warehouse, once all 6 are in']],
+        log: [['Nov 30', '4 of 6 back · Ben and Tom texted'], ['Nov 25', 'Picked up by the party'], ['Nov 23', 'All 42 pieces checked in']]
+      },
+      {
+        id: 'fitch', no: 'R-26-1017', party: 'Alan Fitch', kind: 'Retail · navy suit', staff: 'Marco T.',
+        venue: 'Bought in store', event: 'Sat, Oct 17', eventSub: 'Bought', deadline: 'Sat, Oct 17', dlDays: -46, thisWeek: false,
+        look: 'Navy suit, two-button notch lapel · from shop stock · pants hemmed by Lou',
+        stage: 4, rental: false, fullCheckin: true, placedOn: 'Sat, Oct 17',
+        people: [{ name: 'Alan Fitch', role: 'Customer · (585) 555-0109', coat: '42R', waist: 36, len: '30 hemmed', neck: null, sleeve: null, vest: '—', tie: '—', shoe: '—', retail: true }],
+        doneChecks: ['Paid in full Sat, Oct 17', 'Hem done by Lou Sat, Nov 28'],
+        blockers: [],
+        pickup: { done: false, reminded: false },
+        dates: ['', '', 'Oct 17', '—', 'Oct 17', 'Nov 28'],
+        delivery: [['Bought', 'Sat, Oct 17 · from shop stock, no warehouse order'], ['Alterations', 'Pants hemmed to 30″ by Lou · done Sat, Nov 28'], ['Where', 'Pickup rack, tag R-26-1017']],
+        log: [['Nov 30', 'Voicemail left for Alan, suit is ready'], ['Nov 28', 'Hem done by Lou'], ['Oct 17', 'Bought, pants pinned for hem']]
+      }
+    ];
+  }
+  pieceNames(o, p) {
+    if (!o.rental) return ['Suit coat', 'Suit pants'];
+    return ['Coat', 'Pants', 'Shirt', 'Vest', p.tie || 'Neckwear', 'Studs & cufflinks', 'Shoes'];
+  }
+  keys(o) {
+    const out = [];
+    o.people.forEach((p, i) => this.pieceNames(o, p).forEach((_, j) => out.push(i + '-' + j)));
+    return out;
+  }
+  total(o) { return o.people.length * (o.rental ? 7 : 2); }
+  checkedCount(o) { const c = o.checkin || {}; return this.keys(o).filter((k) => c[k]).length; }
+  eff(o) {
+    if (o.stage < 2) return o.blockers.some((b) => !b.done) ? 0 : 1;
+    if (o.stage >= 4) return this.checkedCount(o) === this.total(o) ? 5 : 4;
+    return o.stage;
+  }
+  upd(id, fn) {
+    this.setState({ orders: this.state.orders.map((o) => {
+      if (o.id !== id) return o;
+      const c = JSON.parse(JSON.stringify(o));
+      fn(c);
+      return c;
+    }) });
+  }
+  nextStep(o, e) {
+    const open = o.blockers.filter((b) => !b.done);
+    if (e === 0) {
+      const m = open.filter((b) => b.kind === 'measure');
+      const d = open.filter((b) => b.kind === 'deposit');
+      const parts = [];
+      if (m.length) parts.push(m.length + ' measurement' + (m.length > 1 ? 's' : ''));
+      if (d.length) parts.push(d.length + ' deposit' + (d.length > 1 ? 's' : ''));
+      const names = open.length <= 2 ? ': ' + open.map((b) => b.who).join(' and ') : '';
+      const red = o.dlDays <= 7;
+      return { text: (red ? 'Blocked: ' : 'Waiting on ') + parts.join(' + ') + names, color: red ? '#E86A5E' : '#EEE7D9' };
+    }
+    if (e === 1) return { text: 'Ready to place · nothing blocking. Order by ' + o.deadline + '.', color: '#C9A66B' };
+    if (e === 2) return { text: 'Placed ' + o.placedOn + ' · ships ' + o.shipOn + ', arrives ' + o.arriving, color: '#EEE7D9' };
+    if (e === 3) return { text: 'On the truck · arriving ' + o.arriving + (o.id === 'brennan' ? ' · pickup Thu, Dec 10' : ''), color: '#EEE7D9' };
+    if (e === 4) return { text: 'Received · ' + this.checkedCount(o) + ' of ' + this.total(o) + ' pieces checked in', color: '#C9A66B' };
+    if (o.outs) {
+      const out = o.outs.filter((x) => !x.back);
+      if (out.length) return { text: out.length + ' still out: ' + out.map((x) => x.name).join(' and ') + ' · 2 days late', color: '#E86A5E' };
+      return { text: 'All 6 back · ship to the rental warehouse Fri, Dec 4', color: '#C9A66B' };
+    }
+    if (o.pickup) {
+      if (o.pickup.done) return { text: 'Picked up just now · order closed', color: '#A39A8B' };
+      return { text: 'Hem done · waiting for pickup since Sat, Nov 28', color: '#EEE7D9' };
+    }
+    const alt = (o.alts || []).filter((a) => !a.done);
+    if (alt.length) return { text: 'Checked in · Andre’s coat still with Lou (check today 4:30) · pickup ' + o.pickupOn, color: '#E86A5E' };
+    return { text: 'All ' + this.total(o) + ' pieces checked in · ready for pickup' + (o.pickupOn ? ' ' + o.pickupOn : ''), color: '#C9A66B' };
+  }
+  renderVals() {
+    const s = this.state;
+    const STEPS = ['Waiting on party', 'Ready to place', 'Placed', 'Shipped', 'Received', 'Checked in'];
+    const O = s.orders;
+    const q = s.q.trim().toLowerCase();
+    const hit = (o) => !q || [o.party, o.no, o.kind, o.venue].concat(o.people.map((p) => p.name)).join(' ').toLowerCase().indexOf(q) >= 0;
+    const found = O.filter(hit);
+    const inTab = (o, t) => {
+      const e = this.eff(o);
+      if (t === 'place') return e < 2;
+      if (t === 'way') return e === 2 || e === 3;
+      if (t === 'shop') return e >= 4;
+      return true;
+    };
+    const TABS = [['place', 'To place'], ['way', 'On the way'], ['shop', 'In the shop'], ['all', 'All']];
+    const tabs = TABS.map((t) => {
+      const on = s.tab === t[0];
+      return { label: t[1], on: on, count: found.filter((o) => inTab(o, t[0])).length, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', cBg: on ? '#15130F' : '#2A2621', cFg: on ? '#C9A66B' : '#A39A8B', pick: () => this.setState({ tab: t[0] }) };
+    });
+    const list = found.filter((o) => inTab(o, s.tab));
+
+    const rows = list.map((o) => {
+      const e = this.eff(o);
+      const n = this.nextStep(o, e);
+      const sel = s.sel === o.id;
+      const placed = o.stage >= 2;
+      const outCount = o.outs ? o.outs.filter((x) => !x.back).length : 0;
+      return {
+        no: o.no, party: o.party, kind: o.kind,
+        event: o.event, eventSub: o.eventSub,
+        deadline: placed ? (o.rental ? 'Placed' : 'Bought') : o.deadline,
+        dlColor: placed ? '#A39A8B' : '#EEE7D9',
+        dlSub: placed ? (o.placedOn || '').replace(/^\w+, /, '') : 'in ' + o.dlDays + ' days',
+        dlSubColor: placed ? '#8E8676' : o.dlDays <= 7 ? '#E86A5E' : '#A39A8B',
+        pieces: this.total(o),
+        piecesSub: outCount ? outCount + ' tuxes out' : o.rental ? (o.people.length === 1 ? '1 person' : o.people.length + ' people') : 'coat and pants',
+        cells: STEPS.map((_, i) => ({
+          bg: i < e || e === 5 ? '#C29E62' : '#0F0E0D',
+          bd: i < e || e === 5 ? '#C29E62' : i === e ? '#E2C48E' : '#4A4237'
+        })),
+        stageName: STEPS[e],
+        stageColor: e === 0 ? '#A39A8B' : '#C9A66B',
+        next: n.text, nextColor: n.color,
+        sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent',
+        pick: () => this.setState({ sel: sel ? null : o.id })
+      };
+    });
+
+    // Summary strip
+    const toPlace = O.filter((o) => this.eff(o) < 2 && o.thisWeek);
+    const arriving = O.filter((o) => { const e = this.eff(o); return (e === 2 || e === 3) && o.arriveThisWeek !== false && o.arriving === 'Mon, Dec 7'; });
+    const arrivingPieces = arriving.reduce((a, o) => a + this.total(o), 0);
+    const alts = [];
+    O.forEach((o) => (o.alts || []).forEach((a) => { if (!a.done) alts.push(a); }));
+    const summary = [
+      { num: toPlace.length, label: 'Orders to place this week', sub: toPlace.length ? toPlace.map((o) => o.party).join(', ') + ' · by Sat, Dec 5' : 'All placed for this week', numColor: toPlace.length ? '#E86A5E' : '#EEE7D9', border: toPlace.length ? '1.5px solid #E86A5E' : '1px solid #38322A' },
+      { num: arrivingPieces, label: 'Pieces arriving this week', sub: arriving.length ? arriving.map((o) => o.party + ', ' + o.arriving).join(' · ') : 'Nothing else on the truck this week', numColor: '#EEE7D9', border: '1px solid #38322A' },
+      { num: alts.length, label: 'Pieces at alterations', sub: alts.length ? 'Andre Castillo’s coat · with Lou, check today 4:30' : 'Nothing with Lou right now', numColor: '#EEE7D9', border: '1px solid #38322A' }
+    ];
+
+    const T = TABS.find((t) => t[0] === s.tab);
+    const listTitle = s.tab === 'all' ? 'All orders' : T[1];
+
+    // Detail panel
+    const o = O.find((x) => x.id === s.sel);
+    let d = {};
+    if (o) {
+      const e = this.eff(o);
+      const steps = STEPS.map((label, i) => {
+        const done = i < e || e === 5;
+        const now = i === e && e !== 5;
+        let sub = o.dates[i] || '';
+        if (i === 2 && o.stage >= 2 && o.placedSub) sub = o.placedSub;
+        return {
+          label: label, sub: sub,
+          mark: done ? '✓' : String(i + 1),
+          bg: done ? '#C29E62' : '#1F1C18',
+          bd: now ? '2px solid #E2C48E' : done ? '1px solid #C29E62' : '1px solid #3A342C',
+          fg: done ? '#15130F' : now ? '#E2C48E' : '#8E8676',
+          labelColor: done || now ? '#EEE7D9' : '#A39A8B',
+          sr: done ? ', done' : now ? ', current step' : ', not yet'
+        };
+      });
+      const open = o.blockers.filter((b) => !b.done);
+      const openDep = open.filter((b) => b.kind === 'deposit');
+      const checks = o.doneChecks.map((t) => ({ done: true, who: '', text: t, color: '#A39A8B', boxBg: '#C29E62', boxBd: '#C29E62', hasSub: false, sub: '', subColor: '#8E8676', actions: [], sr: 'Done: ' }));
+      o.blockers.forEach((b) => {
+        const actions = [];
+        if (!b.done) {
+          actions.push({ label: b.sent ? 'Remind again' : 'Remind', sr: b.who, run: () => this.upd(o.id, (c) => { const x = c.blockers.find((y) => y.id === b.id); x.sent = b.kind === 'deposit' ? 'Deposit link sent just now' : 'Reminder texted just now'; c.note = (b.kind === 'deposit' ? 'Deposit link texted to ' : 'Measurement reminder texted to ') + b.who + '.'; c.log.unshift(['2:40 PM', c.note.replace(/\.$/, '') + ' · Marco T.']); }) });
+          actions.push({ label: b.kind === 'deposit' ? 'Mark paid' : 'Mark in', sr: b.who, run: () => this.upd(o.id, (c) => { const x = c.blockers.find((y) => y.id === b.id); x.done = true; const left = c.blockers.filter((y) => !y.done).length; c.note = b.who + (b.kind === 'deposit' ? '’s deposit marked paid.' : '’s measurements marked in.') + (left ? ' ' + left + ' still blocking.' : ' Nothing blocking now. Ready to place.'); c.log.unshift(['2:40 PM', b.who + (b.kind === 'deposit' ? ' deposit paid' : ' measurements in') + ' · Marco T.']); }) });
+        }
+        const subText = b.sent && !b.done ? b.sent + (b.sub ? ' · ' + b.sub : '') : b.sub;
+        checks.push({
+          done: b.done, who: b.who, text: b.done ? (b.kind === 'deposit' ? 'deposit paid' : 'measurements in') : b.text,
+          color: b.done ? '#A39A8B' : '#EEE7D9',
+          boxBg: b.done ? '#C29E62' : 'transparent', boxBd: b.done ? '#C29E62' : '#E86A5E',
+          hasSub: !b.done && !!subText, sub: subText, subColor: b.sent ? '#C9A66B' : '#8E8676',
+          actions: actions, sr: b.done ? 'Done: ' : 'Blocking: '
+        });
+      });
+      const ready = e === 1;
+      const placeHelp = e === 0
+        ? 'Place order unlocks when nothing is blocking. Waiting on ' + open.length + (open.length === 1 ? ' item.' : ' items.') + ' Due ' + o.deadline + '.'
+        : 'Sends all ' + this.total(o) + ' pieces to the rental warehouse for ' + o.event + '.';
+      const keys = this.keys(o);
+      const c = o.checkin || {};
+      const done = this.checkedCount(o);
+      const tot = this.total(o);
+      const ciGroups = o.people.map((p, i) => {
+        const names = this.pieceNames(o, p);
+        const k = names.map((_, j) => i + '-' + j);
+        const n = k.filter((x) => c[x]).length;
+        return {
+          name: p.name, count: n + ' of ' + names.length, total: names.length, canAll: n < names.length,
+          all: () => this.upd(o.id, (cc) => { cc.checkin = cc.checkin || {}; k.forEach((x) => { cc.checkin[x] = true; }); this.afterCheck(cc); }),
+          pieces: names.map((label, j) => {
+            const on = !!c[i + '-' + j];
+            return {
+              label: label, on: on,
+              bg: on ? '#221F1B' : 'transparent', bd: on ? '#8C7247' : '#4A4237', fg: on ? '#EEE7D9' : '#A39A8B',
+              toggle: () => this.upd(o.id, (cc) => { cc.checkin = cc.checkin || {}; cc.checkin[i + '-' + j] = !on; this.afterCheck(cc); })
+            };
+          })
+        };
+      });
+      const outs = o.outs ? o.outs.map((x) => ({
+        name: x.name, open: !x.back,
+        status: x.back ? 'Back ' + (x.when || 'just now') + ' · all 7 pieces' : 'Not back · due Mon, Nov 30 · ' + x.phone + (x.reminded ? ' · texted just now' : ''),
+        color: x.back ? '#A39A8B' : '#E86A5E',
+        remindLabel: x.reminded ? 'Remind again' : 'Remind',
+        remind: () => this.upd(o.id, (cc) => { cc.outs.find((y) => y.name === x.name).reminded = true; cc.note = 'Return reminder texted to ' + x.name + '.'; cc.log.unshift(['2:40 PM', cc.note.replace(/\.$/, '') + ' · Marco T.']); }),
+        back: () => this.upd(o.id, (cc) => { const y = cc.outs.find((z) => z.name === x.name); y.back = true; y.when = 'just now'; const left = cc.outs.filter((z) => !z.back).length; cc.note = x.name + '’s tux checked back in.' + (left ? ' ' + left + ' still out.' : ' All 6 back, ready to ship to the rental warehouse Fri, Dec 4.'); cc.log.unshift(['2:40 PM', x.name + ' returned · Marco T.']); })
+      })) : [];
+      const outLeft = o.outs ? o.outs.filter((x) => !x.back).length : 0;
+      const people = o.people.map((p) => {
+        const has = p.coat != null;
+        return {
+          name: p.name, role: p.role,
+          coat: has ? p.coat : '—',
+          pant: has ? p.waist + ' × ' + p.len : '—',
+          shirt: has && p.neck ? p.neck + ' / ' + p.sleeve : has ? '—' : 'Waiting',
+          vest: has ? p.vest : '—', tie: has ? p.tie : '—', shoe: has ? p.shoe : '—',
+          color: has ? '#EEE7D9' : '#E86A5E'
+        };
+      });
+      const missingM = o.people.filter((p) => p.coat == null).length;
+      d = {
+        no: o.no, kind: o.kind, party: o.party,
+        meta: (o.rental ? 'Event ' + o.event + ' · ' + o.venue + ' · ' + (o.people.length === 1 ? '1 person' : 'Party of ' + o.people.length) : 'Bought ' + o.event + ' · in store') + ' · ' + o.staff,
+        look: o.look,
+        steps: steps,
+        hasNote: !!o.note, note: o.note || '',
+        blockSummary: o.stage >= 2 ? 'Placed · nothing blocking' : open.length ? open.length + ' blocking' : 'Nothing blocking',
+        blockColor: open.length && o.stage < 2 ? '#E86A5E' : '#C9A66B',
+        checks: checks,
+        showOrderActions: o.stage < 2,
+        place: () => {
+          if (!ready) return;
+          this.upd(o.id, (cc) => {
+            cc.stage = 2; cc.placedOn = 'today'; cc.shipOn = cc.placed.ship; cc.arriving = cc.placed.arrive; cc.placedSub = 'Today';
+            cc.note = 'Placed with the rental warehouse at 2:40 PM by Marco T. · confirmation ' + cc.placed.conf + ' · ships ' + cc.placed.ship + ', arrives ' + cc.placed.arrive + '.';
+            cc.delivery = [['Placed', 'Today, Wed, Dec 2 · confirmation ' + cc.placed.conf], ['Ships', cc.placed.ship + ' from the rental warehouse'], ['Arrives', cc.placed.arrive], ['Tracking', 'Waiting for the shipping notice']];
+            cc.log.unshift(['2:40 PM', 'Placed with the rental warehouse · ' + cc.placed.conf + ' · Marco T.']);
+          });
+        },
+        placeOff: !ready,
+        placeBg: ready ? '#C29E62' : '#2A2621', placeFg: ready ? '#15130F' : '#8E8676', placeCursor: ready ? 'pointer' : 'not-allowed',
+        placeHelp: placeHelp,
+        showLinks: openDep.length > 0,
+        linksLabel: openDep.every((b) => b.sent) ? 'Resend deposit links' : 'Send deposit links (' + openDep.length + ')',
+        sendLinks: () => this.upd(o.id, (cc) => {
+          const dep = cc.blockers.filter((b) => !b.done && b.kind === 'deposit');
+          dep.forEach((b) => { b.sent = 'Deposit link sent just now'; });
+          cc.note = 'Deposit links texted to ' + dep.map((b) => b.who).join(', ') + '. You’ll see it here when they pay.';
+          cc.log.unshift(['2:40 PM', 'Deposit links texted to ' + dep.length + ' · Marco T.']);
+        }),
+        showShipped: e === 2,
+        markShipped: () => this.upd(o.id, (cc) => { cc.stage = 3; cc.note = 'Marked shipped. Arriving ' + cc.arriving + '.'; cc.delivery = cc.delivery.map((r) => r[0] === 'Tracking' ? ['Tracking', 'On the truck · shipped from the rental warehouse'] : r); cc.log.unshift(['2:40 PM', 'Marked shipped · Marco T.']); }),
+        showReceived: e === 3,
+        markReceived: () => this.upd(o.id, (cc) => { cc.stage = 4; cc.checkin = {}; cc.dates[4] = 'Today'; cc.note = 'Marked received today at 2:40 PM. Check in all ' + this.total(cc) + ' pieces below.'; cc.delivery = cc.delivery.map((r) => r[0] === 'Tracking' ? ['Tracking', 'Delivered · in the back room'] : r[0] === 'Arrives' ? ['Arrived', 'Today, Wed, Dec 2 · early'] : r); cc.log.unshift(['2:40 PM', 'Marked received · Marco T.']); }),
+        showCheckin: e >= 4,
+        ciText: done + ' of ' + tot + ' checked in',
+        ciColor: done === tot ? '#C9A66B' : '#EEE7D9',
+        ciPct: Math.round((done / tot) * 100) + '%',
+        checkAllLabel: done === tot ? 'Clear all' : 'Check in all ' + tot,
+        checkAll: () => this.upd(o.id, (cc) => { cc.checkin = {}; if (done !== tot) keys.forEach((k) => { cc.checkin[k] = true; }); this.afterCheck(cc); }),
+        ciGroups: ciGroups,
+        hasAlts: !!(o.alts && o.alts.length),
+        alts: (o.alts || []).map((a) => ({
+          what: a.what, open: !a.done,
+          text: a.done ? 'Back from Lou just now. Ready for pickup.' : a.text,
+          bd: a.done ? '#38322A' : '#E86A5E', bg: a.done ? 'transparent' : '#211614',
+          run: () => this.upd(o.id, (cc) => { cc.alts.find((x) => x.id === a.id).done = true; cc.note = 'Andre’s coat is back from Lou. All 35 pieces ready for pickup ' + cc.pickupOn + '.'; cc.log.unshift(['2:40 PM', 'Andre’s coat back from Lou · Marco T.']); })
+        })),
+        hasOuts: !!o.outs, outs: outs,
+        outText: outLeft ? (6 - outLeft) + ' of 6 back · ' + outLeft + ' still out' : 'All 6 back',
+        outColor: outLeft ? '#E86A5E' : '#C9A66B',
+        hasPickup: !!o.pickup,
+        pickupOpen: !!(o.pickup && !o.pickup.done),
+        pickupText: o.pickup ? (o.pickup.done ? 'Picked up just now. Order closed.' : 'On the pickup rack since Sat, Nov 28. Alan prefers a call: (585) 555-0109.' + (o.pickup.reminded ? ' Texted just now.' : '')) : '',
+        pickupRemindLabel: o.pickup && o.pickup.reminded ? 'Remind again' : 'Remind',
+        pickupRemind: () => this.upd(o.id, (cc) => { cc.pickup.reminded = true; cc.note = 'Pickup reminder texted to Alan Fitch.'; cc.log.unshift(['2:40 PM', 'Pickup reminder texted · Marco T.']); }),
+        pickupDone: () => this.upd(o.id, (cc) => { cc.pickup.done = true; cc.note = 'Alan Fitch picked up his navy suit.'; cc.log.unshift(['2:40 PM', 'Picked up · Marco T.']); }),
+        liSummary: o.rental ? tot + ' pieces · ' + (o.people.length === 1 ? '1 person' : o.people.length + ' people') + ' × 7' + (missingM ? ' · ' + missingM + ' sizes to come' : '') : '2 pieces · coat and pants',
+        people: people,
+        delivery: o.delivery.map((r) => ({ label: r[0], value: r[1] })),
+        log: o.log.map((l) => ({ when: l[0], what: l[1] })),
+        hasPartyLink: !!o.partyLink,
+        close: () => this.setState({ sel: null })
+      };
+    }
+
+    return {
+      q: s.q,
+      setQ: (ev) => this.setState({ q: ev.target.value }),
+      summary: summary,
+      tabs: tabs,
+      listTitle: listTitle,
+      rows: rows,
+      noRows: rows.length === 0,
+      noRowsText: q ? 'No orders match “' + s.q.trim() + '”.' : 'Nothing here right now.',
+      hasSel: !!o,
+      d: d
+    };
+  }
+  afterCheck(cc) {
+    const n = this.checkedCount(cc);
+    const t = this.total(cc);
+    if (n === t) {
+      cc.dates[5] = 'Today';
+      cc.note = 'All ' + t + ' pieces checked in. Ready for fittings and pickup.';
+      if (!cc.loggedCheckin) { cc.log.unshift(['2:40 PM', 'All ' + t + ' pieces checked in · Marco T.']); cc.loggedCheckin = true; }
+    }
+  }
+}
+</script>
+</body>
+</html>
