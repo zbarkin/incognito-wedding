@@ -32,55 +32,53 @@
 <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:stretch;">
 
 <section aria-label="Mannequin" style="flex:1 1 320px; min-width:0; box-sizing:border-box; padding:20px; background:{{t.stage}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; align-items:center; gap:14px;">
-<svg role="img" aria-label="{{stageLabel}}" viewBox="0 0 300 420" style="width:100%; max-width:340px; height:auto; display:block;">
-<ellipse cx="150" cy="402" rx="62" ry="10" fill="{{t.standDark}}"></ellipse>
-<rect x="146" y="250" width="8" height="150" fill="{{t.stand}}"></rect>
-<rect x="138" y="20" width="24" height="30" rx="6" fill="{{t.form}}"></rect>
-<path d="M 95 50 Q 150 38 205 50 L 220 120 Q 212 190 200 250 L 100 250 Q 88 190 80 120 Z" fill="{{t.form}}" stroke="{{t.formLine}}" stroke-width="1.5"></path>
-<path d="M 150 55 L 150 245" stroke="{{t.formLine}}" stroke-width="1" stroke-dasharray="3 4"></path>
+<svg role="img" aria-label="{{stageLabel}}" viewBox="-14 -8 424 568" style="width:100%; max-width:340px; height:auto; display:block;">
+<defs><linearGradient id="su-satin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{{t.lapel}}"></stop><stop offset=".45" stop-color="{{t.sheen}}"></stop><stop offset=".55" stop-color="{{t.lapel}}"></stop><stop offset="1" stop-color="{{t.lapel}}"></stop></linearGradient></defs>
+<ellipse cx="204" cy="548" rx="80" ry="9" fill="{{t.standDark}}"></ellipse>
+<rect x="200" y="380" width="8" height="166" fill="{{t.stand}}"></rect>
+<path transform="translate(62.2 0)" d="M97.81,16.02c6.17-7.98,20.91-12.97,42.96-15.06,23.38-2.22,41,3.92,50.31,12.97,20.6,20.03,106.94,54.31,106.94,54.31,0,0-25.74,26.61-36.01,77.16-16.17,79.58-16.74,201.97,8.34,247.22,5.31,9.59-254.26-1.36-254.26-1.36,0,0,22.67-148.64,7.26-245.86C16.44,101.87.68,66.51.68,66.51.68,66.51,79.35,39.88,97.81,16.02Z" fill="{{t.form}}" stroke="{{t.formLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
 <g display="{{show.shirt}}">
-<path d="M 95 52 L 70 70 L 62 200 L 82 200 L 86 110 Z" fill="#F4F1EA" stroke="#C9C2B2" stroke-width="1"></path>
-<path d="M 205 52 L 230 70 L 238 200 L 218 200 L 214 110 Z" fill="#F4F1EA" stroke="#C9C2B2" stroke-width="1"></path>
-<path d="M 95 50 Q 150 38 205 50 L 220 120 Q 212 190 200 250 L 100 250 Q 88 190 80 120 Z" fill="#F4F1EA" stroke="#C9C2B2" stroke-width="1"></path>
-<path d="M 135 45 L 150 64 L 165 45 L 160 36 L 140 36 Z" fill="#FFFFFF" stroke="#C9C2B2" stroke-width="1"></path>
-<path d="M 150 70 L 150 245" stroke="#D9D2C2" stroke-width="1.5"></path>
+<path transform="translate(62.11 18.06)" d="M97.9,15.58S121.47,1.57,142.52.52c23.45-1.17,158.25,50.04,158.25,50.04,0,0-86,189.34-44.67,284,15.41,35.3-245.97,25.28-238.12,4.63C23.39,324.94,36.77,104.79.77,49.9.77,49.9,97.9,15.58,97.9,15.58Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g transform="translate(151.1 8.45)"><path d="M37.12,32.71l17.64-22.65c-9.44-.49-19.87-2.09-29.31-2.59-6.39-.33-13.93.1-14.39-3.1C7.09,10.11.5,16.08.5,24.06L37.12,32.71Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M70.34,32.21l-15.33-22.15c9.15-.48,13.29.49,22.44,0,6.54-.34,14.67-3.83,18.54-9.39,9.13,5.56,8.27,8.18,13.27,15.08L70.34,32.21Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path></g>
 </g>
 <g display="{{show.trousers}}">
-<path d="M 100 248 L 200 248 L 207 336 L 157 336 L 150 292 L 143 336 L 93 336 Z" fill="#141414"></path>
-<path d="M 118 252 L 116 334 M 182 252 L 184 334" stroke="#2B2B2E" stroke-width="2"></path>
+<path d="M104 368 L304 368 L298 540 L213 540 L204 430 L195 540 L110 540 Z" fill="{{t.trouser}}" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="M112 372 L117 538 M296 372 L291 538" fill="none" stroke="{{t.lapelLine}}" stroke-width="2.5" vector-effect="non-scaling-stroke" opacity=".55"></path>
 </g>
-<g display="{{show.studs}}">
-<circle cx="150" cy="105" r="4" fill="#15130F" stroke="{{t.metal}}" stroke-width="1.5"></circle>
-<circle cx="150" cy="132" r="4" fill="#15130F" stroke="{{t.metal}}" stroke-width="1.5"></circle>
-<circle cx="150" cy="159" r="4" fill="#15130F" stroke="{{t.metal}}" stroke-width="1.5"></circle>
-</g>
+<g display="{{show.studs}}" transform="translate(204.1 74)"><circle cx="2.06" cy="1.95" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="1.95" cy="37.06" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2.06" cy="72.18" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2.06" cy="107.29" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
 <g display="{{show.cufflinks}}">
-<circle cx="72" cy="196" r="5" fill="{{t.metal}}"></circle>
-<circle cx="228" cy="196" r="5" fill="{{t.metal}}"></circle>
+<path d="M8 386 L72 385 L71 399 L7 400 Z M337 385 L393 387 L392 401 L336 399 Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<rect x="34" y="388" width="9" height="9" rx="1.5" fill="{{t.metal}}"></rect><rect x="360" y="389" width="9" height="9" rx="1.5" fill="{{t.metal}}"></rect>
 </g>
-<g display="{{show.vest}}">
-<path d="M 110 60 L 150 168 L 190 60 L 206 110 Q 204 190 200 250 L 100 250 Q 96 190 94 110 Z" fill="#17171A"></path>
-<circle cx="150" cy="190" r="2.6" fill="{{t.metal}}"></circle>
-<circle cx="150" cy="212" r="2.6" fill="{{t.metal}}"></circle>
-<circle cx="150" cy="234" r="2.6" fill="{{t.metal}}"></circle>
+<g display="{{show.vest}}" transform="translate(79.58 22.41)">
+<path d="M233.19,22.59c-10.87,19.57,7.4,153.53,7.4,153.53l.1,157.58-37.39,41.85-79.91-41.85-76.76,37.12-25-18.6L.51,334.84l4.66-148.6s-2.42-18.94-1.31-21.36C21.05,127.55,10.63,29.62,10.63,29.62L69.15,3.98l58.79,125.57L185.82.66l47.37,20.72" fill="{{t.vest}}" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="M127.94,129.55L123.39,333.7" fill="none" stroke="{{t.stitch}}" stroke-width=".75" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></path>
+<circle cx="134.54" cy="148.55" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="178.65" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="211.88" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="247.12" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="282.36" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle>
 </g>
-<g display="{{show.bowtie}}">
-<path d="M 150 53 L 129 41 L 129 65 Z M 150 53 L 171 41 L 171 65 Z" fill="{{tieColor}}"></path>
-<rect x="143" y="46" width="14" height="14" rx="3" fill="{{tieColor}}"></rect>
+<g display="{{show.bowtie}}" transform="translate(171.1 11.45)">
+<polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="{{t.tieShade}}"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="{{t.tieShade}}"></polyline>
+<polyline points="40.72 10.46 70.5 1.21 70.5 27.77 40.72 19.59" fill="{{tieColor}}"></polyline><polyline points="30.05 19.72 .27 28.98 .27 2.41 30.05 10.6" fill="{{tieColor}}"></polyline>
+<circle cx="35.12" cy="15.19" r="8.15" fill="{{t.tieShade}}"></circle>
 </g>
 <g display="{{show.jacket}}">
-<path d="M 90 52 L 66 68 L 58 205 L 82 205 L 86 110 Z" fill="#0E0E10"></path>
-<path d="M 210 52 L 234 68 L 242 205 L 218 205 L 214 110 Z" fill="#0E0E10"></path>
-<path d="M 92 50 L 140 44 L 150 200 L 147 262 L 96 256 Q 86 190 82 120 Z" fill="#0E0E10"></path>
-<path d="M 208 50 L 160 44 L 150 200 L 153 262 L 204 256 Q 214 190 218 120 Z" fill="#0E0E10"></path>
-<path d="M 140 44 L 150 200 L 118 130 L 108 96 L 128 100 Z" fill="#050506" stroke="#4A4A50" stroke-width="1"></path>
-<path d="M 160 44 L 150 200 L 182 130 L 192 96 L 172 100 Z" fill="#050506" stroke="#4A4A50" stroke-width="1"></path>
-<circle cx="150" cy="214" r="5" fill="#050506" stroke="#4A4A50" stroke-width="1"></circle>
+<g transform="translate(0 17.78)">
+<path d="M157.04,3.8L42.73,53.97s-8.12,23.88-25.5,118.82c-6.67,36.43-6.43,33.46-7.85,59.05C2.35,357.76.55,376.92.55,376.92l74.23-1.01,2.62-139.91,5.56-105.84s2.01,138.32,1.83,158.56c-.18,21.7-7.85,86.46-7.85,86.46l257.54,1.43s-14.76-59.38-15.58-79.65c-.9-22.3,7.02-166.8,7.02-166.8,0,0,5.3,139.54,6.07,160.07.8,21.28,2.83,84.12,2.83,84.12l58.33,1.85s3.76-115.13-.01-141.36c-7.35-51.08-7.8-70.16-18.74-148.99-2.1-15.17-9.76-38.1-9.76-38.1L254.93.73s-18.52,229.28-49.92,232.36C186.36,234.92,157.04,3.8,157.04,3.8Z" fill="{{t.cloth}}" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="{{art.vent}}" fill="none" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="M47.22,56.51c7.01,5.08,22.05,17.48,30.44,39.11,4.98,12.83,5.85,24.36,5.78,32" fill="{{t.cloth}}"></path>
+<path d="M47.82,56.95c7.24,5.34,21.68,17.64,29.84,38.67,4.87,12.56,5.81,23.86,5.78,31.5" fill="none" stroke="{{t.stitch}}" stroke-width=".75" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></path>
+<path d="M325.66,127.62c-.3-8.31.31-20.41,4.89-34,8.18-24.28,24.14-38.79,31.78-44.89" fill="{{t.cloth}}"></path>
+<path d="M325.64,126.88c-.24-8.28.46-20.07,4.91-33.26,8.05-23.87,23.61-38.3,31.39-44.57" fill="none" stroke="{{t.stitch}}" stroke-width=".75" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></path>
+<path d="M277.17 108.16H320.17 M245.38 320.51H312.77 M100.63 320.51H168.02" fill="none" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g display="{{art.frontButtons}}"><circle cx="211.87" cy="278.93" r="5.77" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="211.87" cy="324.93" r="5.77" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
+<circle cx="10.77" cy="345.64" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="11.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.13" cy="345.66" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle>
+<g display="{{art.shawl}}"><circle cx="11.44" cy="365.3" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="10.58" cy="355.37" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="383.09" cy="365.08" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="385.14" cy="355.33" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
 </g>
-<g display="{{show.square}}">
-<path d="M 172 128 L 202 124" stroke="#4A4A50" stroke-width="2"></path>
-<path d="M 175 126 L 181 112 L 188 125 L 194 111 L 200 124 Z" fill="{{squareColor}}"></path>
+<g transform="{{art.lapelAt}}">
+<path d="{{art.lapelL}}" fill="url(#su-satin)" stroke="{{t.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{art.lapelR}}" fill="url(#su-satin)" stroke="{{t.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g display="{{art.shawl}}"><circle cx="83.27" cy="265.54" r="4.5" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
 </g>
+</g>
+<g display="{{show.square}}"><polygon points="281.88 124.62 283.22 120.96 316.86 117.65 317.55 124.62 281.88 124.62" fill="{{squareColor}}"></polygon></g>
 </svg>
 <div role="img" aria-label="{{progressLabel}}" style="display:flex; gap:6px;">
 <sc-for list="{{pips}}" as="p" hint-placeholder-count="8">
@@ -175,6 +173,7 @@ class Component extends DCLogic {
         pointsLine: '+50 points for the squad.', crewName: 'Squad 85', againLabel: 'Run it back', signupLabel: 'Sign up your squad for prom', signupHref: 'PromKodak.dc.html',
         aliases: { shirt: 'Base layer', trousers: 'The slacks', studs: 'Hardware', cufflinks: 'More hardware', vest: 'The vest', bowtie: 'The tie', jacket: 'The jacket', square: 'Finishing touch' },
         tie: '#7A1F2E', square: '#F4F1EA',
+        lapelStyle: 'notch', shirt: '#F4F1EA', shirtLine: '#C9C2B2', cloth: '#141312', line: '#C29E62', lapel: '#0A0908', lapelLine: '#C29E62', stitch: '#C29E62', vest: '#1A1816', tieShade: '#561522', sheen: '#6B5634', trouser: '#141312',
         footnote: 'Times are for fun. Your real fitting happens in the shop.'
       },
       birch: {
@@ -189,6 +188,7 @@ class Component extends DCLogic {
         pointsLine: '+50 points for your crew.', crewName: 'Crew Silver Fox', againLabel: 'Run it again', signupLabel: 'Brief your crew for prom', signupHref: 'PromBirch.dc.html',
         aliases: { shirt: 'Base cover', trousers: 'Field trousers', studs: 'Signal studs', cufflinks: 'Gold cufflinks', vest: 'Body layer', bowtie: 'Black tie', jacket: 'Dinner jacket', square: 'Signature' },
         tie: '#0E0E10', square: '#F4F1EA',
+        lapelStyle: 'shawl', shirt: '#F4F1EA', shirtLine: '#B9BDBF', cloth: '#131316', line: '#B9BDBF', lapel: '#09090B', lapelLine: '#E2E5E7', stitch: '#8F9396', vest: '#19191C', tieShade: '#2C2C31', sheen: '#55585C', trouser: '#131316',
         footnote: 'Times are for fun. Your real fitting happens in the shop.'
       },
       park: {
@@ -203,9 +203,20 @@ class Component extends DCLogic {
         pointsLine: '+50 points for your crew.', crewName: 'The Penfield Irregulars', againLabel: 'Reopen the case', signupLabel: 'Enlist your crew for prom', signupHref: 'PromPark.dc.html',
         aliases: { shirt: 'Exhibit A', trousers: 'Exhibit B', studs: 'Exhibit C', cufflinks: 'Exhibit D', vest: 'Exhibit E', bowtie: 'Exhibit F', jacket: 'Exhibit G', square: 'Exhibit H' },
         tie: '#7B2D26', square: '#F2EAD8',
+        lapelStyle: 'peak', shirt: '#F2EAD8', shirtLine: '#B9AE95', cloth: '#14211B', line: '#C6A867', lapel: '#0B1511', lapelLine: '#C6A867', stitch: '#8F7440', vest: '#2A2015', tieShade: '#56201B', sheen: '#3F5A48', trouser: '#101813',
         footnote: 'Times are for fun. Your real fitting happens in the shop.'
       }
     };
+  }
+  lapels(style) {
+    const L = {
+      notch: ['translate(118.96 12.83)', 'M38.05,1.85L2.94,42.3l12.56,1.64L.6,58.81l83.38,183.87s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.3-34.05-9.34-34.67-27.65-102.37-28.44-106.95C39.55,37.39,38.05,1.85,38.05,1.85Z', 'M134.33,1.11l40.75,41.08-12.4,1.64,13.38,13.53-95.85,210.41s6.29-34.43,6.94-35.72c6.03-11.96,12.08-34.32,12.73-37.27,7.98-36.01,26.91-103.88,27.26-108.52C130.9,35.47,134.33,1.11,134.33,1.11Z'],
+      peak: ['translate(105.03 12.48)', 'M52.32,2.2L17.21,42.65l38.94,5.09L.85,40.76l97.4,202.27s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.31-34.05-9.33-34.67-27.65-102.37-28.43-106.95C53.81,37.74,52.32,2.2,52.32,2.2Z', 'M148.6,1.46l28,42.73-30.23,4.11,51.29-6.7-103.18,226.52s6.29-34.42,6.94-35.72c6.03-11.95,12.08-34.32,12.73-37.27,7.98-36,26.91-103.88,27.25-108.52C145.17,35.82,148.6,1.46,148.6,1.46Z'],
+      shawl: ['translate(125.33 13.7)', 'M31.71,1L1.29,14.39c-5.52.32,18.11,152.67,63.89,240.25,6.44,12.33,12.25,21.91,15.86,28.08,0-7.89,1.93-20.55-2.27-34.6-17.7-59.18-23.07-91.44-33.03-138.08C31.71,44.39,31.71,1,31.71,1Z', 'M128.99.69l23.41,9.26s-12.67,160.44-59.68,244.5c-6.83,12.21-8.08,22.06-11.68,28.27,0-7.94-6.02-20.69-1.84-34.84,17.61-59.58,22.18-92.5,30.53-139.16C121.8,41.39,128.99.69,128.99.69Z']
+    };
+    const l = L[style] || L.notch;
+    const shawl = style === 'shawl';
+    return { lapelAt: l[0], lapelL: l[1], lapelR: l[2], shawl: shawl ? 'inline' : 'none', frontButtons: shawl ? 'none' : 'inline', vent: shawl ? 'M208.04,376.92s-2.33-8.17,0-107.47' : 'M200.5,376.92s-2.33-8.17,0-107.47' };
   }
   fmt(ms) {
     return (Math.max(0, ms) / 1000).toFixed(1) + 's';
@@ -291,6 +302,7 @@ class Component extends DCLogic {
     const next = pieces[s.placed];
     return {
       t: t,
+      art: this.lapels(t.lapelStyle),
       show: show,
       tieColor: t.tie,
       squareColor: t.square,
