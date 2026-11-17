@@ -225,6 +225,110 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </sc-if>
 </section>
 
+<section aria-labelledby="msg-h" style="background:#1A1816; border:1px solid #38322A; padding:24px; display:flex; flex-direction:column; gap:16px;">
+<div style="display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Text or email</span>
+<h2 id="msg-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">Message the party</h2>
+</div>
+
+<div role="group" aria-labelledby="tpl-l" style="display:flex; flex-direction:column; gap:8px;">
+<span id="tpl-l" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Message</span>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{msg.tpls}}" as="tp" hint-placeholder-count="6">
+<button type="button" class="ghost" aria-pressed="{{tp.on}}" onClick="{{tp.pick}}" style="height:36px; padding:0 12px; background:{{tp.bg}}; color:{{tp.fg}}; border:1px solid {{tp.bd}}; border-radius:18px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{tp.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<fieldset style="margin:0; padding:0; border:0; display:flex; flex-direction:column; gap:8px; min-width:0;">
+<legend style="padding:0; margin-bottom:8px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">To · {{msg.toCount}}</legend>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{msg.groups}}" as="g" hint-placeholder-count="4">
+<button type="button" class="ghost" onClick="{{g.pick}}" style="height:32px; padding:0 10px; background:transparent; color:#C9A66B; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">{{g.label}}</button>
+</sc-for>
+</div>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; border-top:1px solid #2A2621;">
+<sc-for list="{{msg.people}}" as="r" hint-placeholder-count="9">
+<li style="border-bottom:1px solid #2A2621;">
+<label style="display:flex; align-items:center; gap:12px; min-height:44px; padding:4px 0; cursor:{{r.cursor}}; opacity:{{r.opacity}};">
+<input type="checkbox" checked="{{r.on}}" disabled="{{r.off}}" onChange="{{r.toggle}}" style="width:18px; height:18px; margin:0; accent-color:#C29E62; flex:0 0 18px;">
+<span style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:1px;">
+<span style="font-size:14px; font-weight:600; color:#EEE7D9;">{{r.name}}</span>
+<span style="font-size:12px; color:#A39A8B;">{{r.contact}}</span>
+</span>
+<sc-if value="{{r.hasTag}}" hint-placeholder-val="{{true}}">
+<span style="flex:0 0 auto; font-size:11px; font-weight:700; color:{{r.tagColor}};">{{r.tag}}</span>
+</sc-if>
+</label>
+</li>
+</sc-for>
+</ul>
+</fieldset>
+
+<div role="group" aria-labelledby="ch-l" style="display:flex; flex-direction:column; gap:8px;">
+<span id="ch-l" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Send by</span>
+<div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); border:1px solid #38322A; border-radius:2px;">
+<sc-for list="{{msg.channels}}" as="c" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="height:40px; padding:0 8px; background:{{c.bg}}; color:{{c.fg}}; border:0; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{c.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{msg.showSubject}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<label for="msg-subject" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Email subject</label>
+<input id="msg-subject" class="fld" type="text" value="{{msg.subject}}" onChange="{{msg.setSubject}}" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+</div>
+</sc-if>
+
+<div style="display:flex; flex-direction:column; gap:6px;">
+<label for="msg-body" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Words</label>
+<textarea id="msg-body" class="fld" rows="5" value="{{msg.body}}" onChange="{{msg.setBody}}" aria-describedby="msg-help" style="box-sizing:border-box; width:100%; min-height:128px; padding:10px 12px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; line-height:1.5;"></textarea>
+<span id="msg-help" style="font-size:12px; line-height:1.5; color:#8E8676;">{first} becomes each person’s first name. {link} becomes their own party-page link.</span>
+</div>
+
+<sc-if value="{{msg.hasPreview}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-direction:column; gap:8px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">What {{msg.previewName}} gets</span>
+<div style="align-self:flex-start; max-width:92%; padding:10px 14px; background:#2B2620; border-radius:16px 16px 16px 4px; font-size:14px; line-height:1.5; color:#EEE7D9; white-space:pre-wrap; overflow-wrap:anywhere;">{{msg.preview}}</div>
+<span style="font-size:12px; color:#8E8676;">{{msg.lengthNote}}</span>
+</div>
+</sc-if>
+
+<button type="button" class="btn" onClick="{{msg.send}}" disabled="{{msg.cantSend}}" style="height:48px; padding:0 18px; background:{{msg.sendBg}}; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:14px; cursor:{{msg.sendCursor}};">{{msg.sendLabel}}</button>
+<p aria-live="polite" style="margin:0; font-size:13px; line-height:1.5; color:#C9A66B;">{{msg.status}}</p>
+
+<div style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:1px solid #2A2621;">
+<button type="button" class="ghost" aria-expanded="{{msg.ownOpen}}" aria-controls="own-list" onClick="{{msg.toggleOwn}}" style="align-self:flex-start; height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{msg.ownLabel}}</button>
+<sc-if value="{{msg.ownOpen}}" hint-placeholder-val="{{false}}">
+<div id="own-list" style="display:flex; flex-direction:column; gap:8px;">
+<span style="font-size:12px; line-height:1.5; color:#8E8676;">Opens your phone’s messages or your email app with the words filled in, one person at a time. Nothing is logged here.</span>
+<ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+<sc-for list="{{msg.own}}" as="o" hint-placeholder-count="3">
+<li style="display:flex; align-items:center; gap:8px;">
+<span style="flex:1 1 auto; min-width:0; font-size:14px; color:#EEE7D9;">{{o.name}}</span>
+<a href="{{o.sms}}" class="ghost" style="display:inline-flex; align-items:center; height:34px; padding:0 10px; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:12px; font-weight:600;">Text<span class="sr"> {{o.name}}</span></a>
+<a href="{{o.mail}}" class="ghost" style="display:inline-flex; align-items:center; height:34px; padding:0 10px; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:12px; font-weight:600;">Email<span class="sr"> {{o.name}}</span></a>
+</li>
+</sc-for>
+</ul>
+</div>
+</sc-if>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:4px; padding-top:12px; border-top:1px solid #2A2621;">
+<h3 style="margin:0 0 4px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Sent</h3>
+<ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<sc-for list="{{msg.log}}" as="l" hint-placeholder-count="3">
+<li style="display:flex; flex-direction:column; gap:2px; padding:9px 0; border-bottom:1px solid #2A2621;">
+<span style="font-size:14px; font-weight:600; color:#EEE7D9;">{{l.what}}</span>
+<span style="font-size:12px; line-height:1.5; color:#A39A8B;">{{l.detail}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
 <section aria-labelledby="notes-h" style="background:#1A1816; border:1px solid #38322A; padding:24px; display:flex; flex-direction:column; gap:14px;">
 <h2 id="notes-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">Staff notes</h2>
 <label for="note-input" class="sr">Add a staff note</label>
@@ -259,6 +363,18 @@ class Component extends DCLogic {
       asked: {},
       done: {},
       draft: '',
+      msgTpl: 'measure',
+      msgTo: [4, 6, 8],
+      msgCh: 'text',
+      msgBody: this.templates().measure.body,
+      msgSubject: this.templates().measure.subject,
+      msgStatus: '',
+      msgOwn: false,
+      msgLog: [
+        { what: 'At-home measuring guide', detail: 'Nov 18 · Marco T. · text and email to Luis' },
+        { what: 'Party invites', detail: 'Nov 18 · sent automatically · text to all 8 with phones' },
+        { what: 'Welcome and consultation recap', detail: 'Nov 18 · Marco T. · email to Daniel' }
+      ],
       notes: [
         { who: 'JR', byline: 'Jess R. · Nov 21', text: 'Measured Victor in store. He likes a little room in the jacket, so go one size up if he’s between sizes.' },
         { who: 'MT', byline: 'Marco T. · Nov 18', text: 'Groom wants midnight navy for himself, black for everyone else. Owen (ring bearer) is 7, boys’ sizing.' },
@@ -277,7 +393,114 @@ class Component extends DCLogic {
       { id: 7, name: 'Victor Okafor', role: 'Father of the groom', phone: '(585) 555-0102', invite: 'Joined', source: 'Measured in store · Nov 21 · Jess R.', m: { ht: 71, wt: 205, chest: 44, overarm: 51, neck: 17, sleeve: 34, waist: 40, hip: 43, outseam: 43, shoe: '11 E' }, dep: true },
       { id: 8, name: 'Richard Whitman', role: 'Father of the bride', phone: '(585) 555-0175', invite: 'Invite not opened · sent Nov 18', missing: 'Hasn’t opened his invite. A phone call may work better than another text.', dep: false },
       { id: 9, name: 'Owen Whitman', role: 'Ring bearer · age 7', phone: 'Through Sam Whitman', invite: 'Through his dad', missing: 'Boys’ sizing. Needs to come in to be measured, ideally with Sam.', dep: false }
-    ];
+    ].map((p) => {
+      const d = p.phone.replace(/\D/g, '');
+      const parts = p.name.toLowerCase().split(' ');
+      return Object.assign(p, { phoneNum: d.length === 10 ? '+1' + d : '', email: d.length === 10 ? parts[0] + '.' + parts[1] + '@example.com' : '', code: 'ow' + p.id + 'k' + (p.id * 7 + 3) });
+    });
+  }
+  templates() {
+    return {
+      measure: { label: 'Measurements', subject: 'Your measurements for Daniel & Claire’s wedding', body: 'Hi {first}, it’s Marco at Incognito Menswear. We still need your measurements for Daniel & Claire’s wedding on Jan 23. They’re due Sat, Dec 12 and take about 10 minutes: {link}\nQuestions? Reply here or call (585) 586-7846.' },
+      deposit: { label: 'Deposit', subject: 'Your deposit for Daniel & Claire’s wedding', body: 'Hi {first}, it’s Marco at Incognito. Your deposit for Daniel & Claire’s wedding is still open. Pay it here so we can place the order by Dec 19: {link}' },
+      fitting: { label: 'Fitting', subject: 'Book your fitting at Incognito', body: 'Hi {first}, fittings for Daniel & Claire’s wedding run Jan 14–20 at Incognito, 1823 Penfield Rd. Pick a time that works for you: {link}' },
+      pickup: { label: 'Pickup', subject: 'Your tux is ready for pickup', body: 'Hi {first}, your tux is ready! Pick it up Thu, Jan 21 at Incognito, 1823 Penfield Rd, Penfield. We’re open 12–7. Your page: {link}' },
+      returns: { label: 'Return', subject: 'Returning your tux', body: 'Hi {first}, thanks for wearing Incognito! Please bring everything back by Mon, Jan 25. We’re open 12–7. Just leave it on the hanger in the bag.' },
+      custom: { label: 'Write my own', subject: 'A note from Incognito Menswear', body: 'Hi {first}, ' }
+    };
+  }
+  messageVals(M, first) {
+    const s = this.state;
+    const T = this.templates();
+    const reachable = (p) => !!p.phoneNum;
+    const ids = (list) => list.filter(reachable).map((p) => p.id);
+    const missing = M.filter((p) => !p.m);
+    const unpaid = M.filter((p) => !p.dep);
+    const P = M.find((p) => p.id === s.sel) || M[0];
+    const to = M.filter((p) => s.msgTo.indexOf(p.id) >= 0 && reachable(p));
+    const fill = (text, p) => text.replace(/\{first\}/g, first(p)).replace(/\{link\}/g, 'incognitomenswear.com/p/' + p.code);
+    const useText = s.msgCh !== 'email';
+    const useEmail = s.msgCh !== 'text';
+    const how = s.msgCh === 'both' ? 'text and email' : s.msgCh;
+    const pv = to[0] ? fill(s.msgBody, to[0]) : '';
+    const segs = Math.max(1, Math.ceil(pv.length / 160));
+    const groups = [
+      { label: 'Everyone', list: M },
+      { label: 'Missing measurements', list: missing },
+      { label: 'Deposit due', list: unpaid },
+      { label: 'Just ' + first(P), list: [P] }
+    ].map((g) => ({ label: g.label, pick: () => this.setState({ msgTo: ids(g.list), msgStatus: '' }) }));
+    const enc = encodeURIComponent;
+    return {
+      tpls: Object.keys(T).map((k) => {
+        const on = s.msgTpl === k;
+        return { label: T[k].label, on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', bd: on ? '#C29E62' : '#4A4237',
+          pick: () => this.compose(k, null) };
+      }),
+      groups: groups,
+      toCount: to.length === 1 ? '1 person' : to.length + ' people',
+      people: M.map((p) => {
+        const on = s.msgTo.indexOf(p.id) >= 0 && reachable(p);
+        const tag = !p.phoneNum ? 'Reach through Sam' : !p.m ? 'No measurements' : !p.dep ? 'Deposit due' : '';
+        return {
+          name: p.name, on: on, off: !reachable(p),
+          contact: p.phoneNum ? p.phone + ' · ' + p.email : p.phone,
+          hasTag: !!tag, tag: tag, tagColor: !p.m && p.phoneNum ? '#E86A5E' : '#A39A8B',
+          cursor: reachable(p) ? 'pointer' : 'default', opacity: reachable(p) ? 1 : 0.55,
+          toggle: () => {
+            const cur = this.state.msgTo;
+            this.setState({ msgTo: cur.indexOf(p.id) >= 0 ? cur.filter((x) => x !== p.id) : cur.concat([p.id]), msgStatus: '' });
+          }
+        };
+      }),
+      channels: [['text', 'Text'], ['email', 'Email'], ['both', 'Both']].map((c) => {
+        const on = s.msgCh === c[0];
+        return { label: c[1], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', pick: () => this.setState({ msgCh: c[0] }) };
+      }),
+      showSubject: useEmail,
+      subject: s.msgSubject,
+      setSubject: (e) => this.setState({ msgSubject: e.target.value }),
+      body: s.msgBody,
+      setBody: (e) => this.setState({ msgBody: e.target.value, msgStatus: '' }),
+      hasPreview: !!to[0],
+      previewName: to[0] ? first(to[0]) : '',
+      preview: pv,
+      lengthNote: useText ? pv.length + ' characters · ' + (segs === 1 ? 'fits in one text' : 'sends as ' + segs + ' texts') : 'Sent from hello@incognitomenswear.com',
+      cantSend: to.length === 0 || !s.msgBody.trim(),
+      sendBg: to.length && s.msgBody.trim() ? '#C29E62' : '#4A4237',
+      sendCursor: to.length && s.msgBody.trim() ? 'pointer' : 'not-allowed',
+      sendLabel: to.length ? 'Send to ' + (to.length === 1 ? first(to[0]) : to.length + ' people') + ' by ' + how : 'Pick who gets it',
+      status: s.msgStatus,
+      send: () => {
+        if (!to.length || !s.msgBody.trim()) return;
+        const done = Object.assign({}, s.done);
+        const asked = Object.assign({}, s.asked);
+        if (s.msgTpl === 'measure' && missing.filter(reachable).every((p) => s.msgTo.indexOf(p.id) >= 0)) done.remind = true;
+        if (s.msgTpl === 'deposit' && unpaid.filter(reachable).every((p) => s.msgTo.indexOf(p.id) >= 0)) done.links = true;
+        to.forEach((p) => { asked[p.id] = true; });
+        const names = to.map(first);
+        this.setState({
+          done: done, asked: asked,
+          msgStatus: 'Sent to ' + names.join(', ') + ' by ' + how + '. Replies land in the shop inbox.',
+          msgLog: [{ what: T[s.msgTpl].label + (s.msgTpl === 'custom' ? '' : ' message'), detail: 'Just now · Marco T. · ' + how + ' to ' + names.join(', ') }].concat(s.msgLog)
+        });
+      },
+      ownOpen: s.msgOwn,
+      ownLabel: s.msgOwn ? 'Hide' : 'Or send from your own phone or email',
+      toggleOwn: () => this.setState({ msgOwn: !this.state.msgOwn }),
+      own: to.map((p) => {
+        const text = fill(s.msgBody, p);
+        return { name: p.name, sms: 'sms:' + p.phoneNum + '?&body=' + enc(text), mail: 'mailto:' + p.email + '?subject=' + enc(s.msgSubject) + '&body=' + enc(text) };
+      }),
+      log: s.msgLog
+    };
+  }
+  compose(tpl, list) {
+    const T = this.templates();
+    const next = { msgTpl: tpl, msgBody: T[tpl].body, msgSubject: T[tpl].subject, msgStatus: '' };
+    if (list) next.msgTo = list;
+    this.setState(next);
+    if (list) setTimeout(() => { const h = document.getElementById('msg-h'); if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 0);
   }
   inches(v) {
     const whole = Math.floor(v);
@@ -357,7 +580,7 @@ class Component extends DCLogic {
       level: 'Due in 10 days',
       title: missing.length + ' people haven’t sent measurements',
       lines: missing.map((p) => ({ who: p.name + ':', text: p.missing })),
-      actions: [act(s.done.remind ? 'Reminders sent' : 'Text reminders to all ' + missing.length, mark('remind'), false), act('Call Richard', select(8), false)],
+      actions: [act(s.done.remind ? 'Reminders sent' : 'Write reminders to all ' + missing.length, () => this.compose('measure', missing.filter((p) => p.phoneNum).map((p) => p.id)), false), act('Call Richard', select(8), false)],
       resolved: false
     });
     items.push({
@@ -365,7 +588,7 @@ class Component extends DCLogic {
       level: 'Before the order',
       title: unpaid.length + ' deposits still out',
       lines: [{ who: '', text: unpaid.map(first).join(', ') + '. The order can’t go in until every deposit is paid.' }],
-      actions: [act(s.done.links ? 'Deposit links sent' : 'Send deposit links', mark('links'), false)],
+      actions: [act(s.done.links ? 'Deposit links sent' : 'Write deposit reminders', () => this.compose('deposit', unpaid.filter((p) => p.phoneNum).map((p) => p.id)), false)],
       resolved: false
     });
     items.push({
@@ -464,8 +687,13 @@ class Component extends DCLogic {
       shirt: P.m ? this.inches(P.m.neck).replace('″', '') + ' / ' + Math.round(P.m.sleeve) : '—',
       shoe: P.m ? P.m.shoe : '—',
       missingNote: P.missing || '',
-      askLabel: askedNow ? 'Texted just now' : P.m ? 'Text ' + first(P) + ' to re-check' : 'Text ' + first(P) + ' a reminder',
-      ask: () => this.setState({ asked: Object.assign({}, this.state.asked, { [P.id]: true }) }),
+      askLabel: askedNow ? 'Messaged just now' : !P.phoneNum ? 'Reach through Sam' : P.m ? 'Ask ' + first(P) + ' to re-check' : 'Remind ' + first(P),
+      ask: () => {
+        if (!P.phoneNum) return;
+        if (!P.m) { this.compose('measure', [P.id]); return; }
+        this.compose('custom', [P.id]);
+        this.setState({ msgBody: 'Hi {first}, it’s Marco at Incognito. Thanks for sending your measurements! One number looks off: ' + pc.map((x) => x.field).join(' and ') + '. Could you have someone re-measure it? The how-to is on your page: {link}', msgSubject: 'Quick re-check on your measurements' });
+      },
       confirm: () => this.setState({ checked: Object.assign({}, this.state.checked, { [P.id]: true }) })
     };
 
@@ -475,6 +703,7 @@ class Component extends DCLogic {
       openText: openCount + ' open · next deadline Sat, Dec 12',
       members: members,
       sel: sel,
+      msg: this.messageVals(M, first),
       orderBlock: 'Waiting on ' + blockers.join(', '),
       notes: s.notes,
       draft: s.draft,
