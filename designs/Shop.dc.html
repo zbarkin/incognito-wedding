@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Shop · Incognito</title>
+<script src="./support.js"></script>
+<script src="../shop/commerce.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+.sh-card{position:relative}
+.sh-card .sh-swap{opacity:0; transition:opacity .25s ease}
+.sh-card:hover .sh-swap, .sh-card:focus-within .sh-swap{opacity:1}
+.sh-card:hover .sh-name{color:#E2C48E}
+.sh-btn:hover{background:#D4B47A !important}
+.sh-ghost:hover{border-color:#C9A66B !important}
+.sh-size:not([disabled]):hover{border-color:#C9A66B !important}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.sh-card .sh-swap{transition:none}}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-direction:column;">
+
+<header style="background:#0C0B0A; border-bottom:1px solid #2E2923; position:sticky; top:0; z-index:20;">
+<div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:14px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 24px;">
+<a href="Main.dc.html" aria-label="Incognito Menswear and Tux Shop" style="display:flex; align-items:stretch; text-decoration:none;">
+<span style="display:flex; border:1px solid #C9A66B; padding:3px;">
+<span style="display:flex; flex-direction:column; align-items:center; border:1px solid #C9A66B; padding:7px 14px 6px;">
+<span style="font-family:Rokkitt, serif; font-weight:700; font-size:22px; line-height:1; letter-spacing:.16em; color:#EEE7D9;">INCOGNITO</span>
+<span style="margin-top:5px; padding-top:4px; border-top:1px solid #8C7247; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:9px; line-height:1; letter-spacing:.38em; color:#C9A66B;">MENSWEAR &amp; TUX</span>
+</span>
+</span>
+<span style="display:flex; align-items:center; margin-left:5px; padding:0 8px; border:1.5px solid #E86A5E; font-family:Rokkitt, serif; font-weight:700; font-size:16px; color:#E86A5E;">1985</span>
+</a>
+<nav aria-label="Main" style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; font-size:15px;">
+<a href="Main.dc.html" style="color:#A39A8B; text-decoration:none;">Weddings</a>
+<a href="PromKodak.dc.html" style="color:#A39A8B; text-decoration:none;">Prom</a>
+<a href="Shop.dc.html" aria-current="page" style="color:#EEE7D9; text-decoration:none; border-bottom:2px solid #C29E62; padding-bottom:2px;">Shop</a>
+<a href="Book.dc.html" style="color:#A39A8B; text-decoration:none;">Book a fitting</a>
+<button type="button" class="sh-ghost" onClick="{{openCart}}" aria-label="{{cartAria}}" style="height:44px; padding:0 16px; display:inline-flex; align-items:center; gap:10px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7Z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
+Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border-radius:11px; background:{{cartBadgeBg}}; color:#15130F; font-size:12px; font-weight:700;">{{cartCount}}</span>
+</button>
+</nav>
+</div>
+</header>
+
+<main style="flex:1 0 auto; width:100%; max-width:1280px; margin:0 auto; box-sizing:border-box; padding:48px 32px 72px; display:flex; flex-direction:column; gap:28px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 40px;">
+<div style="display:flex; flex-direction:column; gap:10px; max-width:640px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#C9A66B;">The shop</span>
+<h1 style="margin:0; font-family:norman-stencil-fat, Rokkitt, serif; font-weight:800; font-size:clamp(40px, 6vw, 64px); line-height:1; color:#EEE7D9;">SUITS TO OWN</h1>
+<p style="margin:0; font-size:18px; line-height:1.5; color:#A39A8B;">The wedding suits and dinner jackets we fit in Penfield, to buy and keep. Order online, then come in and we’ll tailor it to you.</p>
+</div>
+<span style="font-size:14px; color:#A39A8B;">{{countLine}}</span>
+</div>
+
+<sc-if value="{{loading}}" hint-placeholder-val="{{false}}">
+<p style="margin:0; font-size:16px; color:#A39A8B;">Loading the collection…</p>
+</sc-if>
+<sc-if value="{{loadError}}" hint-placeholder-val="{{false}}">
+<p role="alert" style="margin:0; padding:14px 16px; border:1px solid #E86A5E; color:#EEE7D9; font-size:15px;">{{loadError}}</p>
+</sc-if>
+
+<section aria-label="Filter the collection" style="display:flex; flex-direction:column; gap:16px; padding:18px 0; border-top:1px solid #2E2923; border-bottom:1px solid #2E2923;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
+<div role="group" aria-label="Type" style="display:flex; gap:6px; flex-wrap:wrap;">
+<sc-for list="{{types}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; padding:0 18px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;">
+<label style="display:flex; align-items:center; gap:8px; font-size:14px; color:#EEE7D9; cursor:pointer;"><input id="sh-instock" type="checkbox" checked="{{inStock}}" onChange="{{toggleStock}}" style="width:18px; height:18px; accent-color:#C29E62;">In stock only</label>
+<label style="display:flex; align-items:center; gap:8px; font-size:14px; color:#A39A8B;">Sort
+<select id="sh-sort" onChange="{{pickSort}}" style="height:40px; padding:0 10px; background:#0F0E0D; color:#EEE7D9; border:1px solid #38322A; border-radius:2px; font-family:Archivo, sans-serif; font-size:14px;">
+<sc-for list="{{sorts}}" as="o" hint-placeholder-count="3"><option value="{{o.id}}" selected="{{o.on}}">{{o.name}}</option></sc-for>
+</select>
+</label>
+</div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 28px;">
+<div role="group" aria-label="Collection" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B; margin-right:6px;">Collection</span>
+<sc-for list="{{lines}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:36px; padding:0 14px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:18px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+<div role="group" aria-label="Color" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B; margin-right:4px;">Color</span>
+<sc-for list="{{families}}" as="o" hint-placeholder-count="7">
+<button type="button" aria-pressed="{{o.on}}" aria-label="{{o.name}}" title="{{o.name}}" onClick="{{o.pick}}" style="width:32px; height:32px; padding:0; border-radius:50%; background:{{o.hex}}; border:1px solid rgba(238,231,217,.3); box-shadow:{{o.ring}}; cursor:pointer;"></button>
+</sc-for>
+<sc-if value="{{familyOn}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{clearFamily}}" style="height:32px; padding:0 10px; background:transparent; color:#C9A66B; border:0; font-family:Archivo, sans-serif; font-size:13px; text-decoration:underline; cursor:pointer;">Clear color</button></sc-if>
+</div>
+</div>
+</section>
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+<div style="padding:40px 0; display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+<p style="margin:0; font-size:18px;">Nothing matches those filters.</p>
+<button type="button" class="sh-ghost" onClick="{{resetFilters}}" style="height:44px; padding:0 18px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">Show everything</button>
+</div>
+</sc-if>
+
+<section aria-label="Products" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap:28px 22px;">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="8">
+<article class="sh-card" style="display:flex; flex-direction:column; gap:12px; min-width:0;">
+<button type="button" onClick="{{p.open}}" aria-label="{{p.aria}}" style="position:relative; display:block; padding:0; border:1px solid #2E2923; background:#FFFFFF; aspect-ratio:1 / 1; width:100%; overflow:hidden; cursor:pointer; border-radius:2px;">
+<img src="{{p.photo}}" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;">
+<img class="sh-swap" src="{{p.swatch}}" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#FFFFFF;">
+<sc-if value="{{p.soldOut}}" hint-placeholder-val="{{false}}"><span style="position:absolute; left:10px; top:10px; padding:5px 9px; background:#15130F; color:#EEE7D9; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;">Sold out</span></sc-if>
+</button>
+<div style="display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">{{p.kicker}}</span>
+<button type="button" class="sh-name" onClick="{{p.open}}" style="padding:0; background:none; border:0; text-align:left; color:#EEE7D9; font-family:Rokkitt, serif; font-weight:600; font-size:22px; line-height:1.15; cursor:pointer;">{{p.title}}</button>
+<span style="display:flex; align-items:center; gap:10px; font-size:15px;"><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{p.price}}</span><span aria-hidden="true" style="width:12px; height:12px; border-radius:50%; background:{{p.dot}}; border:1px solid rgba(238,231,217,.3);"></span><span style="color:#A39A8B; font-size:13px;">{{p.sizeLine}}</span></span>
+</div>
+</article>
+</sc-for>
+</section>
+
+<p style="margin:0; font-size:13px; line-height:1.5; color:#7E7668; max-width:760px;">Preview: products, photos and prices come from the current online store. Size labels are cleaned up and the descriptions are drafts. Checkout isn’t connected yet: carts are saved in this browser only.</p>
+</main>
+
+<sc-if value="{{detail.show}}" hint-placeholder-val="{{false}}">
+<div onClick="{{closeAll}}" style="position:fixed; inset:0; z-index:40; background:rgba(8,7,6,.72);"></div>
+<div role="dialog" aria-modal="true" aria-labelledby="sh-d-title" style="position:fixed; z-index:41; top:50%; left:50%; transform:translate(-50%,-50%); width:min(1040px, calc(100vw - 32px)); max-height:calc(100vh - 48px); overflow:auto; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; box-shadow:0 30px 80px rgba(0,0,0,.6);">
+<button type="button" onClick="{{closeAll}}" aria-label="Close" style="position:sticky; float:right; top:12px; margin:12px 12px 0 0; z-index:2; width:44px; height:44px; padding:0; background:#0F0E0D; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-size:22px; line-height:1; cursor:pointer;">×</button>
+<div style="display:flex; flex-wrap:wrap; gap:28px; padding:28px;">
+<div style="flex:1 1 380px; min-width:0; display:flex; flex-direction:column; gap:10px;">
+<div style="background:#FFFFFF; aspect-ratio:1 / 1; width:100%; border-radius:2px; overflow:hidden;">
+<img src="{{detail.image}}" alt="{{detail.imageAlt}}" style="display:block; width:100%; height:100%; object-fit:{{detail.fit}};">
+</div>
+<div role="group" aria-label="Pictures" style="display:flex; gap:8px; flex-wrap:wrap;">
+<sc-for list="{{detail.thumbs}}" as="th" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{th.on}}" aria-label="{{th.label}}" onClick="{{th.pick}}" style="width:72px; height:72px; padding:0; background:#FFFFFF; border:2px solid {{th.bd}}; border-radius:2px; overflow:hidden; cursor:pointer;"><img src="{{th.src}}" alt="" style="width:100%; height:100%; object-fit:{{th.fit}}; display:block;"></button>
+</sc-for>
+</div>
+</div>
+<div style="flex:1 1 360px; min-width:0; display:flex; flex-direction:column; gap:18px;">
+<div style="display:flex; flex-direction:column; gap:8px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#C9A66B;">{{detail.kicker}}</span>
+<h2 id="sh-d-title" style="margin:0; font-family:Rokkitt, serif; font-weight:700; font-size:32px; line-height:1.1;">{{detail.title}}</h2>
+<span style="font-size:22px; font-weight:700; font-variant-numeric:tabular-nums;">{{detail.price}}</span>
+</div>
+<p style="margin:0; font-size:16px; line-height:1.6; color:#D9D2C2;">{{detail.description}}</p>
+
+<sc-if value="{{detail.hasColors}}" hint-placeholder-val="{{false}}">
+<div role="radiogroup" aria-labelledby="sh-color-h" style="display:flex; flex-direction:column; gap:8px;">
+<span id="sh-color-h" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Color · {{detail.colorName}}</span>
+<div style="display:flex; gap:6px;">
+<sc-for list="{{detail.colors}}" as="c" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="height:40px; padding:0 16px; background:{{c.bg}}; color:{{c.fg}}; border:1px solid {{c.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">{{c.name}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<div role="radiogroup" aria-labelledby="sh-size-h" style="display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+<span id="sh-size-h" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Size · {{detail.sizeName}}</span>
+<a href="Measure.dc.html" style="font-size:13px; color:#C9A66B;">Not sure? Measure online</a>
+</div>
+<sc-for list="{{detail.sizeRows}}" as="row" hint-placeholder-count="3">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-size:13px; color:#A39A8B;">{{row.name}}</span>
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(76px, 1fr)); gap:6px;">
+<sc-for list="{{row.sizes}}" as="sz" hint-placeholder-count="6">
+<button type="button" role="radio" class="sh-size" aria-checked="{{sz.on}}" aria-label="{{sz.aria}}" disabled="{{sz.out}}" onClick="{{sz.pick}}" style="height:48px; padding:0 4px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; background:{{sz.bg}}; color:{{sz.fg}}; border:1px solid {{sz.bd}}; border-radius:2px; font-family:Archivo, sans-serif; cursor:{{sz.cursor}}; text-decoration:{{sz.deco}};"><span style="font-weight:700; font-size:14px;">{{sz.jacket}}</span><span style="font-size:11px; opacity:.75;">{{sz.waist}}</span></button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<span style="font-size:13px; line-height:1.5; color:#A39A8B;">Jacket size first, with the trouser waist that comes with it. Crossed-out sizes are sold out online; call and we’ll check the back room.</span>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+<button type="button" class="sh-btn" onClick="{{detail.add}}" disabled="{{detail.addDisabled}}" style="flex:1 1 220px; height:54px; padding:0 22px; background:{{detail.addBg}}; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:{{detail.addCursor}};">{{detail.addLabel}}</button>
+<a href="Book.dc.html" class="sh-ghost" style="flex:0 1 auto; height:54px; padding:0 20px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-weight:600; font-size:14px;">Book a fitting</a>
+</div>
+<span aria-live="polite" style="font-size:14px; color:{{detail.noteColor}};">{{detail.note}}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{cart.show}}" hint-placeholder-val="{{false}}">
+<div onClick="{{closeAll}}" style="position:fixed; inset:0; z-index:40; background:rgba(8,7,6,.6);"></div>
+<aside role="dialog" aria-modal="true" aria-labelledby="sh-cart-h" style="position:fixed; z-index:41; top:0; right:0; bottom:0; width:min(440px, 100vw); box-sizing:border-box; background:#1A1816; border-left:1px solid #38322A; display:flex; flex-direction:column;">
+<div style="display:flex; justify-content:space-between; align-items:center; padding:20px 22px; border-bottom:1px solid #2E2923;">
+<h2 id="sh-cart-h" style="margin:0; font-family:Rokkitt, serif; font-weight:700; font-size:26px;">Your cart</h2>
+<button type="button" onClick="{{closeAll}}" aria-label="Close cart" style="width:44px; height:44px; padding:0; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-size:22px; cursor:pointer;">×</button>
+</div>
+<div style="flex:1 1 auto; overflow:auto; padding:8px 22px;">
+<sc-if value="{{cart.empty}}" hint-placeholder-val="{{false}}"><p style="margin:24px 0; font-size:16px; color:#A39A8B;">Your cart is empty.</p></sc-if>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{cart.lines}}" as="l" hint-placeholder-count="2">
+<li style="display:flex; gap:14px; padding:16px 0; border-bottom:1px solid #2E2923;">
+<img src="{{l.image}}" alt="" style="width:72px; height:72px; flex:0 0 72px; object-fit:contain; background:#FFFFFF; border-radius:2px;">
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15;">{{l.title}}</span>
+<span style="font-size:13px; color:#A39A8B;">{{l.detail}}</span>
+<div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+<div role="group" aria-label="{{l.qtyAria}}" style="display:flex; align-items:center; border:1px solid #38322A;">
+<button type="button" onClick="{{l.minus}}" aria-label="One fewer" style="width:36px; height:36px; background:transparent; color:#EEE7D9; border:0; font-size:18px; cursor:pointer;">−</button>
+<span style="min-width:28px; text-align:center; font-variant-numeric:tabular-nums;">{{l.quantity}}</span>
+<button type="button" onClick="{{l.plus}}" aria-label="One more" style="width:36px; height:36px; background:transparent; color:#EEE7D9; border:0; font-size:18px; cursor:pointer;">+</button>
+</div>
+<span style="font-weight:700; font-variant-numeric:tabular-nums;">{{l.total}}</span>
+</div>
+<button type="button" onClick="{{l.remove}}" style="align-self:flex-start; padding:0; background:none; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:13px; text-decoration:underline; cursor:pointer;">Remove</button>
+</div>
+</li>
+</sc-for>
+</ul>
+</div>
+<div style="padding:18px 22px 22px; border-top:1px solid #2E2923; display:flex; flex-direction:column; gap:12px;">
+<div style="display:flex; justify-content:space-between; font-size:17px;"><span>Subtotal</span><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{cart.subtotal}}</span></div>
+<span style="font-size:13px; color:#A39A8B;">Tax and alterations are figured at checkout and your fitting.</span>
+<button type="button" class="sh-btn" onClick="{{cart.checkout}}" disabled="{{cart.empty}}" style="height:54px; background:{{cart.checkoutBg}}; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;">Check out</button>
+<sc-if value="{{cart.message}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin:0; padding:12px 14px; border:1px solid #8C7247; font-size:14px; line-height:1.5; color:#EEE7D9;">{{cart.message}} To order now, call <a href="tel:+15855867846" style="color:#C9A66B;">(585) 586-7846</a> or stop in at 1823 Penfield Rd.</p>
+</sc-if>
+</div>
+</aside>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":960}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      loading: true, error: '', catalog: null, cart: { lines: [] },
+      type: 'all', line: 'all', family: '', inStock: false, sort: 'featured',
+      open: '', img: 0, color: '', size: '', note: '', noteOk: true, cartOpen: false, cartMsg: ''
+    };
+  }
+  componentDidMount() {
+    const C = window.IncognitoCommerce;
+    if (!C) { this.setState({ loading: false, error: 'The shop couldn’t load. Refresh to try again.' }); return; }
+    Promise.all([C.getCatalog(), C.getCart()])
+      .then(([catalog, cart]) => this.setState({ loading: false, catalog: catalog, cart: cart }))
+      .catch((e) => this.setState({ loading: false, error: e.message }));
+    C.onCartChange((cart) => this.setState({ cart: { lines: cart.lines.slice() } }));
+    this.onKey = (e) => { if (e.key === 'Escape' && (this.state.open || this.state.cartOpen)) this.setState({ open: '', cartOpen: false, cartMsg: '' }); };
+    document.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { document.removeEventListener('keydown', this.onKey); }
+  money(n) { return '$' + Number(n).toFixed(2).replace(/\.00$/, ''); }
+  families() {
+    return [['blue', 'Blues', '#2A4A7A'], ['gray', 'Grays', '#8C8F94'], ['black', 'Black', '#121212'], ['brown', 'Browns and tans', '#A88660'], ['green', 'Greens', '#2F4A35'], ['red', 'Burgundy', '#6B1E2E'], ['white', 'Whites', '#F2EFE6']];
+  }
+  seg(list, key, extra) {
+    return list.map((o) => {
+      const on = this.state[key] === o[0];
+      return { name: o[1], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', bd: on ? '#C29E62' : '#4A4237', pick: () => this.setState(Object.assign({ [key]: o[0] }, extra || {})) };
+    });
+  }
+  openProduct(handle) {
+    const p = this.state.catalog.products.find((x) => x.handle === handle);
+    const colors = (p.options.find((o) => o.name === 'Color') || { values: [] }).values;
+    this.setState({ open: handle, img: 0, color: colors[0] || '', size: '', note: '', noteOk: true, cartOpen: false });
+  }
+  addToCart(p) {
+    const v = p.variants.find((x) => x.size === this.state.size && (x.color || '') === (this.state.color || ''));
+    if (!v) { this.setState({ note: 'Pick a size first.', noteOk: false }); return; }
+    window.IncognitoCommerce.addToCart(v.id, 1)
+      .then(() => this.setState({ note: 'Added to your cart: ' + p.title + ', ' + v.size + (v.color ? ', ' + v.color : '') + '.', noteOk: true }))
+      .catch((e) => this.setState({ note: e.message, noteOk: false }));
+  }
+  checkout() {
+    window.IncognitoCommerce.checkout().then((r) => {
+      if (r.ok && r.url) { window.location.href = r.url; return; }
+      this.setState({ cartMsg: r.message });
+    });
+  }
+  renderVals() {
+    const s = this.state;
+    const all = s.catalog ? s.catalog.products.filter((p) => !p.hidden) : [];
+    const famHex = {}; this.families().forEach((f) => { famHex[f[0]] = f[2]; });
+    let list = all.filter((p) => (s.type === 'all' || p.type === s.type) && (s.line === 'all' || p.line === s.line) && (!s.family || p.colorFamily === s.family) && (!s.inStock || p.available));
+    if (s.sort === 'low') list = list.slice().sort((a, b) => a.price - b.price);
+    if (s.sort === 'high') list = list.slice().sort((a, b) => b.price - a.price);
+    if (s.sort === 'featured') list = list.slice().sort((a, b) => (b.available - a.available));
+    const photoOf = (p) => (p.images.find((i) => i.kind === 'photo') || p.images[0]).src.replace(/^img\//, '../shop/img/');
+    const swatchOf = (p) => (p.images.find((i) => i.kind === 'swatch') || p.images[0]).src.replace(/^img\//, '../shop/img/');
+    const products = list.map((p) => {
+      const avail = p.variants.filter((v) => v.available).length;
+      return {
+        title: p.title.replace(/ Wedding Suit$/, '').replace(/ Dinner Jacket$/, ' Dinner Jacket'),
+        kicker: (p.line ? p.line + ' · ' : '') + (p.type === 'suit' ? 'Suit' : 'Dinner jacket') + (p.fabric ? ' · ' + p.fabric : ''),
+        price: this.money(p.price), dot: famHex[p.colorFamily], photo: photoOf(p), swatch: swatchOf(p),
+        soldOut: !p.available,
+        sizeLine: !p.available ? 'Sold out' : avail < 5 ? avail === 1 ? '1 size left' : avail + ' sizes left' : 'Sizes 36S–60L',
+        aria: p.title + ', ' + this.money(p.price) + (p.available ? '' : ', sold out'),
+        open: () => this.openProduct(p.handle)
+      };
+    });
+
+    // Product detail
+    let detail = { show: false };
+    const p = s.open && s.catalog ? s.catalog.products.find((x) => x.handle === s.open) : null;
+    if (p) {
+      const imgs = p.images.filter((i) => !p.variants.some((v) => v.color) || true);
+      const cur = imgs[Math.min(s.img, imgs.length - 1)];
+      const vs = p.variants.filter((v) => (v.color || '') === (s.color || ''));
+      const rows = [['S', 'Short'], ['R', 'Regular'], ['L', 'Long']].map((r) => ({
+        name: r[1],
+        sizes: vs.filter((v) => v.length === r[0]).map((v) => {
+          const on = s.size === v.size;
+          return {
+            jacket: v.chest + r[0], waist: v.waist + 'W', on: on, out: !v.available,
+            aria: v.chest + ' ' + r[1].toLowerCase() + ' jacket with ' + v.waist + ' inch waist' + (v.available ? '' : ', sold out'),
+            bg: on ? '#C29E62' : '#0F0E0D', fg: on ? '#15130F' : v.available ? '#EEE7D9' : '#5E574C', bd: on ? '#C29E62' : '#38322A',
+            cursor: v.available ? 'pointer' : 'not-allowed', deco: v.available ? 'none' : 'line-through',
+            pick: () => this.setState({ size: v.size, note: '' })
+          };
+        })
+      })).filter((r) => r.sizes.length);
+      const colors = (p.options.find((o) => o.name === 'Color') || { values: [] }).values;
+      const ready = !!s.size && p.available;
+      detail = {
+        show: true, title: p.title, price: this.money(p.price), description: p.description,
+        kicker: (p.line ? p.line + ' collection · ' : '') + (p.type === 'suit' ? 'Suit' : 'Dinner jacket'),
+        image: cur.src.replace(/^img\//, '../shop/img/'), imageAlt: cur.kind === 'photo' ? p.alt.photo : p.alt.swatch, fit: cur.kind === 'photo' ? 'contain' : 'cover',
+        thumbs: imgs.map((im, i) => ({ src: im.src.replace(/^img\//, '../shop/img/'), fit: im.kind === 'photo' ? 'contain' : 'cover', on: i === s.img, bd: i === s.img ? '#C29E62' : '#2E2923', label: im.kind === 'photo' ? 'Show the suit' : 'Show the fabric', pick: () => this.setState({ img: i }) })),
+        hasColors: colors.length > 1, colorName: s.color,
+        colors: colors.map((c) => { const on = s.color === c; return { name: c, on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', bd: on ? '#C29E62' : '#4A4237', pick: () => this.setState({ color: c, size: '' }) }; }),
+        sizeName: s.size || 'pick one', sizeRows: rows,
+        addLabel: !p.available ? 'Sold out' : s.size ? 'Add to cart · ' + this.money(p.price) : 'Pick a size',
+        addDisabled: !ready, addBg: ready ? '#C29E62' : '#4A4237', addCursor: ready ? 'pointer' : 'not-allowed',
+        add: () => this.addToCart(p),
+        note: s.note, noteColor: s.noteOk ? '#C9A66B' : '#E86A5E'
+      };
+    }
+
+    const lines = (s.cart.lines || []).map((l) => ({
+      title: l.title, detail: 'Size ' + l.size + (l.color ? ' · ' + l.color : '') + ' · ' + this.money(l.price) + ' each',
+      image: (l.image || '').replace(/^img\//, '../shop/img/'), quantity: l.quantity, total: this.money(l.price * l.quantity),
+      qtyAria: 'Quantity of ' + l.title,
+      minus: () => window.IncognitoCommerce.updateLine(l.variantId, l.quantity - 1),
+      plus: () => window.IncognitoCommerce.updateLine(l.variantId, l.quantity + 1),
+      remove: () => window.IncognitoCommerce.updateLine(l.variantId, 0)
+    }));
+    const count = (s.cart.lines || []).reduce((a, l) => a + l.quantity, 0);
+    const subtotal = (s.cart.lines || []).reduce((a, l) => a + l.price * l.quantity, 0);
+
+    return {
+      loading: s.loading, loadError: s.error,
+      countLine: s.catalog ? list.length + ' of ' + all.length + ' pieces' : '',
+      types: this.seg([['all', 'Everything'], ['suit', 'Suits'], ['dinner-jacket', 'Dinner jackets']], 'type'),
+      lines: this.seg([['all', 'All'], ['Hampton', 'Hampton · $499'], ['Madison', 'Madison · $399']], 'line'),
+      families: this.families().map((f) => ({ name: f[1], hex: f[2], on: s.family === f[0], ring: s.family === f[0] ? '0 0 0 3px #121110, 0 0 0 5px #C29E62' : 'none', pick: () => this.setState({ family: s.family === f[0] ? '' : f[0] }) })),
+      familyOn: !!s.family, clearFamily: () => this.setState({ family: '' }),
+      inStock: s.inStock, toggleStock: (e) => this.setState({ inStock: e.target.checked }),
+      sorts: [['featured', 'Featured'], ['low', 'Price: low to high'], ['high', 'Price: high to low']].map((o) => ({ id: o[0], name: o[1], on: s.sort === o[0] })),
+      pickSort: (e) => this.setState({ sort: e.target.value }),
+      empty: !!s.catalog && !list.length,
+      resetFilters: () => this.setState({ type: 'all', line: 'all', family: '', inStock: false }),
+      products: products,
+      detail: detail,
+      cart: { show: s.cartOpen, empty: !lines.length, lines: lines, subtotal: this.money(subtotal), checkout: () => this.checkout(), checkoutBg: lines.length ? '#C29E62' : '#4A4237', message: s.cartMsg },
+      cartCount: String(count), cartBadgeBg: count ? '#C29E62' : '#4A4237', cartAria: 'Cart, ' + count + (count === 1 ? ' item' : ' items'),
+      openCart: () => this.setState({ cartOpen: true, open: '', cartMsg: '' }),
+      closeAll: () => this.setState({ open: '', cartOpen: false, cartMsg: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

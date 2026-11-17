@@ -51,5 +51,8 @@ window.SCREEN_GROUPS = [
     ['staff-orders', 'StaffOrders', 'Orders', 'Rental warehouse orders, from waiting on the party to checked in'],
     ['staff-pickups', 'StaffPickups', 'Pickups & returns', 'The counter: hand-offs with a checklist, returns with condition check-in'],
     ['staff-customers', 'StaffCustomers', 'Customers', 'Everyone who’s rented or bought, with sizes and history']
+  ]],
+  ['Shop', [
+    ['shop', 'Shop', 'The shop', 'Every suit and dinner jacket to buy, with sizes and a cart (checkout not connected yet)']
   ]]
 ];
