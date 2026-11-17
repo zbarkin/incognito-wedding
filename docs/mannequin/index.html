@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stitched jacket · test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0F0E0D; --ink: #EEE7D9; --accent: #C29E62; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: Rokkitt, Georgia, serif; transition: background .4s; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr) 260px; align-items: start; }
+  h1 { font-weight: 600; letter-spacing: .04em; margin: 0 0 6px; font-size: 26px; }
+  p { margin: 0 0 14px; line-height: 1.45; opacity: .8; }
+  video { display: block; width: 100%; max-height: 82vh; aspect-ratio: 3 / 4; object-fit: contain; background: var(--bg); }
+  label { display: block; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin: 14px 0 6px; color: var(--accent); }
+  select, button { font: inherit; font-size: 16px; width: 100%; padding: 8px 10px; background: transparent; color: var(--ink); border: 1px solid var(--accent); }
+  select option { background: var(--bg); }
+  button { cursor: pointer; margin-top: 10px; }
+  button:hover { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+  .row { display: flex; gap: 8px; align-items: center; margin-top: 10px; font-size: 16px; }
+  .row input { accent-color: var(--accent); }
+  .row label { margin: 0; text-transform: none; letter-spacing: 0; color: inherit; }
+  @media (max-width: 720px) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <video id="jacket" muted playsinline autoplay loop preload="auto"
+         src="jacket-kodak.mp4" poster="jacket-kodak.jpg"></video>
+  <aside>
+    <h1>Stitched jacket</h1>
+    <p>A dinner jacket comes together on a tailor's dress form: the pieces arrive, the seams are sewn in gold thread, then the lapels, collar, button and bow tie finish it.</p>
+    <label for="style">Style</label>
+    <select id="style">
+      <option value="kodak" data-bg="#0F0E0D" data-ink="#EEE7D9" data-accent="#C29E62">Kodak</option>
+      <option value="silver-birch" data-bg="#111112" data-ink="#F4F1EA" data-accent="#B9BDBF">Silver Birch</option>
+      <option value="tuxedo-park" data-bg="#0E1B16" data-ink="#F2EAD8" data-accent="#C6A867">Tuxedo Park · green</option>
+      <option value="tuxedo-park-burgundy" data-bg="#270A12" data-ink="#F2EAD8" data-accent="#C6A867">Tuxedo Park · burgundy</option>
+    </select>
+    <div class="row"><input type="checkbox" id="loop" checked><label for="loop">Loop</label></div>
+    <button id="replay">Play again</button>
+  </aside>
+</main>
+<script>
+  const video = document.getElementById('jacket');
+  const style = document.getElementById('style'), loop = document.getElementById('loop');
+  const q = new URLSearchParams(location.search);
+  if (q.get('style')) style.value = q.get('style');
+  function paint() {
+    const o = style.selectedOptions[0].dataset, r = document.documentElement.style;
+    r.setProperty('--bg', o.bg); r.setProperty('--ink', o.ink); r.setProperty('--accent', o.accent);
+    video.poster = 'jacket-' + style.value + '.jpg';
+    video.src = 'jacket-' + style.value + '.mp4';
+    video.play().catch(() => {});
+  }
+  paint();
+  style.onchange = paint;
+  loop.onchange = () => { video.loop = loop.checked; };
+  document.getElementById('replay').onclick = () => { video.currentTime = 0; video.play(); };
+</script>
+</body>
+</html>
