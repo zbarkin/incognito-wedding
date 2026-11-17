@@ -108,6 +108,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="flex:1 1 0; height:48px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:15px; cursor:pointer;">{{o.name}}</button>
 </sc-for>
 </div>
+<sc-if value="{{lapelNote}}" hint-placeholder-val="{{false}}"><span style="font-size:14px; line-height:1.45; color:#A39A8B;">{{lapelNote}}</span></sc-if>
 </div>
 <div role="group" aria-labelledby="g-neck" style="display:flex; flex-direction:column; gap:14px;">
 <span id="g-neck" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Neckwear</span>
@@ -246,7 +247,7 @@ class Component extends DCLogic {
     const s = this.state;
     const TYPES = [
       { id: 'tux', name: 'Tuxedo', note: 'Satin-faced lapels and a formal evening finish. The classic for black tie and night receptions.' },
-      { id: 'suit', name: 'Suit', note: 'Matching lapels and a softer finish. Easy for daytime, outdoor and barn venues.' }
+      { id: 'suit', name: 'Suit', note: 'Notch lapels in the suit fabric and a softer finish. Easy for daytime, outdoor and barn venues.' }
     ];
     const COLORS = [
       { id: 'black', name: 'Black', hex: '#141414' },
@@ -276,7 +277,7 @@ class Component extends DCLogic {
     const type = find(TYPES, s.type);
     const partyCol = find(COLORS, s.color);
     const groomCol = find(COLORS, s.groomColor);
-    const lapel = find(LAPELS, s.lapel);
+    const lapel = s.type === 'suit' ? find(LAPELS, 'notch') : find(LAPELS, s.lapel);
     const neck = find(NECKS, s.neck);
     const layer = find(LAYERS, s.layer);
     const showGroom = s.groomDiff && s.view === 'groom';
@@ -320,7 +321,8 @@ class Component extends DCLogic {
       types: types,
       colors: this.swatches(COLORS, 'color'),
       groomColors: this.swatches(COLORS, 'groomColor'),
-      lapels: this.seg(LAPELS, 'lapel'),
+      lapels: s.type === 'suit' ? this.seg(LAPELS.filter((l) => l.id === 'notch'), 'lapel').map((o) => Object.assign(o, { on: true, bg: '#C29E62', fg: '#15130F', bd: '#C29E62' })) : this.seg(LAPELS, 'lapel'),
+      lapelNote: s.type === 'suit' ? 'Suits come with a notch lapel. Peak and shawl are tuxedo lapels.' : '',
       necks: this.seg(NECKS, 'neck'),
       layers: this.seg(LAYERS, 'layer'),
       groomDiff: s.groomDiff,
