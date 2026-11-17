@@ -55,7 +55,7 @@
   </div>
 
   <div class="grid" id="grid"></div>
-  <p class="note">Pieces are lined up by eye, because each drawing has its own canvas size. Exported from one shared artboard, they would stack exactly. Trousers aren't in your set yet, so the Suit Up version keeps its generated trousers.</p>
+  <p class="note">Pieces are placed from your shared artboard. The bow tie and studs aren’t on it, so those two are placed by eye. Trousers aren't in your set yet, so the Suit Up version keeps its generated trousers.</p>
 </main>
 
 <script>
@@ -81,8 +81,8 @@ var P = {
   square: '0 6.97 1.33 3.3 34.98 0 35.67 6.97 0 6.97'
 };
 
-// Where each drawing sits on the form (lined up by eye).
-var AT = { shirt:[0,18], jacket:[-59,18], vest:[18,20], notch:[60,20], peak:[45.7,20], collar:[89,24], bow:[109,27], tie:[123.5,30], studs:[142,74], square:[222,119] };
+// Where each drawing sits, taken from the shared artboard (Asset 12). Bow tie and studs aren't on it, so they're placed by eye.
+var AT = { form:[62.2,0], shirt:[62.11,18.06], jacket:[0,17.78], vest:[79.58,22.41], notch:[118.96,12.83], peak:[105.03,12.48], collar:[151.1,8.45], bow:[171.1,11.45], tie:[184.77,18.51], studs:[204.1,74], square:[281.88,117.65] };
 
 var THEMES = [
   { k:'kodak', name:'Kodak', blurb:'Black dinner jacket, brass outlines and stitching, oxblood bow tie.',
@@ -123,8 +123,8 @@ function mine(t) {
   var L = opt.lapel === 'peak' ? [P.peakL, P.peakR, AT.peak] : [P.notchL, P.notchR, AT.notch];
 
   var s = defs;
-  s += '<ellipse cx="146" cy="404" rx="70" ry="8" fill="#000" opacity=".35"/>';
-  s += '<path d="' + P.form + '" fill="' + t.form + '"' + o(t.formLine) + '/>';
+  s += '<ellipse cx="204" cy="404" rx="110" ry="8" fill="#000" opacity=".35"/>';
+  s += '<g transform="translate(' + AT.form[0] + ' ' + AT.form[1] + ')"><path d="' + P.form + '" fill="' + t.form + '"' + o(t.formLine) + '/></g>';
   s += g('shirt', AT.shirt, '<path d="' + P.shirt + '" fill="' + t.shirt + '"' + o(t.shirtLine) + '/>');
   s += g('studs', AT.studs, [[2.06,1.95],[1.95,37.06],[2.06,72.18],[2.06,107.29],[3.65,142.4]].map(function (c) { return '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="2.4" fill="#0B0A09"' + o(t.metal, Math.max(.75, lw)) + '/>'; }).join(''));
   if (opt.neck === 'long') s += g('tie', AT.tie, '<polygon points="' + P.tieBlade + '" fill="' + t.tie + '"' + o(t.tieShade) + '/><polygon points="' + P.tieKnot + '" fill="' + t.tieShade + '"' + o(t.tieShade) + '/>');
@@ -141,11 +141,11 @@ function mine(t) {
   jacket += '<path d="' + P.flapL + '" fill="' + t.cloth + '"/>' + stitch(P.stitchL) + '<path d="' + P.flapR + '" fill="' + t.cloth + '"/>' + stitch(P.stitchR);
   jacket += [[277.17,108.16,320.17],[245.38,320.51,312.77],[100.63,320.51,168.02]].map(function (l) { return '<line x1="' + l[0] + '" y1="' + l[1] + '" x2="' + l[2] + '" y2="' + l[1] + '"' + o(t.line) + '/>'; }).join('');
   jacket += '<circle cx="211.87" cy="278.93" r="5.77" fill="#0B0A09"' + o(t.metal) + '/><circle cx="211.87" cy="324.93" r="5.77" fill="#0B0A09"' + o(t.metal) + '/>';
-  jacket += [[11.44,365.3],[10.58,355.37],[10.77,345.64],[11.55,336.03],[383.09,365.08],[385.14,355.33],[386.13,345.66],[386.55,336.03]].map(function (c) { return '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="2.75" fill="#0B0A09"' + o(t.metal, Math.max(.5, lw * .6)) + '/>'; }).join('');
+  jacket += [[10.77,345.64],[11.55,336.03],[386.13,345.66],[386.55,336.03]].map(function (c) { return '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="2.75" fill="#0B0A09"' + o(t.metal, Math.max(.5, lw * .6)) + '/>'; }).join('');
   s += g('jacket', AT.jacket, jacket);
   s += g('lapels', L[2], '<path d="' + L[0] + '" fill="' + lapelFill + '"' + o(t.lapelLine) + '/><path d="' + L[1] + '" fill="' + lapelFill + '"' + o(t.lapelLine) + '/>');
   s += g('square', AT.square, '<polygon points="' + P.square + '" fill="' + t.square + '"/>');
-  return '<svg viewBox="-75 -12 450 430" role="img" aria-label="Your drawings dressed in the ' + t.name + ' style">' + s + '</svg>';
+  return '<svg viewBox="-14 -8 424 420" role="img" aria-label="Your drawings dressed in the ' + t.name + ' style">' + s + '</svg>';
 }
 
 // The art Suit Up draws now, fully dressed, in the same colors.
