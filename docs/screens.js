@@ -20,7 +20,8 @@ window.SCREEN_GROUPS = [
     ['prom-measure-tuxedo-park', 'PromMeasurePark', 'Prom measurements · Tuxedo Park', 'Gather the evidence: online measurements'],
     ['suit-up-kodak', 'PromGameKodak', 'Suit Up game · Kodak', 'Minigame: dress the form in the right order against the clock'],
     ['suit-up-silver-birch', 'PromGameBirch', 'Suit Up game · Silver Birch', 'Minigame: the mission version'],
-    ['suit-up-tuxedo-park', 'PromGamePark', 'Suit Up game · Tuxedo Park', 'Minigame: the case-file version']
+    ['suit-up-tuxedo-park', 'PromGamePark', 'Suit Up game · Tuxedo Park', 'Minigame: the case-file version'],
+    ['suit-up-art', 'SuitUpArt', 'Suit Up art test', 'Your drawings in each style, next to the current game art']
   ]],
   ['Style details', [
     ['silver-birch-details', 'SilverBirch', 'Silver Birch · detail components', 'The small parts of the Silver Birch style'],
