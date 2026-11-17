@@ -176,12 +176,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #C6A867;outline-offset:3p
 </div>
 <div style="display:flex; flex-direction:column; gap:2px;">
 <label for="tpb-f-venue" style="font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#4E463A;">Venue</label>
-<input id="tpb-f-venue" class="tpb-line" type="text" value="{{f.venue}}" onChange="{{set.venue}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 2px; background:transparent; border:0; border-bottom:1px solid #1F1A14; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
+<input id="tpb-f-venue" onBlur="{{commitMap}}" class="tpb-line" type="text" value="{{f.venue}}" onChange="{{set.venue}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 2px; background:transparent; border:0; border-bottom:1px solid #1F1A14; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
 </div>
 <div style="display:flex; flex-direction:column; gap:2px;">
 <label for="tpb-f-city" style="font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#4E463A;">City</label>
-<input id="tpb-f-city" class="tpb-line" type="text" autocomplete="address-level2" value="{{f.city}}" onChange="{{set.city}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 2px; background:transparent; border:0; border-bottom:1px solid #1F1A14; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
+<input id="tpb-f-city" onBlur="{{commitMap}}" class="tpb-line" type="text" autocomplete="address-level2" value="{{f.city}}" onChange="{{set.city}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 2px; background:transparent; border:0; border-bottom:1px solid #1F1A14; border-radius:0; color:#1F1A14; font-family:'EB Garamond', Georgia, serif; font-style:italic; font-weight:500; font-size:23px;">
 </div>
+<dc-import name="PlaceMap" theme="parkb" kind="Your venue" q="{{mapQ}}" title="{{mapTitle}}" sub="{{mapSub}}" height="240px" hint-size="100%,330px"></dc-import>
 <div style="display:flex; flex-direction:column; gap:8px;">
 <span id="tpb-size-label" style="font-weight:600; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#4E463A;">People who need a tux or suit</span>
 <div role="group" aria-labelledby="tpb-size-label" style="align-self:flex-start; display:flex; align-items:center; gap:16px;">
@@ -245,8 +246,10 @@ class Component extends DCLogic {
       contact: 'Text',
       date: '2027-01-23',
       time: '16:30',
-      venue: 'The Glass Hall',
-      city: 'Rochester, NY',
+      venue: 'Woodcliff Hotel & Spa',
+      city: 'Fairport, NY',
+      mapVenue: 'Woodcliff Hotel & Spa',
+      mapCity: 'Fairport, NY',
       size: 9,
       heard: '',
       notes: ''
@@ -299,6 +302,10 @@ class Component extends DCLogic {
     return {
       eng: this.engraving(),
       f: s,
+      mapQ: [s.mapVenue, s.mapCity].filter(Boolean).join(', '),
+      mapTitle: s.mapVenue || s.mapCity || 'Your venue',
+      mapSub: s.mapVenue ? s.mapCity : '',
+      commitMap: () => setTimeout(() => { const n = this.state; if (n.venue !== n.mapVenue || n.city !== n.mapCity) this.setState({ mapVenue: n.venue, mapCity: n.city }); }, 0),
       set: set,
       contacts: contacts,
       dateHint: dateHint,

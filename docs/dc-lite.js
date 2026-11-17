@@ -173,6 +173,37 @@
     return n;
   }
 
+  // Put the new render in place. Embedded frames marked data-keep (maps) that
+  // show the same page are carried over with moveBefore, so they don't reload
+  // on every keystroke. Browsers without moveBefore just reload them.
+  function swapIn(root, frag) {
+    var keepers = {};
+    if (root.moveBefore) {
+      Array.prototype.forEach.call(root.querySelectorAll('iframe[data-keep]'), function (f) {
+        keepers[f.getAttribute('data-keep') + ' ' + f.getAttribute('src')] = f;
+      });
+    }
+    var matches = [];
+    Array.prototype.forEach.call(frag.querySelectorAll('iframe[data-keep]'), function (f) {
+      var old = keepers[f.getAttribute('data-keep') + ' ' + f.getAttribute('src')];
+      if (old) {
+        f.removeAttribute('src');
+        matches.push([old, f]);
+      }
+    });
+    if (!matches.length) {
+      root.replaceChildren(frag);
+      return;
+    }
+    var before = Array.prototype.slice.call(root.childNodes);
+    root.appendChild(frag);
+    matches.forEach(function (m) {
+      m[1].parentNode.moveBefore(m[0], m[1]);
+      m[1].remove();
+    });
+    before.forEach(function (n) { if (n.parentNode === root) n.remove(); });
+  }
+
   function toHead(nodes) {
     Array.prototype.slice.call(nodes).forEach(function (n) {
       if (n.nodeType !== 1) return;
@@ -239,7 +270,7 @@
       currentRender = comp.__render;
       importCount = 0;
       kids(def.tpl, [comp.renderVals ? comp.renderVals() : {}], frag);
-      root.replaceChildren(frag);
+      swapIn(root, frag);
       pendingMounts.splice(0).forEach(function (c) { c.componentDidMount(); });
       if (keep) {
         var back = findPath(root, keep);

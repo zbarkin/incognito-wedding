@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Place map</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<style>.pm-link:hover{filter:brightness(1.12)}.pm-link:focus-visible{outline:2px solid currentColor;outline-offset:3px}</style>
+</helmet>
+<figure style="grid-column:1 / -1; min-width:0; margin:0; box-sizing:border-box; display:flex; flex-direction:column; background:{{t.panel}}; border:{{t.border}}; padding:{{t.pad}}; box-shadow:{{t.shadow}};">
+<div style="position:relative; height:{{h}}; overflow:hidden; background:{{t.mapBg}};">
+<iframe data-keep="{{keepKey}}" src="{{src}}" title="{{frameTitle}}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="display:block; width:100%; height:100%; border:0; filter:{{t.filter}};"></iframe>
+<span aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; box-shadow:{{t.innerShadow}};"></span>
+</div>
+<sc-if value="{{hasCaption}}" hint-placeholder-val="{{true}}">
+<figcaption style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px; padding:{{t.capPad}}; font-family:{{t.body}};">
+<sc-if value="{{showText}}" hint-placeholder-val="{{true}}">
+<span style="display:flex; flex-direction:column; gap:3px; min-width:0;">
+<span style="font-family:{{t.kickerFont}}; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:{{t.accent}};">{{kind}}</span>
+<span style="font-family:{{t.titleFont}}; font-style:{{t.titleStyle}}; font-weight:{{t.titleWeight}}; font-size:{{t.titleSize}}; line-height:1.2; color:{{t.text}};">{{title}}</span>
+<span style="font-size:14px; line-height:1.4; color:{{t.muted}};">{{sub}}</span>
+</span>
+</sc-if>
+<a class="pm-link" href="{{dirHref}}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; height:44px; padding:0 18px; box-sizing:border-box; background:{{t.btnBg}}; color:{{t.btnFg}}; border:{{t.btnBorder}}; border-radius:{{t.radius}}; font-family:{{t.kickerFont}}; font-weight:600; font-size:13px; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; white-space:nowrap;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Directions<span class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;"> to {{title}} (opens Google Maps)</span></a>
+</figcaption>
+</sc-if>
+</figure>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park","parkb"],"default":"kodak"},"q":{"editor":"text","default":"Incognito Menswear, 1823 Penfield Rd, Penfield, NY 14526"},"title":{"editor":"text","default":"Incognito Menswear & Tux Shop"},"sub":{"editor":"text","default":"1823 Penfield Rd, Penfield, NY 14526"},"kind":{"editor":"text","default":"Our shop"},"caption":{"editor":"enum","options":["full","link","none"],"default":"full"},"height":{"editor":"text","default":"260px"},"$preview":{"width":720,"height":360}}'>
+class Component extends DCLogic {
+  themes() {
+    return {
+      kodak: {
+        panel: '#1A1816', border: '1px solid #38322A', pad: '6px', shadow: 'none', radius: '2px',
+        mapBg: '#0F0E0D', filter: 'invert(.9) hue-rotate(180deg) sepia(.35) saturate(.75) contrast(.92)',
+        innerShadow: 'inset 0 0 0 1px rgba(194,158,98,.35)', capPad: '14px 10px 8px',
+        body: 'Archivo, sans-serif', kickerFont: 'Archivo, sans-serif', titleFont: 'Rokkitt, serif', titleStyle: 'normal', titleWeight: 600, titleSize: '20px',
+        accent: '#C9A66B', text: '#EEE7D9', muted: '#A39A8B',
+        btnBg: '#C29E62', btnFg: '#15130F', btnBorder: '0'
+      },
+      birch: {
+        panel: '#121213', border: '1px solid #2E2F31', pad: '0', shadow: 'none', radius: '0',
+        mapBg: '#1B1B1D', filter: 'grayscale(1) invert(.92) contrast(.95) brightness(.95)',
+        innerShadow: 'inset 0 -1px 0 #C9A24B', capPad: '16px 18px',
+        body: 'Jost, sans-serif', kickerFont: 'Jost, sans-serif', titleFont: 'Jost, sans-serif', titleStyle: 'normal', titleWeight: 500, titleSize: '19px',
+        accent: '#C9A24B', text: '#F4F1EA', muted: '#B9BDBF',
+        btnBg: 'transparent', btnFg: '#F4F1EA', btnBorder: '1px solid #B9BDBF'
+      },
+      park: {
+        panel: '#F2EAD8', border: '1px solid #1F1A14', pad: '8px', shadow: 'inset 0 0 0 4px #F2EAD8, inset 0 0 0 5px #C6A867', radius: '0',
+        mapBg: '#E5DBC4', filter: 'sepia(.55) saturate(.7) contrast(.95)',
+        innerShadow: 'inset 0 0 0 1px rgba(31,26,20,.5)', capPad: '14px 8px 6px',
+        body: "'EB Garamond', Georgia, serif", kickerFont: "'EB Garamond', Georgia, serif", titleFont: "'EB Garamond', Georgia, serif", titleStyle: 'italic', titleWeight: 500, titleSize: '22px',
+        accent: '#7B2D26', text: '#1F1A14', muted: '#4E463A',
+        btnBg: '#1F1A14', btnFg: '#F2EAD8', btnBorder: '0'
+      },
+      parkb: {
+        panel: '#F2EAD8', border: '1px solid #1F1A14', pad: '8px', shadow: 'inset 0 0 0 4px #F2EAD8, inset 0 0 0 5px #C6A867', radius: '0',
+        mapBg: '#E5DBC4', filter: 'sepia(.6) saturate(.75) hue-rotate(-12deg) contrast(.95)',
+        innerShadow: 'inset 0 0 0 1px rgba(31,26,20,.5)', capPad: '14px 8px 6px',
+        body: "'EB Garamond', Georgia, serif", kickerFont: "'EB Garamond', Georgia, serif", titleFont: "'EB Garamond', Georgia, serif", titleStyle: 'italic', titleWeight: 500, titleSize: '22px',
+        accent: '#7A1F2E', text: '#1F1A14', muted: '#4E463A',
+        btnBg: '#1F1A14', btnFg: '#F2EAD8', btnBorder: '0'
+      }
+    };
+  }
+  renderVals() {
+    const p = this.props;
+    const T = this.themes();
+    const t = T[p.theme] || T.kodak;
+    const q = String(p.q || '').trim() || 'Penfield, NY';
+    const enc = encodeURIComponent(q);
+    const caption = p.caption || 'full';
+    return {
+      t: t,
+      h: p.height || '260px',
+      // Google's keyless map embed. Swap for the Maps Embed API (with the shop's key) when it's ready.
+      src: 'https://maps.google.com/maps?q=' + enc + '&z=15&output=embed',
+      dirHref: 'https://www.google.com/maps/dir/?api=1&destination=' + enc,
+      keepKey: 'map-' + (p.kind || 'place'),
+      frameTitle: 'Map: ' + (p.title || q),
+      kind: p.kind,
+      title: p.title || q,
+      sub: p.sub,
+      hasCaption: caption !== 'none',
+      showText: caption === 'full'
+    };
+  }
+}
+</script>
+</body>
+</html>

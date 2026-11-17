@@ -177,12 +177,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </div>
 <div style="display:flex; flex-direction:column; gap:8px;">
 <label for="f-venue" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Venue</label>
-<input id="f-venue" class="fld" type="text" value="{{f.venue}}" onChange="{{set.venue}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<input id="f-venue" onBlur="{{commitMap}}" class="fld" type="text" value="{{f.venue}}" onChange="{{set.venue}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
 </div>
 <div style="display:flex; flex-direction:column; gap:8px;">
 <label for="f-city" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">City</label>
-<input id="f-city" class="fld" type="text" autocomplete="address-level2" value="{{f.city}}" onChange="{{set.city}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<input id="f-city" onBlur="{{commitMap}}" class="fld" type="text" autocomplete="address-level2" value="{{f.city}}" onChange="{{set.city}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
 </div>
+<dc-import name="PlaceMap" theme="kodak" kind="Your venue" q="{{mapQ}}" title="{{mapTitle}}" sub="{{mapSub}}" height="240px" hint-size="100%,330px"></dc-import>
 <div style="display:flex; flex-direction:column; gap:8px;">
 <span id="size-label" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">People who need a tux or suit</span>
 <div role="group" aria-labelledby="size-label" style="display:flex; align-items:center; align-self:flex-start; height:50px; box-sizing:border-box; border:1px solid #38322A; border-radius:2px; background:#0F0E0D;">
@@ -245,8 +246,10 @@ class Component extends DCLogic {
       contact: 'Text',
       date: '2027-01-23',
       time: '16:30',
-      venue: 'The Glass Hall',
-      city: 'Rochester, NY',
+      venue: 'Woodcliff Hotel & Spa',
+      city: 'Fairport, NY',
+      mapVenue: 'Woodcliff Hotel & Spa',
+      mapCity: 'Fairport, NY',
       size: 9,
       heard: '',
       notes: ''
@@ -281,6 +284,10 @@ class Component extends DCLogic {
     }
     return {
       f: s,
+      mapQ: [s.mapVenue, s.mapCity].filter(Boolean).join(', '),
+      mapTitle: s.mapVenue || s.mapCity || 'Your venue',
+      mapSub: s.mapVenue ? s.mapCity : '',
+      commitMap: () => setTimeout(() => { const n = this.state; if (n.venue !== n.mapVenue || n.city !== n.mapCity) this.setState({ mapVenue: n.venue, mapCity: n.city }); }, 0),
       set: set,
       contacts: contacts,
       dateHint: dateHint,
