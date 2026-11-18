@@ -73,19 +73,41 @@ select.kk-input { cursor:pointer; background:transparent; padding:10px 0; }
 .kk-field:focus-within .kk-dymo { color:var(--kk-brass-hi); }
 .kk-help { font-size:13px; color:var(--kk-muted); }
 
-/* 04 Dial: a precise machined selector ---------------------------------------------------- */
-.kk-dialwrap { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
-.kk-dial { width:116px; height:116px; flex:0 0 116px; filter:saturate(.6); }
-.kk-dial-ring { transform:rotate(var(--kk-angle, 0deg)); transform-origin:50% 50%; transform-box:fill-box; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
-.kk-dial-opts { display:flex; flex-direction:column; gap:0; flex:1 1 140px; min-width:0; border-top:1px solid var(--kk-line); }
-.kk-dial-opt { display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:42px; padding:0 2px; background:transparent; color:var(--kk-muted); border:0; border-bottom:1px solid var(--kk-line);
-  cursor:pointer; font:500 14px var(--kk-body); text-align:left; transition:color .15s; }
-.kk-dial-opt small { font:11px var(--kk-mono); opacity:.7; letter-spacing:.06em; }
-.kk-dial-opt[aria-checked="true"], .kk-dial-opt[aria-pressed="true"] { color:var(--kk-text); font-weight:600; box-shadow:inset 3px 0 0 var(--kk-brass); padding-left:12px; }
+/* 04 Choice scale: an engraved selector scale, like a camera's shutter-speed ring ---------- */
+/* Same markup as before (.kk-dialwrap > .kk-dial svg + .kk-dial-opts > .kk-dial-opt). The round dial
+   art is hidden; the options read as one row over a tick ruler with a brass index under the pick. */
+.kk-dialwrap { display:block; }
+.kk-dial { display:none; }
+.kk-dial-opts { display:flex; flex-direction:row; gap:0; position:relative; padding-bottom:16px; border:0; min-width:0;
+  background:
+    linear-gradient(var(--kk-line), var(--kk-line)) 0 calc(100% - 9px) / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, rgba(238,231,217,.22) 0 1px, transparent 1px 7px) 0 calc(100% - 3px) / 100% 6px no-repeat; }
+.kk-dial-opt { position:relative; flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-height:46px; padding:0 6px;
+  background:transparent; border:0; color:var(--kk-muted); cursor:pointer; font:500 14px/1.2 var(--kk-body); text-align:center; transition:color .15s; }
+.kk-dial-opt small { font:10px var(--kk-mono); letter-spacing:.1em; text-transform:uppercase; opacity:.7; }
+.kk-dial-opts > .kk-dial-opt::after { content:""; position:absolute; left:18%; right:18%; bottom:-10px; height:2px; background:transparent; transition:background .2s; }
+.kk-dial-opts > .kk-dial-opt::before { content:""; position:absolute; left:50%; bottom:-16px; transform:translateX(-50%); border:5px solid transparent; border-bottom-color:transparent; transition:border-color .2s; }
+.kk-dial-opt[aria-checked="true"], .kk-dial-opt[aria-pressed="true"] { color:var(--kk-text); font-weight:600; }
+.kk-dial-opts > .kk-dial-opt[aria-checked="true"]::after, .kk-dial-opts > .kk-dial-opt[aria-pressed="true"]::after { background:var(--kk-brass); }
+.kk-dial-opts > .kk-dial-opt[aria-checked="true"]::before, .kk-dial-opts > .kk-dial-opt[aria-pressed="true"]::before { border-bottom-color:var(--kk-brass); }
 .kk-dial-opt:hover:not([aria-checked="true"]):not([aria-pressed="true"]) { color:var(--kk-text); }
-/* Dial-opt also styles tab rows and filter chips; give those a gap and outline when laid out in a row. */
-:not(.kk-dial-opts) > .kk-dial-opt { border:1px solid var(--kk-line); padding:0 14px; border-radius:2px; min-height:40px; }
-:not(.kk-dial-opts) > .kk-dial-opt[aria-checked="true"], :not(.kk-dial-opts) > .kk-dial-opt[aria-pressed="true"] { box-shadow:none; padding-left:14px; border-color:var(--kk-brass); color:var(--kk-brass-hi); background:rgba(194,158,98,.08); }
+/* Dial-opt also styles tab rows and filter chips outside a scale: outlined chips. */
+:not(.kk-dial-opts) > .kk-dial-opt { flex:0 0 auto; flex-direction:row; border:1px solid var(--kk-line); padding:0 14px; border-radius:2px; min-height:40px; }
+:not(.kk-dial-opts) > .kk-dial-opt[aria-checked="true"], :not(.kk-dial-opts) > .kk-dial-opt[aria-pressed="true"] { border-color:var(--kk-brass); color:var(--kk-brass-hi); background:rgba(194,158,98,.08); }
+
+/* Fabric swatch chip: a colour cut with a pinked (zigzag) edge, like the shop's own swatches. */
+.kk-swatch { display:flex; flex-direction:column; align-items:center; gap:10px; width:88px; padding:6px 2px 4px; background:transparent; border:0; cursor:pointer; color:var(--kk-muted); font:500 13px/1.25 var(--kk-body); text-align:center; }
+.kk-swatch-chip { display:block; width:64px; height:46px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.45);
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 95% 92%, 90% 100%, 85% 92%, 80% 100%, 75% 92%, 70% 100%, 65% 92%, 60% 100%, 55% 92%, 50% 100%, 45% 92%, 40% 100%, 35% 92%, 30% 100%, 25% 92%, 20% 100%, 15% 92%, 10% 100%, 5% 92%, 0 100%);
+  background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.12) 0 1px, transparent 1px 3px); transition:transform .2s; }
+.kk-swatch-ring { padding:3px; border:1px solid transparent; transition:border-color .2s; }
+.kk-swatch-name { padding-bottom:3px; background-image:linear-gradient(var(--kk-brass), var(--kk-brass)); background-repeat:no-repeat; background-position:50% 100%; background-size:0 1px; transition:background-size .25s; }
+.kk-swatch:hover .kk-swatch-chip { transform:translateY(-2px); }
+.kk-swatch[aria-pressed="true"], .kk-swatch[aria-checked="true"] { color:var(--kk-text); font-weight:600; }
+.kk-swatch[aria-pressed="true"] .kk-swatch-ring, .kk-swatch[aria-checked="true"] .kk-swatch-ring { border-color:var(--kk-brass); }
+.kk-swatch[aria-pressed="true"] .kk-swatch-name, .kk-swatch[aria-checked="true"] .kk-swatch-name { background-size:70% 1px; }
+.kk-swatch.is-small { width:80px; }
+.kk-swatch.is-small .kk-swatch-chip { width:52px; height:38px; }
 
 /* 05 Toggle: a slim brass switch (the markup's cube art is hidden) ------------------------ */
 .kk-cube { display:flex; align-items:center; gap:14px; cursor:pointer; user-select:none; position:relative; }
