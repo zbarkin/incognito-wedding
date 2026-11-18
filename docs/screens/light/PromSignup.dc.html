@@ -18,7 +18,7 @@
 <header style="border-bottom:1px solid {{t.line}}; background:{{t.bar}};">
 <div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:16px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
 <span style="display:flex; align-items:baseline; gap:14px;">
-<span style="font-family:{{t.markFont}}; font-weight:{{t.markWeight}}; font-size:26px; letter-spacing:{{t.markTrack}}; color:{{t.text}};">{{t.mark}}</span>
+<span style="font-family:{{t.markFont}}; font-weight:{{t.markWeight}}; font-size:26px; letter-spacing:{{t.markTrack}}; color:{{t.markColor}}; text-shadow:{{t.markShadow}};">{{t.mark}}</span>
 <span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">Prom 2027</span>
 </span>
 <span style="font-size:15px; color:{{t.muted}};">Questions? <a href="tel:+15855867846" style="color:{{t.accent}}; font-weight:600;">(585) 586-7846</a></span>
@@ -29,7 +29,7 @@
 
 <aside style="flex:1 1 340px; max-width:440px; display:flex; flex-direction:column; gap:26px;">
 <span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
-<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(40px, 5.4vw, 64px); line-height:1; color:{{t.headColor}};">{{t.title}}</h1>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(40px, 5.4vw, 64px); line-height:1; color:{{t.headColor}}; text-shadow:{{t.headShadow}};">{{t.title}}</h1>
 <p style="margin:0; font-size:18px; line-height:1.55; color:{{t.muted}};">{{t.sub}}</p>
 
 <sc-if value="{{is.birch}}" hint-placeholder-val="{{false}}">
@@ -40,6 +40,43 @@
 <span style="font-size:14px;">AGENT: <strong>{{f.name}}</strong></span>
 <span style="font-size:14px;">OBJECTIVE: <span style="background:#FBF7EE; color:#15130F;">get the whole crew suited</span> {{dayLine}}</span>
 <span style="font-size:14px;">COVER: Black tie. Dress color on file: <strong>{{dress.name}}</strong></span>
+</div>
+</sc-if>
+
+<sc-if value="{{is.miami}}" hint-placeholder-val="{{false}}">
+<svg role="img" aria-label="A convertible parked under palm trees at sunset" viewBox="0 0 440 300" style="display:block; width:100%; height:auto;">
+<defs>
+<linearGradient id="mi-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#160B33"></stop><stop offset=".45" stop-color="#5B2484"></stop><stop offset=".8" stop-color="#E8418F"></stop><stop offset="1" stop-color="#FF9A6B"></stop></linearGradient>
+<linearGradient id="mi-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE08A"></stop><stop offset="1" stop-color="#FF4FA3"></stop></linearGradient>
+<linearGradient id="mi-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A1766"></stop><stop offset="1" stop-color="#0D0919"></stop></linearGradient>
+<mask id="mi-bands"><rect width="440" height="300" fill="#fff"></rect><rect x="0" y="150" width="440" height="5" fill="#000"></rect><rect x="0" y="163" width="440" height="6" fill="#000"></rect><rect x="0" y="177" width="440" height="7" fill="#000"></rect></mask>
+<filter id="mi-blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter>
+<filter id="mi-glow" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="2.2" result="b"></feGaussianBlur><feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+</defs>
+<rect width="440" height="192" fill="url(#mi-sky)"></rect>
+<circle cx="220" cy="150" r="74" fill="url(#mi-sun)" mask="url(#mi-bands)"></circle>
+<rect y="190" width="440" height="110" fill="url(#mi-sea)"></rect>
+<g stroke="#2DE2E6" stroke-width="2" stroke-linecap="round" opacity=".7"><path d="M170 200 H270"></path><path d="M188 210 H252"></path><path d="M200 219 H240"></path></g>
+<g fill="#0D0919"><path d="M56 300 C60 250 70 200 96 150 L101 152 C78 202 70 250 68 300 Z"></path><path d="M98 150 C80 132 52 128 26 146 C54 138 76 142 98 154 Z"></path><path d="M98 150 C92 124 72 108 48 106 C70 116 86 132 96 154 Z"></path><path d="M98 150 C110 124 130 114 154 116 C132 124 116 136 100 154 Z"></path><path d="M98 150 C124 140 148 146 166 166 C144 156 122 152 100 155 Z"></path><path d="M98 151 C88 160 80 176 78 196 C88 178 94 166 101 155 Z"></path>
+<path d="M392 300 C388 256 380 214 360 172 L355 174 C374 216 380 256 380 300 Z"></path><path d="M358 172 C376 156 400 152 424 166 C400 160 380 164 360 176 Z"></path><path d="M358 172 C362 150 378 136 398 134 C380 144 368 156 360 176 Z"></path><path d="M358 172 C348 150 330 142 310 144 C328 152 342 162 356 176 Z"></path><path d="M358 173 C336 166 316 172 302 188 C320 180 338 176 357 177 Z"></path></g>
+<ellipse cx="222" cy="272" rx="128" ry="7" fill="#2DE2E6" opacity=".55" filter="url(#mi-blur)"></ellipse>
+<path d="M100 256 Q100 244 112 241 L160 236 L196 235 L214 216 L219 218 L204 235 L330 234 Q344 236 344 248 L344 256 Q344 262 338 262 L312 262 A20 20 0 0 0 268 262 L172 262 A20 20 0 0 0 128 262 L106 262 Q100 262 100 256 Z" fill="#0D0919" stroke="#FF4FA3" stroke-width="2" stroke-linejoin="round" filter="url(#mi-glow)"></path>
+<path d="M114 248 H336" stroke="#2DE2E6" stroke-width="2" stroke-linecap="round" filter="url(#mi-glow)"></path>
+<path d="M232 236 Q236 228 246 228 L262 228" fill="none" stroke="#C9CCCE" stroke-width="2" stroke-linecap="round"></path>
+<rect x="100" y="243" width="6" height="7" rx="1" fill="#FF4FA3"></rect><rect x="338" y="241" width="6" height="6" rx="1" fill="#FFF3B0"></rect>
+<g><circle cx="150" cy="262" r="16" fill="#0D0919" stroke="#C9CCCE" stroke-width="3"></circle><circle cx="150" cy="262" r="6" fill="#C9CCCE"></circle><circle cx="290" cy="262" r="16" fill="#0D0919" stroke="#C9CCCE" stroke-width="3"></circle><circle cx="290" cy="262" r="6" fill="#C9CCCE"></circle></g>
+</svg>
+<div style="position:relative; display:flex; background:#FFF6FB; color:#1E1630; font-family:Jost, sans-serif;">
+<div style="flex:1 1 auto; padding:18px 20px; display:flex; flex-direction:column; gap:8px; border-right:2px dashed #E8418F;">
+<span style="font-size:12px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:#C2257A;">Valet · Prom 2027</span>
+<span style="font-size:22px; font-weight:600; line-height:1.1;">{{crew}}</span>
+<span style="font-size:14px;">Driver: <strong>{{f.name}}</strong> · {{dayLine}}</span>
+<span style="display:flex; align-items:center; gap:10px; font-size:14px;"><span aria-hidden="true" style="width:20px; height:20px; border-radius:50%; background:{{dress.hex}}; border:1px solid #E5DECF;"></span>Paint code: {{dress.name}}. We match the vest and tie.</span>
+</div>
+<div aria-hidden="true" style="flex:0 0 76px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; background:#2DE2E6; color:#1E1630;">
+<span style="font-size:11px; font-weight:700; letter-spacing:.2em;">NO.</span>
+<span style="font-size:26px; font-weight:700; font-variant-numeric:tabular-nums;">027</span>
+</div>
 </div>
 </sc-if>
 
@@ -117,7 +154,7 @@
 <span id="p-crew" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">{{t.inviteLabel}}</span>
 <ul aria-labelledby="p-crew" style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px;">
 <sc-for list="{{members}}" as="m" hint-placeholder-count="4">
-<li style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 6px 0 14px; border:1px solid {{t.fieldLine}}; border-radius:{{t.chipRadius}}; font-size:15px;">{{m.name}}<button type="button" aria-label="{{m.removeLabel}}" onClick="{{m.remove}}" style="width:30px; height:30px; padding:0; background:transparent; border:0; color:{{t.cardMuted}}; font-size:18px; cursor:pointer;">×</button></li>
+<li style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 6px 0 14px; border:{{t.chipBorder}}; border-radius:{{t.chipRadius}}; font-size:15px; letter-spacing:{{t.chipTrack}}; text-transform:{{t.chipCase}}; background:{{t.chipBg}};">{{m.name}}<button type="button" aria-label="{{m.removeLabel}}" onClick="{{m.remove}}" style="width:30px; height:30px; padding:0; background:transparent; border:0; color:{{t.cardMuted}}; font-size:18px; cursor:pointer;">×</button></li>
 </sc-for>
 </ul>
 <div style="display:flex; gap:8px;">
@@ -143,7 +180,19 @@
 <span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:22px;">{{t.pointsTitle}}</span>
 <span style="font-size:15px; font-weight:700; color:{{t.cardAccent}};">{{pointsText}}</span>
 </div>
+<sc-if value="{{is.miami}}" hint-placeholder-val="{{false}}">
+<svg role="img" aria-label="Tachometer: {{pointsText}}" viewBox="0 0 220 120" style="display:block; width:220px; max-width:100%; height:auto; align-self:center;">
+<defs><linearGradient id="mi-tach" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2DE2E6"></stop><stop offset=".55" stop-color="#9B5CFF"></stop><stop offset="1" stop-color="#FF4FA3"></stop></linearGradient></defs>
+<path d="M24 108 A86 86 0 0 1 196 108" fill="none" stroke="{{t.track}}" stroke-width="12" stroke-linecap="round"></path>
+<path d="M24 108 A86 86 0 0 1 196 108" fill="none" stroke="url(#mi-tach)" stroke-width="12" stroke-linecap="round" stroke-dasharray="{{gauge.dash}} 300"></path>
+<line x1="110" y1="108" x2="{{gauge.x}}" y2="{{gauge.y}}" stroke="{{t.needle}}" stroke-width="3" stroke-linecap="round"></line>
+<circle cx="110" cy="108" r="6" fill="{{t.needle}}"></circle>
+<text x="110" y="78" text-anchor="middle" font-family="Jost, sans-serif" font-size="11" letter-spacing="2" fill="{{t.muted}}">RPM × 100</text>
+</svg>
+</sc-if>
+<sc-if value="{{showBar}}" hint-placeholder-val="{{true}}">
 <div role="img" aria-label="{{pointsText}}" style="height:10px; background:{{t.field}}; border:1px solid {{t.fieldLine}};"><div style="height:100%; width:{{pointsPct}}; background:{{t.cardAccent}};"></div></div>
+</sc-if>
 <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
 <sc-for list="{{goals}}" as="g" hint-placeholder-count="5">
 <li style="display:flex; justify-content:space-between; gap:12px; font-size:15px; color:{{g.color}};"><span>{{g.mark}} {{g.label}}</span><span style="font-variant-numeric:tabular-nums;">+{{g.pts}}</span></li>
@@ -154,13 +203,13 @@
 
 <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; padding-top:22px; border-top:1px solid {{t.fieldLine}};">
 <span style="font-size:14px; color:{{t.cardMuted}};">Under 18? We’ll also ask for a parent’s number before your fitting.</span>
-<a href="{{t.styleHref}}" style="height:54px; padding:0 28px; box-sizing:border-box; display:inline-flex; align-items:center; background:{{t.cardAccent}}; color:{{t.onAccent}}; text-decoration:none; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase;">{{t.cta}}</a>
+<a href="{{t.styleHref}}" style="height:54px; padding:0 28px; box-sizing:border-box; display:inline-flex; align-items:center; background:{{t.ctaBg}}; color:{{t.onAccent}}; text-decoration:none; box-shadow:{{t.ctaGlow}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase;">{{t.cta}}</a>
 </div>
 </section>
-<div style="flex:1 1 100%; min-width:0;"><dc-import name="Lookbook" theme="{{themeKey}}" hint-size="100%,640px"></dc-import></div>
+<sc-if value="{{showBar}}" hint-placeholder-val="{{true}}"><div style="flex:1 1 100%; min-width:0;"><dc-import name="Lookbook" theme="{{themeKey}}" hint-size="100%,640px"></dc-import></div></sc-if>
 </main>
 
-<footer style="border-top:1px solid {{t.line}};">
+<footer style="border-top:{{t.footRule}};">
 <div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:24px 32px; display:flex; flex-wrap:wrap; gap:10px 40px; justify-content:space-between; font-size:14px; color:{{t.muted}};">
 <span>Incognito Menswear &amp; Tux Shop · 1823 Penfield Rd, Penfield, NY 14526</span>
 <span>Mon, Wed, Thu 12–7 · Fri &amp; Sat 10–5 · Sun 12–5 · Tue closed</span>
@@ -168,7 +217,7 @@
 </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1440,"height":1500}}'>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park","miami"],"default":"kodak"},"$preview":{"width":1440,"height":1500}}'>
 class Component extends DCLogic {
   constructor(...args) {
     super(...args);
@@ -204,6 +253,23 @@ class Component extends DCLogic {
         crews: ['Crew Silver Fox', 'Crew Midnight Falcon', 'Crew Velvet Heron', 'Crew Ivory Wolf', 'Crew Black Orchid'],
         goals: ['Crew assembled', 'Four agents recruited', 'All measurements filed', 'Fittings booked', 'Training complete']
       },
+      miami: {
+        mark: 'INCOGNITO', markFont: 'Jost, sans-serif', markWeight: 600, markTrack: '.34em', markColor: '#FF279D', markShadow: '0 0 18px rgba(255,79,163,0.21)',
+        kicker: 'Prom 2027 · Miami nights', title: 'Black tie. Ocean Drive.',
+        sub: 'Pastel sunsets, chrome and a crew in sharp tuxes. Recruit your crew, get everyone measured, and roll up like you own the boulevard.',
+        bg: '#FFF5F8', bar: '#FFF5F8', line: '#F0D6E4', text: '#1E1630', muted: '#5A4D7A', accent: '#D02C7E', headColor: '#D02C7E',
+        headShadow: '0 0 8px rgba(255,79,163,0.30), 0 0 26px rgba(155,92,255,0.19)',
+        head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, body: 'Jost, sans-serif',
+        card: '#FFFFFF', cardText: '#1E1630', cardMuted: '#5A4D7A', cardAccent: '#C2257A', onAccent: '#FFF5F8', field: '#FFF9FB', fieldLine: '#D9C4E8', score: '#F3FBFB', radius: '0', chipRadius: '6px', scheme: 'light',
+        chipBorder: '2px solid #2DE2E6', chipTrack: '.12em', chipCase: 'uppercase', chipBg: '#F3FBFB', track: '#F0D6E4', needle: '#1E1630',
+        ctaBg: 'linear-gradient(90deg, #FF4FA3, #9B5CFF)', ctaGlow: '0 0 18px rgba(255,79,163,0.16)', footRule: '3px dashed #FF4FA3',
+        formKicker: 'Recruit your crew', formTitle: 'Who’s in the car?', crewLabel: 'Crew name', rerollLabel: 'New name', inviteLabel: 'Riding with you', addLabel: 'Add a rider',
+        dressLabel: 'Your date’s dress (paint code)', pointsTitle: 'Crew RPM', cta: 'Start the engine',
+        gameLabel: 'Warm up: play Suit Up', gameHref: 'PromGameBirch.dc.html', styleHref: 'PromStyleBirch.dc.html',
+        lookTitle: '', lookSub: '', photoFilter: 'none', look: [],
+        crews: ['Crew Flamingo', 'Crew Biscayne', 'Crew Neon Palm', 'Crew Ocean Drive', 'Crew Pastel Coast'],
+        goals: ['Crew started', 'Four riders in', 'Everyone measured', 'Fittings booked', 'Suit Up played']
+      },
       park: {
         mark: 'Incognito', markFont: "vivaldi-mn, 'Playfair Display', Georgia, serif", markWeight: 400, markTrack: '0',
         kicker: 'Prom 2027 · A case for the crew', title: 'The game is afoot. So is prom.',
@@ -224,7 +290,7 @@ class Component extends DCLogic {
     const s = this.state;
     const T = this.themes();
     const key = T[this.props.theme] ? this.props.theme : 'kodak';
-    const t = T[key];
+    const t = Object.assign({ markColor: T[key].text, markShadow: 'none', headShadow: 'none', chipBorder: '1px solid ' + T[key].fieldLine, chipTrack: '0', chipCase: 'none', chipBg: 'transparent', ctaBg: T[key].cardAccent, ctaGlow: 'none', footRule: '1px solid ' + T[key].line }, T[key]);
     const set = {};
     ['name', 'school', 'date', 'phone'].forEach((k) => { set[k] = (e) => this.setState({ [k]: e.target.value }); });
     const DRESSES = [
@@ -251,7 +317,9 @@ class Component extends DCLogic {
     return {
       t: t,
       themeKey: key,
-      is: { kodak: key === 'kodak', birch: key === 'birch', park: key === 'park' },
+      is: { kodak: key === 'kodak', birch: key === 'birch', park: key === 'park', miami: key === 'miami' },
+      showBar: key !== 'miami',
+      gauge: (() => { const f = Math.min(1, total / 1000), a = Math.PI * (1 - f); return { dash: (f * Math.PI * 86).toFixed(1), x: (110 + 62 * Math.cos(a)).toFixed(1), y: (108 - 62 * Math.sin(a)).toFixed(1) }; })(),
       f: s,
       set: set,
       crew: t.crews[s.crewIdx % t.crews.length],

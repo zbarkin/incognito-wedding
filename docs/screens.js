@@ -29,6 +29,7 @@ window.SCREEN_GROUPS = [
   ['Prom', [
     ['prom-kodak', 'PromKodak', 'Prom · Kodak, the squad', 'Prom crew sign-up in the Kodak style: a 1970s city detective, armed with a camera'],
     ['prom-silver-birch', 'PromBirch', 'Prom · Silver Birch, the agent', 'Prom crew sign-up in the Silver Birch style: a secret-agent mission briefing'],
+    ['prom-silver-birch-miami', 'PromBirchMiami', 'Prom · Silver Birch, Miami nights (alternate)', 'An alternate Silver Birch prom sign-up: Miami modern, neon pink, purple and turquoise, with car details'],
     ['prom-tuxedo-park', 'PromPark', 'Prom · Tuxedo Park, the detective', 'Prom crew sign-up in the Tuxedo Park style: a Victorian consulting detective'],
     ['prom-look-kodak', 'PromStyleKodak', 'Prom look · Kodak', 'Browse the inventory and pick the look, matched to your date'],
     ['prom-look-silver-birch', 'PromStyleBirch', 'Prom look · Silver Birch', 'Choose your cover: the inventory as an agent’s wardrobe'],

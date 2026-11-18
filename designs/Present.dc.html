@@ -137,6 +137,7 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
       lightMood: 'Light mode: an ivory base with black type, silver hairlines and the same single gold accent.',
       palette: [['#0A0A0B', 'Black'], ['#111112', 'Panel'], ['#B9BDBF', 'Silver'], ['#F4F1EA', 'Ivory'], ['#C9A24B', 'Gold'], ['#2E2F31', 'Line']],
       details: ['Sharp, 0-radius edges and hairline silver rules', 'Gold kept for the one key action on each screen', 'A minimal numbered progress line', 'Shop suits on a faceless charcoal form with a steel post'],
+      alt: { name: 'Miami nights', file: 'PromBirchMiami', note: 'An alternate prom take for review: Miami modern, with neon pink, purple and turquoise, a convertible at sunset, a valet ticket and a tachometer for crew points.' },
       screens: { wedding: 'SilverBirchSignup', party: 'BirchParty', look: 'BirchLook', book: 'BirchBook', status: 'BirchStatus', member: 'BirchMember', shop: 'ShopBirch', prom: 'PromBirch', game: 'PromGameBirch' }
     },
     park: {
@@ -152,13 +153,14 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
     }
   };
   var ORDER = ['kodak', 'birch', 'park'];
-  var state = { style: 'kodak', step: 0, view: 'walk', burgundy: false, light: false };
+  var state = { style: 'kodak', step: 0, view: 'walk', burgundy: false, light: false, miami: false };
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
   function src(styleKey, stepIdx) {
     var st = STYLES[styleKey], step = STEPS[stepIdx];
     var file = st.screens[step.id];
     if (styleKey === 'park' && state.burgundy && step.id === 'wedding') file = st.variant.wedding;
+    if (styleKey === 'birch' && state.miami && step.id === 'prom') file = st.alt.file;
     return (state.light ? 'light/' : '') + file + '.dc.html';
   }
   // Hash: #kodak-3 or #compare-3, with -light for light mode (#park-2-light)
@@ -193,8 +195,10 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
       + '<div><h3>Palette</h3><div class="palette">' + (state.light ? st.lightPalette : st.palette).map(function (p) { return '<div><span style="background:' + p[0] + '"></span>' + esc(p[1]) + '<br>' + p[0] + '</div>'; }).join('') + '</div></div>'
       + '<div class="type"><h3>Type</h3><div class="d" style="font-family:' + st.display + '; font-weight:' + st.dWeight + '">' + esc(st.displayTxt) + '</div><div class="b" style="font-family:' + st.body + '">' + esc(st.bodyTxt) + '</div></div>'
       + '<div><h3>Signature details</h3><ul class="details">' + st.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></div>';
+    if (st.alt) html += '<div><h3>Prom take</h3><div class="seg" role="group" aria-label="Silver Birch prom take" style="display:inline-flex"><button type="button" id="ptB" aria-pressed="' + !state.miami + '">Black tie</button><button type="button" id="ptM" aria-pressed="' + state.miami + '">Miami nights</button></div><p class="variant" style="margin:8px 0 0">' + esc(st.alt.note) + '</p></div>';
     if (st.variant) html += '<div><h3>Colourway</h3><div class="seg" role="group" aria-label="Tuxedo Park colourway" style="display:inline-flex"><button type="button" id="cwG" aria-pressed="' + !state.burgundy + '">Green</button><button type="button" id="cwB" aria-pressed="' + state.burgundy + '">Burgundy</button></div><p class="variant" style="margin:8px 0 0">The burgundy colourway is drawn for the sign-up and the detail sheet; the rest of the path is shown in green.</p></div>';
     $('story').innerHTML = html;
+    if (st.alt) { $('ptB').onclick = function () { state.miami = false; render(); }; $('ptM').onclick = function () { state.miami = true; state.step = 7; render(); }; }
     if (st.variant) { $('cwG').onclick = function () { state.burgundy = false; render(); }; $('cwB').onclick = function () { state.burgundy = true; state.step = 0; render(); }; }
   }
   function stepButtons(el, onPick) {

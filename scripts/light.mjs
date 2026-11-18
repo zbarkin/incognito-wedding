@@ -229,9 +229,9 @@ THEMES.parkb.headings = '#5E1F2A';
 // ---------- themed components ----------
 // Shared components (the map, the shop, the prom pages) keep each style's colours in a
 // script object, kodak: { bg: '#121110', text: '#EEE7D9', ... }. Those keys are mapped by name.
-const JS_BG = /^(bg|bar|panel|card|field|stage|score|mapBg|btnBg)$/;
-const JS_INK = /^(text|muted|brand|brandDim|red|desc|note|disabled|headColor|cardText|cardMuted|cardAccent|alert|btnFg)$/;
-const JS_LINE = /^(line|line2|border|fieldLine|ring|filled)$/;
+const JS_BG = /^(bg|bar|panel|card|field|stage|score|mapBg|btnBg|chipBg)$/;
+const JS_INK = /^(text|muted|brand|brandDim|red|desc|note|disabled|headColor|cardText|cardMuted|cardAccent|alert|btnFg|markColor|needle)$/;
+const JS_LINE = /^(line|line2|border|fieldLine|ring|filled|track|chipBorder|footRule)$/;
 const MAP_FILTER = {
   parkb: 'sepia(.6) saturate(.75) hue-rotate(-12deg) contrast(.95)',
   kodak: 'sepia(.45) saturate(.8) contrast(.95)',
@@ -251,6 +251,7 @@ function mapJsTheme(t, k, body) {
     else if (JS_BG.test(key)) nv = mapValue(t, 'bg', v);
     else if (JS_INK.test(key)) nv = mapValue(t, 'ink', v);
     else if (JS_LINE.test(key)) nv = mapValue(t, 'line', v);
+    else if (/^(markShadow|headShadow|ctaGlow)$/.test(key)) nv = v.replace(/0 0 6px #FF4FA3, /, '').replace(/rgba\(([^)]*),\s*([0-9.]+)\)/g, (m, c, a) => 'rgba(' + c + ',' + (+a * 0.35).toFixed(2) + ')');  // neon glows, softened for a pale ground
     else if (key === 'shadow' || key === 'innerShadow') nv = /inset 0 0 0/.test(v) ? mapValue(t, 'bg', v) : mapValue(t, 'shadow', v);
     else if (key === 'border') nv = mapValue(t, 'line', v);
     else return all;
@@ -270,7 +271,7 @@ function lightScript(t, js) {
   const keep = [];
   js = lightJs(js);
   // Theme objects were mapped by lightJs; park them so nothing maps them twice.
-  js = js.replace(/^(\s*)(kodak|birch|park|parkb)(\s*:\s*\{)([\s\S]*?)^\1\}/gm, (all) => { keep.push(all); return '\u0000' + (keep.length - 1) + '\u0000'; });
+  js = js.replace(/^(\s*)(kodak|birch|park|parkb|miami)(\s*:\s*\{)([\s\S]*?)^\1\}/gm, (all) => { keep.push(all); return '\u0000' + (keep.length - 1) + '\u0000'; });
   js = js.replace(/(\b[a-zA-Z]+)(\s*:\s*)([^,\n{}]*?'(?:#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))'[^,\n{}]*)/g, (all, key, sep, expr) => {
     const kind = K_BG.test(key) ? 'bg' : K_INK.test(key) ? 'ink' : K_LINE.test(key) ? 'line' : key === 'accent' ? 'accent' : null;
     if (!kind) return all;
@@ -280,8 +281,18 @@ function lightScript(t, js) {
   return js.replace(/\u0000(\d+)\u0000/g, (m, i) => keep[+i]);
 }
 export function lightJs(html) {
-  return html.replace(/^(\s*)(kodak|birch|park|parkb)(\s*:\s*\{)([\s\S]*?)^\1\}/gm, (all, ind, k, open, body) => {
+  return html.replace(/^(\s*)(kodak|birch|park|parkb|miami)(\s*:\s*\{)([\s\S]*?)^\1\}/gm, (all, ind, k, open, body) => {
     const key = k;
     return ind + k + open + mapJsTheme(THEMES[key], key, body) + ind + '}';
   });
 }
+
+// Miami nights (an alternate Silver Birch prom page): in light mode, pastel Art Deco, with the neon
+// turned into deeper pink, violet and teal so it still reads on the pale ground.
+THEMES.miami = {
+  paper: '#FFF5F8', text: '#1E1630', light: '#FFFFFF',
+  bg: P({ '#0e0a1a': '#FFF5F8', '#0b0816': '#FFF5F8', '#161026': '#FFFFFF', '#1e1634': '#FFF9FB', '#120c22': '#F3FBFB' }),
+  ink: P({ '#f7f1ff': '#1E1630', '#b7a9d6': '#5A4D7A', '#ff6fb5': '#D02C7E', '#2de2e6': '#0F8F96', '#ff4fa3': '#C2257A' }),
+  line: P({ '#2a2145': '#F0D6E4', '#3e3166': '#D9C4E8' }),
+  vars: P({ '--kk-accent': '#D02C7E' })
+};
