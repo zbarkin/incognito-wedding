@@ -243,8 +243,8 @@ function mapJsTheme(t, k, body) {
     const v = val;
     if (key === 'scheme') return key + sep + "'light'";
     if (key === 'filter') return key + sep + "'" + MAP_FILTER[k] + "'";
-    // Silver Birch shop cards stay black in light mode too.
-    if (key === 'stage' && k === 'birch') return all;
+    // Silver Birch shop cards in light mode: the page colour, so only the suit shows.
+    if (key === 'stage' && k === 'birch') return key + sep + "'" + t.paper + "'";
     if (!/#[0-9a-fA-F]{3,8}\b|rgba?\(/.test(v)) return all;
     let nv;
     if (key === 'accent') nv = t.vars['--kk-accent'] || t.vars['--kk-brass'] || v;
