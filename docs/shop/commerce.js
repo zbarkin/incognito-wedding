@@ -17,7 +17,8 @@
 (function () {
   var CONFIG = {
     provider: 'local',
-    catalogUrl: '../shop/catalog.json',
+    // Next to this script, so pages at any depth find it.
+    catalogUrl: document.currentScript ? new URL('catalog.json', document.currentScript.src).href : '../shop/catalog.json',
     shopDomain: '',          // e.g. 'incognito-menswear.myshopify.com'
     storefrontToken: '',     // Storefront API public access token
     apiVersion: '2025-01',

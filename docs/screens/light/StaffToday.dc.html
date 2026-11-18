@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff · Today</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../../kodak-kit.light.css">
+<style>
+a.kk-shutter,a.kk-shutter:hover{color:#15130F}a.kk-leader:hover,a.kk-grease:hover{color:#1E1A15}
+body{margin:0;background:#F3ECDD}
+a{color:#87672F}a:hover{color:#87672F}
+.fld:focus{outline:none;border-color:#B08D55 !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
+.fld::placeholder{color:#776E60}
+.btn:hover{background:#D4B47A !important}
+.ghost:hover{border-color:#B08D55 !important}
+.row:hover{background:#FBF7EE !important}
+.nav:hover{background:#FBF7EE !important}
+a:focus-visible,button:focus-visible{outline:2px solid #B08D55;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#F3ECDD; color:#1E1A15; font-family:Archivo, sans-serif; color-scheme:light; display:flex; flex-wrap:wrap;">
+
+<dc-import name="StaffNav" current="today" hint-size="232px,100%"></dc-import>
+
+<main style="flex:999 1 600px; min-width:0; box-sizing:border-box; padding:32px 40px 56px; display:flex; flex-direction:column; gap:28px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 24px;">
+<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#87672F;">Wednesday, December 2 · Open 12–7</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:42px; line-height:1; color:#1E1A15;">Good afternoon, Marco</h1>
+<p style="margin:0; font-size:15px; line-height:1.5; color:#655C4F;">{{summary}}</p>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+<span class="kk-date" style="display:inline-flex; align-items:center; gap:8px; height:46px; padding:0 14px; border:1px solid #D5C9B2;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>2:40 PM</span>
+<button type="button" class="kk-leader" onClick="{{toggleWalkin}}" aria-expanded="{{walkinOpen}}">Log a walk-in</button>
+<a href="StaffAppointments.dc.html" class="kk-shutter">Book appointment</a>
+</div>
+</div>
+
+<sc-if value="{{walkinOpen}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="walk-h" style="background:#FBF7EE; border:1px solid #B08D55; padding:20px 24px; display:flex; flex-direction:column; gap:14px;">
+<h2 id="walk-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#1E1A15;">Walk-in</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap:14px;">
+<div class="kk-field">
+<label for="wk-name" class="kk-dymo">Name</label>
+<input id="wk-name" class="kk-input" type="text" value="{{walkin.name}}" onChange="{{walkin.setName}}" placeholder="First and last name">
+</div>
+<div class="kk-field">
+<span id="wk-why" class="kk-dymo">Here for</span>
+<div role="group" aria-labelledby="wk-why" style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{walkin.reasons}}" as="w" hint-placeholder-count="4">
+<button type="button" class="kk-dial-opt" aria-pressed="{{w.on}}" onClick="{{w.pick}}">{{w.label}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+<button type="button" class="kk-shutter kk-small" onClick="{{walkin.save}}" disabled="{{walkin.off}}">Add to today</button>
+<button type="button" class="ghost" onClick="{{toggleWalkin}}" style="height:44px; padding:0 16px; background:transparent; color:#1E1A15; border:1px solid #C6B89D; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">Cancel</button>
+</div>
+</section>
+</sc-if>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:14px;">
+<sc-for list="{{tiles}}" as="t" hint-placeholder-count="4">
+<a href="{{t.href}}" class="row" style="padding:18px 20px; background:#FBF7EE; border:{{t.border}}; display:flex; flex-direction:column; gap:6px; text-decoration:none;">
+<span style="font-family:Rokkitt, serif; font-weight:700; font-size:44px; line-height:1; color:{{t.numColor}};">{{t.num}}</span>
+<span style="font-size:14px; font-weight:600; color:#1E1A15;">{{t.label}}</span>
+<span style="font-size:13px; color:#655C4F;">{{t.sub}}</span>
+</a>
+</sc-for>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px;">
+
+<section aria-labelledby="sched-h" style="flex:999 1 520px; min-width:0; box-sizing:border-box; background:#FBF7EE; border:1px solid #D5C9B2; padding:24px 26px 12px;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 12px; margin-bottom:8px;">
+<h2 id="sched-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#1E1A15;">Today’s appointments</h2>
+<a href="StaffAppointments.dc.html" class="kk-grease" style="font-size:13px;">Week view</a>
+</div>
+<ol style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{appts}}" as="a" hint-placeholder-count="6">
+<sc-if value="{{a.nowBefore}}" hint-placeholder-val="{{false}}">
+<li aria-label="Now, 2:40 PM" style="display:flex; align-items:center; gap:10px; padding:4px 0;"><span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:700; font-size:10px; letter-spacing:.16em; color:#B23F30;">NOW 2:40</span><span aria-hidden="true" style="flex:1 1 auto; height:2px; background:#C9503F;"></span></li>
+</sc-if>
+<li style="display:flex; gap:16px; padding:16px 0; border-top:1px solid #E3D9C7; opacity:{{a.opacity}};">
+<span style="flex:0 0 64px; display:flex; flex-direction:column; gap:2px;"><span style="font-family:Rokkitt, serif; font-weight:600; font-size:20px; line-height:1; color:{{a.timeColor}};">{{a.time}}</span><span style="font-size:12px; color:#776E60;">{{a.len}}</span></span>
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:6px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px;">
+<span style="font-size:16px; font-weight:700; color:#1E1A15;">{{a.what}}</span>
+<span class="{{a.chipClass}}">{{a.chip}}</span>
+</div>
+<span style="font-size:14px; line-height:1.45; color:#655C4F;">{{a.who}} · with {{a.staff}}</span>
+<sc-if value="{{a.open}}" hint-placeholder-val="{{false}}">
+<ul style="margin:4px 0 0; padding:10px 14px 10px 30px; background:#FFFDF8; border-left:2px solid #B09464; display:flex; flex-direction:column; gap:4px;">
+<sc-for list="{{a.prep}}" as="p" hint-placeholder-count="3">
+<li style="font-size:14px; line-height:1.5; color:#1E1A15;">{{p}}</li>
+</sc-for>
+</ul>
+</sc-if>
+</div>
+<div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+<sc-if value="{{a.canCheckIn}}" hint-placeholder-val="{{true}}">
+<button type="button" class="{{a.ciClass}}" onClick="{{a.checkIn}}" style="{{a.ciStyle}}">{{a.ciLabel}}</button>
+</sc-if>
+<button type="button" class="kk-grease" aria-expanded="{{a.open}}" onClick="{{a.toggle}}" style="font-size:13px; white-space:nowrap;">{{a.prepLabel}}</button>
+</div>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<div style="flex:1 1 320px; max-width:460px; min-width:0; display:flex; flex-direction:column; gap:24px;">
+
+<section aria-labelledby="todo-h" style="box-sizing:border-box; background:#FBF7EE; border:1px solid #D5C9B2; padding:24px 24px 10px;">
+<div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px;">
+<h2 id="todo-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#1E1A15;">Before close</h2>
+<span aria-live="polite" style="font-size:13px; color:#655C4F;">{{todoCount}}</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{todos}}" as="t" hint-placeholder-count="6">
+<li style="display:flex; gap:12px; align-items:flex-start; padding:14px 0; border-top:1px solid #E3D9C7; opacity:{{t.opacity}};">
+<input type="checkbox" id="{{t.id}}" checked="{{t.done}}" onChange="{{t.toggle}}" style="flex:0 0 18px; width:18px; height:18px; margin:2px 0 0; accent-color:#C29E62;">
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px;">
+<label for="{{t.id}}" style="font-size:15px; font-weight:700; line-height:1.35; color:#1E1A15; text-decoration:{{t.strike}}; cursor:pointer;">{{t.title}}</label>
+<span style="font-size:13px; line-height:1.5; color:#655C4F;">{{t.detail}}</span>
+<sc-if value="{{t.showLink}}" hint-placeholder-val="{{true}}">
+<a href="{{t.href}}" class="kk-grease" style="align-self:flex-start; font-size:13px;">{{t.link}}</a>
+</sc-if>
+</div>
+<sc-if value="{{t.urgent}}" hint-placeholder-val="{{false}}">
+<span class="kk-cap is-red" style="flex:0 0 auto;">{{t.tag}}</span>
+</sc-if>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<section aria-labelledby="inbox-h" style="box-sizing:border-box; background:#FBF7EE; border:1px solid #D5C9B2; padding:24px 24px 10px;">
+<div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px;">
+<h2 id="inbox-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#1E1A15;">Replies</h2>
+<span style="font-size:13px; color:#655C4F;">Texts and emails to the shop</span>
+</div>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{inbox}}" as="m" hint-placeholder-count="3">
+<li style="display:flex; flex-direction:column; gap:8px; padding:14px 0; border-top:1px solid #E3D9C7;">
+<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 10px;">
+<span style="font-size:15px; font-weight:700; color:#1E1A15;">{{m.from}}</span>
+<span style="font-size:12px; color:#776E60;">{{m.when}}</span>
+</div>
+<span style="font-size:12px; color:#655C4F;">{{m.about}}</span>
+<span style="align-self:flex-start; max-width:100%; padding:9px 13px; background:#EAE0CD; border-radius:14px 14px 14px 4px; font-size:14px; line-height:1.5; color:#1E1A15;">{{m.text}}</span>
+<sc-if value="{{m.replied}}" hint-placeholder-val="{{false}}">
+<span style="align-self:flex-end; max-width:90%; padding:9px 13px; background:#C29E62; border-radius:14px 14px 4px 14px; font-size:14px; line-height:1.5; color:#15130F;">{{m.answer}}</span>
+</sc-if>
+<sc-if value="{{m.open}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{m.quick}}" as="q" hint-placeholder-count="2">
+<button type="button" class="ghost" onClick="{{q.send}}" style="height:36px; padding:0 12px; background:transparent; color:#1E1A15; border:1px solid #C6B89D; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; text-align:left;">{{q.label}}</button>
+</sc-for>
+</div>
+</sc-if>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<section aria-labelledby="team-h" style="box-sizing:border-box; background:#FBF7EE; border:1px solid #D5C9B2; padding:24px;">
+<h2 id="team-h" style="margin:0 0 10px; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#1E1A15;">In the shop today</h2>
+<ul class="kk-sleeve">
+<sc-for list="{{team}}" as="p" hint-placeholder-count="3">
+<li class="kk-sleeve-row">
+<span aria-hidden="true" class="kk-no">{{p.ini}}</span>
+<span style="min-width:0; display:flex; flex-direction:column; gap:2px;"><span style="font-size:14px; font-weight:600; color:#1E1A15;">{{p.name}}</span><span style="font-size:12px; color:#655C4F;">{{p.role}}</span></span>
+<span style="font-size:13px; color:#1E1A15;">{{p.hours}}</span>
+</li>
+</sc-for>
+</ul>
+</section>
+
+</div>
+</div>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { checked: { a3: false }, open: { a3: true }, done: {}, replied: {}, walkinOpen: false, wkName: '', wkWhy: 'Browsing', walkins: [] };
+  }
+  renderVals() {
+    const s = this.state;
+    const set = (k, v) => this.setState({ [k]: Object.assign({}, this.state[k], v) });
+    const A = [
+      { id: 'a1', time: '12:00', len: '45 min', what: 'Fitting', who: 'Marcus Brennan, groom · Brennan & Liu', staff: 'Jess', past: true, prep: ['Midnight navy 40R from the Brennan rack', 'Pin the sleeves, he wanted them a touch shorter'] },
+      { id: 'a2', time: '1:00', len: '60 min', what: 'Wedding consultation', who: 'Sullivan & Grant · new party of 6', staff: 'Marco', past: true, prep: ['Swatch book and the spring lookbook', 'Wedding is Sat, Mar 20 at Harbor House, Webster'] },
+      { id: 'a3', time: '3:00', len: '45 min', what: 'Fitting', who: 'Kevin Liu and Pat Doyle, groomsmen · Brennan & Liu', staff: 'Jess', next: true, prep: ['Black peak lapel 38R and 42L, pants 31×30 and 36×32', 'Pat said he’s been between sizes; have the 42R ready too', 'After this, 1 of 6 still unbooked'] },
+      { id: 'a4', time: '4:30', len: '20 min', what: 'Alteration check', who: 'Andre Castillo · Castillo & Reyes', staff: 'Lou', prep: ['Sleeve hem should be back from Lou by 4', 'He picks up tomorrow with the rest of the party'] },
+      { id: 'a5', time: '5:00', len: '90 min', what: 'Group measuring', who: '4 groomsmen · Morales & Kim', staff: 'Jess', prep: ['Measuring room is booked 5–6:30', 'Two of them are measuring online instead; skip Chris and Jamal'] }
+    ];
+    const walk = s.walkins.map((w, i) => ({ id: 'w' + i, time: 'Now', len: 'walk-in', what: w.why, who: w.name + ' · walk-in', staff: 'Marco', walkin: true, prep: ['Logged at 2:40 PM'] }));
+    let nowShown = false;
+    const appts = A.concat(walk).map((a) => {
+      const checked = !!s.checked[a.id];
+      const nowBefore = !a.past && !nowShown && !a.walkin;
+      if (nowBefore) nowShown = true;
+      const open = !!s.open[a.id];
+      let chip = a.past ? 'Done' : a.walkin ? 'Walk-in' : checked ? 'Checked in' : a.next ? 'Up next · in 20 min' : 'Booked';
+      return {
+        time: a.time, len: a.len, what: a.what, who: a.who, staff: a.staff, prep: a.prep,
+        nowBefore: nowBefore,
+        opacity: a.past ? 0.55 : 1,
+        timeColor: a.past ? '#776E60' : '#87672F',
+        chip: chip,
+        chipClass: a.past ? 'kk-cap is-grey' : checked ? 'kk-cap is-green' : a.walkin || a.next ? 'kk-cap' : 'kk-cap is-grey',
+        canCheckIn: !a.past && !a.walkin,
+        ciLabel: checked ? 'Checked in ✓' : 'Check in',
+        ciClass: checked ? 'ghost' : 'kk-shutter kk-small',
+        ciStyle: checked ? 'height:38px; padding:0 14px; background:transparent; color:#87672F; border:1px solid #B09464; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer; white-space:nowrap;' : 'white-space:nowrap;',
+        checkIn: () => set('checked', { [a.id]: !checked }),
+        open: open,
+        prepLabel: open ? 'Hide prep' : 'What to have ready',
+        toggle: () => set('open', { [a.id]: !open })
+      };
+    });
+
+    const T = [
+      { id: 't1', title: 'Stage Castillo & Reyes for tomorrow’s pickup', detail: '4 of 5 bags on Rack B. Andre’s jacket goes in once Lou’s done with the sleeves.', link: 'Open pickups', href: 'StaffPickups.dc.html', tag: 'Tomorrow' },
+      { id: 't2', title: 'Chase the DeLuca & Price returns', detail: 'Ben Price and Tom Avila are 2 days late. Ben replied he’ll drop off tomorrow at noon.', link: 'Open returns', href: 'StaffPickups.dc.html', tag: '2 days late' },
+      { id: 't3', title: 'Get Hartman & Osei’s last 2 deposits', detail: 'The order has to go to the rental warehouse by Sat, Dec 5.', link: 'Open the order', href: 'StaffOrders.dc.html', tag: 'Due Sat' },
+      { id: 't4', title: 'Review Okafor & Whitman’s numbers', detail: 'Ravi’s overarm and Theo’s sleeve failed the automatic check.', link: 'Open the party', href: 'PartyAdmin.dc.html' },
+      { id: 't5', title: 'Call Richard Whitman', detail: 'Father of the bride hasn’t opened his invite since Nov 18. (585) 555-0175.', link: '', href: '' },
+      { id: 't6', title: 'Book the last Brennan & Liu fitting', detail: 'Fittings end Wed, Dec 9. Wedding is Sat, Dec 12.', link: 'Open appointments', href: 'StaffAppointments.dc.html' }
+    ];
+    const todos = T.map((t) => {
+      const done = !!s.done[t.id];
+      return { id: 'todo-' + t.id, title: t.title, detail: t.detail, link: t.link, href: t.href, showLink: !!t.link && !done,
+        done: done, strike: done ? 'line-through' : 'none', opacity: done ? 0.5 : 1, urgent: !!t.tag && !done, tag: t.tag || '',
+        toggle: () => set('done', { [t.id]: !done }) };
+    });
+    const left = T.filter((t) => !s.done[t.id]).length;
+
+    const M = [
+      { id: 'm1', from: 'Ben Price', when: '1:52 PM · text', about: 'DeLuca & Price · return 2 days late', text: 'So sorry!! Totally forgot. Can I drop it off tomorrow around noon?', quick: ['Noon works, thanks Ben!', 'We open at 12. See you then.'] },
+      { id: 'm2', from: 'Jordan Pike', when: '11:20 AM · email', about: 'Black-tie gala, Sat Dec 12 · rental', text: 'Could I come in Friday at 11 to try the jacket on? Also need a bow tie.', quick: ['Friday at 11 is yours. Bow tie will be ready.', 'Friday’s full at 11. Is 11:45 OK?'] },
+      { id: 'm3', from: 'Sam Whitman', when: 'Yesterday · text', about: 'Okafor & Whitman · measurements missing', text: 'Doing my measurements tonight with my wife. Owen too?', quick: ['Thanks Sam! Owen needs to come in, kids sizing is tricky.', 'Yes, the how-to has a kids section.'] }
+    ];
+    const inbox = M.map((m) => {
+      const ans = s.replied[m.id];
+      return { from: m.from, when: m.when, about: m.about, text: m.text, replied: !!ans, answer: ans || '', open: !ans,
+        quick: m.quick.map((q) => ({ label: q, send: () => set('replied', { [m.id]: q }) })) };
+    });
+
+    const checkedCount = A.filter((a) => s.checked[a.id]).length;
+    const tiles = [
+      { num: A.length + s.walkins.length, label: 'Appointments today', sub: '2 done · next at 3:00 with Jess', href: 'StaffAppointments.dc.html', red: false },
+      { num: 1, label: 'Pickup today', sub: 'Alan Fitch’s hem · 5 tomorrow', href: 'StaffPickups.dc.html', red: false },
+      { num: 2, label: 'Returns overdue', sub: 'DeLuca & Price · 2 days late', href: 'StaffPickups.dc.html', red: true },
+      { num: 1, label: 'Order due this week', sub: 'Hartman & Osei · Sat, Dec 5', href: 'StaffOrders.dc.html', red: false }
+    ].map((t) => Object.assign(t, { border: t.red ? '1.5px solid #E86A5E' : '1px solid #38322A', numColor: t.red ? '#B23F30' : '#1E1A15' }));
+
+    const REASONS = ['Browsing', 'Measuring', 'Pickup', 'Return', 'Question'];
+    const wkOk = s.wkName.trim().length > 1;
+    return {
+      summary: (A.length - 2 + s.walkins.length) + ' appointments left, 1 pickup and 2 overdue returns. ' + left + ' thing' + (left === 1 ? '' : 's') + ' to sort before close.',
+      tiles: tiles,
+      appts: appts,
+      todos: todos,
+      todoCount: left ? left + ' left' : 'All done',
+      inbox: inbox,
+      team: [
+        { ini: 'MT', name: 'Marco T.', role: 'Front counter', hours: '12–7' },
+        { ini: 'JR', name: 'Jess R.', role: 'Fittings · measuring room 5–6:30', hours: '12–7' },
+        { ini: 'L', name: 'Lou', role: 'Tailor · alterations', hours: '2–7' }
+      ],
+      walkinOpen: s.walkinOpen,
+      toggleWalkin: () => this.setState({ walkinOpen: !this.state.walkinOpen }),
+      walkin: {
+        name: s.wkName,
+        setName: (e) => this.setState({ wkName: e.target.value }),
+        reasons: REASONS.map((r) => {
+          const on = s.wkWhy === r;
+          return { label: r, on: on, pick: () => this.setState({ wkWhy: r }) };
+        }),
+        off: !wkOk,
+        save: () => {
+          if (!wkOk) return;
+          this.setState({ walkins: this.state.walkins.concat([{ name: this.state.wkName.trim(), why: this.state.wkWhy }]), wkName: '', walkinOpen: false });
+        }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

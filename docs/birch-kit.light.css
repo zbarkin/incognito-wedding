@@ -1,0 +1,176 @@
+/* Silver Birch component kit: the same parts as kodak-kit.css (all class names kk-*), restyled for the
+   Silver Birch screens. Linked from each Birch screen's <helmet> as ../birch-kit.css.
+   Inline styles win over these classes.
+
+   Direction: sleek, modern, quiet. Black, silver and ivory; square 0-radius edges; hairline rules;
+   Jost small caps for labels; cesso only for display numerals. Gold (#C9A24B) is kept for the one key
+   accent in any group: the picked option, the done step, the field number. Matches SilverBirchSignup. */
+
+:root {
+  --kk-bg:#F4F1EA; --kk-panel:#FBFAF6; --kk-field:#FFFFFF; --kk-line:#D8D5CD; --kk-line2:#BDBAB2; --kk-rule:#9A9DA0; --kk-hair:rgba(15,15,16,.1);
+  --kk-text:#0F0F10; --kk-muted:#54585B; --kk-dim:#6C7073; --kk-brass:#A98632; --kk-brass-hi:#C9A24B; --kk-brass-lo:#8A6B21;
+  --kk-red:#C0473B; --kk-green:#0F0F10; --kk-silver:linear-gradient(90deg, #54585B 0%, #0F0F10 45%, #6C7073 100%);
+  --kk-display:Cesso, cesso, Plaster, Jost, sans-serif; --kk-body:Jost, 'Century Gothic', sans-serif;
+}
+@media (prefers-reduced-motion: reduce) { [class*="kk-"], [class*="kk-"]::before, [class*="kk-"]::after { animation:none !important; transition:none !important; } }
+
+/* 01 Buttons ------------------------------------------------------------------------------- */
+/* Main action: a flat ivory bar, small caps, turns gold on hover. Works on <button> and <a>. */
+.kk-shutter { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:54px; padding:0 28px; box-sizing:border-box;
+  border:0; border-radius:0; cursor:pointer; text-decoration:none; color:#F4F1EA; background:#0F0F10;
+  font:600 13px/1.15 var(--kk-body); letter-spacing:.2em; text-transform:uppercase; text-align:center; transition:background .2s; }
+.kk-shutter::before { content:none; }
+.kk-shutter:hover { background:var(--kk-brass); }
+.kk-shutter[disabled], .kk-shutter[aria-disabled="true"] { background:#FBFAF6; color:var(--kk-dim); cursor:not-allowed; }
+.kk-dot { display:none; }
+.kk-shutter.kk-small { min-height:46px; padding:0 20px; font-size:12px; letter-spacing:.18em; }
+/* Secondary / back: a silver hairline outline in small caps; the line turns ivory on hover. */
+.kk-leader { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:48px; padding:0 20px; box-sizing:border-box; cursor:pointer; text-decoration:none;
+  color:var(--kk-text); background:transparent; border:1px solid var(--kk-dim); border-radius:0; font:600 12px/1.1 var(--kk-body); letter-spacing:.18em; text-transform:uppercase; transition:border-color .2s; }
+.kk-leader:hover { border-color:var(--kk-text); }
+/* Text link: ivory text with a gold underline. */
+.kk-grease { color:var(--kk-text); font-weight:500; cursor:pointer; background:none; border:0; padding:0; font-family:inherit; font-size:inherit;
+  text-decoration:underline; text-decoration-color:var(--kk-brass); text-decoration-thickness:1px; text-underline-offset:5px; transition:text-decoration-color .2s; }
+.kk-grease:hover, .kk-grease:focus-visible { text-decoration-color:var(--kk-text); }
+a.kk-shutter, a.kk-shutter:hover, a.kk-shutter:visited { color:#F4F1EA; text-decoration:none; }
+a.kk-leader, a.kk-leader:hover, a.kk-leader:visited { color:var(--kk-text); text-decoration:none; }
+a.kk-grease, a.kk-grease:hover, a.kk-grease:visited { color:var(--kk-text); }
+
+/* 02 Step progress: a minimal numbered line ----------------------------------------------- */
+/* Each step is a hairline with a number and a name. Done steps take a gold rule, the current step ivory. */
+.kk-steps { display:block; min-width:0; }
+.kk-counter { display:none; }
+.kk-strip { list-style:none; margin:0; padding:0; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0, 1fr); gap:12px; min-width:0; }
+.kk-frame { min-width:0; display:flex; flex-direction:column; gap:8px; padding-top:13px; border-top:1px solid var(--kk-line2); color:var(--kk-muted); font:400 18px/1.25 var(--kk-body); }
+.kk-frame b { font:600 11px/1 var(--kk-body); letter-spacing:.2em; color:var(--kk-dim); }
+.kk-frame a { color:inherit; text-decoration:none; gap:8px; }
+.kk-frame a:hover { color:var(--kk-text); }
+.kk-frame.is-done { padding-top:12px; border-top:2px solid var(--kk-brass); color:var(--kk-text); }
+.kk-frame.is-done b { color:var(--kk-brass); }
+.kk-frame.is-now { padding-top:12px; border-top:2px solid var(--kk-text); color:var(--kk-text); font-weight:600; }
+.kk-frame.is-now b { color:var(--kk-text); }
+@media (max-width: 560px) {
+  .kk-strip { gap:8px; }
+  .kk-frame { font-size:0; gap:6px; }
+  .kk-frame b { font-size:10px; letter-spacing:.14em; }
+  .kk-frame.is-now { font-size:13px; }
+}
+
+/* 03 Fields: numbered small-caps labels over filled, bottom-ruled inputs ------------------ */
+.kk-field { display:flex; flex-direction:column; gap:9px; min-width:0; }
+.kk-dymo { align-self:flex-start; display:inline-flex; gap:10px; padding:0; background:none; color:var(--kk-muted); font:500 11px/1.2 var(--kk-body); letter-spacing:.2em; text-transform:uppercase; }
+.kk-dymo.is-red { color:var(--kk-text); }
+.kk-dymo.is-red::after { content:" *"; color:var(--kk-brass); letter-spacing:0; }
+.kk-input { width:100%; min-height:50px; box-sizing:border-box; padding:0 12px; background:var(--kk-field); color:var(--kk-text); border:0; border-bottom:1px solid var(--kk-rule);
+  border-radius:0; font:400 16px/1.3 var(--kk-body); outline:none; transition:border-color .2s; color-scheme:light; }
+textarea.kk-input { min-height:104px; padding:14px 12px; resize:vertical; line-height:1.5; }
+select.kk-input { cursor:pointer; appearance:none; -webkit-appearance:none; }
+.kk-input::placeholder { color:var(--kk-dim); }
+.kk-input:focus { border-bottom-color:var(--kk-brass); box-shadow:0 1px 0 0 var(--kk-brass); }
+.kk-field:focus-within .kk-dymo { color:var(--kk-brass); }
+.kk-help { font-size:14px; color:var(--kk-muted); }
+
+/* 04 Choice scale: a clean segmented line ------------------------------------------------- */
+/* Same markup as Kodak (.kk-dialwrap > .kk-dial svg + .kk-dial-opts > .kk-dial-opt). The dial art is
+   hidden; the options sit on one hairline, divided by short ticks, with a gold rule under the pick. */
+.kk-dialwrap { display:block; }
+.kk-dial { display:none; }
+.kk-dial-opts { display:flex; flex-direction:row; gap:0; position:relative; min-width:0; border-bottom:1px solid var(--kk-line2); }
+.kk-dial-opt { position:relative; flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-height:48px; padding:0 6px;
+  background:transparent; border:0; color:var(--kk-dim); cursor:pointer; font:500 12px/1.2 var(--kk-body); letter-spacing:.16em; text-transform:uppercase; text-align:center; transition:color .15s; }
+.kk-dial-opt small { font:500 10px var(--kk-body); letter-spacing:.14em; opacity:.75; }
+.kk-dial-opts > .kk-dial-opt + .kk-dial-opt::before { content:""; position:absolute; left:0; bottom:0; width:1px; height:12px; background:var(--kk-line2); }
+.kk-dial-opts > .kk-dial-opt::after { content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:transparent; transition:background .2s; }
+.kk-dial-opt[aria-checked="true"], .kk-dial-opt[aria-pressed="true"] { color:var(--kk-text); font-weight:600; }
+.kk-dial-opts > .kk-dial-opt[aria-checked="true"]::after, .kk-dial-opts > .kk-dial-opt[aria-pressed="true"]::after { background:var(--kk-brass); }
+.kk-dial-opt:hover:not([aria-checked="true"]):not([aria-pressed="true"]) { color:var(--kk-text); }
+/* Outside a scale (tab rows, filter chips) a dial-opt is a square plaque; the pick is gold with an inner ring. */
+:not(.kk-dial-opts) > .kk-dial-opt { flex:0 0 auto; flex-direction:row; border:1px solid var(--kk-rule); padding:0 14px; min-height:44px; color:var(--kk-text); letter-spacing:.12em; }
+:not(.kk-dial-opts) > .kk-dial-opt[aria-checked="true"], :not(.kk-dial-opts) > .kk-dial-opt[aria-pressed="true"] { border-color:var(--kk-brass); color:#F4F1EA; background:var(--kk-brass); box-shadow:inset 0 0 0 3px var(--kk-brass), inset 0 0 0 4px #F4F1EA; }
+
+/* Fabric swatch: a square cut of cloth with a hairline edge, no pinking. */
+.kk-swatch { display:flex; flex-direction:column; align-items:center; gap:10px; width:88px; padding:6px 2px 4px; background:transparent; border:0; cursor:pointer; color:var(--kk-muted); font:400 13px/1.25 var(--kk-body); text-align:center; }
+.kk-swatch-chip { display:block; width:52px; height:52px; position:relative; box-shadow:inset 0 0 0 1px rgba(30,26,21,0.096);
+  background-image:repeating-linear-gradient(45deg, rgba(30,26,21,0.024) 0 1px, transparent 1px 3px), linear-gradient(180deg, rgba(30,26,21,0.036), rgba(244,241,234,0.12)); transition:transform .2s; }
+.kk-swatch-ring { padding:4px; border:1px solid transparent; transition:border-color .2s; }
+.kk-swatch-name { padding-bottom:4px; background-image:linear-gradient(var(--kk-brass), var(--kk-brass)); background-repeat:no-repeat; background-position:50% 100%; background-size:0 1px; transition:background-size .25s; }
+.kk-swatch:hover .kk-swatch-ring { border-color:var(--kk-line2); }
+.kk-swatch[aria-pressed="true"], .kk-swatch[aria-checked="true"] { color:var(--kk-text); font-weight:500; }
+.kk-swatch[aria-pressed="true"] .kk-swatch-ring, .kk-swatch[aria-checked="true"] .kk-swatch-ring { border-color:var(--kk-brass); }
+.kk-swatch[aria-pressed="true"] .kk-swatch-name, .kk-swatch[aria-checked="true"] .kk-swatch-name { background-size:70% 1px; }
+.kk-swatch.is-small { width:80px; }
+.kk-swatch.is-small .kk-swatch-chip { width:42px; height:42px; }
+
+/* 05 Toggle: the Silver Birch switch, black track and a polished silver knob --------------- */
+.kk-cube { display:flex; align-items:center; gap:14px; cursor:pointer; user-select:none; position:relative; }
+.kk-cube input { position:relative; appearance:none; -webkit-appearance:none; width:46px; height:26px; flex:0 0 46px; margin:0; box-sizing:border-box; border-radius:13px; background:#F4F1EA; border:1.5px solid var(--kk-dim); cursor:pointer; transition:border-color .2s; }
+.kk-cube input::after { content:""; position:absolute; top:2.5px; left:3px; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #FFFFFF 0, #C9CCCE 45%, #6B6E71 100%); transition:transform .2s; }
+.kk-cube input:checked { border-color:var(--kk-brass); }
+.kk-cube input:checked::after { transform:translateX(19px); }
+.kk-cube input:focus-visible { outline:2px solid var(--kk-brass); outline-offset:3px; }
+.kk-cube-art { display:none; }
+
+/* 06 Product card ------------------------------------------------------------------------- */
+.kk-mount { position:relative; background:var(--kk-panel); border:1px solid var(--kk-line); padding:12px 12px 40px; color:var(--kk-text); transition:border-color .2s; }
+.kk-mount:hover, .kk-mount:focus-within { border-color:var(--kk-dim); }
+.kk-mount-win { position:relative; overflow:hidden; }
+.kk-mount-hand { position:absolute; left:12px; right:12px; bottom:12px; font:500 13px/1.1 var(--kk-body); letter-spacing:.06em; color:var(--kk-text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.kk-mount-print { display:none; }
+
+/* 07 Picked items: a gold hairline and an inner ring, like the plaques ------------------- */
+.kk-pick { position:relative; }
+.kk-circle { display:none; }
+.kk-pick[aria-pressed="true"], .kk-pick[aria-checked="true"], .kk-pick[aria-current="true"], .kk-pick[aria-current="page"], .kk-pick.is-picked { outline:1px solid #F4F1EA; outline-offset:-4px; }
+.kk-pick[aria-pressed="true"]:focus-visible, .kk-pick[aria-checked="true"]:focus-visible { outline:2px solid var(--kk-brass); outline-offset:3px; }
+.kk-sheet { background:#F4F1EA; padding:10px; }
+
+/* 08 Badges -------------------------------------------------------------------------------- */
+.kk-date { font:600 12px/1 var(--kk-body); font-variant-numeric:tabular-nums; letter-spacing:.16em; text-transform:uppercase; color:var(--kk-muted); white-space:nowrap; }
+.kk-dx { display:inline-flex; align-items:center; gap:8px; height:24px; padding:0 9px; border:1px solid var(--kk-line); color:var(--kk-muted); font:500 10px/1 var(--kk-body); letter-spacing:.18em; text-transform:uppercase; white-space:nowrap; background:transparent; }
+.kk-dx::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--kk-text); }
+.kk-dx.is-low::before { background:transparent; box-shadow:inset 0 0 0 1.5px var(--kk-dim); }
+.kk-dx.is-out { color:var(--kk-dim); }
+.kk-dx.is-out::before { border-radius:0; background:var(--kk-red); }
+/* Status chip: square, hairline, with a mark that follows the detail sheet:
+   filled ivory = done, hollow silver = waiting, red square = needs a look. */
+.kk-cap { display:inline-flex; align-items:center; gap:8px; min-height:26px; box-sizing:border-box; padding:3px 10px; border-radius:0; background:transparent; color:var(--kk-text);
+  font:500 12px/1.2 var(--kk-body); letter-spacing:.04em; white-space:nowrap; border:1px solid var(--kk-line2); }
+.kk-cap::before { content:""; flex:0 0 7px; width:7px; height:7px; border-radius:50%; background:var(--kk-muted); }
+.kk-cap.is-red { color:var(--kk-text); border-color:rgba(224,88,76,.5); }
+.kk-cap.is-red::before { border-radius:0; background:var(--kk-red); }
+.kk-cap.is-grey { color:var(--kk-muted); }
+.kk-cap.is-grey::before { background:transparent; box-shadow:inset 0 0 0 1.5px var(--kk-dim); }
+.kk-cap.is-green::before { background:var(--kk-green); }
+
+/* 09 Confirmation: a crisp briefing card with a thin gold top rule ----------------------- */
+.kk-envelope { position:relative; background:var(--kk-field); color:var(--kk-text); padding:18px 20px; border:1px solid var(--kk-line); border-top:2px solid var(--kk-brass); border-radius:0; }
+.kk-envelope::before { content:none; }
+.kk-envelope h3, .kk-envelope h2 { margin:0 0 4px; font:400 20px/1.25 var(--kk-body); color:var(--kk-text); }
+.kk-envelope p { margin:0; font-size:15px; line-height:1.55; color:var(--kk-muted); }
+.kk-envelope a { color:var(--kk-text); text-decoration-color:var(--kk-brass); }
+.kk-stamp { position:static; display:inline-block; margin-bottom:8px; padding:0; border:0; color:var(--kk-brass); font:600 10px/1.2 var(--kk-body); letter-spacing:.3em; text-transform:uppercase; transform:none; opacity:1; }
+.kk-ticks { display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:10px; font:500 11px var(--kk-body); letter-spacing:.14em; text-transform:uppercase; color:var(--kk-muted); }
+.kk-ticks span::before { content:"\25CB  "; } .kk-ticks span.is-done::before { content:"\25CF  "; color:var(--kk-text); }
+
+/* 10 Loading and empty --------------------------------------------------------------------- */
+.kk-reel { width:36px; height:36px; animation:kk-spin 1.8s linear infinite; opacity:.85; }
+@keyframes kk-spin { to { transform:rotate(360deg); } }
+.kk-loading { display:flex; align-items:center; gap:14px; color:var(--kk-muted); font-size:15px; }
+.kk-negative { display:flex; align-items:center; gap:16px; flex-wrap:wrap; background:transparent; border:1px solid var(--kk-line); padding:20px; }
+.kk-neg { width:40px; height:40px; flex:0 0 40px; box-sizing:border-box; border:1px solid var(--kk-line2); color:transparent; font-size:0; position:relative; overflow:hidden; }
+.kk-neg::after { content:""; position:absolute; left:50%; top:-10px; bottom:-10px; width:1px; background:var(--kk-line2); transform:rotate(45deg); }
+.kk-negative p { margin:0; color:var(--kk-muted); max-width:420px; font-size:15px; }
+.kk-negative strong { display:block; color:var(--kk-text); font-weight:500; font-size:17px; margin-bottom:2px; }
+
+/* 11 Lists --------------------------------------------------------------------------------- */
+.kk-sleeve { list-style:none; margin:0; padding:0; background:transparent; border-top:1px solid var(--kk-line); }
+.kk-sleeve > * { border-bottom:1px solid var(--kk-line); }
+.kk-sleeve-row { display:grid; grid-template-columns:40px minmax(0, 1fr) auto; align-items:center; gap:12px; padding:12px 4px; }
+.kk-no { font:600 11px/1 var(--kk-body); font-variant-numeric:tabular-nums; color:var(--kk-brass); letter-spacing:.2em; }
+.kk-mark { font:500 13px/1.25 var(--kk-body); letter-spacing:.02em; color:var(--kk-muted); }
+.kk-mark.is-ok { color:var(--kk-text); } .kk-mark.is-wait { color:var(--kk-muted); } .kk-mark.is-no { color:var(--kk-red); }
+
+/* Divider: a plain hairline (the Kodak edge print is dropped) ------------------------------ */
+.kk-edge { height:1px; background:var(--kk-line); position:relative; overflow:hidden; border:0; }
+.kk-edge::before, .kk-edge::after { content:none; }
+.kk-edge span { display:none; }

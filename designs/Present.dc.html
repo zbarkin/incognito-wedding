@@ -88,6 +88,7 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
     <div class="brand"><b>INCOGNITO MENSWEAR &amp; TUX</b><span>Three directions for the new site · for review</span></div>
     <div class="styles" role="group" aria-label="Style" id="styleBtns"></div>
     <div class="seg" role="group" aria-label="View"><button type="button" id="vWalk" aria-pressed="true">Walk through one</button><button type="button" id="vComp" aria-pressed="false">Side by side</button></div>
+    <div class="seg" role="group" aria-label="Mode"><button type="button" id="mDark" aria-pressed="true">Dark</button><button type="button" id="mLight" aria-pressed="false">Light</button></div>
   </header>
 
   <main class="walk" id="walk">
@@ -122,6 +123,8 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
       name: 'Kodak', kicker: 'Option A', chip: 'linear-gradient(135deg,#121110 50%,#C29E62 50%)',
       display: "norman-stencil-fat, Rokkitt, serif", displayTxt: 'SUITED, SINCE 1985', dWeight: 800, body: 'Archivo, sans-serif', bodyTxt: 'Rokkitt and Archivo. Warm, confident, a little cinematic.',
       mood: 'Rochester in 1985: a camera store’s brass and chrome, darkroom amber, the city at night. Grown-up and warm, with a wink of local history.',
+      lightPalette: [['#F3ECDD', 'Cream'], ['#FBF7EE', 'Card'], ['#B08A4F', 'Brass'], ['#1E1A15', 'Ink'], ['#B8691C', 'Amber'], ['#B23F30', 'Signal']],
+      lightMood: 'Light mode: cream paper with brass, amber and ink, like a print fresh off the enlarger.',
       palette: [['#121110', 'Charcoal'], ['#1A1816', 'Panel'], ['#C29E62', 'Brass'], ['#EEE7D9', 'Cream'], ['#E8963A', 'Amber'], ['#E86A5E', 'Signal']],
       details: ['Brushed-brass main buttons with an engraved grip line', 'Sign-up steps on a quiet film strip with an amber frame counter', 'Engraved selector scales and pinked fabric swatches for choices', 'Shop suits in cream slide mounts, on a knit form with a wood cap'],
       screens: { wedding: 'Main', party: 'Party', look: 'Look', book: 'Book', status: 'Status', member: 'Member', shop: 'Shop', prom: 'PromKodak', game: 'PromGameKodak' }
@@ -130,6 +133,8 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
       name: 'Silver Birch', kicker: 'Option B', chip: 'linear-gradient(135deg,#0A0A0B 50%,#B9BDBF 50%)',
       display: "cesso, Plaster, Jost, sans-serif", displayTxt: 'Black tie, handled.', dWeight: 400, body: 'Jost, sans-serif', bodyTxt: 'Cesso and Jost. Precise, modern, quietly expensive.',
       mood: 'Modern black tie: black, silver and ivory, sharp edges and lots of air. Secret-agent cool without the gadgets.',
+      lightPalette: [['#F4F1EA', 'Ivory'], ['#FBFAF6', 'Card'], ['#54585B', 'Silver'], ['#0F0F10', 'Black'], ['#A98632', 'Gold'], ['#D8D5CD', 'Line']],
+      lightMood: 'Light mode: an ivory base with black type, silver hairlines and the same single gold accent.',
       palette: [['#0A0A0B', 'Black'], ['#111112', 'Panel'], ['#B9BDBF', 'Silver'], ['#F4F1EA', 'Ivory'], ['#C9A24B', 'Gold'], ['#2E2F31', 'Line']],
       details: ['Sharp, 0-radius edges and hairline silver rules', 'Gold kept for the one key action on each screen', 'A minimal numbered progress line', 'Shop suits on a faceless charcoal form with a steel post'],
       screens: { wedding: 'SilverBirchSignup', party: 'BirchParty', look: 'BirchLook', book: 'BirchBook', status: 'BirchStatus', member: 'BirchMember', shop: 'ShopBirch', prom: 'PromBirch', game: 'PromGameBirch' }
@@ -138,6 +143,8 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
       name: 'Tuxedo Park', kicker: 'Option C', chip: 'linear-gradient(135deg,#13241D 50%,#C6A867 50%)',
       display: "vivaldi-mn, 'Playfair Display', Georgia, serif", displayTxt: 'The whole party, properly dressed.', dWeight: 400, body: "'EB Garamond', Georgia, serif", bodyTxt: 'Vivaldi, Playfair and Garamond. Engraved, traditional, gracious.',
       mood: 'The Gilded Age club: bottle-green walls, engraved stationery and gilt, with a consulting detective’s eye for detail.',
+      lightPalette: [['#F4EEDF', 'Stationery'], ['#FFFDF8', 'Card'], ['#1F3D2F', 'Bottle green'], ['#7A1F2E', 'Burgundy'], ['#A88B50', 'Gilt'], ['#1F1A14', 'Ink']],
+      lightMood: 'Light mode: engraved stationery throughout, with bottle green and burgundy as the accents and gilt for the rules.',
       palette: [['#13241D', 'Bottle green'], ['#0E1B16', 'Panel'], ['#C6A867', 'Gilt'], ['#F2EAD8', 'Stationery'], ['#7B2D26', 'Claret'], ['#5E1F2A', 'Burgundy']],
       details: ['Engraved double rules and gilt hairlines', 'Roman-numeral steps and stationery-card confirmations', 'Cream cards and Garamond small caps throughout', 'Shop suits on a linen dress form with a turned wood stand'],
       variant: { name: 'Burgundy', wedding: 'TuxedoParkBurgundySignup', sheet: 'TuxedoParkBurgundy' },
@@ -145,24 +152,25 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
     }
   };
   var ORDER = ['kodak', 'birch', 'park'];
-  var state = { style: 'kodak', step: 0, view: 'walk', burgundy: false };
+  var state = { style: 'kodak', step: 0, view: 'walk', burgundy: false, light: false };
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
   function src(styleKey, stepIdx) {
     var st = STYLES[styleKey], step = STEPS[stepIdx];
     var file = st.screens[step.id];
     if (styleKey === 'park' && state.burgundy && step.id === 'wedding') file = st.variant.wedding;
-    return file + '.dc.html';
+    return (state.light ? 'light/' : '') + file + '.dc.html';
   }
-  // Hash: #kodak-3 or #compare-3
+  // Hash: #kodak-3 or #compare-3, with -light for light mode (#park-2-light)
   function readHash() {
-    var m = (location.hash || '').match(/^#(kodak|birch|park|compare)(?:-(\d+))?$/);
+    var m = (location.hash || '').match(/^#(kodak|birch|park|compare)(?:-(\d+))?(-light)?$/);
     if (!m) return;
+    state.light = !!m[3];
     if (m[1] === 'compare') state.view = 'compare'; else { state.view = 'walk'; state.style = m[1]; }
     if (m[2]) state.step = Math.max(0, Math.min(STEPS.length - 1, +m[2] - 1));
   }
   function writeHash() {
-    var h = '#' + (state.view === 'compare' ? 'compare' : state.style) + '-' + (state.step + 1);
+    var h = '#' + (state.view === 'compare' ? 'compare' : state.style) + '-' + (state.step + 1) + (state.light ? '-light' : '');
     if (location.hash !== h) history.replaceState(null, '', h);
   }
   function fit(vp, frame, phone) {
@@ -181,8 +189,8 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
   function renderStory() {
     var st = STYLES[state.style];
     var html = '<div><div class="kicker">' + esc(st.kicker) + '</div><h1 style="font-family:' + st.display + '; font-weight:' + st.dWeight + '">' + esc(st.name) + '</h1></div>'
-      + '<p class="mood">' + esc(st.mood) + '</p>'
-      + '<div><h3>Palette</h3><div class="palette">' + st.palette.map(function (p) { return '<div><span style="background:' + p[0] + '"></span>' + esc(p[1]) + '<br>' + p[0] + '</div>'; }).join('') + '</div></div>'
+      + '<p class="mood">' + esc(st.mood) + '</p>' + (state.light ? '<p class="mood">' + esc(st.lightMood) + '</p>' : '')
+      + '<div><h3>Palette</h3><div class="palette">' + (state.light ? st.lightPalette : st.palette).map(function (p) { return '<div><span style="background:' + p[0] + '"></span>' + esc(p[1]) + '<br>' + p[0] + '</div>'; }).join('') + '</div></div>'
       + '<div class="type"><h3>Type</h3><div class="d" style="font-family:' + st.display + '; font-weight:' + st.dWeight + '">' + esc(st.displayTxt) + '</div><div class="b" style="font-family:' + st.body + '">' + esc(st.bodyTxt) + '</div></div>'
       + '<div><h3>Signature details</h3><ul class="details">' + st.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></div>';
     if (st.variant) html += '<div><h3>Colourway</h3><div class="seg" role="group" aria-label="Tuxedo Park colourway" style="display:inline-flex"><button type="button" id="cwG" aria-pressed="' + !state.burgundy + '">Green</button><button type="button" id="cwB" aria-pressed="' + state.burgundy + '">Burgundy</button></div><p class="variant" style="margin:8px 0 0">The burgundy colourway is drawn for the sign-up and the detail sheet; the rest of the path is shown in green.</p></div>';
@@ -229,10 +237,13 @@ header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:s
     renderStyles();
     $('walk').hidden = state.view !== 'walk'; $('compare').hidden = state.view !== 'compare';
     if (state.view === 'walk') { renderStory(); renderWalk(); } else renderCompare();
+    $('mDark').setAttribute('aria-pressed', String(!state.light)); $('mLight').setAttribute('aria-pressed', String(state.light));
     writeHash();
   }
   $('vWalk').onclick = function () { state.view = 'walk'; render(); };
   $('vComp').onclick = function () { state.view = 'compare'; render(); };
+  $('mDark').onclick = function () { state.light = false; render(); };
+  $('mLight').onclick = function () { state.light = true; render(); };
   $('prev').onclick = function () { if (state.step > 0) { state.step--; render(); } };
   $('next').onclick = function () { if (state.step < STEPS.length - 1) state.step++; else state.view = 'compare'; render(); };
   document.addEventListener('keydown', function (e) {

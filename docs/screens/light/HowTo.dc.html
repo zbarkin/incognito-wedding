@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How to measure · animation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../../kodak-kit.light.css">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width:100%; box-sizing:border-box; display:flex; flex-direction:column; gap:14px; background:#F3ECDD; font-family:Archivo, sans-serif; color:#1E1A15;">
+
+<div style="position:relative; width:100%; aspect-ratio:1 / 1; box-sizing:border-box; background:#FFFDF8; border:1px solid #D5C9B2; overflow:hidden;">
+<svg role="img" aria-label="{{alt}}" viewBox="{{vb}}" preserveAspectRatio="xMidYMid meet" style="display:block; width:100%; height:100%;">
+<path d="{{grid}}" stroke="#1F1C18" stroke-width="{{sw.grid}}" fill="none"></path>
+<path d="{{thin}}" stroke="#6F5C3C" stroke-width="{{sw.thin}}" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+
+<g display="{{bodyShow}}" fill="#171512" stroke="#C9A66B" stroke-width="{{sw.body}}" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 90 74 L 56 86 Q 47 90 47 102 L 58 132 L 64 206 L 60 248 L 66 300 L 70 456 L 54 466 Q 50 474 60 474 L 92 474 L 95 456 L 98 292 Q 100 286 102 292 L 105 456 L 108 474 L 140 474 Q 150 474 146 466 L 130 456 L 134 300 L 140 248 L 136 206 L 142 132 L 153 102 Q 153 90 144 86 L 110 74 Z"></path>
+<path d="M 52 90 Q 39 95 37 112 L 22 244 L 40 248 L 58 134 L 55 100 Z"></path>
+<path d="M 148 90 Q 161 95 163 112 L 178 244 L 160 248 L 142 134 L 145 100 Z"></path>
+<ellipse cx="31" cy="261" rx="9" ry="13"></ellipse>
+<ellipse cx="169" cy="261" rx="9" ry="13"></ellipse>
+<path d="M 91 54 L 90 76 M 109 54 L 110 76" fill="none"></path>
+<ellipse cx="100" cy="31" rx="21" ry="27"></ellipse>
+</g>
+
+<g display="{{footShow}}" fill="#171512" stroke="#C9A66B" stroke-width="{{sw.body}}" stroke-linejoin="round" stroke-linecap="round">
+<path d="M 500 178 C 474 178 470 152 472 124 C 474 96 468 74 474 56 C 480 40 498 34 512 38 C 528 42 534 58 532 82 C 530 112 532 150 528 166 C 524 176 514 178 500 178 Z"></path>
+<circle cx="516" cy="50" r="6"></circle>
+<circle cx="503" cy="47" r="4.5"></circle>
+<circle cx="492" cy="51" r="4"></circle>
+<circle cx="483" cy="58" r="3.5"></circle>
+<circle cx="477" cy="67" r="3"></circle>
+</g>
+
+<path d="{{bold}}" stroke="#C9A66B" stroke-width="{{sw.bold}}" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+
+<g display="{{animShow}}">
+<path d="{{back}}" stroke="#E86A5E" stroke-width="{{sw.back}}" stroke-dasharray="{{dash}}" fill="none" opacity="0">
+<animate attributeName="opacity" values="0;0;0.55;0.55;0" keyTimes="0;0.3;0.5;0.9;1" dur="4.5s" repeatCount="indefinite"></animate>
+</path>
+<path display="{{tapeShow}}" d="{{tape}}" pathLength="100" stroke="#E86A5E" stroke-width="{{sw.tape}}" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="100 100" stroke-dashoffset="100">
+<animate attributeName="stroke-dashoffset" values="100;100;0;0;100" keyTimes="0;0.1;0.55;0.9;1" dur="4.5s" repeatCount="indefinite"></animate>
+</path>
+<circle display="{{tapeShow}}" r="{{tabR}}" fill="#C9A66B" stroke="#15130F" stroke-width="{{sw.thin}}">
+<animateMotion path="{{tape}}" keyPoints="0;0;1;1;0" keyTimes="0;0.1;0.55;0.9;1" calcMode="linear" dur="4.5s" repeatCount="indefinite"></animateMotion>
+</circle>
+<line display="{{needleShow}}" x1="100" y1="492" x2="100" y2="484" stroke="#E86A5E" stroke-width="{{sw.tape}}" stroke-linecap="round">
+<animateTransform attributeName="transform" type="rotate" values="-70 100 492;-70 100 492;40 100 492;40 100 492;-70 100 492" keyTimes="0;0.1;0.55;0.9;1" dur="4.5s" repeatCount="indefinite"></animateTransform>
+</line>
+<g opacity="0">
+<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.55;0.62;0.86;0.9;1" dur="4.5s" repeatCount="indefinite"></animate>
+<path d="{{lead}}" stroke="#C9A66B" stroke-width="{{sw.thin}}" fill="none"></path>
+<rect x="{{tag.x}}" y="{{tag.y}}" width="{{tag.w}}" height="{{tag.h}}" rx="{{tag.rx}}" fill="#15130F" stroke="#C9A66B" stroke-width="{{sw.thin}}"></rect>
+<text x="{{tag.cx}}" y="{{tag.cy}}" text-anchor="middle" dominant-baseline="central" font-family="Rokkitt, serif" font-weight="700" font-size="{{tag.fs}}" fill="#EEE7D9">{{readout}}</text>
+</g>
+</g>
+
+<g display="{{stillShow}}">
+<path d="{{back}}" stroke="#E86A5E" stroke-width="{{sw.back}}" stroke-dasharray="{{dash}}" fill="none" opacity="0.55"></path>
+<path display="{{tapeShow}}" d="{{tape}}" stroke="#E86A5E" stroke-width="{{sw.tape}}" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+<circle display="{{tapeShow}}" cx="{{endX}}" cy="{{endY}}" r="{{tabR}}" fill="#C9A66B" stroke="#15130F" stroke-width="{{sw.thin}}"></circle>
+<line display="{{needleShow}}" x1="100" y1="492" x2="100" y2="484" stroke="#E86A5E" stroke-width="{{sw.tape}}" stroke-linecap="round" transform="rotate(40 100 492)"></line>
+<path d="{{lead}}" stroke="#C9A66B" stroke-width="{{sw.thin}}" fill="none"></path>
+<rect x="{{tag.x}}" y="{{tag.y}}" width="{{tag.w}}" height="{{tag.h}}" rx="{{tag.rx}}" fill="#15130F" stroke="#C9A66B" stroke-width="{{sw.thin}}"></rect>
+<text x="{{tag.cx}}" y="{{tag.cy}}" text-anchor="middle" dominant-baseline="central" font-family="Rokkitt, serif" font-weight="700" font-size="{{tag.fs}}" fill="#EEE7D9">{{readout}}</text>
+</g>
+</svg>
+</div>
+
+<sc-if value="{{showSteps}}" hint-placeholder-val="{{true}}">
+<ol class="kk-sleeve">
+<sc-for list="{{stepList}}" as="s" hint-placeholder-count="3">
+<li class="kk-sleeve-row" style="grid-template-columns:30px minmax(0, 1fr); align-items:baseline; font-size:15px; line-height:1.45; color:#1E1A15;">
+<span class="kk-no">{{s.no}}</span>
+<span>{{s.text}}</span>
+</li>
+</sc-for>
+</ol>
+<p style="margin:0; font-size:14px; line-height:1.5; color:#655C4F;"><span style="margin-right:8px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:700; font-size:10px; letter-spacing:.18em; color:#B23F30;">TIP</span>{{note}}</p>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"which":{"editor":"enum","options":["height","weight","chest","overarm","neck","sleeve","waist","hip","outseam","shoe"],"default":"overarm"},"still":{"editor":"boolean","default":false},"steps":{"editor":"boolean","default":true},"$preview":{"width":360,"height":600}}'>
+class Component extends DCLogic {
+  defs() {
+    return {
+      height: {
+        name: 'Height', crop: [-140, -12, 500, 500], read: '5′ 11″',
+        tape: 'M 200 474 L 200 4', end: [200, 4],
+        thin: 'M 212 -20 L 212 490 M -150 474 L 360 474', bold: 'M 74 3 L 210 3',
+        tag: [222, 211], lead: 'M 200 234 L 222 234',
+        steps: ['Take your shoes off and stand straight with your back against a wall.', 'Have a friend lay a book flat on your head, pressed to the wall, and mark the wall under it.', 'Step away and measure from the floor up to the mark.'],
+        note: 'Write it in feet and inches, like 5 ft 11 in.'
+      },
+      weight: {
+        name: 'Weight', crop: [-20, 300, 240, 240], read: '175 lbs',
+        tape: 'M 100 492 L 100 491', end: [100, 492],
+        thin: 'M -20 506 L 220 506 M 91 492 A 9 9 0 1 0 109 492 A 9 9 0 1 0 91 492', bold: 'M 34 474 L 166 474 L 166 506 L 34 506 Z',
+        tag: [124, 446], lead: 'M 107 486 L 124 462',
+        steps: ['Take your shoes off and step onto a scale.', 'Stand still and read the number in pounds.'],
+        note: 'Your best guess is fine. It helps us double-check the other numbers.'
+      },
+      chest: {
+        name: 'Chest', crop: [0, 30, 200, 200], read: '40″',
+        tape: 'M 58 124 Q 100 136 142 124', back: 'M 142 124 Q 100 112 58 124', end: [142, 124],
+        tagC: 134,
+        steps: ['Stand relaxed with your arms down.', 'Wrap the tape under your arms, around the fullest part of your chest.', 'Keep it level across your back and snug, not tight.'],
+        note: 'Breathe normally. Don’t puff your chest out.'
+      },
+      overarm: {
+        name: 'Overarm', crop: [0, 30, 200, 200], read: '47″',
+        tape: 'M 34 108 Q 100 124 166 108', back: 'M 166 108 Q 100 96 34 108', end: [166, 108],
+        tagC: 120,
+        steps: ['Let your arms hang relaxed at your sides.', 'Wrap the tape around your chest and upper arms together, at the widest point across your shoulders.', 'Keep it level all the way around.'],
+        note: 'This one really needs a friend to hold the tape.'
+      },
+      neck: {
+        name: 'Neck', crop: [40, 0, 120, 120], read: '15½″',
+        tape: 'M 88 68 Q 100 76 112 68', back: 'M 112 68 Q 100 62 88 68', end: [112, 68],
+        thin: 'M 97.5 63 L 97.5 80 M 102.5 63 L 102.5 80 M 97.5 80 Q 100 82 102.5 80',
+        tagC: 77,
+        steps: ['Wrap the tape around the base of your neck, where a shirt collar sits.', 'Slip one finger under the tape so it isn’t tight.', 'Read the number where the tape overlaps.'],
+        note: 'Round up to the nearest half inch.'
+      },
+      sleeve: {
+        name: 'Sleeve', crop: [-60, 40, 260, 260], read: '34″',
+        tape: 'M 100 72 L 52 88 Q 38 94 35 110 L 19 246', end: [19, 246],
+        thin: 'M 100 66 L 100 78',
+        tag: [-58, 200], lead: 'M 23 212 L 0 212',
+        steps: ['Stand with your arm relaxed and slightly bent.', 'Start at the center back of your neck.', 'Run the tape over the top of your shoulder and down to your wrist bone.'],
+        note: 'It goes neck to wrist, not shoulder to wrist.'
+      },
+      waist: {
+        name: 'Waist', crop: [0, 120, 200, 200], read: '34″',
+        tape: 'M 64 200 Q 100 210 136 200', back: 'M 136 200 Q 100 192 64 200', end: [136, 200],
+        tagC: 209,
+        steps: ['Find where you wear your dress pants, usually at your belly button.', 'Wrap the tape around, level all the way.', 'Leave one finger of room and read the number.'],
+        note: 'This isn’t your jeans size. It’s usually a little bigger.'
+      },
+      hip: {
+        name: 'Hip', crop: [0, 150, 200, 200], read: '40″',
+        tape: 'M 61 248 Q 100 260 139 248', back: 'M 139 248 Q 100 238 61 248', end: [139, 248],
+        tagC: 258,
+        steps: ['Stand with your feet together.', 'Wrap the tape around the fullest part of your seat.', 'Keep it level and read the number.'],
+        note: 'Measure over thin pants or underwear, not jeans.'
+      },
+      outseam: {
+        name: 'Outseam', crop: [-60, 160, 330, 330], read: '43″',
+        tape: 'M 57 204 L 53 248 L 59 300 L 63 472', end: [63, 472],
+        thin: 'M -60 474 L 270 474 M 48 204 L 70 204',
+        tag: [-42, 340], lead: 'M 60 355 L 31 355',
+        steps: ['Take your shoes off.', 'Start at your waistline on the side of your body, where you wear your pants.', 'Run the tape straight down the outside of your leg to the floor.'],
+        note: 'Stand up straight and look ahead, not down at the tape.'
+      },
+      shoe: {
+        name: 'Shoe size', crop: [400, 10, 200, 200], read: '11″',
+        tape: 'M 548 182 L 548 36', end: [548, 36],
+        thin: 'M 426 26 L 578 26 L 578 182 L 426 182 Z', bold: 'M 404 184 L 596 184 M 466 36 L 556 36',
+        tag: [554, 96], lead: 'M 548 105 L 554 105',
+        steps: ['Stand on a sheet of paper with your heel against a wall.', 'Mark the tip of your longest toe.', 'Measure from the wall to the mark, or just pick your usual dress shoe size.'],
+        note: 'Between sizes? Go with the larger one.'
+      }
+    };
+  }
+  renderVals() {
+    const D = this.defs();
+    const key = D[this.props.which] ? this.props.which : 'overarm';
+    const d = D[key];
+    const cx = d.crop[0];
+    const cy = d.crop[1];
+    const cw = d.crop[2];
+    const k = cw / 350;
+    const step = cw / 10;
+    let grid = '';
+    for (let i = 0; i <= 10; i++) {
+      const gx = (cx + i * step).toFixed(1);
+      const gy = (cy + i * step).toFixed(1);
+      grid += 'M ' + gx + ' ' + cy + ' L ' + gx + ' ' + (cy + cw) + ' M ' + cx + ' ' + gy + ' L ' + (cx + cw) + ' ' + gy + ' ';
+    }
+    const tw = 78 * k;
+    const th = 32 * k;
+    const tx = d.tagC !== undefined ? 100 - tw / 2 : d.tag[0];
+    const ty = d.tagC !== undefined ? d.tagC : d.tag[1];
+    let reduce = false;
+    try {
+      reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    } catch (e) {
+      reduce = false;
+    }
+    const still = !!this.props.still || reduce;
+    const show = (b) => (b ? 'inline' : 'none');
+    return {
+      vb: d.crop.join(' '),
+      grid: grid,
+      thin: d.thin || '',
+      bold: d.bold || '',
+      back: d.back || '',
+      tape: d.tape,
+      sw: { grid: k, thin: 1.2 * k, bold: 3.5 * k, body: 1.8 * k, tape: 4 * k, back: 2.2 * k },
+      dash: (4 * k).toFixed(2) + ' ' + (4 * k).toFixed(2),
+      tabR: 4.5 * k,
+      endX: d.end[0],
+      endY: d.end[1],
+      tag: { x: tx, y: ty, w: tw, h: th, rx: 3 * k, cx: tx + tw / 2, cy: ty + th / 2, fs: 17 * k },
+      lead: d.lead || '',
+      readout: d.read,
+      bodyShow: show(key !== 'shoe'),
+      footShow: show(key === 'shoe'),
+      tapeShow: show(key !== 'weight'),
+      needleShow: show(key === 'weight'),
+      animShow: show(!still),
+      stillShow: show(still),
+      alt: (still ? 'Diagram: ' : 'Animation: ') + 'how to measure your ' + d.name.toLowerCase() + ', example reading ' + d.read,
+      showSteps: this.props.steps !== false,
+      stepList: d.steps.map((t, i) => ({ n: i + 1, no: String(i + 1).padStart(2, '0'), text: t })),
+      note: d.note
+    };
+  }
+}
+</script>
+</body>
+</html>

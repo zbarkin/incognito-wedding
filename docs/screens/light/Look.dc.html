@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Register your wedding · The look</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../../kodak-kit.light.css">
+<style>
+body{margin:0;background:#F3ECDD}
+a{color:#87672F}a:not([class*="kk-"]):hover{color:#87672F}
+a:focus-visible,button:focus-visible{outline:2px solid #B08D55;outline-offset:3px}
+.kk-leader:focus-visible{background:#F8F4EC;box-shadow:inset 0 -3px 0 #E2C48E}
+.kk-circle path{stroke-dasharray:none}
+.kk-pick:not([aria-pressed="true"]):not([aria-checked="true"]) .kk-circle{display:none}
+</style>
+</helmet>
+<div style="min-height:100vh; background:#F3ECDD; color:#1E1A15; font-family:Archivo, sans-serif; color-scheme:light; display:flex; flex-direction:column;">
+
+<header style="background:#F3ECDD; border-bottom:1px solid #E3D9C7;">
+<div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:14px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 24px;">
+<a href="Main.dc.html" aria-label="Incognito Menswear and Tux Shop" style="display:flex; align-items:stretch; text-decoration:none;">
+<span style="display:flex; border:1px solid #B08D55; padding:3px;">
+<span style="display:flex; flex-direction:column; align-items:center; border:1px solid #B08D55; padding:7px 14px 6px;">
+<span style="font-family:Rokkitt, serif; font-weight:700; font-size:22px; line-height:1; letter-spacing:.16em; color:#1E1A15;">INCOGNITO</span>
+<span style="margin-top:5px; padding-top:4px; border-top:1px solid #B09464; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:9px; line-height:1; letter-spacing:.38em; color:#87672F;">MENSWEAR &amp; TUX</span>
+</span>
+</span>
+<span style="display:flex; align-items:center; margin-left:5px; padding:0 8px; border:1.5px solid #C9503F; font-family:Rokkitt, serif; font-weight:700; font-size:16px; color:#B23F30;">1985</span>
+</a>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px;">
+<span style="font-size:14px; color:#655C4F;">Questions? <a href="tel:+15855867846" style="color:#87672F; text-decoration:none; font-weight:600;">(585) 586-7846</a></span>
+<button type="button" class="kk-leader">Save &amp; finish later</button>
+</div>
+</div>
+</header>
+
+<main style="flex:1 0 auto; width:100%; max-width:1280px; margin:0 auto; box-sizing:border-box; padding:56px 32px 72px; display:flex; flex-wrap:wrap; align-items:flex-start; gap:40px;">
+
+<section aria-labelledby="step-title" style="flex:999 1 600px; min-width:0; box-sizing:border-box; background:#FBF7EE; border:1px solid #D5C9B2; padding:36px 40px 32px; display:flex; flex-direction:column; gap:34px;">
+
+<nav aria-label="Registration progress">
+<div class="kk-steps">
+<div class="kk-counter" aria-hidden="true">03</div>
+<ol class="kk-strip">
+<li class="kk-frame is-done"><a href="Main.dc.html" style="display:flex; flex-direction:column;"><b>FRAME 1</b>The wedding</a></li>
+<li class="kk-frame is-done"><a href="Party.dc.html" style="display:flex; flex-direction:column;"><b>FRAME 2</b>The party</a></li>
+<li class="kk-frame is-now" aria-current="step"><b>FRAME 3</b>The look</li>
+<li class="kk-frame"><b>FRAME 4</b>Book a visit</li>
+</ol>
+</div>
+</nav>
+
+<div style="display:flex; flex-direction:column; gap:10px;">
+<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#87672F;">Step 3 of 4</span>
+<h2 id="step-title" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:38px; line-height:1.05; color:#1E1A15;">Pick a direction for the look</h2>
+<p style="margin:0; max-width:620px; font-size:16px; line-height:1.5; color:#655C4F;">Nothing is final until your consultation. This just gives us a head start on styles and sizes for your date.</p>
+</div>
+
+<div role="group" aria-labelledby="g-type" style="display:flex; flex-direction:column; gap:14px;">
+<span id="g-type" class="kk-dymo">Tuxedo or suit</span>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px;">
+<sc-for list="{{types}}" as="t" hint-placeholder-count="2">
+<button type="button" class="kk-pick" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:20px 22px; text-align:left; background:{{t.bg}}; border:1px solid {{t.bd}}; border-radius:2px; color:#1E1A15; cursor:pointer; font-family:Archivo, sans-serif;">
+<span style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:12px;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:26px; line-height:1;">{{t.name}}</span>
+<span aria-hidden="true" style="width:20px; height:20px; box-sizing:border-box; border:1px solid {{t.bd}}; background:{{t.dot}};"></span>
+</span>
+<span style="font-size:14px; line-height:1.5; color:#655C4F;">{{t.note}}</span>
+<svg class="kk-circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"></path></svg>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div role="group" aria-labelledby="g-color" style="display:flex; flex-direction:column; gap:14px;">
+<span id="g-color" class="kk-dymo">Color for the party</span>
+<div style="display:flex; flex-wrap:wrap; gap:6px 8px;">
+<sc-for list="{{colors}}" as="c" hint-placeholder-count="6">
+<button type="button" class="kk-swatch" aria-pressed="{{c.on}}" onClick="{{c.pick}}" aria-label="{{c.name}}">
+<span class="kk-swatch-ring" aria-hidden="true"><span class="kk-swatch-chip" style="background-color:{{c.hex}};"></span></span>
+<span class="kk-swatch-name">{{c.name}}</span>
+<svg class="kk-circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"></path></svg>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap:28px 32px;">
+<div role="group" aria-labelledby="g-lapel" style="display:flex; flex-direction:column; gap:14px;">
+<span id="g-lapel" class="kk-dymo">Lapel</span>
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="dg-lapel" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{lapelAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#dg-lapel)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12">PEAK</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(120 85 85)">SHAWL</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(240 85 85)">NOTCH</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#C29E62"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">LAPEL</text>
+</svg>
+<div class="kk-dial-opts" role="radiogroup" aria-labelledby="g-lapel">
+<sc-for list="{{lapels}}" as="o" hint-placeholder-count="3">
+<button type="button" class="kk-dial-opt" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{lapelNote}}" hint-placeholder-val="{{false}}"><span style="font-size:14px; line-height:1.45; color:#655C4F;">{{lapelNote}}</span></sc-if>
+</div>
+<div role="group" aria-labelledby="g-neck" style="display:flex; flex-direction:column; gap:14px;">
+<span id="g-neck" class="kk-dymo">Neckwear</span>
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="dg-neck" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{neckAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#dg-neck)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12">BOW TIE</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(180 85 85)">LONG TIE</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#C29E62"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">NECK</text>
+</svg>
+<div class="kk-dial-opts" role="radiogroup" aria-labelledby="g-neck">
+<sc-for list="{{necks}}" as="o" hint-placeholder-count="2">
+<button type="button" class="kk-dial-opt" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<div role="group" aria-labelledby="g-layer" style="display:flex; flex-direction:column; gap:14px;">
+<span id="g-layer" class="kk-dymo">Vest or cummerbund</span>
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="dg-layer" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{layerAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#dg-layer)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12">VEST</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="10" transform="rotate(120 85 85)">CUMMERBUND</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(240 85 85)">NEITHER</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#C29E62"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">LAYER</text>
+</svg>
+<div class="kk-dial-opts" role="radiogroup" aria-labelledby="g-layer">
+<sc-for list="{{layers}}" as="o" hint-placeholder-count="3">
+<button type="button" class="kk-dial-opt" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex; flex-direction:column; gap:18px; padding:22px 24px; background:#F8F2E6; border:1px solid #E3D9C7;">
+<label class="kk-cube">
+<input type="checkbox" checked="{{groomDiff}}" onChange="{{toggleGroom}}">
+<svg class="kk-cube-art" viewBox="0 0 58 58" aria-hidden="true"><rect x="4" y="10" width="50" height="44" rx="3" fill="#0E0E0E"></rect><rect class="kk-face" x="9" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="9" y="34" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="34" width="18" height="16" rx="2"></rect><rect x="22" y="2" width="14" height="9" rx="1" fill="#2A2621"></rect></svg>
+<span style="display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:21px; color:#1E1A15;">Set the groom apart</span>
+<span style="font-size:14px; color:#655C4F;">Same cut as the party, in a different color.</span>
+</span>
+</label>
+<sc-if value="{{groomDiff}}" hint-placeholder-val="{{true}}">
+<div role="group" aria-label="Groom's color" style="display:flex; flex-wrap:wrap; gap:4px 6px;">
+<sc-for list="{{groomColors}}" as="c" hint-placeholder-count="6">
+<button type="button" class="kk-swatch is-small" aria-pressed="{{c.on}}" onClick="{{c.pick}}" aria-label="{{c.name}}">
+<span class="kk-swatch-ring" aria-hidden="true"><span class="kk-swatch-chip" style="background-color:{{c.hex}};"></span></span>
+<span class="kk-swatch-name">{{c.name}}</span>
+<svg class="kk-circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"></path></svg>
+</button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+
+<div class="kk-edge" aria-hidden="true"><span style="left:14px">INCOGNITO 400</span><span style="left:220px">▶ 03</span><span style="left:360px">03A</span><span style="left:500px">INCOGNITO 400</span></div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-top:-10px;">
+<a href="Party.dc.html" class="kk-leader"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</a>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px;">
+<a href="Book.dc.html" class="kk-grease" style="font-size:15px;">Not sure yet? Decide in store</a>
+<a href="Book.dc.html" class="kk-shutter"><span class="kk-dot" aria-hidden="true"></span>Continue to booking<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</div>
+
+</section>
+
+<aside aria-label="Look preview" style="flex:1 1 320px; max-width:400px; display:flex; flex-direction:column; gap:18px;">
+<span style="align-self:flex-start; border:1px solid #B09464; padding:2px;"><span style="display:block; border:1px solid #B09464; padding:5px 10px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#87672F;">Preview</span></span>
+
+<sc-if value="{{groomDiff}}" hint-placeholder-val="{{true}}">
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="dg-view" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{viewAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#dg-view)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="11">GROOMSMEN</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(180 85 85)">GROOM</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#C29E62"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">VIEW</text>
+</svg>
+<div class="kk-dial-opts" role="radiogroup" aria-label="Preview who">
+<sc-for list="{{views}}" as="v" hint-placeholder-count="2">
+<button type="button" class="kk-dial-opt" role="radio" aria-checked="{{v.on}}" onClick="{{v.pick}}">{{v.name}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<figure style="margin:0; background:#EFE8D8; padding:14px 14px 12px; box-shadow:0 18px 40px rgba(60,45,25,0.158);">
+<svg role="img" aria-label="{{pv.alt}}" viewBox="0 0 360 440" style="display:block; width:100%; height:auto;">
+<rect width="360" height="440" fill="#6BAFD4"></rect>
+<svg x="0" y="0" width="360" height="440" viewBox="12 -22 376 460" overflow="hidden"><image href="../../art/mannequin.svg" x="62.2" y="0" width="298.9" height="817.28"></image><path transform="translate(7.25 18.06)" d="M152.76,15.58S176.33,1.57,197.39.52c23.45-1.17,158.24,50.04,158.24,50.04,4.07,44.8,9.36,45.9,15.22,105.59.33,3.36,8.44,56.74,8.45,56.83,5.78,111.92,2.71,166.92,2.71,166.92h-52.49s-2.66-165.24-3.56-170.22c-3.11-17.23-8.53-84.91-9.77-80.34-10.21,37.61-23.82,162.64-5.23,205.22,15.42,35.3-245.97,25.28-238.12,4.63,21.49-56.53,9.44-185.99,2.6-217.87-.98-4.57-7.01,76.89-7.01,76.89-1.31-3.91-4.25,192.34-5.58,187.57-1.49-5.34-61.13,4.15-62.28,0-1.45-5.25,19.23-210.48,16.95-216.88-1.16-3.27,21.57-107.57,19.56-112.67C69.45,44.79,120.38,27.02,152.76,15.58Z" fill="#F3ECDD" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g transform="translate(204.1 74)"><circle cx="2" cy="1.95" r="2.4" fill="#0B0A09" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2" cy="37.06" r="2.4" fill="#0B0A09" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2" cy="72.18" r="2.4" fill="#0B0A09" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g display="{{pv.tieShow}}" transform="translate(184.77 18.51)"><polygon points="15.73 27.33 0 318.43 15.73 334.85 36.67 315.56 26.78 27.33 15.73 27.33" fill="#0B0B0C"></polygon><polygon points="6.89 18 21.09 0 34.22 18.67 26.78 28.98 14.69 28.39 6.89 18" fill="#0B0B0C"></polygon></g><g transform="translate(151.1 8.45)"><path d="M37.12,32.71l17.64-22.65c-9.44-.49-19.87-2.09-29.31-2.59-6.39-.33-13.93.1-14.39-3.1C7.09,10.11.5,16.08.5,24.06L37.12,32.71Z" fill="#F3ECDD" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M70.34,32.21l-15.33-22.15c9.15-.48,13.29.49,22.44,0,6.54-.34,14.67-3.83,18.54-9.39,9.13,5.56,8.27,8.18,13.27,15.08L70.34,32.21Z" fill="#F3ECDD" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path></g><g display="{{pv.vestShow}}" transform="translate(79.58 22.41)"><path d="M233.19,22.59c-10.87,19.57,7.4,153.53,7.4,153.53l.1,157.58-37.39,41.85-79.91-41.85-76.76,37.12-25-18.6L.51,334.84l4.66-148.6s-2.42-18.94-1.31-21.36C21.05,127.55,10.63,29.62,10.63,29.62L69.15,3.98l58.79,125.57L185.82.66l47.37,20.72" fill="{{pv.vest}}" stroke="{{pv.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><circle cx="134.54" cy="148.55" r="3.25" fill="#0B0A09" stroke="{{pv.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="178.65" r="3.25" fill="#0B0A09" stroke="{{pv.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="211.88" r="3.25" fill="#0B0A09" stroke="{{pv.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="247.12" r="3.25" fill="#0B0A09" stroke="{{pv.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="282.36" r="3.25" fill="#0B0A09" stroke="{{pv.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g display="{{pv.cumShow}}"><path d="M150 214 L262 214 L258 262 L154 262 Z" fill="#0E0E10"></path><path d="M152 226H260M153 238H259M154 250H258" stroke="#3A3A40" stroke-width="1.2" vector-effect="non-scaling-stroke"></path></g><g display="{{pv.bowShow}}" transform="translate(171.1 11.45)"><polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="#0B0B0C"></polyline><polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="#000" opacity=".35"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="#0B0B0C"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="#000" opacity=".35"></polyline><polyline points="40.72 10.46 70.5 1.21 70.5 27.77 40.72 19.59" fill="#0B0B0C"></polyline><polyline points="30.05 19.72 .27 28.98 .27 2.41 30.05 10.6" fill="#0B0B0C"></polyline><circle cx="35.12" cy="15.19" r="8.15" fill="#0B0B0C"></circle><circle cx="35.12" cy="15.19" r="8.15" fill="#000" opacity=".3"></circle></g><g transform="translate(0 17.78)"><path d="M157.04,3.8L42.73,53.97s-8.12,23.88-25.5,118.82c-6.67,36.43-6.43,33.46-7.85,59.05C2.35,357.76.55,376.92.55,376.92l74.23-1.01,2.62-139.91,5.56-105.84s2.01,138.32,1.83,158.56c-.18,21.7-7.85,86.46-7.85,86.46l257.54,1.43s-14.76-59.38-15.58-79.65c-.9-22.3,7.02-166.8,7.02-166.8,0,0,5.3,139.54,6.07,160.07.8,21.28,2.83,84.12,2.83,84.12l58.33,1.85s3.76-115.13-.01-141.36c-7.35-51.08-7.8-70.16-18.74-148.99-2.1-15.17-9.76-38.1-9.76-38.1L254.93.73s-18.52,229.28-49.92,232.36C186.36,234.92,157.04,3.8,157.04,3.8Z" fill="{{pv.jacket}}" stroke="{{pv.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{pv.vent}}" fill="none" stroke="{{pv.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M47.22,56.51c7.01,5.08,22.05,17.48,30.44,39.11,4.98,12.83,5.85,24.36,5.78,32" fill="{{pv.jacket}}"></path><path d="M47.82,56.95c7.24,5.34,21.68,17.64,29.84,38.67,4.87,12.56,5.81,23.86,5.78,31.5" fill="none" stroke="{{pv.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M325.66,127.62c-.3-8.31.31-20.41,4.89-34,8.18-24.28,24.14-38.79,31.78-44.89" fill="{{pv.jacket}}"></path><path d="M325.64,126.88c-.24-8.28.46-20.07,4.91-33.26,8.05-23.87,23.61-38.3,31.39-44.57" fill="none" stroke="{{pv.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M277.17 108.16H320.17M245.38 320.51H312.77M100.63 320.51H168.02" fill="none" stroke="{{pv.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g display="{{pv.btnShow}}"><circle cx="211.87" cy="278.93" r="5.77" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="211.87" cy="324.93" r="5.77" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><circle cx="10.77" cy="345.64" r="2.75" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="11.55" cy="336.03" r="2.75" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.13" cy="345.66" r="2.75" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.55" cy="336.03" r="2.75" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g transform="{{pv.lapelAt}}"><path d="{{pv.lapelL}}" fill="{{pv.lapel}}" stroke="{{pv.lapelStroke}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{pv.lapelR}}" fill="{{pv.lapel}}" stroke="{{pv.lapelStroke}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g display="{{pv.shawlShow}}"><circle cx="83.27" cy="265.54" r="4.5" fill="{{pv.button}}" stroke="{{pv.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g></g><polygon points="281.88 124.62 283.22 120.96 316.86 117.65 317.55 124.62 281.88 124.62" fill="#F3ECDD"></polygon><g transform="translate(262 92)"><path d="M-4 10 L-10 30" stroke="#2F4A2C" stroke-width="3" stroke-linecap="round"></path><path d="M-8 20 Q-22 20 -28 32 Q-14 34 -8 20 Z" fill="#2F4A2C"></path><circle r="12" fill="#D2392C"></circle><circle r="4.5" fill="#8E2219"></circle></g></svg>
+</svg>
+<figcaption style="padding-top:12px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:#3B342A;">{{pv.caption}}</figcaption>
+</figure>
+
+<dl style="margin:0; background:#FBF7EE; border:1px solid #D5C9B2; padding:6px 24px; display:flex; flex-direction:column;">
+<div style="display:flex; flex-direction:column; gap:4px; padding:16px 0; border-bottom:1px solid #E3D9C7;">
+<dt style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#655C4F;">Groomsmen &amp; fathers</dt>
+<dd style="margin:0; font-size:15px; line-height:1.5; color:#1E1A15;">{{partyLine}}</dd>
+</div>
+<div style="display:flex; flex-direction:column; gap:4px; padding:16px 0;">
+<dt style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#655C4F;">Groom</dt>
+<dd style="margin:0; font-size:15px; line-height:1.5; color:#1E1A15;">{{groomLine}}</dd>
+</div>
+</dl>
+</aside>
+</main>
+
+<footer style="border-top:1px solid #E3D9C7; background:#F3ECDD;">
+<div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:26px 32px; display:flex; flex-wrap:wrap; gap:12px 40px; justify-content:space-between; font-size:13px; line-height:1.6; color:#655C4F;">
+<span>Incognito Menswear &amp; Tux Shop · 1823 Penfield Rd, Penfield, NY 14526</span>
+<span>Mon, Wed, Thu 12–7 · Fri &amp; Sat 10–5 · Sun 12–5 · Tue closed</span>
+<a href="tel:+15855867846" style="color:#87672F; text-decoration:none; font-weight:600;">(585) 586-7846</a>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { type: 'tux', color: 'black', lapel: 'peak', neck: 'bow', layer: 'vest', groomDiff: true, groomColor: 'navy', view: 'party' };
+  }
+  shade(hex, f) {
+    const n = parseInt(hex.slice(1), 16);
+    const parts = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v * f).toString(16).padStart(2, '0'));
+    return '#' + parts.join('');
+  }
+  lum(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+  }
+  seg(list, key) {
+    return list.map((o) => {
+      const on = this.state[key] === o.id;
+      return {
+        name: o.name,
+        on: on,
+        pick: () => this.setState({ [key]: o.id })
+      };
+    });
+  }
+  swatches(list, key) {
+    return list.map((c) => {
+      const on = this.state[key] === c.id;
+      return {
+        name: c.name,
+        hex: c.hex,
+        on: on,
+        ring: on ? '#B08D55' : '#D5C9B2',
+        fg: on ? '#1E1A15' : '#655C4F',
+        pick: () => this.setState({ [key]: c.id })
+      };
+    });
+  }
+  renderVals() {
+    const s = this.state;
+    const TYPES = [
+      { id: 'tux', name: 'Tuxedo', note: 'Satin-faced lapels and a formal evening finish. The classic for black tie and night receptions.' },
+      { id: 'suit', name: 'Suit', note: 'Notch lapels in the suit fabric and a softer finish. Easy for daytime, outdoor and barn venues.' }
+    ];
+    const COLORS = [
+      { id: 'black', name: 'Black', hex: '#141414' },
+      { id: 'navy', name: 'Midnight navy', hex: '#1D2A44' },
+      { id: 'charcoal', name: 'Charcoal', hex: '#3C3D40' },
+      { id: 'grey', name: 'Steel grey', hex: '#7F858D' },
+      { id: 'tan', name: 'Tan', hex: '#B38B5D' },
+      { id: 'burgundy', name: 'Burgundy', hex: '#5E1F2A' }
+    ];
+    const LAPELS = [{ id: 'peak', name: 'Peak' }, { id: 'shawl', name: 'Shawl' }, { id: 'notch', name: 'Notch' }];
+    const NECKS = [{ id: 'bow', name: 'Bow tie' }, { id: 'long', name: 'Long tie' }];
+    const LAYERS = [{ id: 'vest', name: 'Vest' }, { id: 'cummerbund', name: 'Cummerbund' }, { id: 'none', name: 'Neither' }];
+    const LAPEL_D = {'notch': ['M38.05,1.85L2.94,42.3l12.56,1.64L.6,58.81l83.38,183.87s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.3-34.05-9.34-34.67-27.65-102.37-28.44-106.95C39.55,37.39,38.05,1.85,38.05,1.85Z', 'M134.33,1.11l40.75,41.08-12.4,1.64,13.38,13.53-95.85,210.41s6.29-34.43,6.94-35.72c6.03-11.96,12.08-34.32,12.73-37.27,7.98-36.01,26.91-103.88,27.26-108.52C130.9,35.47,134.33,1.11,134.33,1.11Z', 'translate(118.96 12.83)'], 'peak': ['M52.32,2.2L17.21,42.65l38.94,5.09L.85,40.76l97.4,202.27s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.31-34.05-9.33-34.67-27.65-102.37-28.43-106.95C53.81,37.74,52.32,2.2,52.32,2.2Z', 'M148.6,1.46l28,42.73-30.23,4.11,51.29-6.7-103.18,226.52s6.29-34.42,6.94-35.72c6.03-11.95,12.08-34.32,12.73-37.27,7.98-36,26.91-103.88,27.25-108.52C145.17,35.82,148.6,1.46,148.6,1.46Z', 'translate(105.03 12.48)'], 'shawl': ['M31.71,1L1.29,14.39c-5.52.32,18.11,152.67,63.89,240.25,6.44,12.33,12.25,21.91,15.86,28.08,0-7.89,1.93-20.55-2.27-34.6-17.7-59.18-23.07-91.44-33.03-138.08C31.71,44.39,31.71,1,31.71,1Z', 'M128.99.69l23.41,9.26s-12.67,160.44-59.68,244.5c-6.83,12.21-8.08,22.06-11.68,28.27,0-7.94-6.02-20.69-1.84-34.84,17.61-59.58,22.18-92.5,30.53-139.16C121.8,41.39,128.99.69,128.99.69Z', 'translate(125.33 13.7)']};
+    const find = (list, id) => list.find((x) => x.id === id) || list[0];
+
+    const types = TYPES.map((t) => {
+      const on = s.type === t.id;
+      return {
+        name: t.name, note: t.note, on: on,
+        bg: on ? '#F8F2E6' : '#FFFDF8',
+        bd: on ? '#B08D55' : '#D5C9B2',
+        dot: on ? '#C29E62' : 'transparent',
+        pick: () => this.setState({ type: t.id })
+      };
+    });
+
+    const type = find(TYPES, s.type);
+    const partyCol = find(COLORS, s.color);
+    const groomCol = find(COLORS, s.groomColor);
+    const lapel = s.type === 'suit' ? find(LAPELS, 'notch') : find(LAPELS, s.lapel);
+    const neck = find(NECKS, s.neck);
+    const layer = find(LAYERS, s.layer);
+    const showGroom = s.groomDiff && s.view === 'groom';
+    const col = showGroom ? groomCol : partyCol;
+
+    const tux = s.type === 'tux';
+    const dark = this.lum(col.hex) < 0.3;
+    const line = dark ? '#A39A8B' : '#16140F';
+    const details = lapel.name.toLowerCase() + ' lapel, ' + neck.name.toLowerCase() + (layer.id === 'none' ? '' : ', ' + layer.name.toLowerCase());
+    const pv = {
+      jacket: col.hex,
+      shade: this.shade(col.hex, 0.78),
+      lapel: tux ? '#0B0B0C' : col.hex,
+      lapelStroke: tux ? (dark ? '#5A5A60' : '#0B0B0C') : line,
+      lapelL: LAPEL_D[lapel.id][0],
+      lapelR: LAPEL_D[lapel.id][1],
+      lapelAt: LAPEL_D[lapel.id][2],
+      shawlShow: lapel.id === 'shawl' ? 'inline' : 'none',
+      btnShow: lapel.id === 'shawl' ? 'none' : 'inline',
+      vent: lapel.id === 'shawl' ? 'M208.04,376.92s-2.33-8.17,0-107.47' : 'M200.5,376.92s-2.33-8.17,0-107.47',
+      line: line,
+      button: tux ? '#F3ECDD' : this.shade(col.hex, 0.6),
+      vest: tux ? '#0E0E10' : col.hex,
+      vestShow: layer.id === 'vest' ? 'inline' : 'none',
+      cumShow: layer.id === 'cummerbund' ? 'inline' : 'none',
+      bowShow: neck.id === 'bow' ? 'inline' : 'none',
+      tieShow: neck.id === 'long' ? 'inline' : 'none',
+      caption: (showGroom ? 'The groom · ' : 'The party · ') + col.name,
+      alt: 'Preview: ' + col.name.toLowerCase() + ' ' + type.name.toLowerCase() + ' with ' + details
+    };
+
+    const views = [{ id: 'party', name: 'Groomsmen' }, { id: 'groom', name: 'Groom' }].map((v) => {
+      const on = s.view === v.id;
+      return { name: v.name, on: on, pick: () => this.setState({ view: v.id }) };
+    });
+
+    const partyLine = partyCol.name + ' ' + type.name.toLowerCase() + ' · ' + lapel.name + ' lapel · ' + neck.name + (layer.id === 'none' ? '' : ' · ' + layer.name);
+    const groomLine = s.groomDiff ? groomCol.name + ' ' + type.name.toLowerCase() + ', same details as the party' : 'Matches the party';
+
+    return {
+      types: types,
+      colors: this.swatches(COLORS, 'color'),
+      groomColors: this.swatches(COLORS, 'groomColor'),
+      lapels: s.type === 'suit' ? this.seg(LAPELS.filter((l) => l.id === 'notch'), 'lapel').map((o) => Object.assign(o, { on: true })) : this.seg(LAPELS, 'lapel'),
+      lapelNote: s.type === 'suit' ? 'Suits come with a notch lapel. Peak and shawl are tuxedo lapels.' : '',
+      necks: this.seg(NECKS, 'neck'),
+      layers: this.seg(LAYERS, 'layer'),
+      groomDiff: s.groomDiff,
+      toggleGroom: () => this.setState({ groomDiff: !s.groomDiff, view: s.groomDiff ? 'party' : s.view }),
+      lapelAngle: -120 * LAPELS.findIndex((l) => l.id === lapel.id),
+      neckAngle: -180 * NECKS.findIndex((x) => x.id === neck.id),
+      layerAngle: -120 * LAYERS.findIndex((x) => x.id === layer.id),
+      viewAngle: s.view === 'groom' ? -180 : 0,
+      views: views,
+      pv: pv,
+      partyLine: partyLine,
+      groomLine: groomLine
+    };
+  }
+}
+</script>
+</body>
+</html>

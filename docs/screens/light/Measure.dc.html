@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your measurements · Sam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../../kodak-kit.light.css">
+<style>
+body{margin:0;background:#F3ECDD}
+a{color:#87672F}a:not([class*="kk-"]):hover{color:#87672F}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+a:focus-visible,button:focus-visible{outline:2px solid #B08D55;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="width:390px; min-height:2460px; box-sizing:border-box; background:#F3ECDD; color:#1E1A15; font-family:Archivo, sans-serif; color-scheme:light; display:flex; flex-direction:column;">
+
+<header style="background:#F3ECDD; border-bottom:1px solid #E3D9C7; padding:12px 20px 12px 12px; display:flex; align-items:center; justify-content:space-between;">
+<a href="Member.dc.html" class="kk-leader" style="min-height:44px; padding:0 34px 0 12px; gap:6px; white-space:nowrap; flex:0 0 auto;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"></path></svg>To-do list</a>
+<span aria-label="Incognito Menswear and Tux Shop" role="img" style="display:flex; align-items:stretch;">
+<span style="display:flex; border:1px solid #B08D55; padding:2px;">
+<span style="display:flex; flex-direction:column; align-items:center; border:1px solid #B08D55; padding:5px 10px 4px;">
+<span style="font-family:Rokkitt, serif; font-weight:700; font-size:17px; line-height:1; letter-spacing:.16em; color:#1E1A15;">INCOGNITO</span>
+<span style="margin-top:4px; padding-top:3px; border-top:1px solid #B09464; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:7.5px; line-height:1; letter-spacing:.34em; color:#87672F;">MENSWEAR &amp; TUX</span>
+</span>
+</span>
+<span style="display:flex; align-items:center; margin-left:4px; padding:0 6px; border:1.5px solid #C9503F; font-family:Rokkitt, serif; font-weight:700; font-size:13px; color:#B23F30;">1985</span>
+</span>
+</header>
+
+<main style="flex:1 0 auto; padding:26px 20px 32px; display:flex; flex-direction:column; gap:28px;">
+
+<div style="display:flex; flex-direction:column; gap:12px;">
+<span class="kk-cap is-red" style="align-self:flex-start;">Due Sat, Dec 12 · 11 days</span>
+<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:40px; line-height:1; color:#1E1A15;">Your measurements</h1>
+<p style="margin:0; font-size:16px; line-height:1.5; color:#655C4F;">Grab a soft tape measure and a friend. Tap <strong style="color:#1E1A15;">How?</strong> on any line to watch how it’s done. Skip anything you’re unsure of and we’ll follow up before the order goes in.</p>
+<a href="Guide.dc.html" class="kk-leader" style="margin-top:4px;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="#C9A66B"><path d="M7 4v16l13-8Z"></path></svg>Walk me through it, one at a time</a>
+</div>
+
+<div style="display:flex; align-items:center; gap:14px; padding:16px; background:#FBF7EE; border:1px solid #D5C9B2;">
+<div class="kk-counter" aria-hidden="true">{{countNo}}</div>
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:10px;">
+<div role="img" aria-label="{{countText}}" style="display:grid; grid-template-columns:repeat(9, minmax(0, 1fr)); gap:4px;">
+<sc-for list="{{meter}}" as="q" hint-placeholder-count="9">
+<span style="height:22px; box-sizing:border-box; background:{{q.bg}}; border:1px solid {{q.bd}};"></span>
+</sc-for>
+</div>
+<span aria-live="polite" style="font-size:14px; color:#1E1A15;"><strong style="font-weight:700; color:#87672F;">{{countText}}</strong> · {{countHint}}</span>
+</div>
+</div>
+
+<section aria-labelledby="h-basics" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-basics" style="margin:0; padding-bottom:12px; border-bottom:1px solid #E3D9C7; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#1E1A15;">The basics</h2>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 14px;">
+
+<div class="kk-field" style="grid-column:{{ht.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<span id="l-height" class="kk-dymo is-red" style="align-self:center;">Height</span>
+<button type="button" aria-expanded="{{ht.open}}" aria-label="{{ht.tipAria}}" onClick="{{ht.toggle}}" class="kk-grease" style="flex:0 0 auto; min-height:44px; margin:-10px -4px -10px 0; padding:0 4px 5px; font-size:13px;">{{ht.tipLabel}}</button>
+</div>
+<div role="group" aria-labelledby="l-height" style="display:flex; gap:6px;">
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="kk-input" aria-label="Height, feet" value="{{v.ft}}" onChange="{{setFt}}" style="padding-right:22px; appearance:none;">
+<option value="">ft</option>
+<option value="4">4 ft</option>
+<option value="5">5 ft</option>
+<option value="6">6 ft</option>
+<option value="7">7 ft</option>
+</select>
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:8px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="kk-input" aria-label="Height, inches" value="{{v.inch}}" onChange="{{setInch}}" style="padding-right:22px; appearance:none;">
+<option value="">in</option>
+<option value="0">0 in</option>
+<option value="1">1 in</option>
+<option value="2">2 in</option>
+<option value="3">3 in</option>
+<option value="4">4 in</option>
+<option value="5">5 in</option>
+<option value="6">6 in</option>
+<option value="7">7 in</option>
+<option value="8">8 in</option>
+<option value="9">9 in</option>
+<option value="10">10 in</option>
+<option value="11">11 in</option>
+</select>
+<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:8px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<sc-if value="{{ht.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="height" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+
+<div class="kk-field" style="grid-column:{{wt.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="m-weight" class="kk-dymo is-red" style="align-self:center;">Weight<span class="sr"> in pounds</span></label>
+<button type="button" aria-expanded="{{wt.open}}" aria-label="{{wt.tipAria}}" onClick="{{wt.toggle}}" class="kk-grease" style="flex:0 0 auto; min-height:44px; margin:-10px -4px -10px 0; padding:0 4px 5px; font-size:13px;">{{wt.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="m-weight" class="kk-input" type="number" step="1" min="0" placeholder="e.g. 180" value="{{wt.value}}" onChange="{{wt.set}}" style="padding-right:36px;">
+<span aria-hidden="true" style="position:absolute; right:4px; top:16px; font-size:14px; color:#776E60;">lbs</span>
+</div>
+<sc-if value="{{wt.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="weight" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+
+</div>
+
+<div role="radiogroup" aria-labelledby="l-fit" class="kk-field">
+<span id="l-fit" class="kk-dymo">How you like a jacket to fit</span>
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="kk-dg-fit" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{fitAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#kk-dg-fit)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12">SLIM</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(120 85 85)">CLASSIC</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(240 85 85)">RELAXED</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#C29E62"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">FIT</text>
+</svg>
+<div class="kk-dial-opts">
+<sc-for list="{{fits}}" as="o" hint-placeholder-count="3">
+<button type="button" role="radio" class="kk-dial-opt" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="h-jacket" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-jacket" style="margin:0; padding-bottom:12px; border-bottom:1px solid #E3D9C7; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#1E1A15;">Jacket &amp; shirt</h2>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 14px;">
+<sc-for list="{{jacket}}" as="f" hint-placeholder-count="4">
+<div class="kk-field" style="grid-column:{{f.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="{{f.id}}" class="kk-dymo is-red" style="align-self:center;">{{f.label}}<span class="sr">{{f.srUnit}}</span></label>
+<button type="button" aria-expanded="{{f.open}}" aria-label="{{f.tipAria}}" onClick="{{f.toggle}}" class="kk-grease" style="flex:0 0 auto; min-height:44px; margin:-10px -4px -10px 0; padding:0 4px 5px; font-size:13px;">{{f.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="{{f.id}}" class="kk-input" type="number" step="0.25" min="0" placeholder="{{f.placeholder}}" value="{{f.value}}" onChange="{{f.set}}" style="padding-right:28px;">
+<span aria-hidden="true" style="position:absolute; right:4px; top:16px; font-size:14px; color:#776E60;">in</span>
+</div>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="{{f.key}}" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<div class="kk-field">
+<label for="m-size" class="kk-dymo">Jacket size, if you know it</label>
+<input id="m-size" class="kk-input" type="text" placeholder="e.g. 40R or 42L" value="{{v.jacket}}" onChange="{{setJacket}}">
+</div>
+</section>
+
+<section aria-labelledby="h-pants" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-pants" style="margin:0; padding-bottom:12px; border-bottom:1px solid #E3D9C7; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#1E1A15;">Pants</h2>
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 14px;">
+<sc-for list="{{pants}}" as="f" hint-placeholder-count="3">
+<div class="kk-field" style="grid-column:{{f.span}};">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="{{f.id}}" class="kk-dymo is-red" style="align-self:center;">{{f.label}}<span class="sr">{{f.srUnit}}</span></label>
+<button type="button" aria-expanded="{{f.open}}" aria-label="{{f.tipAria}}" onClick="{{f.toggle}}" class="kk-grease" style="flex:0 0 auto; min-height:44px; margin:-10px -4px -10px 0; padding:0 4px 5px; font-size:13px;">{{f.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<input id="{{f.id}}" class="kk-input" type="number" step="0.25" min="0" placeholder="{{f.placeholder}}" value="{{f.value}}" onChange="{{f.set}}" style="padding-right:28px;">
+<span aria-hidden="true" style="position:absolute; right:4px; top:16px; font-size:14px; color:#776E60;">in</span>
+</div>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="{{f.key}}" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="h-shoes" style="display:flex; flex-direction:column; gap:16px; padding:18px; background:#FBF7EE; border:1px solid #D5C9B2;">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:14px;">
+<span style="display:flex; flex-direction:column; gap:3px;">
+<h2 id="h-shoes" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:21px; color:#1E1A15;">I need shoes</h2>
+<span style="font-size:14px; color:#655C4F;">Matched to the party’s look.</span>
+</span>
+<label class="kk-cube" style="flex:0 0 auto;">
+<input type="checkbox" role="switch" aria-labelledby="h-shoes" checked="{{shoes}}" onChange="{{toggleShoes}}">
+<svg class="kk-cube-art" viewBox="0 0 58 58" aria-hidden="true">
+<rect x="4" y="10" width="50" height="44" rx="3" fill="#0E0E0E"></rect>
+<rect class="kk-face" x="9" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="15" width="18" height="16" rx="2"></rect>
+<rect class="kk-face" x="9" y="34" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="34" width="18" height="16" rx="2"></rect>
+<rect x="22" y="2" width="14" height="9" rx="1" fill="#2A2621"></rect>
+</svg>
+</label>
+</div>
+<sc-if value="{{shoes}}" hint-placeholder-val="{{true}}">
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px;">
+<div class="kk-field">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; min-height:24px;">
+<label for="m-shoe" class="kk-dymo" style="align-self:center; letter-spacing:.12em;">Shoe size</label>
+<button type="button" aria-expanded="{{sh.open}}" aria-label="{{sh.tipAria}}" onClick="{{sh.toggle}}" class="kk-grease" style="flex:0 0 auto; min-height:44px; margin:-10px -4px -10px 0; padding:0 4px 5px; font-size:13px;">{{sh.tipLabel}}</button>
+</div>
+<div style="position:relative;">
+<select id="m-shoe" class="kk-input" value="{{shoeSize}}" onChange="{{setShoeSize}}" style="padding-right:32px; appearance:none;">
+<option>7</option>
+<option>7.5</option>
+<option>8</option>
+<option>8.5</option>
+<option>9</option>
+<option>9.5</option>
+<option>10</option>
+<option>10.5</option>
+<option>11</option>
+<option>11.5</option>
+<option>12</option>
+<option>13</option>
+<option>14</option>
+<option>15</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:10px; top:17px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+<div class="kk-field">
+<label for="m-width" class="kk-dymo">Width</label>
+<div style="position:relative;">
+<select id="m-width" class="kk-input" value="{{shoeWidth}}" onChange="{{setShoeWidth}}" style="padding-right:32px; appearance:none;">
+<option value="D">Regular (D)</option>
+<option value="E">Wide (E)</option>
+<option value="EE">Extra wide (EE)</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:10px; top:17px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+</div>
+<sc-if value="{{sh.open}}" hint-placeholder-val="{{false}}">
+<dc-import name="HowTo" which="shoe" still="{{false}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+</sc-if>
+</sc-if>
+</section>
+
+<section aria-labelledby="h-extra" style="display:flex; flex-direction:column; gap:18px;">
+<h2 id="h-extra" style="margin:0; padding-bottom:12px; border-bottom:1px solid #E3D9C7; font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#1E1A15;">Before you send</h2>
+<div role="radiogroup" aria-labelledby="l-by" class="kk-field">
+<span id="l-by" class="kk-dymo">Who measured you?</span>
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="kk-dg-by" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{byAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#kk-dg-by)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12">MYSELF</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(120 85 85)">A FRIEND</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(240 85 85)">A TAILOR</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#C29E62"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">BY</text>
+</svg>
+<div class="kk-dial-opts">
+<sc-for list="{{bys}}" as="o" hint-placeholder-count="3">
+<button type="button" role="radio" class="kk-dial-opt" aria-checked="{{o.on}}" onClick="{{o.pick}}">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<div class="kk-field">
+<label for="m-notes" class="kk-dymo">Anything else? Optional</label>
+<textarea id="m-notes" class="kk-input" rows="3" placeholder="Athletic build, long arms, between sizes…" value="{{notes}}" onChange="{{setNotes}}"></textarea>
+</div>
+</section>
+
+<sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
+<div style="display:flex; flex-direction:column; gap:12px;">
+<button type="button" class="kk-shutter" onClick="{{send}}"><span class="kk-dot" aria-hidden="true"></span>Send to Incognito</button>
+<p style="margin:0; font-size:13px; line-height:1.5; text-align:center; color:#655C4F;">You can change these until Dec 12. Daniel sees that you’re done, not your numbers.</p>
+</div>
+</sc-if>
+<sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
+<div aria-live="polite" style="display:flex; flex-direction:column; gap:14px;">
+<div class="kk-envelope">
+<span class="kk-stamp" aria-hidden="true">Received</span>
+<h2>Got them, Sam.</h2>
+<p>We’ll look them over and text you if anything needs a second look. Next up: your deposit.</p>
+</div>
+<a href="Member.dc.html" class="kk-leader">Back to your to-do list</a>
+</div>
+</sc-if>
+
+</main>
+
+<footer style="padding:18px 20px 26px; border-top:1px solid #E3D9C7; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:12px; color:#655C4F;">
+<span>Rather we measure you?</span>
+<a href="Book.dc.html" class="kk-grease">Book a visit</a>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2460}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      v: { ft: '5', inch: '11', weight: '175', chest: '40', overarm: '', neck: '', sleeve: '', jacket: '', waist: '34', hip: '', outseam: '' },
+      fit: 'classic',
+      by: 'friend',
+      shoes: true,
+      shoeSize: '10.5',
+      shoeWidth: 'D',
+      notes: '',
+      tips: { overarm: true },
+      sent: false
+    };
+  }
+  setV(key) {
+    return (e) => this.setState({ v: Object.assign({}, this.state.v, { [key]: e.target.value }) });
+  }
+  tip(key, label) {
+    const open = !!this.state.tips[key];
+    return {
+      open: open,
+      tipLabel: open ? 'Hide' : 'How?',
+      tipAria: (open ? 'Hide help for ' : 'How to measure ') + label.toLowerCase(),
+      span: open ? '1 / -1' : 'auto',
+      toggle: () => this.setState({ tips: Object.assign({}, this.state.tips, { [key]: !open }) })
+    };
+  }
+  field(key, label, placeholder, tip) {
+    const value = this.state.v[key];
+    return Object.assign(this.tip(key, label), {
+      key: key,
+      id: 'm-' + key,
+      label: label,
+      srUnit: ' in inches',
+      placeholder: placeholder,
+      tip: tip,
+      value: value,
+      set: this.setV(key)
+    });
+  }
+  seg(list, key) {
+    return list.map((o) => {
+      const on = this.state[key] === o.id;
+      return {
+        name: o.name, on: on,
+        pick: () => this.setState({ [key]: o.id })
+      };
+    });
+  }
+  dialAngle(list, key) {
+    const i = list.findIndex((o) => o.id === this.state[key]);
+    return Math.max(0, i) * -120;
+  }
+  renderVals() {
+    const s = this.state;
+    const FITS = [{ id: 'slim', name: 'Slim' }, { id: 'classic', name: 'Classic' }, { id: 'relaxed', name: 'Relaxed' }];
+    const BYS = [{ id: 'self', name: 'Myself' }, { id: 'friend', name: 'A friend' }, { id: 'tailor', name: 'A tailor' }];
+    const v = s.v;
+    const jacket = [
+      this.field('chest', 'Chest', 'e.g. 40', 'Around the fullest part of your chest, under your arms, with the tape level across your back. Arms down and relaxed.'),
+      this.field('overarm', 'Overarm', 'e.g. 47', 'Around your chest and upper arms together, at the widest point across your shoulders. Arms down at your sides.'),
+      this.field('neck', 'Neck', 'e.g. 15.5', 'Around the base of your neck where a shirt collar sits. Keep one finger under the tape.'),
+      this.field('sleeve', 'Sleeve', 'e.g. 34', 'From the center back of your neck, over your shoulder and down to your wrist bone, arm slightly bent.')
+    ];
+    const pants = [
+      this.field('waist', 'Waist', 'e.g. 34', 'Where you wear dress pants, usually at your belly button. This is not your jeans size.'),
+      this.field('hip', 'Hip', 'e.g. 40', 'Around the fullest part of your seat, feet together.'),
+      this.field('outseam', 'Outseam', 'e.g. 43', 'From your waistline down the outside of your leg to the floor, shoes off.')
+    ];
+    const wt = Object.assign(this.tip('weight', 'Weight'), {
+      value: v.weight,
+      tip: 'Your best guess is fine. It helps us check the other numbers.',
+      set: this.setV('weight')
+    });
+    const ht = this.tip('height', 'Height');
+    const sh = this.tip('shoe', 'Shoe size');
+
+    const required = [v.ft && v.inch !== '', v.weight, v.chest, v.overarm, v.neck, v.sleeve, v.waist, v.hip, v.outseam];
+    const count = required.filter(Boolean).length;
+    const left = required.length - count;
+    const meter = required.map((_, i) => ({ bg: i < count ? '#C29E62' : '#FFFDF8', bd: i < count ? '#B08D55' : '#C6B89D' }));
+
+    return {
+      v: v,
+      ht: ht,
+      sh: sh,
+      wt: wt,
+      jacket: jacket,
+      pants: pants,
+      setFt: this.setV('ft'),
+      setInch: this.setV('inch'),
+      setJacket: this.setV('jacket'),
+      meter: meter,
+      countText: count + ' of ' + required.length + ' filled in',
+      countNo: String(count).padStart(2, '0'),
+      countHint: left === 0 ? 'all set, send it over' : left + ' to go, or send what you have',
+      fits: this.seg(FITS, 'fit'),
+      bys: this.seg(BYS, 'by'),
+      fitAngle: this.dialAngle(FITS, 'fit'),
+      byAngle: this.dialAngle(BYS, 'by'),
+      shoes: s.shoes,
+      toggleShoes: () => this.setState({ shoes: !s.shoes }),
+      shoeSize: s.shoeSize,
+      shoeWidth: s.shoeWidth,
+      setShoeSize: (e) => this.setState({ shoeSize: e.target.value }),
+      setShoeWidth: (e) => this.setState({ shoeWidth: e.target.value }),
+      notes: s.notes,
+      setNotes: (e) => this.setState({ notes: e.target.value }),
+      notSent: !s.sent,
+      sent: s.sent,
+      send: () => this.setState({ sent: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

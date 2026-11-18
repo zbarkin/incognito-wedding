@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { THEMES, themeOf, lightHtml, lightCss, lightJs } from './light.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'docs', 'screens');
@@ -18,4 +19,18 @@ for (const name of readdirSync(join(root, 'designs')).filter((f) => f.endsWith('
   );
   writeFileSync(join(out, name), html);
   console.log('built screens/' + name);
+
+  // Light copy: one folder down, so paths that climb out of screens/ climb one more.
+  if (name === 'Present.dc.html') continue;
+  let lite = lightHtml(THEMES[themeOf(name)], html)
+    .replace(/(["'(])\.\.\//g, '$1../../')
+    .replace(/(kodak|birch|park)-kit\.css/g, '$1-kit.light.css');
+  mkdirSync(join(out, 'light'), { recursive: true });
+  writeFileSync(join(out, 'light', name), lite);
 }
+
+for (const k of ['kodak', 'birch', 'park']) {
+  const css = readFileSync(join(root, 'docs', k + '-kit.css'), 'utf8');
+  writeFileSync(join(root, 'docs', k + '-kit.light.css'), lightCss(THEMES[k], css));
+}
+console.log('built light copies in screens/light/');

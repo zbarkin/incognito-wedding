@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Shop · Incognito</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+<script src="../../shop/commerce.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<link rel="stylesheet" href="../../kodak-kit.light.css">
+<style>
+body{margin:0}
+.sh-card{position:relative}
+.sh-card .sh-swap{opacity:0; transition:opacity .25s ease}
+.sh-card:hover .sh-swap, .sh-card:focus-within .sh-swap{opacity:1}
+.sh-card:hover .sh-name{color:#87672F}
+.sh-btn:hover{background:#D4B47A !important}
+.sh-ghost:hover{border-color:#B08D55 !important}
+.sh-size:not([disabled]):hover{border-color:#B08D55 !important}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #B08D55;outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.sh-card .sh-swap{transition:none}}
+</style>
+</helmet>
+<svg aria-hidden="true" width="0" height="0" style="position:absolute; width:0; height:0; overflow:hidden;">
+<defs>
+<linearGradient id="mk-metal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5F656B"></stop><stop offset=".32" stop-color="#E9ECEE"></stop><stop offset=".52" stop-color="#9DA3A9"></stop><stop offset=".7" stop-color="#F6F7F8"></stop><stop offset="1" stop-color="#6E747A"></stop></linearGradient>
+<linearGradient id="mk-wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3B2414"></stop><stop offset=".35" stop-color="#7A5232"></stop><stop offset=".5" stop-color="#A2703F"></stop><stop offset=".78" stop-color="#5A3A22"></stop><stop offset="1" stop-color="#341F11"></stop></linearGradient>
+<linearGradient id="mk-brass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7E6532"></stop><stop offset=".45" stop-color="#E3CB8A"></stop><stop offset="1" stop-color="#8F7440"></stop></linearGradient>
+<linearGradient id="mk-fadegrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"></stop><stop offset=".955" stop-color="#fff"></stop><stop offset="1" stop-color="#000"></stop></linearGradient>
+<mask id="mk-fade" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#mk-fadegrad)"></rect></mask>
+<linearGradient id="mk-linen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B9AE95"></stop><stop offset=".45" stop-color="#E8DFC9"></stop><stop offset="1" stop-color="#A69A7E"></stop></linearGradient>
+</defs>
+</svg>
+<div style="min-height:100vh; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:{{t.scheme}}; display:flex; flex-direction:column;">
+
+<header style="background:{{t.bar}}; border-bottom:1px solid {{t.line}}; position:sticky; top:0; z-index:20;">
+<div style="max-width:1280px; margin:0 auto; box-sizing:border-box; padding:14px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 24px;">
+<a href="{{t.home}}" aria-label="Incognito Menswear and Tux Shop" style="display:flex; align-items:stretch; text-decoration:none;">
+<span style="display:flex; border:1px solid {{t.brand}}; padding:3px;">
+<span style="display:flex; flex-direction:column; align-items:center; border:1px solid {{t.brand}}; padding:7px 14px 6px;">
+<span style="font-family:{{t.display}}; font-weight:700; font-size:22px; line-height:1; letter-spacing:.16em; color:{{t.text}};">INCOGNITO</span>
+<span style="margin-top:5px; padding-top:4px; border-top:1px solid {{t.brandDim}}; font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:9px; line-height:1; letter-spacing:.38em; color:{{t.brand}};">MENSWEAR &amp; TUX</span>
+</span>
+</span>
+<span style="display:flex; align-items:center; margin-left:5px; padding:0 8px; border:1.5px solid {{t.red}}; font-family:{{t.display}}; font-weight:700; font-size:16px; color:{{t.red}};">1985</span>
+</a>
+<nav aria-label="Main" style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px; font-size:15px;">
+<a href="{{t.home}}" style="color:{{t.muted}}; text-decoration:none;">Weddings</a>
+<a href="{{t.prom}}" style="color:{{t.muted}}; text-decoration:none;">Prom</a>
+<a href="{{t.self}}" aria-current="page" style="color:{{t.text}}; text-decoration:none; border-bottom:2px solid {{t.accent}}; padding-bottom:2px;">Shop</a>
+<a href="Book.dc.html" style="color:{{t.muted}}; text-decoration:none;">Book a fitting</a>
+<button type="button" class="sh-ghost" onClick="{{openCart}}" aria-label="{{cartAria}}" style="height:44px; padding:0 16px; display:inline-flex; align-items:center; gap:10px; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.brand}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7Z"></path><path d="M9 7a3 3 0 0 1 6 0"></path></svg>
+Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border-radius:11px; background:{{cartBadgeBg}}; color:{{t.onAccent}}; font-size:12px; font-weight:700;">{{cartCount}}</span>
+</button>
+</nav>
+</div>
+</header>
+
+<main style="flex:1 0 auto; width:100%; max-width:1280px; margin:0 auto; box-sizing:border-box; padding:48px 32px 72px; display:flex; flex-direction:column; gap:28px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 40px;">
+<div style="display:flex; flex-direction:column; gap:10px; max-width:640px;">
+<span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:{{t.brand}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(40px, 6vw, 64px); line-height:1; color:{{t.text}};">{{t.title}}</h1>
+<p style="margin:0; font-size:18px; line-height:1.5; color:{{t.muted}};">{{t.sub}}</p>
+</div>
+<span style="font-size:14px; color:{{t.muted}};">{{countLine}}</span>
+</div>
+
+<sc-if value="{{loading}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}"><div class="kk-loading" role="status"><svg class="kk-reel" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#2A2621" stroke="#C29E62" stroke-width="2"></circle><circle cx="32" cy="32" r="6" fill="#0B0A09" stroke="#C29E62" stroke-width="2"></circle><g fill="#0B0A09"><circle cx="32" cy="14" r="7"></circle><circle cx="49" cy="26" r="7"></circle><circle cx="43" cy="46" r="7"></circle><circle cx="21" cy="46" r="7"></circle><circle cx="15" cy="26" r="7"></circle></g></svg>Loading the collection…</div></sc-if>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><p style="margin:0; font-size:16px; color:{{t.muted}};">Loading the collection…</p></sc-if>
+</sc-if>
+<sc-if value="{{loadError}}" hint-placeholder-val="{{false}}">
+<p role="alert" style="margin:0; padding:14px 16px; border:1px solid {{t.red}}; color:{{t.text}}; font-size:15px;">{{loadError}}</p>
+</sc-if>
+
+<section aria-label="Filter the collection" style="display:flex; flex-direction:column; gap:16px; padding:18px 0; border-top:1px solid {{t.line}}; border-bottom:1px solid {{t.line}};">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
+<div role="group" aria-label="Type" style="display:flex; gap:6px; flex-wrap:wrap;">
+<sc-for list="{{types}}" as="o" hint-placeholder-count="3">
+<button type="button" class="{{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; padding:0 18px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;">
+<label style="display:flex; align-items:center; gap:8px; font-size:14px; color:{{t.text}}; cursor:pointer;"><input id="sh-instock" type="checkbox" checked="{{inStock}}" onChange="{{toggleStock}}" style="width:18px; height:18px; accent-color:{{t.accent}};">In stock only</label>
+<label style="display:flex; align-items:center; gap:8px; font-size:14px; color:{{t.muted}};">Sort
+<select id="sh-sort" onChange="{{pickSort}}" style="height:40px; padding:0 10px; background:{{t.field}}; color:{{t.text}}; border:1px solid {{t.line2}}; border-radius:2px; font-family:{{t.body}}; font-size:14px;">
+<sc-for list="{{sorts}}" as="o" hint-placeholder-count="3"><option value="{{o.id}}" selected="{{o.on}}">{{o.name}}</option></sc-for>
+</select>
+</label>
+</div>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 28px;">
+<div role="group" aria-label="Collection" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+<span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}}; margin-right:6px;">Collection</span>
+<sc-for list="{{lines}}" as="o" hint-placeholder-count="3">
+<button type="button" class="{{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:36px; padding:0 14px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:{{o.pill}}; font-family:{{t.body}}; font-weight:600; font-size:13px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+<div role="group" aria-label="Color" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+<span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}}; margin-right:4px;">Color</span>
+<sc-for list="{{families}}" as="o" hint-placeholder-count="7">
+<button type="button" aria-pressed="{{o.on}}" aria-label="{{o.name}}" title="{{o.name}}" onClick="{{o.pick}}" style="width:32px; height:32px; padding:0; border-radius:50%; background:{{o.hex}}; border:1px solid {{t.ring}}; box-shadow:{{o.ring}}; cursor:pointer;"></button>
+</sc-for>
+<sc-if value="{{familyOn}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{clearFamily}}" style="height:32px; padding:0 10px; background:transparent; color:{{t.brand}}; border:0; font-family:{{t.body}}; font-size:13px; text-decoration:underline; cursor:pointer;">Clear color</button></sc-if>
+</div>
+</div>
+</section>
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
+<div class="kk-negative">
+<div class="kk-neg" aria-hidden="true">Undeveloped</div>
+<p><strong>Nothing matches those filters.</strong></p>
+<button type="button" class="sh-ghost" onClick="{{resetFilters}}" style="height:44px; padding:0 18px; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">Show everything</button>
+</div>
+</sc-if>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}">
+<div style="padding:40px 0; display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+<p style="margin:0; font-size:18px;">Nothing matches those filters.</p>
+<button type="button" class="sh-ghost" onClick="{{resetFilters}}" style="height:44px; padding:0 18px; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">Show everything</button>
+</div>
+</sc-if>
+</sc-if>
+
+<section aria-label="Products" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap:28px 22px;">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="8">
+<article class="sh-card" style="display:flex; flex-direction:column; gap:12px; min-width:0;">
+<div class="{{k.mount}}" style="{{k.mountStyle}}">
+<button type="button" class="{{k.win}}" onClick="{{p.open}}" aria-label="{{p.aria}}" style="position:relative; display:block; padding:0; border:{{k.winBorder}}; background:{{t.stage}}; aspect-ratio:4 / 5; width:100%; overflow:hidden; cursor:pointer; border-radius:{{k.winRadius}};">
+<svg viewBox="{{p.vb}}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; display:{{p.figShow}};"><image href="{{p.render}}" x="{{p.rx}}" y="{{p.ry}}" width="{{p.rw}}" height="{{p.rh}}" display="{{p.renderShow}}"></image><path d="{{p.m.a.d}}" fill="{{p.m.a.fill}}" stroke="{{p.m.a.stroke}}" stroke-width="{{p.m.a.sw}}" opacity="{{p.m.a.op}}"></path><path d="{{p.m.b.d}}" fill="{{p.m.b.fill}}" stroke="{{p.m.b.stroke}}" stroke-width="{{p.m.b.sw}}" opacity="{{p.m.b.op}}"></path><path d="{{p.m.c.d}}" fill="{{p.m.c.fill}}" stroke="{{p.m.c.stroke}}" stroke-width="{{p.m.c.sw}}" opacity="{{p.m.c.op}}"></path><path d="{{p.m.d.d}}" fill="{{p.m.d.fill}}" stroke="{{p.m.d.stroke}}" stroke-width="{{p.m.d.sw}}" opacity="{{p.m.d.op}}"></path><path d="{{p.m.e.d}}" fill="{{p.m.e.fill}}" stroke="{{p.m.e.stroke}}" stroke-width="{{p.m.e.sw}}" opacity="{{p.m.e.op}}"></path><path d="{{p.m.f.d}}" fill="{{p.m.f.fill}}" stroke="{{p.m.f.stroke}}" stroke-width="{{p.m.f.sw}}" opacity="{{p.m.f.op}}"></path><path d="{{p.m.g.d}}" fill="{{p.m.g.fill}}" stroke="{{p.m.g.stroke}}" stroke-width="{{p.m.g.sw}}" opacity="{{p.m.g.op}}"></path><path d="{{p.m.h.d}}" fill="{{p.m.h.fill}}" stroke="{{p.m.h.stroke}}" stroke-width="{{p.m.h.sw}}" opacity="{{p.m.h.op}}"></path><path d="{{p.m.i.d}}" fill="{{p.m.i.fill}}" stroke="{{p.m.i.stroke}}" stroke-width="{{p.m.i.sw}}" opacity="{{p.m.i.op}}"></path><path d="{{p.m.j.d}}" fill="{{p.m.j.fill}}" stroke="{{p.m.j.stroke}}" stroke-width="{{p.m.j.sw}}" opacity="{{p.m.j.op}}"></path><path d="{{p.m.k.d}}" fill="{{p.m.k.fill}}" stroke="{{p.m.k.stroke}}" stroke-width="{{p.m.k.sw}}" opacity="{{p.m.k.op}}"></path><path d="{{p.m.l.d}}" fill="{{p.m.l.fill}}" stroke="{{p.m.l.stroke}}" stroke-width="{{p.m.l.sw}}" opacity="{{p.m.l.op}}"></path><path d="{{p.m.m.d}}" fill="{{p.m.m.fill}}" stroke="{{p.m.m.stroke}}" stroke-width="{{p.m.m.sw}}" opacity="{{p.m.m.op}}"></path><path d="{{p.m.n.d}}" fill="{{p.m.n.fill}}" stroke="{{p.m.n.stroke}}" stroke-width="{{p.m.n.sw}}" opacity="{{p.m.n.op}}"></path><image href="{{p.cut}}" x="0" y="0" width="{{p.w}}" height="{{p.h}}" mask="{{p.mask}}"></image></svg>
+<img class="sh-swap" src="{{p.swatch}}" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:{{t.stage}};">
+<sc-if value="{{p.soldOut}}" hint-placeholder-val="{{false}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{true}}"><span class="kk-dx is-out" style="position:absolute; left:10px; top:10px; z-index:1;">Sold out</span></sc-if><sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><span style="position:absolute; left:10px; top:10px; padding:5px 9px; background:{{t.onAccent}}; color:{{t.text}}; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;">Sold out</span></sc-if></sc-if>
+</button>
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
+<button type="button" class="kk-mount-hand" onClick="{{p.open}}" tabindex="-1" aria-hidden="true" style="padding:0; background:none; border:0; text-align:left; white-space:normal; text-overflow:clip; line-height:1.15; cursor:pointer;">{{p.title}} · {{p.price}}</button>
+<span class="kk-mount-print" aria-hidden="true">INCOGNITO PROCESSING · PENFIELD NY</span>
+</sc-if>
+</div>
+<div style="display:flex; flex-direction:column; gap:4px;">
+<span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}};">{{p.kicker}}</span>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><button type="button" class="sh-name" onClick="{{p.open}}" style="padding:0; background:none; border:0; text-align:left; color:{{t.text}}; font-family:{{t.display}}; font-weight:600; font-size:22px; line-height:1.15; cursor:pointer;">{{p.title}}</button></sc-if>
+<span style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; font-size:15px;"><sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{p.price}}</span></sc-if><span aria-hidden="true" style="width:12px; height:12px; border-radius:50%; background:{{p.dot}}; border:1px solid {{t.ring}};"></span><span class="{{p.sizeCls}}" style="{{p.sizeStyle}}">{{p.sizeLine}}</span></span>
+</div>
+</article>
+</sc-for>
+</section>
+
+<p style="margin:0; font-size:13px; line-height:1.5; color:{{t.note}}; max-width:760px;">Preview: products, photos and prices come from the current online store. Size labels are cleaned up and the descriptions are drafts. Checkout isn’t connected yet: carts are saved in this browser only.</p>
+</main>
+
+<sc-if value="{{detail.show}}" hint-placeholder-val="{{false}}">
+<div onClick="{{closeAll}}" style="position:fixed; inset:0; z-index:40; background:rgba(243,236,221,0.72);"></div>
+<div role="dialog" aria-modal="true" aria-labelledby="sh-d-title" style="position:fixed; z-index:41; top:50%; left:50%; transform:translate(-50%,-50%); width:min(1040px, calc(100vw - 32px)); max-height:calc(100vh - 48px); overflow:auto; box-sizing:border-box; background:{{t.panel}}; border:1px solid {{t.line2}}; box-shadow:0 30px 80px rgba(60,45,25,0.21);">
+<button type="button" onClick="{{closeAll}}" aria-label="Close" style="position:sticky; float:right; top:12px; margin:12px 12px 0 0; z-index:2; width:44px; height:44px; padding:0; background:{{t.field}}; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-size:22px; line-height:1; cursor:pointer;">×</button>
+<div style="display:flex; flex-wrap:wrap; gap:28px; padding:28px;">
+<div style="flex:1 1 380px; min-width:0; display:flex; flex-direction:column; gap:10px;">
+<div role="img" aria-label="{{detail.imageAlt}}" style="position:relative; background:{{t.stage}}; aspect-ratio:4 / 5; width:100%; border-radius:{{t.radius}}; overflow:hidden;">
+<svg viewBox="{{detail.fig.vb}}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; display:{{detail.fig.figShow}};"><image href="{{detail.fig.render}}" x="{{detail.fig.rx}}" y="{{detail.fig.ry}}" width="{{detail.fig.rw}}" height="{{detail.fig.rh}}" display="{{detail.fig.renderShow}}"></image><path d="{{detail.fig.m.a.d}}" fill="{{detail.fig.m.a.fill}}" stroke="{{detail.fig.m.a.stroke}}" stroke-width="{{detail.fig.m.a.sw}}" opacity="{{detail.fig.m.a.op}}"></path><path d="{{detail.fig.m.b.d}}" fill="{{detail.fig.m.b.fill}}" stroke="{{detail.fig.m.b.stroke}}" stroke-width="{{detail.fig.m.b.sw}}" opacity="{{detail.fig.m.b.op}}"></path><path d="{{detail.fig.m.c.d}}" fill="{{detail.fig.m.c.fill}}" stroke="{{detail.fig.m.c.stroke}}" stroke-width="{{detail.fig.m.c.sw}}" opacity="{{detail.fig.m.c.op}}"></path><path d="{{detail.fig.m.d.d}}" fill="{{detail.fig.m.d.fill}}" stroke="{{detail.fig.m.d.stroke}}" stroke-width="{{detail.fig.m.d.sw}}" opacity="{{detail.fig.m.d.op}}"></path><path d="{{detail.fig.m.e.d}}" fill="{{detail.fig.m.e.fill}}" stroke="{{detail.fig.m.e.stroke}}" stroke-width="{{detail.fig.m.e.sw}}" opacity="{{detail.fig.m.e.op}}"></path><path d="{{detail.fig.m.f.d}}" fill="{{detail.fig.m.f.fill}}" stroke="{{detail.fig.m.f.stroke}}" stroke-width="{{detail.fig.m.f.sw}}" opacity="{{detail.fig.m.f.op}}"></path><path d="{{detail.fig.m.g.d}}" fill="{{detail.fig.m.g.fill}}" stroke="{{detail.fig.m.g.stroke}}" stroke-width="{{detail.fig.m.g.sw}}" opacity="{{detail.fig.m.g.op}}"></path><path d="{{detail.fig.m.h.d}}" fill="{{detail.fig.m.h.fill}}" stroke="{{detail.fig.m.h.stroke}}" stroke-width="{{detail.fig.m.h.sw}}" opacity="{{detail.fig.m.h.op}}"></path><path d="{{detail.fig.m.i.d}}" fill="{{detail.fig.m.i.fill}}" stroke="{{detail.fig.m.i.stroke}}" stroke-width="{{detail.fig.m.i.sw}}" opacity="{{detail.fig.m.i.op}}"></path><path d="{{detail.fig.m.j.d}}" fill="{{detail.fig.m.j.fill}}" stroke="{{detail.fig.m.j.stroke}}" stroke-width="{{detail.fig.m.j.sw}}" opacity="{{detail.fig.m.j.op}}"></path><path d="{{detail.fig.m.k.d}}" fill="{{detail.fig.m.k.fill}}" stroke="{{detail.fig.m.k.stroke}}" stroke-width="{{detail.fig.m.k.sw}}" opacity="{{detail.fig.m.k.op}}"></path><path d="{{detail.fig.m.l.d}}" fill="{{detail.fig.m.l.fill}}" stroke="{{detail.fig.m.l.stroke}}" stroke-width="{{detail.fig.m.l.sw}}" opacity="{{detail.fig.m.l.op}}"></path><path d="{{detail.fig.m.m.d}}" fill="{{detail.fig.m.m.fill}}" stroke="{{detail.fig.m.m.stroke}}" stroke-width="{{detail.fig.m.m.sw}}" opacity="{{detail.fig.m.m.op}}"></path><path d="{{detail.fig.m.n.d}}" fill="{{detail.fig.m.n.fill}}" stroke="{{detail.fig.m.n.stroke}}" stroke-width="{{detail.fig.m.n.sw}}" opacity="{{detail.fig.m.n.op}}"></path><image href="{{detail.fig.cut}}" x="0" y="0" width="{{detail.fig.w}}" height="{{detail.fig.h}}" mask="{{detail.fig.mask}}"></image></svg>
+<img src="{{detail.image}}" alt="" style="position:absolute; inset:0; display:{{detail.imgShow}}; width:100%; height:100%; object-fit:cover;">
+</div>
+<div role="group" aria-label="Pictures" style="display:flex; gap:8px; flex-wrap:wrap;">
+<sc-for list="{{detail.thumbs}}" as="th" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{th.on}}" aria-label="{{th.label}}" onClick="{{th.pick}}" style="width:72px; height:72px; padding:0; background:{{t.stage}}; border:2px solid {{th.bd}}; border-radius:2px; overflow:hidden; cursor:pointer;"><img src="{{th.src}}" alt="" style="width:100%; height:100%; object-fit:{{th.fit}}; display:block;"></button>
+</sc-for>
+</div>
+</div>
+<div style="flex:1 1 360px; min-width:0; display:flex; flex-direction:column; gap:18px;">
+<div style="display:flex; flex-direction:column; gap:8px;">
+<span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.brand}};">{{detail.kicker}}</span>
+<h2 id="sh-d-title" style="margin:0; font-family:{{t.display}}; font-weight:700; font-size:32px; line-height:1.1;">{{detail.title}}</h2>
+<span style="font-size:22px; font-weight:700; font-variant-numeric:tabular-nums;">{{detail.price}}</span>
+</div>
+<p style="margin:0; font-size:16px; line-height:1.6; color:{{t.desc}};">{{detail.description}}</p>
+
+<sc-if value="{{detail.hasColors}}" hint-placeholder-val="{{false}}">
+<div role="radiogroup" aria-labelledby="sh-color-h" style="display:flex; flex-direction:column; gap:8px;">
+<span id="sh-color-h" style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}};">Color · {{detail.colorName}}</span>
+<div style="display:flex; gap:6px;">
+<sc-for list="{{detail.colors}}" as="c" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="height:40px; padding:0 16px; background:{{c.bg}}; color:{{c.fg}}; border:1px solid {{c.bd}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{c.name}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<div role="radiogroup" aria-labelledby="sh-size-h" style="display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+<span id="sh-size-h" style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}};">Size · {{detail.sizeName}}</span>
+<a href="Measure.dc.html" style="font-size:13px; color:{{t.brand}};">Not sure? Measure online</a>
+</div>
+<sc-for list="{{detail.sizeRows}}" as="row" hint-placeholder-count="3">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-size:13px; color:{{t.muted}};">{{row.name}}</span>
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(76px, 1fr)); gap:6px;">
+<sc-for list="{{row.sizes}}" as="sz" hint-placeholder-count="6">
+<button type="button" role="radio" class="{{k.sizeCls}}" aria-checked="{{sz.on}}" aria-label="{{sz.aria}}" disabled="{{sz.out}}" onClick="{{sz.pick}}" style="height:48px; padding:0 4px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; background:{{sz.bg}}; color:{{sz.fg}}; border:1px solid {{sz.bd}}; border-radius:2px; font-family:{{t.body}}; cursor:{{sz.cursor}}; text-decoration:{{sz.deco}};"><span style="font-weight:700; font-size:14px;">{{sz.jacket}}</span><span style="font-size:11px; opacity:.75;">{{sz.waist}}</span><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><svg class="kk-circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"></path></svg></sc-if></button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<span style="font-size:13px; line-height:1.5; color:{{t.muted}};">Jacket size first, with the trouser waist that comes with it. Crossed-out sizes are sold out online; call and we’ll check the back room.</span>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+<button type="button" class="{{k.btn}}" onClick="{{detail.add}}" disabled="{{detail.addDisabled}}" style="{{detail.addStyle}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><span class="kk-dot" aria-hidden="true"></span></sc-if>{{detail.addLabel}}</button>
+<a href="Book.dc.html" class="{{k.leader}}" style="{{k.bookStyle}}">Book a fitting</a>
+</div>
+<span aria-live="polite" style="font-size:14px; color:{{detail.noteColor}};">{{detail.note}}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{cart.show}}" hint-placeholder-val="{{false}}">
+<div onClick="{{closeAll}}" style="position:fixed; inset:0; z-index:40; background:rgba(243,236,221,0.6);"></div>
+<aside role="dialog" aria-modal="true" aria-labelledby="sh-cart-h" style="position:fixed; z-index:41; top:0; right:0; bottom:0; width:min(440px, 100vw); box-sizing:border-box; background:{{t.panel}}; border-left:1px solid {{t.line2}}; display:flex; flex-direction:column;">
+<div style="display:flex; justify-content:space-between; align-items:center; padding:20px 22px; border-bottom:1px solid {{t.line}};">
+<h2 id="sh-cart-h" style="margin:0; font-family:{{t.display}}; font-weight:700; font-size:26px;">Your cart</h2>
+<button type="button" onClick="{{closeAll}}" aria-label="Close cart" style="width:44px; height:44px; padding:0; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-size:22px; cursor:pointer;">×</button>
+</div>
+<div style="flex:1 1 auto; overflow:auto; padding:8px 22px;">
+<sc-if value="{{cart.empty}}" hint-placeholder-val="{{false}}"><p style="margin:24px 0; font-size:16px; color:{{t.muted}};">Your cart is empty.</p></sc-if>
+<ul style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{cart.lines}}" as="l" hint-placeholder-count="2">
+<li style="display:flex; gap:14px; padding:16px 0; border-bottom:1px solid {{t.line}};">
+<img src="{{l.image}}" alt="" style="width:72px; height:72px; flex:0 0 72px; object-fit:contain; background:{{t.stage}}; border-radius:2px;">
+<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:6px;">
+<span style="font-family:{{t.display}}; font-weight:600; font-size:18px; line-height:1.15;">{{l.title}}</span>
+<span style="font-size:13px; color:{{t.muted}};">{{l.detail}}</span>
+<div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+<div role="group" aria-label="{{l.qtyAria}}" style="display:flex; align-items:center; border:1px solid {{t.line2}};">
+<button type="button" onClick="{{l.minus}}" aria-label="One fewer" style="width:36px; height:36px; background:transparent; color:{{t.text}}; border:0; font-size:18px; cursor:pointer;">−</button>
+<span style="min-width:28px; text-align:center; font-variant-numeric:tabular-nums;">{{l.quantity}}</span>
+<button type="button" onClick="{{l.plus}}" aria-label="One more" style="width:36px; height:36px; background:transparent; color:{{t.text}}; border:0; font-size:18px; cursor:pointer;">+</button>
+</div>
+<span style="font-weight:700; font-variant-numeric:tabular-nums;">{{l.total}}</span>
+</div>
+<button type="button" onClick="{{l.remove}}" style="align-self:flex-start; padding:0; background:none; border:0; color:{{t.brand}}; font-family:{{t.body}}; font-size:13px; text-decoration:underline; cursor:pointer;">Remove</button>
+</div>
+</li>
+</sc-for>
+</ul>
+</div>
+<div style="padding:18px 22px 22px; border-top:1px solid {{t.line}}; display:flex; flex-direction:column; gap:12px;">
+<div style="display:flex; justify-content:space-between; font-size:17px;"><span>Subtotal</span><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{cart.subtotal}}</span></div>
+<span style="font-size:13px; color:{{t.muted}};">Tax and alterations are figured at checkout and your fitting.</span>
+<button type="button" class="{{k.btn}}" onClick="{{cart.checkout}}" disabled="{{cart.empty}}" style="{{cart.checkoutStyle}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><span class="kk-dot" aria-hidden="true"></span></sc-if>Check out</button>
+<sc-if value="{{cart.message}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
+<div class="kk-envelope" role="status"><span class="kk-stamp" aria-hidden="true">By phone</span><p>{{cart.message}} To order now, call <a href="tel:+15855867846">(585) 586-7846</a> or stop in at 1823 Penfield Rd.</p></div>
+</sc-if>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin:0; padding:12px 14px; border:1px solid {{t.brandDim}}; font-size:14px; line-height:1.5; color:{{t.text}};">{{cart.message}} To order now, call <a href="tel:+15855867846" style="color:{{t.brand}};">(585) 586-7846</a> or stop in at 1823 Penfield Rd.</p>
+</sc-if>
+</sc-if>
+</div>
+</aside>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1280,"height":960}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      loading: true, error: '', catalog: null, cart: { lines: [] }, renders: {},
+      type: 'all', line: 'all', family: '', inStock: false, sort: 'featured',
+      open: '', img: 0, color: '', size: '', note: '', noteOk: true, cartOpen: false, cartMsg: ''
+    };
+  }
+  componentDidMount() {
+    const C = window.IncognitoCommerce;
+    if (!C) { this.setState({ loading: false, error: 'The shop couldn’t load. Refresh to try again.' }); return; }
+    Promise.all([C.getCatalog(), C.getCart()])
+      .then(([catalog, cart]) => this.setState({ loading: false, catalog: catalog, cart: cart }))
+      .catch((e) => this.setState({ loading: false, error: e.message }));
+    fetch('../../shop/render/manifest.json').then((r) => (r.ok ? r.json() : null)).then((m) => { if (m) this.setState({ renders: m.renders || {} }); }).catch(() => {});
+    C.onCartChange((cart) => this.setState({ cart: { lines: cart.lines.slice() } }));
+    this.onKey = (e) => { if (e.key === 'Escape' && (this.state.open || this.state.cartOpen)) this.setState({ open: '', cartOpen: false, cartMsg: '' }); };
+    document.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { document.removeEventListener('keydown', this.onKey); }
+  money(n) { return '$' + Number(n).toFixed(2).replace(/\.00$/, ''); }
+  theme() {
+    const T = {
+      kodak: {
+        kicker: 'The shop', title: 'SUITS TO OWN', sub: 'The wedding suits and dinner jackets we fit in Penfield, to buy and keep. Order online, then come in and we’ll tailor it to you.',
+        home: 'Main.dc.html', prom: 'PromKodak.dc.html', self: 'Shop.dc.html', scheme: 'light', radius: '2px', kit: true,
+        bg: '#F3ECDD', bar: '#F3ECDD', line: '#E3D9C7', line2: '#D5C9B2', brand: '#87672F', brandDim: '#8C7247', red: '#B23F30', text: '#1E1A15', muted: '#655C4F',
+        border: '#C6B89D', accent: '#B08A4F', onAccent: '#1E1A15', field: '#FFFDF8', panel: '#FBF7EE', desc: '#3A342C', note: '#7E7668', disabled: '#5E574C', ring: 'rgba(30,26,21,0.33)',
+        head: 'norman-stencil-fat, Rokkitt, serif', headWeight: 800, display: 'Rokkitt, serif', body: 'Archivo, sans-serif',
+        stage: 'radial-gradient(ellipse at 50% 36%, #E2D6C0 0%, #F6F1E6 55%, #FFFDF8 100%)', mannequin: 'metal', cropAtHem: true
+      },
+      birch: {
+        kicker: 'The collection', title: 'Dressed for the occasion.', sub: 'Our wedding suits and dinner jackets, to buy and keep. Order here, then come to Penfield for the final fit.',
+        home: 'SilverBirchSignup.dc.html', prom: 'PromBirch.dc.html', self: 'ShopBirch.dc.html', scheme: 'light', radius: '0', kit: false,
+        bg: '#F4F1EA', bar: '#F5F2EC', line: '#D8D5CD', line2: '#D8D5CD', brand: '#8A6B21', brandDim: '#6B6E71', red: '#E0584C', text: '#0F0F10', muted: '#54585B',
+        border: '#DFD7C3', accent: '#A98632', onAccent: '#0F0F10', field: '#FBFAF6', panel: '#FBFAF6', desc: '#3F3F43', note: '#6C7073', disabled: '#4A4B4E', ring: 'rgba(30,26,21,0.33)',
+        head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, display: 'Jost, sans-serif', body: 'Jost, sans-serif',
+        stage: 'linear-gradient(180deg, #F7F7F5 0%, #E9E9E6 100%)', mannequin: 'facet', cropAtHem: true
+      },
+      park: {
+        kicker: 'The wardrobe', title: 'The Wardrobe', sub: 'Evening and wedding dress from our own rail, to purchase and keep. Order here, and we shall finish the fit in Penfield.',
+        home: 'TuxedoParkSignup.dc.html', prom: 'PromPark.dc.html', self: 'ShopPark.dc.html', scheme: 'light', radius: '0', kit: false,
+        bg: '#F4EEDF', bar: '#FBF7EE', line: '#CFC3A6', line2: '#CFC3A6', brand: '#2F5A3F', brandDim: '#8F7440', red: '#D75B45', text: '#1F1A14', muted: '#4E5A4D',
+        border: '#DBD2BC', accent: '#2F5A3F', onAccent: '#F4EEDF', field: '#FBF7EE', panel: '#FBF7EE', desc: '#554837', note: '#778772', disabled: '#4E6357', ring: 'rgba(30,26,21,0.385)',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, display: "'Playfair Display', Georgia, serif", body: "'EB Garamond', Georgia, serif",
+        stage: 'radial-gradient(ellipse at 50% 35%, #F4ECDA 0%, #E5D9BE 60%, #D2C3A2 100%)', mannequin: 'wood'
+      }
+    };
+    return T[this.props.theme] || T.kodak;
+  }
+  // Draws a styled mannequin around a cut-out suit photo. f holds the photo's measurements
+  // (collar top, shoulder width, hem). Returns the scene's viewBox and 14 path slots.
+  mannequin(kind, f) {
+    const S = f.sw, cx = f.cx, top = f.top, hem = f.hem, hx = f.hx;
+    const n = (v) => Math.round(v * 10) / 10;
+    const y0 = top - 0.62 * S, H = hem + 0.66 * S - y0, W = 0.8 * H, x0 = cx - W / 2;
+    const rect = (x, y, w, h) => `M${n(x)} ${n(y)}h${n(w)}v${n(h)}h${n(-w)}Z`;
+    const ell = (x, y, rx, ry) => `M${n(x - rx)} ${n(y)}a${n(rx)} ${n(ry)} 0 1 0 ${n(2 * rx)} 0a${n(rx)} ${n(ry)} 0 1 0 ${n(-2 * rx)} 0Z`;
+    const poly = (pts) => 'M' + pts.map((p) => n(p[0]) + ' ' + n(p[1])).join('L') + 'Z';
+    const fill = (d, color, op) => ({ d, fill: color, stroke: 'none', sw: 0, op: op == null ? 1 : op });
+    const line = (d, color, w) => ({ d, fill: 'none', stroke: color, sw: n(w), op: 1 });
+    const out = [];
+    if (kind === 'metal') {
+      // Retro chrome: a wire-cage neck with a domed cap and a tripod stand.
+      const legs = (dx, y2) => poly([[hx - 0.012 * S, hem + 0.33 * S], [hx + 0.012 * S, hem + 0.35 * S], [hx + dx + 0.02 * S, y2], [hx + dx - 0.02 * S, y2 - 0.01 * S]]);
+      out.push(fill(ell(hx, hem + 0.6 * S, 0.44 * S, 0.035 * S), '#000', 0.5));
+      out.push(fill(legs(-0.33 * S, hem + 0.585 * S), 'url(#mk-metal)'));
+      out.push(fill(legs(0.33 * S, hem + 0.585 * S), 'url(#mk-metal)'));
+      out.push(fill(legs(0.05 * S, hem + 0.62 * S), 'url(#mk-metal)'));
+      out.push(fill(ell(hx - 0.33 * S, hem + 0.585 * S, 0.03 * S, 0.012 * S) + ell(hx + 0.33 * S, hem + 0.585 * S, 0.03 * S, 0.012 * S) + ell(hx + 0.05 * S, hem + 0.62 * S, 0.03 * S, 0.012 * S), '#141414'));
+      out.push(fill(rect(hx - 0.016 * S, hem - 0.12 * S, 0.032 * S, 0.47 * S), 'url(#mk-metal)'));
+      out.push(fill(rect(hx - 0.04 * S, hem + 0.16 * S, 0.08 * S, 0.045 * S), 'url(#mk-metal)'));
+      out.push(fill(ell(hx + 0.052 * S, hem + 0.183 * S, 0.014 * S, 0.014 * S), '#2A2A2A'));
+      const nw = 0.125 * S;
+      out.push(line(ell(cx, top - 0.06 * S, nw, 0.028 * S) + ell(cx, top + 0.05 * S, nw * 1.04, 0.03 * S), '#B9BEC3', 0.012 * S));
+      out.push(line(`M${n(cx - nw)} ${n(top - 0.17 * S)}V${n(top + 0.08 * S)}M${n(cx + nw)} ${n(top - 0.17 * S)}V${n(top + 0.08 * S)}M${n(cx)} ${n(top - 0.14 * S)}V${n(top + 0.08 * S)}`, '#D3D7DA', 0.012 * S));
+      out.push(fill(ell(cx, top - 0.17 * S, nw * 1.06, 0.034 * S), 'url(#mk-metal)'));
+      out.push(fill(rect(cx - 0.012 * S, top - 0.25 * S, 0.024 * S, 0.08 * S), 'url(#mk-metal)'));
+      out.push(fill(ell(cx, top - 0.26 * S, 0.035 * S, 0.035 * S), 'url(#mk-metal)'));
+    } else if (kind === 'facet') {
+      // Modern: a faceless, faceted head on a slim black pole with a disc base.
+      out.push(fill(ell(hx, hem + 0.6 * S, 0.36 * S, 0.03 * S), '#000', 0.12));
+      out.push(fill(ell(hx, hem + 0.585 * S, 0.27 * S, 0.045 * S), '#151618'));
+      out.push(Object.assign(fill(ell(hx, hem + 0.57 * S, 0.27 * S, 0.04 * S), '#2A2B2E'), { stroke: '#C9A24B', sw: n(0.006 * S) }));
+      out.push(fill(rect(hx - 0.011 * S, hem - 0.12 * S, 0.022 * S, 0.69 * S), '#1B1C1E'));
+      out.push(fill(poly([[cx - 0.085 * S, top - 0.15 * S], [cx, top - 0.16 * S], [cx, top + 0.08 * S], [cx - 0.11 * S, top + 0.08 * S]]), '#34363A'));
+      out.push(fill(poly([[cx, top - 0.16 * S], [cx + 0.085 * S, top - 0.15 * S], [cx + 0.11 * S, top + 0.08 * S], [cx, top + 0.08 * S]]), '#222326'));
+      const hy = top - 0.34 * S, P = [[cx, hy - 0.2 * S], [cx + 0.13 * S, hy - 0.12 * S], [cx + 0.15 * S, hy + 0.02 * S], [cx + 0.1 * S, hy + 0.15 * S], [cx, hy + 0.2 * S], [cx - 0.1 * S, hy + 0.15 * S], [cx - 0.15 * S, hy + 0.02 * S], [cx - 0.13 * S, hy - 0.12 * S]];
+      const C = [cx - 0.025 * S, hy - 0.01 * S];
+      const tones = ['#4C4F54', '#3A3C40', '#2A2B2E', '#1F2023', '#26272A', '#34363A', '#55585D', '#5E6166'];
+      P.forEach((pt, i) => out.push(fill(poly([C, pt, P[(i + 1) % P.length]]), tones[i])));
+    } else {
+      // Classic: linen neck with a turned wood finial, turned wood pole, curved tripod legs.
+      const leg = (dir, tipY) => `M${n(hx - 0.02 * S * dir)} ${n(hem + 0.34 * S)}Q${n(hx + 0.13 * S * dir)} ${n(hem + 0.5 * S)} ${n(hx + 0.34 * S * dir)} ${n(tipY)}L${n(hx + 0.31 * S * dir)} ${n(tipY + 0.022 * S)}Q${n(hx + 0.1 * S * dir)} ${n(hem + 0.54 * S)} ${n(hx + 0.02 * S * dir)} ${n(hem + 0.37 * S)}Z`;
+      out.push(fill(ell(hx, hem + 0.61 * S, 0.42 * S, 0.035 * S), '#3B2A16', 0.28));
+      out.push(fill(leg(-1, hem + 0.58 * S), 'url(#mk-wood)'));
+      out.push(fill(leg(1, hem + 0.58 * S), 'url(#mk-wood)'));
+      out.push(fill(`M${n(hx - 0.02 * S)} ${n(hem + 0.35 * S)}L${n(hx + 0.02 * S)} ${n(hem + 0.35 * S)}L${n(hx + 0.035 * S)} ${n(hem + 0.62 * S)}L${n(hx - 0.005 * S)} ${n(hem + 0.62 * S)}Z`, 'url(#mk-wood)'));
+      out.push(fill(ell(hx - 0.33 * S, hem + 0.6 * S, 0.026 * S, 0.012 * S) + ell(hx + 0.33 * S, hem + 0.6 * S, 0.026 * S, 0.012 * S) + ell(hx + 0.015 * S, hem + 0.625 * S, 0.026 * S, 0.012 * S), 'url(#mk-brass)'));
+      const prof = [[-0.12, 0.016], [0.08, 0.016], [0.1, 0.03], [0.125, 0.02], [0.2, 0.042], [0.27, 0.02], [0.3, 0.036], [0.37, 0.036]];
+      const L = prof.map((p) => [hx - p[1] * S, hem + p[0] * S]), R = prof.slice().reverse().map((p) => [hx + p[1] * S, hem + p[0] * S]);
+      out.push(fill(poly(L.concat(R)), 'url(#mk-wood)'));
+      out.push(fill(rect(hx - 0.032 * S, hem + 0.095 * S, 0.064 * S, 0.016 * S), 'url(#mk-brass)'));
+      out.push(fill(poly([[cx - 0.1 * S, top - 0.14 * S], [cx + 0.1 * S, top - 0.14 * S], [cx + 0.12 * S, top + 0.08 * S], [cx - 0.12 * S, top + 0.08 * S]]), 'url(#mk-linen)'));
+      out.push(fill(ell(cx, top - 0.15 * S, 0.12 * S, 0.034 * S), 'url(#mk-wood)'));
+      out.push(fill(rect(cx - 0.05 * S, top - 0.2 * S, 0.1 * S, 0.05 * S), 'url(#mk-wood)'));
+      out.push(fill(rect(cx - 0.055 * S, top - 0.215 * S, 0.11 * S, 0.016 * S), 'url(#mk-brass)'));
+      out.push(fill(rect(cx - 0.016 * S, top - 0.26 * S, 0.032 * S, 0.05 * S), 'url(#mk-wood)'));
+      out.push(fill(ell(cx, top - 0.29 * S, 0.042 * S, 0.042 * S), 'url(#mk-wood)'));
+    }
+    const m = {};
+    'abcdefghijklmn'.split('').forEach((k, i) => { m[k] = out[i] || { d: 'M0 0', fill: 'none', stroke: 'none', sw: 0, op: 0 }; });
+    return { vb: `${n(x0)} ${n(y0)} ${n(W)} ${n(H)}`, m };
+  }
+  scene(p, kind) {
+    const im = p.images.find((i) => i.kind === 'photo' && i.fig);
+    const none = { renderShow: 'none', render: '', rx: 0, ry: 0, rw: 1, rh: 1, mask: 'url(#mk-fade)' };
+    if (!im) return Object.assign({ figShow: 'none', vb: '0 0 1 1', m: this.mannequin(kind, { sw: 1, cx: 0, top: 0, hem: 0, hx: 0 }).m, cut: '', w: 1, h: 1 }, none);
+    const g = this.mannequin(kind, im.fig);
+    const out = Object.assign({ figShow: 'block', vb: g.vb, m: g.m, cut: im.cut.replace(/^img\//, '../../shop/img/'), w: im.fig.w, h: im.fig.h }, none);
+    const key = im.cut.replace(/^img\//, '').replace(/-cut\.webp$/, '');
+    const r = ((this.state.renders || {})[key] || {})[this.props.theme || 'kodak'];
+    if (r && r.file && r.frame) {
+      const blank = { d: 'M0 0', fill: 'none', stroke: 'none', sw: 0, op: 0 };
+      const m = {}; Object.keys(g.m).forEach((k) => { m[k] = blank; });
+      Object.assign(out, { m: m, renderShow: 'inline', render: '../../shop/render/' + r.file.replace(/\.png$/, '.webp'), rx: r.frame[0], ry: r.frame[1], rw: r.frame[2], rh: r.frame[3] });
+      out.vb = r.frame.map((x) => Math.round(x * 10) / 10).join(' ');
+      out.frameTop = r.frame[1];
+    }
+    if (this.t && this.t.cropAtHem) {
+      // Frame ends at the bottom of the suit photo: the stand drops out of view and the suit meets the edge.
+      const f = im.fig, S = f.sw, y0 = out.frameTop != null ? out.frameTop : f.top - 0.62 * S, bottom = Math.min(f.h, f.hem + 2), H = bottom - y0, W = 0.8 * H;
+      out.vb = [f.cx - W / 2, y0, W, H].map((x) => Math.round(x * 10) / 10).join(' ');
+      out.mask = 'none';
+    }
+    return out;
+  }
+  families() {
+    return [['blue', 'Blues', '#2A4A7A'], ['gray', 'Grays', '#8C8F94'], ['black', 'Black', '#121212'], ['brown', 'Browns and tans', '#A88660'], ['green', 'Greens', '#2F4A35'], ['red', 'Burgundy', '#6B1E2E'], ['white', 'Whites', '#F2EFE6']];
+  }
+  seg(list, key, extra) {
+    const t = this.t;
+    return list.map((o) => {
+      const on = this.state[key] === o[0];
+      // Kodak: the kit's dial-option class takes over, so the inline colours and the pill radius go empty.
+      if (t.kit) return { name: o[1], on: on, cls: 'kk-dial-opt', bg: '', fg: '', bd: '', pill: '0', pick: () => this.setState(Object.assign({ [key]: o[0] }, extra || {})) };
+      return { name: o[1], on: on, cls: '', bg: on ? t.accent : 'transparent', fg: on ? t.onAccent : t.text, bd: on ? t.accent : t.border, pill: '18px', pick: () => this.setState(Object.assign({ [key]: o[0] }, extra || {})) };
+    });
+  }
+  openProduct(handle) {
+    const p = this.state.catalog.products.find((x) => x.handle === handle);
+    const colors = (p.options.find((o) => o.name === 'Color') || { values: [] }).values;
+    this.setState({ open: handle, img: 0, color: colors[0] || '', size: '', note: '', noteOk: true, cartOpen: false });
+  }
+  addToCart(p) {
+    const v = p.variants.find((x) => x.size === this.state.size && (x.color || '') === (this.state.color || ''));
+    if (!v) { this.setState({ note: 'Pick a size first.', noteOk: false }); return; }
+    window.IncognitoCommerce.addToCart(v.id, 1)
+      .then(() => this.setState({ note: 'Added to your cart: ' + p.title + ', ' + v.size + (v.color ? ', ' + v.color : '') + '.', noteOk: true }))
+      .catch((e) => this.setState({ note: e.message, noteOk: false }));
+  }
+  checkout() {
+    window.IncognitoCommerce.checkout().then((r) => {
+      if (r.ok && r.url) { window.location.href = r.url; return; }
+      this.setState({ cartMsg: r.message });
+    });
+  }
+  renderVals() {
+    const s = this.state;
+    const t = this.theme(); this.t = t;
+    const all = s.catalog ? s.catalog.products.filter((p) => !p.hidden) : [];
+    const famHex = {}; this.families().forEach((f) => { famHex[f[0]] = f[2]; });
+    let list = all.filter((p) => (s.type === 'all' || p.type === s.type) && (s.line === 'all' || p.line === s.line) && (!s.family || p.colorFamily === s.family) && (!s.inStock || p.available));
+    if (s.sort === 'low') list = list.slice().sort((a, b) => a.price - b.price);
+    if (s.sort === 'high') list = list.slice().sort((a, b) => b.price - a.price);
+    if (s.sort === 'featured') list = list.slice().sort((a, b) => (b.available - a.available));
+    const photoOf = (p) => (p.images.find((i) => i.kind === 'photo') || p.images[0]).src.replace(/^img\//, '../../shop/img/');
+    const swatchOf = (p) => (p.images.find((i) => i.kind === 'swatch') || p.images[0]).src.replace(/^img\//, '../../shop/img/');
+    const products = list.map((p) => {
+      const avail = p.variants.filter((v) => v.available).length;
+      const low = t.kit && p.available && avail < 5;
+      return Object.assign(this.scene(p, t.mannequin), {
+        sizeCls: low ? 'kk-dx is-low' : '', sizeStyle: low ? '' : 'color:' + t.muted + '; font-size:13px;',
+        title: p.title.replace(/ Wedding Suit$/, '').replace(/ Dinner Jacket$/, ' Dinner Jacket'),
+        kicker: (p.line ? p.line + ' · ' : '') + (p.type === 'suit' ? 'Suit' : 'Dinner jacket') + (p.fabric ? ' · ' + p.fabric : ''),
+        price: this.money(p.price), dot: famHex[p.colorFamily], photo: photoOf(p), swatch: swatchOf(p),
+        soldOut: !p.available,
+        sizeLine: !p.available ? 'Sold out' : avail < 5 ? avail === 1 ? '1 size left' : avail + ' sizes left' : 'Sizes 36S–60L',
+        aria: p.title + ', ' + this.money(p.price) + (p.available ? '' : ', sold out'),
+        open: () => this.openProduct(p.handle)
+      });
+    });
+
+    // Product detail
+    let detail = { show: false };
+    const p = s.open && s.catalog ? s.catalog.products.find((x) => x.handle === s.open) : null;
+    if (p) {
+      const imgs = p.images.filter((i) => !p.variants.some((v) => v.color) || true);
+      const cur = imgs[Math.min(s.img, imgs.length - 1)];
+      const vs = p.variants.filter((v) => (v.color || '') === (s.color || ''));
+      const rows = [['S', 'Short'], ['R', 'Regular'], ['L', 'Long']].map((r) => ({
+        name: r[1],
+        sizes: vs.filter((v) => v.length === r[0]).map((v) => {
+          const on = s.size === v.size;
+          return {
+            jacket: v.chest + r[0], waist: v.waist + 'W', on: on, out: !v.available,
+            aria: v.chest + ' ' + r[1].toLowerCase() + ' jacket with ' + v.waist + ' inch waist' + (v.available ? '' : ', sold out'),
+            bg: on ? t.accent : t.field, fg: on ? t.onAccent : v.available ? t.text : t.disabled, bd: on ? t.accent : t.line2,
+            cursor: v.available ? 'pointer' : 'not-allowed', deco: v.available ? 'none' : 'line-through',
+            pick: () => this.setState({ size: v.size, note: '' })
+          };
+        })
+      })).filter((r) => r.sizes.length);
+      const colors = (p.options.find((o) => o.name === 'Color') || { values: [] }).values;
+      const ready = !!s.size && p.available;
+      detail = {
+        show: true, title: p.title, price: this.money(p.price), description: p.description,
+        kicker: (p.line ? p.line + ' collection · ' : '') + (p.type === 'suit' ? 'Suit' : 'Dinner jacket'),
+        image: cur.src.replace(/^img\//, '../../shop/img/'), imageAlt: cur.kind === 'photo' ? p.alt.photo : p.alt.swatch, fit: cur.kind === 'photo' ? 'contain' : 'cover',
+        fig: Object.assign(this.scene(p, t.mannequin), cur.kind === 'photo' && cur.fig ? {} : { figShow: 'none' }),
+        imgShow: cur.kind === 'photo' && cur.fig ? 'none' : 'block',
+        thumbs: imgs.map((im, i) => ({ src: im.src.replace(/^img\//, '../../shop/img/'), fit: im.kind === 'photo' ? 'contain' : 'cover', on: i === s.img, bd: i === s.img ? t.accent : t.line, label: im.kind === 'photo' ? 'Show the suit' : 'Show the fabric', pick: () => this.setState({ img: i }) })),
+        hasColors: colors.length > 1, colorName: s.color,
+        colors: colors.map((c) => { const on = s.color === c; return { name: c, on: on, bg: on ? t.accent : 'transparent', fg: on ? t.onAccent : t.text, bd: on ? t.accent : t.border, pick: () => this.setState({ color: c, size: '' }) }; }),
+        sizeName: s.size || 'pick one', sizeRows: rows,
+        addLabel: !p.available ? 'Sold out' : s.size ? 'Add to cart · ' + this.money(p.price) : 'Pick a size',
+        addDisabled: !ready, addBg: ready ? t.accent : t.border, addCursor: ready ? 'pointer' : 'not-allowed',
+        addStyle: t.kit ? 'flex:1 1 220px;' : 'flex:1 1 220px; height:54px; padding:0 22px; background:' + (ready ? t.accent : t.border) + '; color:' + t.onAccent + '; border:0; border-radius:2px; font-family:' + t.body + '; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:' + (ready ? 'pointer' : 'not-allowed') + ';',
+        add: () => this.addToCart(p),
+        note: s.note, noteColor: s.noteOk ? t.brand : t.red
+      };
+    }
+
+    const lines = (s.cart.lines || []).map((l) => ({
+      title: l.title, detail: 'Size ' + l.size + (l.color ? ' · ' + l.color : '') + ' · ' + this.money(l.price) + ' each',
+      image: (l.image || '').replace(/^img\//, '../../shop/img/'), quantity: l.quantity, total: this.money(l.price * l.quantity),
+      qtyAria: 'Quantity of ' + l.title,
+      minus: () => window.IncognitoCommerce.updateLine(l.variantId, l.quantity - 1),
+      plus: () => window.IncognitoCommerce.updateLine(l.variantId, l.quantity + 1),
+      remove: () => window.IncognitoCommerce.updateLine(l.variantId, 0)
+    }));
+    const count = (s.cart.lines || []).reduce((a, l) => a + l.quantity, 0);
+    const subtotal = (s.cart.lines || []).reduce((a, l) => a + l.price * l.quantity, 0);
+
+    // Kit parts, Kodak only. Silver Birch and Tuxedo Park get their original classes and inline styles back.
+    const k = t.kit ? {
+      on: true, off: false,
+      mount: 'kk-mount', mountStyle: 'padding-bottom:56px;', win: 'kk-mount-win', winBorder: '0', winRadius: '10px',
+      sizeCls: 'sh-size kk-pick', btn: 'kk-shutter', leader: 'kk-leader', bookStyle: 'flex:0 1 auto;'
+    } : {
+      on: false, off: true,
+      mount: '', mountStyle: '', win: '', winBorder: '1px solid ' + t.line, winRadius: t.radius,
+      sizeCls: 'sh-size', btn: 'sh-btn', leader: 'sh-ghost',
+      bookStyle: 'flex:0 1 auto; height:54px; padding:0 20px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid ' + t.border + '; border-radius:2px; color:' + t.text + '; text-decoration:none; font-weight:600; font-size:14px;'
+    };
+    const checkoutStyle = t.kit ? '' : 'height:54px; background:' + (lines.length ? t.accent : t.border) + '; color:' + t.onAccent + '; border:0; border-radius:2px; font-family:' + t.body + '; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;';
+
+    return {
+      t: t, k: k,
+      loading: s.loading, loadError: s.error,
+      countLine: s.catalog ? list.length + ' of ' + all.length + ' pieces' : '',
+      types: this.seg([['all', 'Everything'], ['suit', 'Suits'], ['dinner-jacket', 'Dinner jackets']], 'type'),
+      lines: this.seg([['all', 'All'], ['Hampton', 'Hampton · $499'], ['Madison', 'Madison · $399']], 'line'),
+      families: this.families().map((f) => ({ name: f[1], hex: f[2], on: s.family === f[0], ring: s.family === f[0] ? '0 0 0 3px ' + t.bg + ', 0 0 0 5px ' + t.accent : 'none', pick: () => this.setState({ family: s.family === f[0] ? '' : f[0] }) })),
+      familyOn: !!s.family, clearFamily: () => this.setState({ family: '' }),
+      inStock: s.inStock, toggleStock: (e) => this.setState({ inStock: e.target.checked }),
+      sorts: [['featured', 'Featured'], ['low', 'Price: low to high'], ['high', 'Price: high to low']].map((o) => ({ id: o[0], name: o[1], on: s.sort === o[0] })),
+      pickSort: (e) => this.setState({ sort: e.target.value }),
+      empty: !!s.catalog && !list.length,
+      resetFilters: () => this.setState({ type: 'all', line: 'all', family: '', inStock: false }),
+      products: products,
+      detail: detail,
+      cart: { show: s.cartOpen, empty: !lines.length, lines: lines, subtotal: this.money(subtotal), checkout: () => this.checkout(), checkoutBg: lines.length ? t.accent : t.border, checkoutStyle: checkoutStyle, message: s.cartMsg },
+      cartCount: String(count), cartBadgeBg: count ? t.accent : t.border, cartAria: 'Cart, ' + count + (count === 1 ? ' item' : ' items'),
+      openCart: () => this.setState({ cartOpen: true, open: '', cartMsg: '' }),
+      closeAll: () => this.setState({ open: '', cartOpen: false, cartMsg: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

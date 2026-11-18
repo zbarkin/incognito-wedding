@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prom · pick your look</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Plaster&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="box-sizing:border-box; width:100%; min-height:100vh; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:light;">
+
+<header style="border-bottom:1px solid {{t.line}}; background:{{t.bar}};">
+<div style="max-width:1320px; margin:0 auto; box-sizing:border-box; padding:16px 32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
+<span style="display:flex; align-items:baseline; gap:14px;">
+<span style="font-family:{{t.markFont}}; font-weight:{{t.markWeight}}; font-size:26px; letter-spacing:{{t.markTrack}};">{{t.mark}}</span>
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">Prom 2027</span>
+</span>
+<nav aria-label="Prom steps" style="display:flex; flex-wrap:wrap; gap:6px 20px; font-size:15px; font-weight:600;">
+<a href="{{t.links.signup}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.0}}</a>
+<a href="{{t.links.style}}" aria-current="page" style="padding:10px 0 8px; color:{{t.text}}; text-decoration:none; border-bottom:2px solid {{t.accent}};">{{t.steps.1}}</a>
+<a href="{{t.links.measure}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.2}}</a>
+<a href="{{t.links.game}}" style="padding:10px 0; color:{{t.muted}}; text-decoration:none;">{{t.steps.3}}</a>
+</nav>
+</div>
+</header>
+
+<main style="max-width:1320px; margin:0 auto; box-sizing:border-box; padding:44px 32px 72px; display:flex; flex-direction:column; gap:30px;">
+
+<div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 32px;">
+<div style="display:flex; flex-direction:column; gap:10px; max-width:720px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(38px, 5vw, 60px); line-height:1; color:{{t.headColor}};">{{t.title}}</h1>
+<p style="margin:0; font-size:18px; line-height:1.5; color:{{t.muted}};">{{t.sub}}</p>
+</div>
+<div role="group" aria-label="Show" style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="height:44px; padding:0 16px; background:{{f.bg}}; color:{{f.fg}}; border:1px solid {{f.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{f.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; gap:28px; align-items:flex-start;">
+
+<section aria-label="Inventory" style="flex:999 1 620px; min-width:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(210px, 100%), 1fr)); gap:16px;">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="8">
+<button type="button" aria-pressed="{{it.on}}" onClick="{{it.pick}}" aria-label="{{it.aria}}" style="display:flex; flex-direction:column; gap:0; padding:0; text-align:left; background:{{t.card}}; color:{{t.cardText}}; border:{{it.border}}; border-radius:{{t.radius}}; font-family:{{t.body}}; cursor:pointer; overflow:hidden;">
+<span style="display:block; background:{{t.stage}};">
+<svg aria-hidden="true" viewBox="-12 -8 420 410" style="display:block; width:100%; height:auto;"><image href="../../art/mannequin.svg" x="62.2" y="0" width="298.9" height="817.28"></image><path transform="translate(7.25 18.06)" d="M152.76,15.58S176.33,1.57,197.39.52c23.45-1.17,158.24,50.04,158.24,50.04,4.07,44.8,9.36,45.9,15.22,105.59.33,3.36,8.44,56.74,8.45,56.83,5.78,111.92,2.71,166.92,2.71,166.92h-52.49s-2.66-165.24-3.56-170.22c-3.11-17.23-8.53-84.91-9.77-80.34-10.21,37.61-23.82,162.64-5.23,205.22,15.42,35.3-245.97,25.28-238.12,4.63,21.49-56.53,9.44-185.99,2.6-217.87-.98-4.57-7.01,76.89-7.01,76.89-1.31-3.91-4.25,192.34-5.58,187.57-1.49-5.34-61.13,4.15-62.28,0-1.45-5.25,19.23-210.48,16.95-216.88-1.16-3.27,21.57-107.57,19.56-112.67C69.45,44.79,120.38,27.02,152.76,15.58Z" fill="#F8F6F2" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g transform="translate(151.1 8.45)"><path d="M37.12,32.71l17.64-22.65c-9.44-.49-19.87-2.09-29.31-2.59-6.39-.33-13.93.1-14.39-3.1C7.09,10.11.5,16.08.5,24.06L37.12,32.71Z" fill="#F8F6F2" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M70.34,32.21l-15.33-22.15c9.15-.48,13.29.49,22.44,0,6.54-.34,14.67-3.83,18.54-9.39,9.13,5.56,8.27,8.18,13.27,15.08L70.34,32.21Z" fill="#F8F6F2" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path></g><g transform="translate(171.1 11.45)"><polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="#141414"></polyline><polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="#000" opacity=".35"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="#141414"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="#000" opacity=".35"></polyline><polyline points="40.72 10.46 70.5 1.21 70.5 27.77 40.72 19.59" fill="#141414"></polyline><polyline points="30.05 19.72 .27 28.98 .27 2.41 30.05 10.6" fill="#141414"></polyline><circle cx="35.12" cy="15.19" r="8.15" fill="#141414"></circle><circle cx="35.12" cy="15.19" r="8.15" fill="#000" opacity=".3"></circle></g><g transform="translate(0 17.78)"><path d="M157.04,3.8L42.73,53.97s-8.12,23.88-25.5,118.82c-6.67,36.43-6.43,33.46-7.85,59.05C2.35,357.76.55,376.92.55,376.92l74.23-1.01,2.62-139.91,5.56-105.84s2.01,138.32,1.83,158.56c-.18,21.7-7.85,86.46-7.85,86.46l257.54,1.43s-14.76-59.38-15.58-79.65c-.9-22.3,7.02-166.8,7.02-166.8,0,0,5.3,139.54,6.07,160.07.8,21.28,2.83,84.12,2.83,84.12l58.33,1.85s3.76-115.13-.01-141.36c-7.35-51.08-7.8-70.16-18.74-148.99-2.1-15.17-9.76-38.1-9.76-38.1L254.93.73s-18.52,229.28-49.92,232.36C186.36,234.92,157.04,3.8,157.04,3.8Z" fill="{{it.jacket}}" stroke="{{it.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{it.vent}}" fill="none" stroke="{{it.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M47.22,56.51c7.01,5.08,22.05,17.48,30.44,39.11,4.98,12.83,5.85,24.36,5.78,32" fill="{{it.jacket}}"></path><path d="M47.82,56.95c7.24,5.34,21.68,17.64,29.84,38.67,4.87,12.56,5.81,23.86,5.78,31.5" fill="none" stroke="{{it.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M325.66,127.62c-.3-8.31.31-20.41,4.89-34,8.18-24.28,24.14-38.79,31.78-44.89" fill="{{it.jacket}}"></path><path d="M325.64,126.88c-.24-8.28.46-20.07,4.91-33.26,8.05-23.87,23.61-38.3,31.39-44.57" fill="none" stroke="{{it.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M277.17 108.16H320.17M245.38 320.51H312.77M100.63 320.51H168.02" fill="none" stroke="{{it.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g display="{{it.btnShow}}"><circle cx="211.87" cy="278.93" r="5.77" fill="#0B0A09" stroke="{{it.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="211.87" cy="324.93" r="5.77" fill="#0B0A09" stroke="{{it.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><circle cx="10.77" cy="345.64" r="2.75" fill="#0B0A09" stroke="{{it.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="11.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{it.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.13" cy="345.66" r="2.75" fill="#0B0A09" stroke="{{it.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{it.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g transform="{{it.lapelAt}}"><path d="{{it.lapelL}}" fill="{{it.lapel}}" stroke="{{it.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{it.lapelR}}" fill="{{it.lapel}}" stroke="{{it.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g display="{{it.shawlShow}}"><circle cx="83.27" cy="265.54" r="4.5" fill="#0B0A09" stroke="{{it.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g></g><polygon points="281.88 124.62 283.22 120.96 316.86 117.65 317.55 124.62 281.88 124.62" fill="#F4F1EA"></polygon></svg>
+</span>
+<span style="display:flex; flex-direction:column; gap:6px; padding:14px 16px 16px;">
+<span style="display:flex; justify-content:space-between; align-items:baseline; gap:8px;">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:22px; line-height:1.1;">{{it.name}}</span>
+<span aria-hidden="true" style="flex:0 0 18px; height:18px; box-sizing:border-box; border:1px solid {{t.cardAccent}}; background:{{it.dot}};"></span>
+</span>
+<span style="font-size:14px; line-height:1.4; color:{{t.cardMuted}};">{{it.detail}}</span>
+<span style="display:flex; justify-content:space-between; gap:8px; font-size:13px; font-weight:600;"><span style="color:{{it.stockColor}};">{{it.stock}}</span><span style="color:{{t.cardMuted}};">[PRICE]</span></span>
+<span style="font-size:13px; color:{{t.cardAccent}};">{{it.crewLine}}</span>
+</span>
+</button>
+</sc-for>
+</section>
+
+<aside aria-labelledby="look-h" style="flex:1 1 340px; max-width:420px; box-sizing:border-box; padding:26px; background:{{t.card}}; color:{{t.cardText}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; gap:20px;">
+<div style="display:flex; flex-direction:column; gap:6px;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:{{t.cardAccent}};">{{t.lookKicker}}</span>
+<h2 id="look-h" aria-live="polite" style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:30px; line-height:1.05;">{{sel.name}}</h2>
+<span style="font-size:15px; color:{{t.cardMuted}};">{{sel.detail}}</span>
+</div>
+<div style="background:{{t.stage}}; border:1px solid {{t.line}};">
+<svg role="img" aria-label="{{sel.alt}}" viewBox="-20 -20 436 910" style="display:block; width:100%; height:560px;"><defs><linearGradient id="pv-satin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{{sel.lapel}}"></stop><stop offset=".45" stop-color="{{sel.sheen}}"></stop><stop offset=".55" stop-color="{{sel.lapel}}"></stop><stop offset="1" stop-color="{{sel.lapel}}"></stop></linearGradient></defs><image href="../../art/mannequin.svg" x="62.2" y="0" width="298.9" height="817.28"></image><path transform="translate(7.25 18.06)" d="M152.76,15.58S176.33,1.57,197.39.52c23.45-1.17,158.24,50.04,158.24,50.04,4.07,44.8,9.36,45.9,15.22,105.59.33,3.36,8.44,56.74,8.45,56.83,5.78,111.92,2.71,166.92,2.71,166.92h-52.49s-2.66-165.24-3.56-170.22c-3.11-17.23-8.53-84.91-9.77-80.34-10.21,37.61-23.82,162.64-5.23,205.22,15.42,35.3-245.97,25.28-238.12,4.63,21.49-56.53,9.44-185.99,2.6-217.87-.98-4.57-7.01,76.89-7.01,76.89-1.31-3.91-4.25,192.34-5.58,187.57-1.49-5.34-61.13,4.15-62.28,0-1.45-5.25,19.23-210.48,16.95-216.88-1.16-3.27,21.57-107.57,19.56-112.67C69.45,44.79,120.38,27.02,152.76,15.58Z" fill="#F8F6F2" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g transform="translate(204.1 74)"><circle cx="2" cy="1.95" r="2.4" fill="#0B0A09" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2" cy="37.06" r="2.4" fill="#0B0A09" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2" cy="72.18" r="2.4" fill="#0B0A09" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2" cy="107.29" r="2.4" fill="#0B0A09" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g display="{{sel.longShow}}" transform="translate(184.77 18.51)"><polygon points="15.73 27.33 0 318.43 15.73 334.85 36.67 315.56 26.78 27.33 15.73 27.33" fill="{{sel.tie}}"></polygon><polygon points="6.89 18 21.09 0 34.22 18.67 26.78 28.98 14.69 28.39 6.89 18" fill="{{sel.tie}}"></polygon><polygon points="6.89 18 21.09 0 34.22 18.67 26.78 28.98 14.69 28.39 6.89 18" fill="#000" opacity=".3"></polygon></g><g transform="translate(151.1 8.45)"><path d="M37.12,32.71l17.64-22.65c-9.44-.49-19.87-2.09-29.31-2.59-6.39-.33-13.93.1-14.39-3.1C7.09,10.11.5,16.08.5,24.06L37.12,32.71Z" fill="#F8F6F2" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M70.34,32.21l-15.33-22.15c9.15-.48,13.29.49,22.44,0,6.54-.34,14.67-3.83,18.54-9.39,9.13,5.56,8.27,8.18,13.27,15.08L70.34,32.21Z" fill="#F8F6F2" stroke="#C9C2B2" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path></g><g display="{{sel.shoesShow}}" transform="translate(105 760)"><path d="M100.17,40.69c-7.37,1.26-31.44,6.13-73.16,38.62C8.12,94.03-1.32,101.38.3,106.42c2.81,8.7,38.29,11.12,62.6-4.36,6.5-4.14,13.32-10.27,26.9-15.9,10.85-4.5,12.84-3.21,19.19-6.99,14.33-8.53,25.44-27.71,20.93-35.81C125.97,36.27,110.74,38.88,100.17,40.69Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M100.35,36.48c-7.37,1.26-31.43,6.14-73.15,38.63C8.31,89.83-1.13,97.18.49,102.22c2.81,8.7,38.28,11.12,62.59-4.36,6.51-4.14,13.32-10.27,26.91-15.9,10.85-4.5,12.84-3.21,19.19-6.99,14.33-8.53,25.44-27.71,20.92-35.81C126.16,32.07,110.93,34.68,100.35,36.48Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M96.35,14.63c-7.38,1.26-29.21,20.34-67.81,56.1C10.88,87.09.21,92.8,1.83,97.84c2.81,8.7,38.28,11.12,62.59-4.36,6.51-4.14,26.91-15.9,26.91-15.9,0,0,18.97-11.33,25.32-15.11,14.33-8.52,15.22-31.09,10.7-39.19C123.4,16.19,106.92,12.82,96.35,14.63Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M106.52,18.73c-13.67-.63-27.79,8.31-27,13.03.75,4.46,14.97,6.08,25.99,3.68,7.02-1.53,17.26-5.68,17.02-9.79C122.31,21.9,113.43,19.05,106.52,18.73Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M110.56,24.96c6.65,2.77,28.09,12.48,56.83,50.08,13.01,17.03,19.52,25.54,16.19,29.53-5.76,6.88-40.73.88-58.69-18.05-4.81-5.06-9.21-11.91-20.3-19.88-8.87-6.37-11.23-5.71-16.01-10.42-10.8-10.64-14.76-29.75-7.58-35.73C87.29,15.26,101.02,20.99,110.56,24.96Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M110.78,21.36c6.65,2.77,28.09,12.47,56.83,50.08,13.01,17.03,19.51,25.54,16.18,29.52-5.75,6.89-40.73.89-58.68-18.04-4.81-5.06-9.22-11.92-20.31-19.88-8.86-6.37-11.22-5.71-16.01-10.43-10.79-10.64-14.75-29.75-7.57-35.72C87.5,11.66,101.24,17.38,110.78,21.36Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M89.53,3.78c6.29-5.23,23.32-4.38,32.86-.4,6.65,2.77,20.96,24.24,45.56,63.96,11.25,18.17,19.51,25.54,16.18,29.53-5.75,6.88-40.73.88-58.68-18.05-4.81-5.06-20.31-19.88-20.31-19.88,0,0-14.27-14.12-19.06-18.84C75.29,29.46,82.35,9.75,89.53,3.78" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M106.84,19.8c11.8,8.98,29.51,10.24,31.52,5.82,1.9-4.19-9.81-14.33-20.99-19.14-7.12-3.06-18.61-5.92-20.77-2.34C94.64,7.41,100.89,15.27,106.84,19.8Z" fill="#0E0D0C" stroke="#5E5654" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M74.45 34.73L33.26 72.72M34.85 78.81L76.92 39.32M132.19 31.03L162.84 74.27M139.82 29.11L166.97 69.09" fill="none" stroke="#7C7270" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path></g><g transform="translate(89.5 300)"><polygon points=".51 .51 230.57 3.22 195.46 481.42 118.82 475.21 113.84 104.3 90.07 471.2 6.12 473.24 .51 .51" fill="{{sel.pants}}" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></polygon><path d="M15.29,32.31c.71,8.63,1.09,28.12-9.86,48.57" fill="{{sel.pants}}"></path><path d="M15.35,33.05c.66,8.9.73,27.66-9.68,47.38" fill="none" stroke="{{sel.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M220.31,88.3c-4.89-12.12-14.43-38.91-10.57-61.73" fill="{{sel.pants}}"></path><path d="M220.03,87.61c-4.92-12.33-13.94-38.25-10.37-60.54" fill="none" stroke="{{sel.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M60.67 49.78L54.67 472.26M169.62 46.59L163.62 469.07" fill="none" stroke="{{sel.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path display="{{sel.stripeShow}}" d="M3 20 L8 470 M228 22 L196 478" fill="none" stroke="{{sel.stripe}}" stroke-width="3" vector-effect="non-scaling-stroke"></path></g><g display="{{sel.vestShow}}" transform="translate(79.58 22.41)"><path d="M233.19,22.59c-10.87,19.57,7.4,153.53,7.4,153.53l.1,157.58-37.39,41.85-79.91-41.85-76.76,37.12-25-18.6L.51,334.84l4.66-148.6s-2.42-18.94-1.31-21.36C21.05,127.55,10.63,29.62,10.63,29.62L69.15,3.98l58.79,125.57L185.82.66l47.37,20.72" fill="{{sel.tie}}" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M127.94,129.55L123.39,333.7" fill="none" stroke="#000" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke" opacity=".4"></path><circle cx="134.54" cy="148.55" r="3.25" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="178.65" r="3.25" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="211.88" r="3.25" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="247.12" r="3.25" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="282.36" r="3.25" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g display="{{sel.cumShow}}"><path d="M150 214 L262 214 L258 262 L154 262 Z" fill="{{sel.tie}}"></path><path d="M152 226H260M153 238H259M154 250H258" stroke="#000" stroke-opacity=".3" stroke-width="1.2" vector-effect="non-scaling-stroke"></path></g><g display="{{sel.bowShow}}" transform="translate(171.1 11.45)"><polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="{{sel.tie}}"></polyline><polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="#000" opacity=".35"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="{{sel.tie}}"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="#000" opacity=".35"></polyline><polyline points="40.72 10.46 70.5 1.21 70.5 27.77 40.72 19.59" fill="{{sel.tie}}"></polyline><polyline points="30.05 19.72 .27 28.98 .27 2.41 30.05 10.6" fill="{{sel.tie}}"></polyline><circle cx="35.12" cy="15.19" r="8.15" fill="{{sel.tie}}"></circle><circle cx="35.12" cy="15.19" r="8.15" fill="#000" opacity=".3"></circle></g><g transform="translate(0 17.78)"><path d="M157.04,3.8L42.73,53.97s-8.12,23.88-25.5,118.82c-6.67,36.43-6.43,33.46-7.85,59.05C2.35,357.76.55,376.92.55,376.92l74.23-1.01,2.62-139.91,5.56-105.84s2.01,138.32,1.83,158.56c-.18,21.7-7.85,86.46-7.85,86.46l257.54,1.43s-14.76-59.38-15.58-79.65c-.9-22.3,7.02-166.8,7.02-166.8,0,0,5.3,139.54,6.07,160.07.8,21.28,2.83,84.12,2.83,84.12l58.33,1.85s3.76-115.13-.01-141.36c-7.35-51.08-7.8-70.16-18.74-148.99-2.1-15.17-9.76-38.1-9.76-38.1L254.93.73s-18.52,229.28-49.92,232.36C186.36,234.92,157.04,3.8,157.04,3.8Z" fill="{{sel.jacket}}" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{sel.vent}}" fill="none" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M47.22,56.51c7.01,5.08,22.05,17.48,30.44,39.11,4.98,12.83,5.85,24.36,5.78,32" fill="{{sel.jacket}}"></path><path d="M47.82,56.95c7.24,5.34,21.68,17.64,29.84,38.67,4.87,12.56,5.81,23.86,5.78,31.5" fill="none" stroke="{{sel.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M325.66,127.62c-.3-8.31.31-20.41,4.89-34,8.18-24.28,24.14-38.79,31.78-44.89" fill="{{sel.jacket}}"></path><path d="M325.64,126.88c-.24-8.28.46-20.07,4.91-33.26,8.05-23.87,23.61-38.3,31.39-44.57" fill="none" stroke="{{sel.line}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M277.17 108.16H320.17M245.38 320.51H312.77M100.63 320.51H168.02" fill="none" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g display="{{sel.btnShow}}"><circle cx="211.87" cy="278.93" r="5.77" fill="#0B0A09" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="211.87" cy="324.93" r="5.77" fill="#0B0A09" stroke="{{sel.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><circle cx="10.77" cy="345.64" r="2.75" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="11.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.13" cy="345.66" r="2.75" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><g transform="{{sel.lapelAt}}"><path d="{{sel.lapelL}}" fill="url(#pv-satin)" stroke="{{sel.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{sel.lapelR}}" fill="url(#pv-satin)" stroke="{{sel.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><g display="{{sel.shawlShow}}"><circle cx="83.27" cy="265.54" r="4.5" fill="#0B0A09" stroke="{{sel.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g></g><g transform="translate(8 389)"><circle cx="374.41" cy="4.52" r="3.52" fill="{{sel.metal}}" stroke="#0B0A09" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="4.52" cy="8.03" r="3.52" fill="{{sel.metal}}" stroke="#0B0A09" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g><polygon points="281.88 124.62 283.22 120.96 316.86 117.65 317.55 124.62 281.88 124.62" fill="{{sel.tie}}"></polygon></svg>
+</div>
+
+<div role="radiogroup" aria-labelledby="g-tie" style="display:flex; flex-direction:column; gap:10px;">
+<span id="g-tie" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Tie and vest color</span>
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<sc-for list="{{tieColors}}" as="c" hint-placeholder-count="6">
+<button type="button" role="radio" aria-checked="{{c.on}}" aria-label="{{c.name}}" onClick="{{c.pick}}" style="width:40px; height:40px; padding:0; border-radius:50%; background:{{c.hex}}; border:1px solid rgba(128,128,128,.5); box-shadow:{{c.ring}}; cursor:pointer;"></button>
+</sc-for>
+</div>
+<span style="font-size:14px; color:{{t.cardMuted}};">{{tieNote}}</span>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px;">
+<div role="group" aria-labelledby="g-neck" style="display:flex; flex-direction:column; gap:8px;">
+<span id="g-neck" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Neckwear</span>
+<sc-for list="{{necks}}" as="o" hint-placeholder-count="2">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+<div role="group" aria-labelledby="g-layer" style="display:flex; flex-direction:column; gap:8px;">
+<span id="g-layer" style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">Layer</span>
+<sc-for list="{{layers}}" as="o" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+</sc-for>
+</div>
+</div>
+
+<label style="display:flex; align-items:center; gap:12px; min-height:44px; font-size:16px; cursor:pointer;"><input type="checkbox" checked="{{shoes}}" onChange="{{toggleShoes}}" style="width:20px; height:20px; margin:0; accent-color:{{t.cardAccent}};">Add matching shoes</label>
+
+<div style="display:flex; flex-direction:column; gap:8px; padding:14px 16px; background:{{t.score}}; border:1px solid {{t.line}};">
+<span style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:{{t.cardMuted}};">{{t.crewLabel}}</span>
+<span style="font-size:15px; line-height:1.45;">{{crewMatch}}</span>
+<div role="img" aria-label="{{crewMatch}}" style="display:flex; gap:4px;">
+<sc-for list="{{crewPips}}" as="p" hint-placeholder-count="5">
+<span style="flex:1 1 0; height:8px; background:{{p.bg}}; border:1px solid {{t.cardAccent}};"></span>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{notLocked}}" hint-placeholder-val="{{true}}">
+<button type="button" onClick="{{lock}}" style="height:56px; background:{{t.cardAccent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.lockLabel}}</button>
+</sc-if>
+<sc-if value="{{locked}}" hint-placeholder-val="{{false}}">
+<div aria-live="polite" style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid {{t.cardAccent}};">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:22px;">{{t.lockedTitle}}</span>
+<span style="font-size:15px; color:{{t.cardMuted}};">+100 points. Next, send your measurements so we can hold your size.</span>
+<a href="{{t.links.measure}}" style="align-self:flex-start; height:46px; padding:0 18px; box-sizing:border-box; display:inline-flex; align-items:center; background:{{t.cardAccent}}; color:{{t.onAccent}}; text-decoration:none; font-weight:700; font-size:14px;">{{t.measureLabel}}</a>
+</div>
+</sc-if>
+<span style="font-size:13px; color:{{t.cardMuted}};">Sample inventory and stock. Prices and availability come from the shop.</span>
+</aside>
+</div>
+<dc-import name="Lookbook" theme="{{themeKey}}" hint-size="100%,640px"></dc-import>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { filter: 'all', pick: 'navy', tie: 'date', neck: 'bow', layer: 'vest', shoes: true, locked: false };
+  }
+  themes() {
+    const steps = { kodak: ['The squad', 'The look', 'Measurements', 'Suit Up'], birch: ['The crew', 'Your cover', 'Intel', 'Training'], park: ['The case', 'The wardrobe', 'The evidence', 'Warm-up case'] };
+    const link = (k) => ({ signup: 'Prom' + k + '.dc.html', style: 'PromStyle' + k + '.dc.html', measure: 'PromMeasure' + k + '.dc.html', game: 'PromGame' + k + '.dc.html' });
+    return {
+      kodak: {
+        mark: 'INCOGNITO', markFont: 'norman-stencil-fat, Rokkitt, serif', markWeight: 800, markTrack: '.08em', steps: steps.kodak, links: link('Kodak'),
+        kicker: 'Prom 2027 · The look', title: 'Pick your look. Don’t overthink it.', sub: 'Tap a jacket, match the tie to your date’s dress, and lock it in. The squad sees what you picked.',
+        bg: '#F3ECDD', bar: '#F3ECDD', line: '#D5C9B2', text: '#1E1A15', muted: '#655C4F', accent: '#B08A4F', headColor: '#1E1A15',
+        head: 'norman-stencil-fat, Rokkitt, serif', headWeight: 800, body: 'Archivo, sans-serif',
+        card: '#FBF7EE', cardText: '#1E1A15', cardMuted: '#655C4F', cardAccent: '#87672F', onAccent: '#1E1A15', stage: '#FFFDF8', score: '#FFFDF8', radius: '2px',
+        lookKicker: 'Your look', crewLabel: 'Squad match', lockLabel: 'Lock it in', lockedTitle: 'Locked in. Looking sharp.', measureLabel: 'Send measurements',
+        filterNames: ['Everything', 'Tuxedos', 'Velvet', 'Suits']
+      },
+      birch: {
+        mark: 'INCOGNITO', markFont: 'Jost, sans-serif', markWeight: 600, markTrack: '.34em', steps: steps.birch, links: link('Birch'),
+        kicker: 'Prom 2027 · Your cover', title: 'Choose your cover.', sub: 'Every agent needs the right jacket. Pick yours, match it to your date, and the crew is briefed.',
+        bg: '#F4F1EA', bar: '#F4F1EA', line: '#D8D5CD', text: '#0F0F10', muted: '#54585B', accent: '#A98632', headColor: '#8A6B21',
+        head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, body: 'Jost, sans-serif',
+        card: '#FBFAF6', cardText: '#0F0F10', cardMuted: '#54585B', cardAccent: '#8A6B21', onAccent: '#0F0F10', stage: '#F4F1EA', score: '#F4F1EA', radius: '0',
+        lookKicker: 'Your cover', crewLabel: 'Crew coordination', lockLabel: 'Confirm your cover', lockedTitle: 'Cover confirmed.', measureLabel: 'File your intel',
+        filterNames: ['All covers', 'Black tie', 'Velvet', 'Lounge suits']
+      },
+      park: {
+        mark: 'Incognito', markFont: "vivaldi-mn, 'Playfair Display', Georgia, serif", markWeight: 400, markTrack: '0', steps: steps.park, links: link('Park'),
+        kicker: 'Prom 2027 · The wardrobe', title: 'Examine the wardrobe.', sub: 'Study each jacket, choose the one that fits the facts, and match it to the evidence: your date’s dress.',
+        bg: '#F4EEDF', bar: '#FBF7EE', line: '#CFC3A6', text: '#1F1A14', muted: '#4E5A4D', accent: '#2F5A3F', headColor: '#1F1A14',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, body: "'EB Garamond', Georgia, serif",
+        card: '#FFFDF8', cardText: '#1F1A14', cardMuted: '#4E463A', cardAccent: '#7B2D26', onAccent: '#F4EEDF', stage: '#E5DBC4', score: '#E9DFC8', radius: '0',
+        lookKicker: 'Your choice', crewLabel: 'Your accomplices', lockLabel: 'Seal the choice', lockedTitle: 'Sealed. Elementary.', measureLabel: 'Submit the evidence',
+        filterNames: ['The full wardrobe', 'Evening dress', 'Velvet', 'Lounge suits']
+      }
+    };
+  }
+  inventory() {
+    return [
+      { id: 'black', name: 'The Classic', kind: 'tux', hex: '#141414', lapel: 'peak', detail: 'Black tuxedo · satin peak lapel · slim', stock: 'In stock' },
+      { id: 'navy', name: 'The Midnight', kind: 'tux', hex: '#1D2A44', lapel: 'shawl', detail: 'Midnight navy tuxedo · satin shawl collar', stock: 'In stock' },
+      { id: 'white', name: 'The White Jacket', kind: 'tux', hex: '#EDE6D6', lapel: 'shawl', detail: 'Ivory dinner jacket · black trousers', stock: 'Only a few left' },
+      { id: 'burgundy', name: 'Burgundy Velvet', kind: 'velvet', hex: '#5E1F2A', lapel: 'shawl', detail: 'Velvet jacket · black satin shawl collar', stock: 'Only a few left' },
+      { id: 'emerald', name: 'Emerald Velvet', kind: 'velvet', hex: '#1F4D3A', lapel: 'shawl', detail: 'Velvet jacket · black satin shawl collar', stock: 'In stock' },
+      { id: 'charcoal', name: 'Charcoal Suit', kind: 'suit', hex: '#3C3D40', lapel: 'notch', detail: 'Charcoal suit · notch lapel · slim', stock: 'In stock' },
+      { id: 'grey', name: 'Steel Grey Suit', kind: 'suit', hex: '#7F858D', lapel: 'notch', detail: 'Steel grey suit · notch lapel', stock: 'In stock' },
+      { id: 'tan', name: 'Tan Suit', kind: 'suit', hex: '#B38B5D', lapel: 'notch', detail: 'Tan suit · notch lapel · relaxed', stock: 'Order by April 1' }
+    ];
+  }
+  lum(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+  }
+  dress(it) {
+    const LAPEL = {
+      notch: ['translate(118.96 12.83)', 'M38.05,1.85L2.94,42.3l12.56,1.64L.6,58.81l83.38,183.87s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.3-34.05-9.34-34.67-27.65-102.37-28.44-106.95C39.55,37.39,38.05,1.85,38.05,1.85Z', 'M134.33,1.11l40.75,41.08-12.4,1.64,13.38,13.53-95.85,210.41s6.29-34.43,6.94-35.72c6.03-11.96,12.08-34.32,12.73-37.27,7.98-36.01,26.91-103.88,27.26-108.52C130.9,35.47,134.33,1.11,134.33,1.11Z'],
+      peak: ['translate(105.03 12.48)', 'M52.32,2.2L17.21,42.65l38.94,5.09L.85,40.76l97.4,202.27s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.31-34.05-9.33-34.67-27.65-102.37-28.43-106.95C53.81,37.74,52.32,2.2,52.32,2.2Z', 'M148.6,1.46l28,42.73-30.23,4.11,51.29-6.7-103.18,226.52s6.29-34.42,6.94-35.72c6.03-11.95,12.08-34.32,12.73-37.27,7.98-36,26.91-103.88,27.25-108.52C145.17,35.82,148.6,1.46,148.6,1.46Z'],
+      shawl: ['translate(125.33 13.7)', 'M31.71,1L1.29,14.39c-5.52.32,18.11,152.67,63.89,240.25,6.44,12.33,12.25,21.91,15.86,28.08,0-7.89,1.93-20.55-2.27-34.6-17.7-59.18-23.07-91.44-33.03-138.08C31.71,44.39,31.71,1,31.71,1Z', 'M128.99.69l23.41,9.26s-12.67,160.44-59.68,244.5c-6.83,12.21-8.08,22.06-11.68,28.27,0-7.94-6.02-20.69-1.84-34.84,17.61-59.58,22.18-92.5,30.53-139.16C121.8,41.39,128.99.69,128.99.69Z']
+    };
+    const satin = it.kind !== 'suit';
+    const light = this.lum(it.hex) > 0.45;
+    const L = LAPEL[it.lapel];
+    const shawl = it.lapel === 'shawl';
+    const darkPants = it.id === 'white' || it.kind === 'velvet';
+    return {
+      jacket: it.hex,
+      lapel: satin ? '#0B0B0C' : it.hex,
+      sheen: satin ? '#5C5F63' : it.hex,
+      line: light ? '#6B6256' : '#A39A8B',
+      lapelLine: light ? '#6B6256' : '#C9C2B2',
+      metal: '#C9A24B',
+      lapelAt: L[0],
+      lapelL: L[1],
+      lapelR: L[2],
+      shawlShow: shawl ? 'inline' : 'none',
+      btnShow: shawl ? 'none' : 'inline',
+      vent: shawl ? 'M208.04,376.92s-2.33-8.17,0-107.47' : 'M200.5,376.92s-2.33-8.17,0-107.47',
+      pants: darkPants ? '#141414' : it.hex,
+      stripeShow: satin ? 'inline' : 'none',
+      stripe: '#3A3A3E'
+    };
+  }
+  renderVals() {
+    const s = this.state;
+    const T = this.themes();
+    const key = T[this.props.theme] ? this.props.theme : 'kodak';
+    const t = T[key];
+    const INV = this.inventory();
+    const crewPicks = { navy: ['Jayden'], black: ['Tyler', 'Andre'] };
+    const kinds = ['all', 'tux', 'velvet', 'suit'];
+    const filters = kinds.map((k, i) => {
+      const on = s.filter === k;
+      return { label: t.filterNames[i], on: on, bg: on ? t.accent : 'transparent', fg: on ? t.onAccent === '#40372C' ? '#1F1A14' : t.onAccent : t.text, bd: on ? t.accent : t.line, pick: () => this.setState({ filter: k }) };
+    });
+    const items = INV.filter((it) => s.filter === 'all' || it.kind === s.filter).map((it) => {
+      const on = s.pick === it.id;
+      const picks = crewPicks[it.id] || [];
+      return Object.assign(this.dress(it), {
+        name: it.name,
+        detail: it.detail,
+        stock: it.stock,
+        stockColor: it.stock === 'In stock' ? t.cardMuted : t.cardAccent,
+        on: on,
+        aria: it.name + ', ' + it.detail + ', ' + it.stock + (on ? ', selected' : ''),
+        border: on ? '2px solid ' + t.cardAccent : '1px solid ' + t.line,
+        dot: on ? t.cardAccent : 'transparent',
+        crewLine: picks.length ? picks.join(' and ') + (picks.length > 1 ? ' picked this' : ' picked this') : '',
+        pick: () => this.setState({ pick: it.id, locked: false })
+      });
+    });
+    const it = INV.find((x) => x.id === s.pick) || INV[0];
+    const TIES = [['date', 'Match your date: burgundy', '#6B1E2E'], ['black', 'Black', '#111111'], ['silver', 'Silver', '#C9CCCE'], ['gold', 'Gold', '#C9A24B'], ['navy', 'Navy', '#1D2A44'], ['champagne', 'Champagne', '#E6D3A8']];
+    const tie = TIES.find((x) => x[0] === s.tie) || TIES[0];
+    const tieColors = TIES.map((c) => {
+      const on = s.tie === c[0];
+      return { name: c[1], hex: c[2], on: on, ring: on ? '0 0 0 3px ' + t.card + ', 0 0 0 5px ' + t.cardAccent : 'none', pick: () => this.setState({ tie: c[0], locked: false }) };
+    });
+    const seg = (list, k) => list.map((o) => {
+      const on = s[k] === o[0];
+      return { name: o[1], on: on, bg: on ? t.cardAccent : 'transparent', fg: on ? t.onAccent : t.cardText, bd: on ? t.cardAccent : t.line, pick: () => this.setState({ [k]: o[0], locked: false }) };
+    });
+    const d = this.dress(it);
+    const layerName = s.layer === 'vest' ? ', vest' : s.layer === 'cummerbund' ? ', cummerbund' : '';
+    const matching = (crewPicks[it.id] || []).length + 1;
+    return {
+      t: t,
+      themeKey: key,
+      filters: filters,
+      items: items,
+      sel: Object.assign(d, {
+        name: it.name,
+        detail: tie[1].replace('Match your date: ', '') + ' ' + (s.neck === 'bow' ? 'bow tie' : 'long tie') + layerName + (s.shoes ? ', matching shoes' : ''),
+        tie: tie[2],
+        bowShow: s.neck === 'bow' ? 'inline' : 'none',
+        longShow: s.neck === 'long' ? 'inline' : 'none',
+        vestShow: s.layer === 'vest' ? 'inline' : 'none',
+        cumShow: s.layer === 'cummerbund' ? 'inline' : 'none',
+        squareShow: 'inline',
+        shoesShow: s.shoes ? 'inline' : 'none',
+        alt: 'Your look: ' + it.detail + ' with a ' + tie[1].toLowerCase() + ' ' + (s.neck === 'bow' ? 'bow tie' : 'tie')
+      }),
+      tieColors: tieColors,
+      tieNote: s.tie === 'date' ? 'Matched to the burgundy dress from your crew sign-up.' : tie[1] + '. Your date’s dress is burgundy.',
+      necks: seg([['bow', 'Bow tie'], ['long', 'Long tie']], 'neck'),
+      layers: seg([['vest', 'Vest'], ['cummerbund', 'Cummerbund'], ['none', 'Neither']], 'layer'),
+      shoes: s.shoes,
+      toggleShoes: (e) => this.setState({ shoes: e.target.checked, locked: false }),
+      crewMatch: matching > 1 ? matching + ' of 5 in the crew picked ' + it.name + '. Jayden, Tyler and Andre have picked; Chris hasn’t yet.' : 'You’d be the only one in ' + it.name + '. Jayden, Tyler and Andre have picked; Chris hasn’t yet.',
+      crewPips: [1, 2, 3, 4, 5].map((n) => ({ bg: n <= matching ? t.cardAccent : 'transparent' })),
+      locked: s.locked,
+      notLocked: !s.locked,
+      lock: () => this.setState({ locked: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

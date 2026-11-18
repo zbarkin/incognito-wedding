@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Measuring walkthrough · Sam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../../kodak-kit.light.css">
+<style>
+body{margin:0;background:#F3ECDD}
+a{color:#87672F}a:not([class*="kk-"]):hover{color:#87672F}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+.ghost:hover{border-color:#B08D55 !important}
+a:focus-visible,button:focus-visible{outline:2px solid #B08D55;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="width:390px; min-height:1320px; box-sizing:border-box; background:#F3ECDD; color:#1E1A15; font-family:Archivo, sans-serif; color-scheme:light; display:flex; flex-direction:column;">
+
+<header style="background:#F3ECDD; border-bottom:1px solid #E3D9C7; padding:12px 20px 12px 12px; display:flex; align-items:center; justify-content:space-between;">
+<a href="Member.dc.html" class="kk-leader"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>Close</a>
+<span aria-live="polite" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#87672F;">{{stepText}}</span>
+</header>
+
+<main style="flex:1 0 auto; padding:20px 20px 28px; display:flex; flex-direction:column; gap:20px;">
+
+<div role="img" aria-label="{{progressLabel}}">
+<ol class="kk-strip" aria-hidden="true" style="padding-inline:6px; gap:4px;">
+<sc-for list="{{tiles}}" as="t" hint-placeholder-count="10">
+<li class="{{t.cls}}" style="min-height:30px; padding:0; align-items:center;"><b style="margin:0;">{{t.no}}</b></li>
+</sc-for>
+</ol>
+</div>
+
+<div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px;">
+<div style="display:flex; flex-direction:column; gap:10px; min-width:0;">
+<span style="font-size:14px; color:#655C4F;">Grab a soft tape measure and a friend.</span>
+<div style="display:flex; align-items:center; gap:14px; min-width:0;">
+<div class="kk-counter" aria-hidden="true">{{stepNo}}</div>
+<h1 style="margin:0; min-width:0; font-family:Rokkitt, serif; font-weight:600; font-size:40px; line-height:1; color:#1E1A15;">{{cur.name}}</h1>
+</div>
+</div>
+<button type="button" class="ghost" aria-pressed="{{paused}}" aria-label="{{pauseLabel}}" onClick="{{togglePause}}" style="flex:0 0 44px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:1px solid #C6B89D; border-radius:2px; cursor:pointer;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="#C9A66B"><path d="{{pauseIcon}}"></path></svg></button>
+</div>
+
+<dc-import name="HowTo" which="{{cur.key}}" still="{{paused}}" steps="{{true}}" hint-size="100%,560px"></dc-import>
+
+<div style="display:flex; flex-direction:column; gap:10px; padding:18px; background:#FBF7EE; border:1px solid #D5C9B2;">
+<sc-if value="{{cur.isNum}}" hint-placeholder-val="{{true}}">
+<div class="kk-field">
+<label for="g-input" class="kk-dymo is-red">Your {{cur.lower}}<span class="sr">{{cur.srUnit}}</span></label>
+<div style="position:relative;">
+<input id="g-input" class="kk-input" type="number" step="{{cur.step}}" min="0" placeholder="{{cur.ph}}" value="{{cur.value}}" onChange="{{cur.set}}" style="padding-right:46px;">
+<span aria-hidden="true" style="position:absolute; right:4px; top:15px; font-size:15px; color:#776E60;">{{cur.unit}}</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{cur.isHeight}}" hint-placeholder-val="{{false}}">
+<div class="kk-field">
+<span id="g-height" class="kk-dymo is-red">Your height</span>
+<div role="group" aria-labelledby="g-height" style="display:flex; gap:8px;">
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="kk-input" aria-label="Feet" value="{{vals.ft}}" onChange="{{setFt}}" style="padding-right:34px; appearance:none;">
+<option value="">ft</option>
+<option value="4">4 ft</option>
+<option value="5">5 ft</option>
+<option value="6">6 ft</option>
+<option value="7">7 ft</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:21px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="kk-input" aria-label="Inches" value="{{vals.inch}}" onChange="{{setInch}}" style="padding-right:34px; appearance:none;">
+<option value="">in</option>
+<option value="0">0 in</option>
+<option value="1">1 in</option>
+<option value="2">2 in</option>
+<option value="3">3 in</option>
+<option value="4">4 in</option>
+<option value="5">5 in</option>
+<option value="6">6 in</option>
+<option value="7">7 in</option>
+<option value="8">8 in</option>
+<option value="9">9 in</option>
+<option value="10">10 in</option>
+<option value="11">11 in</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{cur.isShoe}}" hint-placeholder-val="{{false}}">
+<div class="kk-field">
+<label for="g-shoe" class="kk-dymo is-red">Your dress shoe size</label>
+<div style="position:relative;">
+<select id="g-shoe" class="kk-input" value="{{vals.shoe}}" onChange="{{setShoe}}" style="padding-right:34px; appearance:none;">
+<option value="">Choose a size</option>
+<option>7</option>
+<option>7.5</option>
+<option>8</option>
+<option>8.5</option>
+<option>9</option>
+<option>9.5</option>
+<option>10</option>
+<option>10.5</option>
+<option>11</option>
+<option>11.5</option>
+<option>12</option>
+<option>13</option>
+<option>14</option>
+<option>15</option>
+<option value="none">I don’t need shoes</option>
+</select>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+</sc-if>
+</div>
+
+<div style="display:flex; gap:10px;">
+<sc-if value="{{hasPrev}}" hint-placeholder-val="{{true}}">
+<button type="button" class="kk-leader" onClick="{{prev}}" aria-label="{{prevLabel}}" style="flex:0 0 auto; min-height:54px; padding:0 40px 0 14px;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
+</sc-if>
+<sc-if value="{{notLast}}" hint-placeholder-val="{{true}}">
+<button type="button" class="kk-shutter" onClick="{{next}}" style="flex:1 1 auto; min-width:0; padding-right:16px;"><span class="kk-dot" aria-hidden="true"></span>{{nextLabel}}</button>
+</sc-if>
+<sc-if value="{{isLast}}" hint-placeholder-val="{{false}}">
+<a href="Measure.dc.html" class="kk-shutter" style="flex:1 1 auto; min-width:0;"><span class="kk-dot" aria-hidden="true"></span>Review &amp; send</a>
+</sc-if>
+</div>
+<sc-if value="{{notLast}}" hint-placeholder-val="{{true}}">
+<button type="button" class="kk-grease" onClick="{{next}}" style="align-self:center; min-height:44px; font-size:15px;">Not sure? Skip this one</button>
+</sc-if>
+
+<p style="margin:0; padding:14px 16px; border:1px dashed #D5C9B2; font-size:14px; line-height:1.5; color:#655C4F;">A pro measuring you is always most accurate. Close to Penfield? <a href="Book.dc.html" class="kk-grease">Book a visit</a> and we’ll do it in a few minutes.</p>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1320}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      idx: 2,
+      paused: false,
+      vals: { ft: '5', inch: '11', weight: '175', chest: '', overarm: '', neck: '', sleeve: '', waist: '', hip: '', outseam: '', shoe: '' }
+    };
+  }
+  setVal(key) {
+    return (e) => this.setState({ vals: Object.assign({}, this.state.vals, { [key]: e.target.value }) });
+  }
+  renderVals() {
+    const STEPS = [
+      { key: 'height', name: 'Height', kind: 'height' },
+      { key: 'weight', name: 'Weight', kind: 'num', unit: 'lbs', unitWord: 'pounds', ph: 'e.g. 180', step: '1' },
+      { key: 'chest', name: 'Chest', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 40', step: '0.25' },
+      { key: 'overarm', name: 'Overarm', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 47', step: '0.25' },
+      { key: 'neck', name: 'Neck', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 15.5', step: '0.25' },
+      { key: 'sleeve', name: 'Sleeve', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 34', step: '0.25' },
+      { key: 'waist', name: 'Waist', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 34', step: '0.25' },
+      { key: 'hip', name: 'Hip', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 40', step: '0.25' },
+      { key: 'outseam', name: 'Outseam', kind: 'num', unit: 'in', unitWord: 'inches', ph: 'e.g. 43', step: '0.25' },
+      { key: 'shoe', name: 'Shoe size', kind: 'shoe' }
+    ];
+    const s = this.state;
+    const i = s.idx;
+    const c = STEPS[i];
+    const filled = (st) => (st.kind === 'height' ? !!(s.vals.ft && s.vals.inch !== '') : !!s.vals[st.key]);
+    const tiles = STEPS.map((st, j) => {
+      const done = filled(st);
+      const now = j === i;
+      return {
+        no: String(j + 1).padStart(2, '0'),
+        cls: 'kk-frame' + (now ? ' is-now' : done ? ' is-done' : '')
+      };
+    });
+    const doneCount = STEPS.filter(filled).length;
+    const value = c.kind === 'num' ? s.vals[c.key] : '';
+    const last = i === STEPS.length - 1;
+    return {
+      stepText: 'Step ' + (i + 1) + ' of ' + STEPS.length,
+      stepNo: String(i + 1).padStart(2, '0'),
+      tiles: tiles,
+      progressLabel: doneCount + ' of ' + STEPS.length + ' measurements entered',
+      cur: {
+        key: c.key,
+        name: c.name,
+        lower: c.name.toLowerCase(),
+        isNum: c.kind === 'num',
+        isHeight: c.kind === 'height',
+        isShoe: c.kind === 'shoe',
+        unit: c.unit || '',
+        srUnit: c.unitWord ? ' in ' + c.unitWord : '',
+        ph: c.ph || '',
+        step: c.step || '1',
+        value: value,
+        set: this.setVal(c.key)
+      },
+      vals: s.vals,
+      setFt: this.setVal('ft'),
+      setInch: this.setVal('inch'),
+      setShoe: this.setVal('shoe'),
+      paused: s.paused,
+      togglePause: () => this.setState({ paused: !s.paused }),
+      pauseLabel: s.paused ? 'Play animation' : 'Pause animation',
+      pauseIcon: s.paused ? 'M7 4v16l13-8Z' : 'M6 4h4v16H6zM14 4h4v16h-4z',
+      hasPrev: i > 0,
+      prevLabel: i > 0 ? 'Back to ' + STEPS[i - 1].name.toLowerCase() : 'Back',
+      prev: () => this.setState({ idx: Math.max(0, i - 1) }),
+      notLast: !last,
+      isLast: last,
+      nextLabel: last ? '' : 'Next: ' + STEPS[i + 1].name,
+      next: () => this.setState({ idx: Math.min(STEPS.length - 1, i + 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

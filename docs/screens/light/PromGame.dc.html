@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Suit Up · prom minigame</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../../dc-lite.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Plaster&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="box-sizing:border-box; width:100%; min-height:100vh; padding:40px 24px 56px; background:{{t.bg}}; color:{{t.text}}; font-family:{{t.body}}; color-scheme:light;">
+<div style="max-width:1120px; margin:0 auto; display:flex; flex-direction:column; gap:28px;">
+
+<header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px 24px;">
+<div style="display:flex; flex-direction:column; gap:10px; min-width:0;">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.kicker}}</span>
+<h1 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:clamp(34px, 6vw, 60px); line-height:1; letter-spacing:{{t.headTrack}}; color:{{t.headColor}};">{{t.title}}</h1>
+<p style="margin:0; max-width:620px; font-size:18px; line-height:1.5; color:{{t.muted}};">{{t.sub}}</p>
+</div>
+<div role="timer" aria-live="off" style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+<span style="font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.muted}};">{{t.clockLabel}}</span>
+<span id="suitup-clock" style="font-family:{{t.head}}; font-size:48px; line-height:1; font-variant-numeric:tabular-nums; color:{{t.accent}};">{{clock}}</span>
+<span style="font-size:13px; color:{{t.muted}};">{{penaltyText}}</span>
+</div>
+</header>
+
+<div style="display:flex; flex-wrap:wrap; gap:24px; align-items:stretch;">
+
+<section aria-label="Mannequin" style="flex:1 1 320px; min-width:0; box-sizing:border-box; padding:20px; background:{{t.stage}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; align-items:center; gap:14px;">
+<svg role="img" aria-label="{{stageLabel}}" viewBox="-14 -8 424 892" style="width:100%; max-width:340px; height:auto; display:block;">
+<defs><linearGradient id="su-satin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{{t.lapel}}"></stop><stop offset=".45" stop-color="{{t.sheen}}"></stop><stop offset=".55" stop-color="{{t.lapel}}"></stop><stop offset="1" stop-color="{{t.lapel}}"></stop></linearGradient></defs>
+<ellipse cx="204" cy="870" rx="110" ry="9" fill="{{t.standDark}}"></ellipse>
+<rect x="200" y="380" width="8" height="440" fill="{{t.stand}}"></rect>
+<path transform="translate(62.2 0)" d="M97.81,16.02c6.17-7.98,20.91-12.97,42.96-15.06,23.38-2.22,41,3.92,50.31,12.97,20.6,20.03,106.94,54.31,106.94,54.31,0,0-25.74,26.61-36.01,77.16-16.17,79.58-16.74,201.97,8.34,247.22,5.31,9.59-254.26-1.36-254.26-1.36,0,0,22.67-148.64,7.26-245.86C16.44,101.87.68,66.51.68,66.51.68,66.51,79.35,39.88,97.81,16.02Z" fill="{{t.form}}" stroke="{{t.formLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g display="{{show.shirt}}">
+<path transform="translate(7.25 18.06)" d="M152.76,15.58S176.33,1.57,197.39.52c23.45-1.17,158.24,50.04,158.24,50.04,4.07,44.8,9.36,45.9,15.22,105.59.33,3.36,8.44,56.74,8.45,56.83,5.78,111.92,2.71,166.92,2.71,166.92h-52.49s-2.66-165.24-3.56-170.22c-3.11-17.23-8.53-84.91-9.77-80.34-10.21,37.61-23.82,162.64-5.23,205.22,15.42,35.3-245.97,25.28-238.12,4.63,21.49-56.53,9.44-185.99,2.6-217.87-.98-4.57-7.01,76.89-7.01,76.89-1.31-3.91-4.25,192.34-5.58,187.57-1.49-5.34-61.13,4.15-62.28,0-1.45-5.25,19.23-210.48,16.95-216.88-1.16-3.27,21.57-107.57,19.56-112.67C69.45,44.79,120.38,27.02,152.76,15.58Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g transform="translate(151.1 8.45)"><path d="M37.12,32.71l17.64-22.65c-9.44-.49-19.87-2.09-29.31-2.59-6.39-.33-13.93.1-14.39-3.1C7.09,10.11.5,16.08.5,24.06L37.12,32.71Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M70.34,32.21l-15.33-22.15c9.15-.48,13.29.49,22.44,0,6.54-.34,14.67-3.83,18.54-9.39,9.13,5.56,8.27,8.18,13.27,15.08L70.34,32.21Z" fill="{{t.shirt}}" stroke="{{t.shirtLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path></g>
+</g>
+<g display="{{show.shoes}}" transform="translate(105 760)"><path d="M100.17,40.69c-7.37,1.26-31.44,6.13-73.16,38.62C8.12,94.03-1.32,101.38.3,106.42c2.81,8.7,38.29,11.12,62.6-4.36,6.5-4.14,13.32-10.27,26.9-15.9,10.85-4.5,12.84-3.21,19.19-6.99,14.33-8.53,25.44-27.71,20.93-35.81C125.97,36.27,110.74,38.88,100.17,40.69Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M100.35,36.48c-7.37,1.26-31.43,6.14-73.15,38.63C8.31,89.83-1.13,97.18.49,102.22c2.81,8.7,38.28,11.12,62.59-4.36,6.51-4.14,13.32-10.27,26.91-15.9,10.85-4.5,12.84-3.21,19.19-6.99,14.33-8.53,25.44-27.71,20.92-35.81C126.16,32.07,110.93,34.68,100.35,36.48Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M96.35,14.63c-7.38,1.26-29.21,20.34-67.81,56.1C10.88,87.09.21,92.8,1.83,97.84c2.81,8.7,38.28,11.12,62.59-4.36,6.51-4.14,26.91-15.9,26.91-15.9,0,0,18.97-11.33,25.32-15.11,14.33-8.52,15.22-31.09,10.7-39.19C123.4,16.19,106.92,12.82,96.35,14.63Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M106.52,18.73c-13.67-.63-27.79,8.31-27,13.03.75,4.46,14.97,6.08,25.99,3.68,7.02-1.53,17.26-5.68,17.02-9.79C122.31,21.9,113.43,19.05,106.52,18.73Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M110.56,24.96c6.65,2.77,28.09,12.48,56.83,50.08,13.01,17.03,19.52,25.54,16.19,29.53-5.76,6.88-40.73.88-58.69-18.05-4.81-5.06-9.21-11.91-20.3-19.88-8.87-6.37-11.23-5.71-16.01-10.42-10.8-10.64-14.76-29.75-7.58-35.73C87.29,15.26,101.02,20.99,110.56,24.96Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M110.78,21.36c6.65,2.77,28.09,12.47,56.83,50.08,13.01,17.03,19.51,25.54,16.18,29.52-5.75,6.89-40.73.89-58.68-18.04-4.81-5.06-9.22-11.92-20.31-19.88-8.86-6.37-11.22-5.71-16.01-10.43-10.79-10.64-14.75-29.75-7.57-35.72C87.5,11.66,101.24,17.38,110.78,21.36Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M89.53,3.78c6.29-5.23,23.32-4.38,32.86-.4,6.65,2.77,20.96,24.24,45.56,63.96,11.25,18.17,19.51,25.54,16.18,29.53-5.75,6.88-40.73.88-58.68-18.05-4.81-5.06-20.31-19.88-20.31-19.88,0,0-14.27-14.12-19.06-18.84C75.29,29.46,82.35,9.75,89.53,3.78" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M106.84,19.8c11.8,8.98,29.51,10.24,31.52,5.82,1.9-4.19-9.81-14.33-20.99-19.14-7.12-3.06-18.61-5.92-20.77-2.34C94.64,7.41,100.89,15.27,106.84,19.8Z" fill="#0E0D0C" stroke="{{t.line}}" stroke-width=".8" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="M74.45 34.73L33.26 72.72M34.85 78.81L76.92 39.32M132.19 31.03L162.84 74.27M139.82 29.11L166.97 69.09" fill="none" stroke="{{t.stitch}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path></g>
+<g display="{{show.trousers}}" transform="translate(89.5 300)"><polygon points=".51 .51 230.57 3.22 195.46 481.42 118.82 475.21 113.84 104.3 90.07 471.2 6.12 473.24 .51 .51" fill="{{t.trouser}}" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></polygon><path d="M15.29,32.31c.71,8.63,1.09,28.12-9.86,48.57" fill="{{t.trouser}}"></path><path d="M15.35,33.05c.66,8.9.73,27.66-9.68,47.38" fill="none" stroke="{{t.stitch}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M220.31,88.3c-4.89-12.12-14.43-38.91-10.57-61.73" fill="{{t.trouser}}"></path><path d="M220.03,87.61c-4.92-12.33-13.94-38.25-10.37-60.54" fill="none" stroke="{{t.stitch}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M60.67 49.78L54.67 472.26M169.62 46.59L163.62 469.07" fill="none" stroke="{{t.stitch}}" stroke-width=".8" stroke-dasharray="2.5 2.5" vector-effect="non-scaling-stroke"></path><path d="M3 20 L8 470 M228 22 L196 478" fill="none" stroke="{{t.lapelLine}}" stroke-width="2.5" vector-effect="non-scaling-stroke" opacity=".55"></path></g>
+<g display="{{show.studs}}" transform="translate(204.1 74)"><circle cx="2.06" cy="1.95" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="1.95" cy="37.06" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2.06" cy="72.18" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="2.06" cy="107.29" r="2.4" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
+<g display="{{show.vest}}" transform="translate(79.58 22.41)">
+<path d="M233.19,22.59c-10.87,19.57,7.4,153.53,7.4,153.53l.1,157.58-37.39,41.85-79.91-41.85-76.76,37.12-25-18.6L.51,334.84l4.66-148.6s-2.42-18.94-1.31-21.36C21.05,127.55,10.63,29.62,10.63,29.62L69.15,3.98l58.79,125.57L185.82.66l47.37,20.72" fill="{{t.vest}}" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="M127.94,129.55L123.39,333.7" fill="none" stroke="{{t.stitch}}" stroke-width=".75" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></path>
+<circle cx="134.54" cy="148.55" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="178.65" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="211.88" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="247.12" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="134.54" cy="282.36" r="3.25" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle>
+</g>
+<g display="{{show.bowtie}}" transform="translate(171.1 11.45)">
+<polyline points="40.45 9.26 70.23 0 70.23 26.56 40.45 18.38" fill="{{t.tieShade}}"></polyline><polyline points="29.78 18.51 0 27.77 0 1.21 29.78 9.39" fill="{{t.tieShade}}"></polyline>
+<polyline points="40.72 10.46 70.5 1.21 70.5 27.77 40.72 19.59" fill="{{tieColor}}"></polyline><polyline points="30.05 19.72 .27 28.98 .27 2.41 30.05 10.6" fill="{{tieColor}}"></polyline>
+<circle cx="35.12" cy="15.19" r="8.15" fill="{{t.tieShade}}"></circle>
+</g>
+<g display="{{show.jacket}}">
+<g transform="translate(0 17.78)">
+<path d="M157.04,3.8L42.73,53.97s-8.12,23.88-25.5,118.82c-6.67,36.43-6.43,33.46-7.85,59.05C2.35,357.76.55,376.92.55,376.92l74.23-1.01,2.62-139.91,5.56-105.84s2.01,138.32,1.83,158.56c-.18,21.7-7.85,86.46-7.85,86.46l257.54,1.43s-14.76-59.38-15.58-79.65c-.9-22.3,7.02-166.8,7.02-166.8,0,0,5.3,139.54,6.07,160.07.8,21.28,2.83,84.12,2.83,84.12l58.33,1.85s3.76-115.13-.01-141.36c-7.35-51.08-7.8-70.16-18.74-148.99-2.1-15.17-9.76-38.1-9.76-38.1L254.93.73s-18.52,229.28-49.92,232.36C186.36,234.92,157.04,3.8,157.04,3.8Z" fill="{{t.cloth}}" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="{{art.vent}}" fill="none" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<path d="M47.22,56.51c7.01,5.08,22.05,17.48,30.44,39.11,4.98,12.83,5.85,24.36,5.78,32" fill="{{t.cloth}}"></path>
+<path d="M47.82,56.95c7.24,5.34,21.68,17.64,29.84,38.67,4.87,12.56,5.81,23.86,5.78,31.5" fill="none" stroke="{{t.stitch}}" stroke-width=".75" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></path>
+<path d="M325.66,127.62c-.3-8.31.31-20.41,4.89-34,8.18-24.28,24.14-38.79,31.78-44.89" fill="{{t.cloth}}"></path>
+<path d="M325.64,126.88c-.24-8.28.46-20.07,4.91-33.26,8.05-23.87,23.61-38.3,31.39-44.57" fill="none" stroke="{{t.stitch}}" stroke-width=".75" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></path>
+<path d="M277.17 108.16H320.17 M245.38 320.51H312.77 M100.63 320.51H168.02" fill="none" stroke="{{t.line}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g display="{{art.frontButtons}}"><circle cx="211.87" cy="278.93" r="5.77" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="211.87" cy="324.93" r="5.77" fill="#0B0A09" stroke="{{t.metal}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
+<circle cx="10.77" cy="345.64" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="11.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.13" cy="345.66" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="386.55" cy="336.03" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle>
+<g display="{{art.shawl}}"><circle cx="11.44" cy="365.3" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="10.58" cy="355.37" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="383.09" cy="365.08" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle><circle cx="385.14" cy="355.33" r="2.75" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".6" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
+</g>
+<g transform="{{art.lapelAt}}">
+<path d="{{art.lapelL}}" fill="url(#su-satin)" stroke="{{t.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path><path d="{{art.lapelR}}" fill="url(#su-satin)" stroke="{{t.lapelLine}}" stroke-width="1" vector-effect="non-scaling-stroke" stroke-linejoin="round"></path>
+<g display="{{art.shawl}}"><circle cx="83.27" cy="265.54" r="4.5" fill="#0B0A09" stroke="{{t.metal}}" stroke-width=".75" vector-effect="non-scaling-stroke" stroke-linejoin="round"></circle></g>
+</g>
+</g>
+<g display="{{show.cufflinks}}" transform="translate(8 389)"><circle cx="374.41" cy="4.52" r="3.52" fill="{{t.metal}}" stroke="#0B0A09" stroke-width=".6" vector-effect="non-scaling-stroke"></circle><circle cx="4.52" cy="8.03" r="3.52" fill="{{t.metal}}" stroke="#0B0A09" stroke-width=".6" vector-effect="non-scaling-stroke"></circle></g>
+<g display="{{show.square}}"><polygon points="281.88 124.62 283.22 120.96 316.86 117.65 317.55 124.62 281.88 124.62" fill="{{squareColor}}"></polygon></g>
+</svg>
+<div role="img" aria-label="{{progressLabel}}" style="display:flex; gap:6px;">
+<sc-for list="{{pips}}" as="p" hint-placeholder-count="8">
+<span style="width:22px; height:8px; background:{{p.bg}}; border:1px solid {{p.bd}};"></span>
+</sc-for>
+</div>
+</section>
+
+<section aria-label="Game" style="flex:1.2 1 360px; min-width:0; box-sizing:border-box; padding:24px; background:{{t.panel}}; border:1px solid {{t.line}}; display:flex; flex-direction:column; gap:20px;">
+
+<sc-if value="{{phase.intro}}" hint-placeholder-val="{{true}}">
+<h2 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:30px; line-height:1.1; color:{{t.headColor}};">{{t.introHead}}</h2>
+<p style="margin:0; font-size:17px; line-height:1.55; color:{{t.muted}};">{{t.introBody}}</p>
+<ul style="margin:0; padding:0 0 0 20px; display:flex; flex-direction:column; gap:8px; font-size:16px; line-height:1.45; color:{{t.text}};">
+<li>Tap the pieces in the order you’d put them on.</li>
+<li>A wrong piece adds two seconds.</li>
+<li>Your best time counts toward your crew’s score.</li>
+</ul>
+<button type="button" onClick="{{start}}" style="align-self:flex-start; height:56px; padding:0 30px; background:{{t.accent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:15px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.startLabel}}</button>
+</sc-if>
+
+<sc-if value="{{phase.play}}" hint-placeholder-val="{{false}}">
+<div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+<h2 style="margin:0; font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:26px; line-height:1.1; color:{{t.headColor}};">{{nextPrompt}}</h2>
+<span aria-live="polite" style="font-size:15px; font-weight:600; color:{{feedbackColor}};">{{feedback}}</span>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap:10px;">
+<sc-for list="{{tray}}" as="it" hint-placeholder-count="8">
+<button type="button" onClick="{{it.pick}}" disabled="{{it.used}}" aria-label="{{it.aria}}" style="min-height:64px; padding:10px 14px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:3px; text-align:left; background:{{it.bg}}; color:{{it.fg}}; border:1px solid {{it.bd}}; border-radius:{{t.radius}}; font-family:{{t.body}}; cursor:{{it.cursor}}; text-decoration:{{it.deco}};"><span style="font-size:16px; font-weight:600;">{{it.name}}</span><span style="font-size:12px; letter-spacing:.06em; color:{{it.sub}};">{{it.alias}}</span></button>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{phase.done}}" hint-placeholder-val="{{false}}">
+<span style="font-size:12px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:{{t.accent}};">{{t.doneKicker}}</span>
+<div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+<span style="font-family:{{t.head}}; font-weight:{{t.headWeight}}; font-size:64px; line-height:1; color:{{t.headColor}};">{{finalTime}}</span>
+<span style="font-size:16px; color:{{t.muted}};">{{finalDetail}}</span>
+</div>
+<p style="margin:0; font-size:18px; line-height:1.5;">{{t.rankLead}} <strong style="color:{{t.accent}};">{{rank}}</strong>. {{t.pointsLine}}</p>
+<div style="display:flex; flex-direction:column; gap:0; border-top:1px solid {{t.line}};">
+<span style="padding:12px 0 8px; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:{{t.muted}};">{{t.crewName}} · best times</span>
+<ol style="list-style:none; margin:0; padding:0;">
+<sc-for list="{{board}}" as="b" hint-placeholder-count="5">
+<li style="display:flex; align-items:center; gap:14px; padding:10px 0; border-top:1px solid {{t.line}}; font-size:16px; color:{{b.color}}; font-weight:{{b.weight}};"><span style="width:22px; font-variant-numeric:tabular-nums; color:{{t.muted}};">{{b.place}}</span><span style="flex:1 1 auto;">{{b.name}}</span><span style="font-variant-numeric:tabular-nums;">{{b.time}}</span></li>
+</sc-for>
+</ol>
+</div>
+<div style="display:flex; flex-wrap:wrap; gap:10px;">
+<button type="button" onClick="{{start}}" style="height:52px; padding:0 26px; background:{{t.accent}}; color:{{t.onAccent}}; border:0; border-radius:{{t.radius}}; font-family:{{t.body}}; font-weight:700; font-size:14px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;">{{t.againLabel}}</button>
+<a href="{{t.signupHref}}" style="height:52px; padding:0 22px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid {{t.line}}; border-radius:{{t.radius}}; color:{{t.text}}; text-decoration:none; font-weight:600; font-size:15px;">{{t.signupLabel}}</a>
+</div>
+</sc-if>
+
+</section>
+</div>
+
+<p style="margin:0; font-size:13px; color:{{t.muted}};">{{t.footnote}}</p>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["kodak","birch","park"],"default":"kodak"},"$preview":{"width":1280,"height":960}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { phase: 'intro', placed: 0, mistakes: 0, startedAt: 0, endedAt: 0, wrong: null, order: [], best: null };
+    this.timer = null;
+  }
+  pieces() {
+    return [
+      { id: 'shirt', name: 'Dress shirt' },
+      { id: 'trousers', name: 'Trousers' },
+      { id: 'shoes', name: 'Shoes' },
+      { id: 'studs', name: 'Shirt studs' },
+      { id: 'cufflinks', name: 'Cufflinks' },
+      { id: 'vest', name: 'Vest' },
+      { id: 'bowtie', name: 'Bow tie' },
+      { id: 'jacket', name: 'Jacket' },
+      { id: 'square', name: 'Pocket square' }
+    ];
+  }
+  themes() {
+    return {
+      kodak: {
+        kicker: 'Prom 2027 · The squad', title: 'SUIT UP. MAKE IT QUICK.',
+        sub: 'One night. One shot at the photo. Get dressed before the clock runs out.',
+        bg: '#F3ECDD', stage: '#FFFDF8', panel: '#FBF7EE', line: '#D5C9B2', text: '#1E1A15', muted: '#655C4F',
+        accent: '#B08A4F', onAccent: '#1E1A15', headColor: '#1E1A15', alert: '#B23F30', radius: '2px',
+        head: "norman-stencil-fat, Rokkitt, serif", headWeight: 800, headTrack: '0', body: 'Archivo, sans-serif',
+        form: '#B9A27A', formLine: '#8C7247', stand: '#6E5B3C', standDark: '#2A2621', metal: '#C29E62',
+        clockLabel: 'On the clock', introHead: 'You’ve got one shot.', introBody: 'The squad’s waiting in the car. Get the tux on, in the right order, fast.',
+        startLabel: 'Hit it', doneKicker: 'Done. Nice work, rookie.', rankLead: 'Rank:', ranks: ['Rookie', 'Regular', 'Legend of the precinct'],
+        pointsLine: '+50 points for the squad.', crewName: 'Squad 85', againLabel: 'Run it back', signupLabel: 'Sign up your squad for prom', signupHref: 'PromKodak.dc.html',
+        aliases: { shirt: 'Base layer', trousers: 'The slacks', shoes: 'Shoe leather', studs: 'Hardware', cufflinks: 'More hardware', vest: 'The vest', bowtie: 'The tie', jacket: 'The jacket', square: 'Finishing touch' },
+        tie: '#7A1F2E', square: '#F4F1EA',
+        lapelStyle: 'notch', shirt: '#F4F1EA', shirtLine: '#C9C2B2', cloth: '#141312', line: '#B08D55', lapel: '#0A0908', lapelLine: '#C29E62', stitch: '#C29E62', vest: '#1A1816', tieShade: '#561522', sheen: '#6B5634', trouser: '#141312',
+        footnote: 'Times are for fun. Your real fitting happens in the shop.'
+      },
+      birch: {
+        kicker: 'Prom 2027 · Mission briefing', title: 'SUIT UP, AGENT',
+        sub: 'Your cover is black tie. Assemble it in the proper order before the clock runs out.',
+        bg: '#F4F1EA', stage: '#FBFAF6', panel: '#FBFAF6', line: '#D8D5CD', text: '#0F0F10', muted: '#54585B',
+        accent: '#A98632', onAccent: '#0F0F10', headColor: '#8A6B21', alert: '#E0584C', radius: '0',
+        head: "cesso, Plaster, Jost, sans-serif", headWeight: 400, headTrack: '.02em', body: 'Jost, sans-serif',
+        form: '#8F9396', formLine: '#6B6E71', stand: '#B9BDBF', standDark: '#1E1E20', metal: '#C9A24B',
+        clockLabel: 'Mission clock', introHead: 'Your briefing.', introBody: 'Nine pieces of kit. One correct order. Wrong moves cost you time.',
+        startLabel: 'Begin mission', doneKicker: 'Mission complete', rankLead: 'Clearance:', ranks: ['Trainee', 'Field agent', 'Station chief'],
+        pointsLine: '+50 points for your crew.', crewName: 'Crew Silver Fox', againLabel: 'Run it again', signupLabel: 'Brief your crew for prom', signupHref: 'PromBirch.dc.html',
+        aliases: { shirt: 'Base cover', trousers: 'Field trousers', shoes: 'Patent shoes', studs: 'Signal studs', cufflinks: 'Gold cufflinks', vest: 'Body layer', bowtie: 'Black tie', jacket: 'Dinner jacket', square: 'Signature' },
+        tie: '#0E0E10', square: '#F4F1EA',
+        lapelStyle: 'shawl', shirt: '#F4F1EA', shirtLine: '#B9BDBF', cloth: '#131316', line: '#9A9DA0', lapel: '#09090B', lapelLine: '#E2E5E7', stitch: '#8F9396', vest: '#19191C', tieShade: '#2C2C31', sheen: '#55585C', trouser: '#131316',
+        footnote: 'Times are for fun. Your real fitting happens in the shop.'
+      },
+      park: {
+        kicker: 'Prom 2027 · A case for the crew', title: 'The Case of the Undressed Gentleman',
+        sub: 'Assemble the evidence in its proper order, and swiftly.',
+        bg: '#F4EEDF', stage: '#FBF7EE', panel: '#FBF7EE', line: '#CFC3A6', text: '#1F1A14', muted: '#4E5A4D',
+        accent: '#2F5A3F', onAccent: '#F4EEDF', headColor: '#1F1A14', alert: '#D75B45', radius: '0',
+        head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, headTrack: '0', body: "'EB Garamond', Georgia, serif",
+        form: '#D9CDB0', formLine: '#A69A7E', stand: '#8F7440', standDark: '#0A1410', metal: '#C6A867',
+        clockLabel: 'The pocket watch', introHead: 'The facts of the case.', introBody: 'A gentleman must be dressed for the ball. Deduce the proper order. Each error costs two seconds.',
+        startLabel: 'Take the case', doneKicker: 'Case closed', rankLead: 'The verdict:', ranks: ['Constable', 'Inspector', 'Consulting detective'],
+        pointsLine: '+50 points for your crew.', crewName: 'The Penfield Irregulars', againLabel: 'Reopen the case', signupLabel: 'Enlist your crew for prom', signupHref: 'PromPark.dc.html',
+        aliases: { shirt: 'Exhibit A', trousers: 'Exhibit B', studs: 'Exhibit C', cufflinks: 'Exhibit D', vest: 'Exhibit E', bowtie: 'Exhibit F', jacket: 'Exhibit G', square: 'Exhibit H', shoes: 'Exhibit I' },
+        tie: '#7B2D26', square: '#F2EAD8',
+        lapelStyle: 'peak', shirt: '#F2EAD8', shirtLine: '#B9AE95', cloth: '#14211B', line: '#A88B50', lapel: '#0B1511', lapelLine: '#C6A867', stitch: '#8F7440', vest: '#2A2015', tieShade: '#56201B', sheen: '#3F5A48', trouser: '#101813',
+        footnote: 'Times are for fun. Your real fitting happens in the shop.'
+      }
+    };
+  }
+  lapels(style) {
+    const L = {
+      notch: ['translate(118.96 12.83)', 'M38.05,1.85L2.94,42.3l12.56,1.64L.6,58.81l83.38,183.87s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.3-34.05-9.34-34.67-27.65-102.37-28.44-106.95C39.55,37.39,38.05,1.85,38.05,1.85Z', 'M134.33,1.11l40.75,41.08-12.4,1.64,13.38,13.53-95.85,210.41s6.29-34.43,6.94-35.72c6.03-11.96,12.08-34.32,12.73-37.27,7.98-36.01,26.91-103.88,27.26-108.52C130.9,35.47,134.33,1.11,134.33,1.11Z'],
+      peak: ['translate(105.03 12.48)', 'M52.32,2.2L17.21,42.65l38.94,5.09L.85,40.76l97.4,202.27s2.1-13.53,1.8-14.95c-2.9-13.85-8.52-31.14-9.31-34.05-9.33-34.67-27.65-102.37-28.43-106.95C53.81,37.74,52.32,2.2,52.32,2.2Z', 'M148.6,1.46l28,42.73-30.23,4.11,51.29-6.7-103.18,226.52s6.29-34.42,6.94-35.72c6.03-11.95,12.08-34.32,12.73-37.27,7.98-36,26.91-103.88,27.25-108.52C145.17,35.82,148.6,1.46,148.6,1.46Z'],
+      shawl: ['translate(125.33 13.7)', 'M31.71,1L1.29,14.39c-5.52.32,18.11,152.67,63.89,240.25,6.44,12.33,12.25,21.91,15.86,28.08,0-7.89,1.93-20.55-2.27-34.6-17.7-59.18-23.07-91.44-33.03-138.08C31.71,44.39,31.71,1,31.71,1Z', 'M128.99.69l23.41,9.26s-12.67,160.44-59.68,244.5c-6.83,12.21-8.08,22.06-11.68,28.27,0-7.94-6.02-20.69-1.84-34.84,17.61-59.58,22.18-92.5,30.53-139.16C121.8,41.39,128.99.69,128.99.69Z']
+    };
+    const l = L[style] || L.notch;
+    const shawl = style === 'shawl';
+    return { lapelAt: l[0], lapelL: l[1], lapelR: l[2], shawl: shawl ? 'inline' : 'none', frontButtons: shawl ? 'none' : 'inline', vent: shawl ? 'M208.04,376.92s-2.33-8.17,0-107.47' : 'M200.5,376.92s-2.33-8.17,0-107.47' };
+  }
+  fmt(ms) {
+    return (Math.max(0, ms) / 1000).toFixed(1) + 's';
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      if (this.state.phase !== 'play') return;
+      const el = document.getElementById('suitup-clock');
+      if (el) el.textContent = this.fmt(Date.now() - this.state.startedAt + this.state.mistakes * 2000);
+    }, 100);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  start() {
+    const order = this.pieces().map((p) => p.id);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = order[i];
+      order[i] = order[j];
+      order[j] = tmp;
+    }
+    this.setState({ phase: 'play', placed: 0, mistakes: 0, startedAt: Date.now(), endedAt: 0, wrong: null, order: order });
+  }
+  pick(id) {
+    const s = this.state;
+    if (s.phase !== 'play') return;
+    const seq = this.pieces().map((p) => p.id);
+    if (seq[s.placed] === id) {
+      const placed = s.placed + 1;
+      if (placed === seq.length) {
+        const endedAt = Date.now();
+        const total = endedAt - s.startedAt + s.mistakes * 2000;
+        this.setState({ placed: placed, wrong: null, phase: 'done', endedAt: endedAt, best: s.best === null ? total : Math.min(s.best, total) });
+      } else {
+        this.setState({ placed: placed, wrong: null });
+      }
+    } else {
+      this.setState({ mistakes: s.mistakes + 1, wrong: id });
+    }
+  }
+  renderVals() {
+    const s = this.state;
+    const T = this.themes();
+    const t = T[this.props.theme] || T.kodak;
+    const pieces = this.pieces();
+    const seq = pieces.map((p) => p.id);
+    const on = {};
+    seq.forEach((id, i) => { on[id] = i < s.placed; });
+    const show = {};
+    seq.forEach((id) => { show[id] = on[id] ? 'inline' : 'none'; });
+    const order = s.order.length ? s.order : seq;
+    const tray = order.map((id) => {
+      const p = pieces.find((x) => x.id === id);
+      const used = on[id];
+      const wrong = s.wrong === id;
+      return {
+        name: p.name,
+        alias: t.aliases[id],
+        used: used,
+        aria: p.name + (used ? ', already on' : ''),
+        bg: wrong ? t.alert : used ? 'transparent' : t.stage,
+        fg: wrong ? '#15130F' : used ? t.muted : t.text,
+        sub: wrong ? '#15130F' : t.muted,
+        bd: wrong ? t.alert : used ? t.line : t.accent,
+        deco: used ? 'line-through' : 'none',
+        cursor: used ? 'default' : 'pointer',
+        pick: () => this.pick(id)
+      };
+    });
+    const total = s.phase === 'done' ? s.endedAt - s.startedAt + s.mistakes * 2000 : 0;
+    const rank = total < 12000 ? t.ranks[2] : total < 20000 ? t.ranks[1] : t.ranks[0];
+    const crew = [['Marcus', 11800], ['Jayden', 14200], ['Tyler', 16900], ['Andre', 19500]];
+    if (s.best !== null) crew.push(['You', s.best]);
+    crew.sort((a, b) => a[1] - b[1]);
+    const board = crew.map((c, i) => ({
+      place: i + 1,
+      name: c[0],
+      time: this.fmt(c[1]),
+      color: c[0] === 'You' ? t.accent : t.text,
+      weight: c[0] === 'You' ? 700 : 400
+    }));
+    const next = pieces[s.placed];
+    return {
+      t: t,
+      art: this.lapels(t.lapelStyle),
+      show: show,
+      tieColor: t.tie,
+      squareColor: t.square,
+      tray: tray,
+      pips: seq.map((id) => ({ bg: on[id] ? t.accent : 'transparent', bd: on[id] ? t.accent : t.line })),
+      progressLabel: s.placed + ' of ' + seq.length + ' pieces on',
+      stageLabel: 'Dress form wearing ' + (s.placed ? pieces.slice(0, s.placed).map((p) => p.name.toLowerCase()).join(', ') : 'nothing yet'),
+      phase: { intro: s.phase === 'intro', play: s.phase === 'play', done: s.phase === 'done' },
+      clock: s.phase === 'done' ? this.fmt(total) : s.phase === 'play' ? this.fmt(Date.now() - s.startedAt + s.mistakes * 2000) : '0.0s',
+      penaltyText: s.mistakes ? s.mistakes + ' wrong · +' + s.mistakes * 2 + 's' : 'No mistakes yet',
+      nextPrompt: next ? 'Piece ' + (s.placed + 1) + ' of ' + seq.length : '',
+      feedback: s.wrong ? 'Not yet. +2s' : s.placed ? 'Good.' : '',
+      feedbackColor: s.wrong ? t.alert : t.accent,
+      finalTime: this.fmt(total),
+      finalDetail: s.mistakes ? s.mistakes + ' wrong piece' + (s.mistakes > 1 ? 's' : '') + ' (+' + s.mistakes * 2 + 's)' : 'Clean run, no mistakes',
+      rank: rank,
+      board: board,
+      start: () => this.start()
+    };
+  }
+}
+</script>
+</body>
+</html>
