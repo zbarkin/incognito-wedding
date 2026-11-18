@@ -373,10 +373,12 @@ class Component extends DCLogic {
       const blank = { d: 'M0 0', fill: 'none', stroke: 'none', sw: 0, op: 0 };
       const m = {}; Object.keys(g.m).forEach((k) => { m[k] = blank; });
       Object.assign(out, { m: m, renderShow: 'inline', render: '../shop/render/' + r.file.replace(/\.png$/, '.webp'), rx: r.frame[0], ry: r.frame[1], rw: r.frame[2], rh: r.frame[3] });
+      out.vb = r.frame.map((x) => Math.round(x * 10) / 10).join(' ');
+      out.frameTop = r.frame[1];
     }
     if (this.t && this.t.cropAtHem) {
       // Frame ends at the bottom of the suit photo: the stand drops out of view and the suit meets the edge.
-      const f = im.fig, S = f.sw, y0 = f.top - 0.62 * S, bottom = Math.min(f.h, f.hem + 2), H = bottom - y0, W = 0.8 * H;
+      const f = im.fig, S = f.sw, y0 = out.frameTop != null ? out.frameTop : f.top - 0.62 * S, bottom = Math.min(f.h, f.hem + 2), H = bottom - y0, W = 0.8 * H;
       out.vb = [f.cx - W / 2, y0, W, H].map((x) => Math.round(x * 10) / 10).join(' ');
       out.mask = 'none';
     }

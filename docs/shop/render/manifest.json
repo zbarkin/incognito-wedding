@@ -4,63 +4,63 @@
    "kodak": {
     "file": "kodak/arlan-tux-dinner-jacket-0.png",
     "frame": [
-     -62.58,
-     -107.84,
-     603.17,
-     753.96
+     -99.81,
+     -200.9,
+     677.62,
+     847.02
     ],
-    "k": 613.04,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 601.65,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 235.9,
-    "stretch": 1.009,
+    "stretch": 1.034,
     "lean_px": 3,
-    "drop_m": 0.645,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/arlan-tux-dinner-jacket-0.png",
     "frame": [
-     -62.58,
-     -107.84,
-     603.17,
-     753.96
+     -99.81,
+     -200.9,
+     677.62,
+     847.02
     ],
-    "k": 613.04,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 601.65,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 235.9,
-    "stretch": 1.009,
+    "stretch": 1.034,
     "lean_px": 3,
-    "drop_m": 0.645,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/arlan-tux-dinner-jacket-0.png",
     "frame": [
-     -62.58,
-     -107.84,
-     603.17,
-     753.96
+     -99.81,
+     -200.9,
+     677.62,
+     847.02
     ],
-    "k": 613.04,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 601.65,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 235.9,
-    "stretch": 1.009,
+    "stretch": 1.034,
     "lean_px": 3,
-    "drop_m": 0.645,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "solid-biege-suit-0": {
    "kodak": {
     "file": "kodak/solid-biege-suit-0.png",
     "frame": [
-     -31.34,
-     -55.36,
-     488.67,
-     610.84
+     -54.83,
+     -114.1,
+     535.66,
+     669.58
     ],
     "yaw_deg": 43.5,
     "k": 586.34,
@@ -74,10 +74,10 @@
    "birch": {
     "file": "birch/solid-biege-suit-0.png",
     "frame": [
-     -31.34,
-     -55.36,
-     488.67,
-     610.84
+     -54.83,
+     -114.1,
+     535.66,
+     669.58
     ],
     "yaw_deg": 43.5,
     "k": 586.34,
@@ -91,10 +91,10 @@
    "park": {
     "file": "park/solid-biege-suit-0.png",
     "frame": [
-     -31.34,
-     -55.36,
-     488.67,
-     610.84
+     -54.83,
+     -114.1,
+     535.66,
+     669.58
     ],
     "yaw_deg": 43.5,
     "k": 586.34,
@@ -110,275 +110,275 @@
    "kodak": {
     "file": "kodak/solid-burgundy-suit-0.png",
     "frame": [
-     -42.33,
-     -107.78,
-     578.66,
-     723.32
+     -77.84,
+     -196.55,
+     649.67,
+     812.09
     ],
-    "k": 584.78,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 580.22,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 235.5,
-    "stretch": 1.024,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.652,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/solid-burgundy-suit-0.png",
     "frame": [
-     -42.33,
-     -107.78,
-     578.66,
-     723.32
+     -77.84,
+     -196.55,
+     649.67,
+     812.09
     ],
-    "k": 584.78,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 580.22,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 235.5,
-    "stretch": 1.024,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.652,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/solid-burgundy-suit-0.png",
     "frame": [
-     -42.33,
-     -107.78,
-     578.66,
-     723.32
+     -77.84,
+     -196.55,
+     649.67,
+     812.09
     ],
-    "k": 584.78,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 580.22,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 235.5,
-    "stretch": 1.024,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.652,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "blue-sharkskin-suit-0": {
    "kodak": {
     "file": "kodak/blue-sharkskin-suit-0.png",
     "frame": [
-     -62.73,
-     -128.28,
-     623.46,
-     779.32
+     -101.54,
+     -225.3,
+     701.07,
+     876.34
     ],
-    "k": 639.13,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 616.96,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 252.5,
-    "stretch": 0.988,
+    "stretch": 1.034,
     "lean_px": -5,
-    "drop_m": 0.634,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/blue-sharkskin-suit-0.png",
     "frame": [
-     -62.73,
-     -128.28,
-     623.46,
-     779.32
+     -101.54,
+     -225.3,
+     701.07,
+     876.34
     ],
-    "k": 639.13,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 616.96,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 252.5,
-    "stretch": 0.988,
+    "stretch": 1.034,
     "lean_px": -5,
-    "drop_m": 0.634,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/blue-sharkskin-suit-0.png",
     "frame": [
-     -62.73,
-     -128.28,
-     623.46,
-     779.32
+     -101.54,
+     -225.3,
+     701.07,
+     876.34
     ],
-    "k": 639.13,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 616.96,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 252.5,
-    "stretch": 0.988,
+    "stretch": 1.034,
     "lean_px": -5,
-    "drop_m": 0.634,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "french-blue-suit-0": {
    "kodak": {
     "file": "kodak/french-blue-suit-0.png",
     "frame": [
-     -61.84,
-     -122.9,
-     619.68,
-     774.6
+     -100.78,
+     -220.25,
+     697.56,
+     871.95
     ],
-    "k": 641.3,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 607.78,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 247.6,
-    "stretch": 0.964,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.622,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/french-blue-suit-0.png",
     "frame": [
-     -61.84,
-     -122.9,
-     619.68,
-     774.6
+     -100.78,
+     -220.25,
+     697.56,
+     871.95
     ],
-    "k": 641.3,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 607.78,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 247.6,
-    "stretch": 0.964,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.622,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/french-blue-suit-0.png",
     "frame": [
-     -61.84,
-     -122.9,
-     619.68,
-     774.6
+     -100.78,
+     -220.25,
+     697.56,
+     871.95
     ],
-    "k": 641.3,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 607.78,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 247.6,
-    "stretch": 0.964,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.622,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "hunter-green-suit-0": {
    "kodak": {
     "file": "kodak/hunter-green-suit-0.png",
     "frame": [
-     -59.98,
-     -129.84,
-     619.97,
-     774.96
+     -97.21,
+     -222.9,
+     694.42,
+     868.02
     ],
-    "k": 613.04,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 633.8,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 250.4,
-    "stretch": 1.08,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.679,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/hunter-green-suit-0.png",
     "frame": [
-     -59.98,
-     -129.84,
-     619.97,
-     774.96
+     -97.21,
+     -222.9,
+     694.42,
+     868.02
     ],
-    "k": 613.04,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 633.8,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 250.4,
-    "stretch": 1.08,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.679,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/hunter-green-suit-0.png",
     "frame": [
-     -59.98,
-     -129.84,
-     619.97,
-     774.96
+     -97.21,
+     -222.9,
+     694.42,
+     868.02
     ],
-    "k": 613.04,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 633.8,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 250.4,
-    "stretch": 1.08,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.679,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "medium-gray-suit-0": {
    "kodak": {
     "file": "kodak/medium-gray-suit-0.png",
     "frame": [
-     -48.78,
-     -113.26,
-     595.55,
-     744.44
+     -84.81,
+     -203.35,
+     667.62,
+     834.53
     ],
-    "k": 593.48,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 604.72,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 249.9,
-    "stretch": 1.06,
+    "stretch": 1.034,
     "lean_px": 1,
-    "drop_m": 0.669,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/medium-gray-suit-0.png",
     "frame": [
-     -48.78,
-     -113.26,
-     595.55,
-     744.44
+     -84.81,
+     -203.35,
+     667.62,
+     834.53
     ],
-    "k": 593.48,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 604.72,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 249.9,
-    "stretch": 1.06,
+    "stretch": 1.034,
     "lean_px": 1,
-    "drop_m": 0.669,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/medium-gray-suit-0.png",
     "frame": [
-     -48.78,
-     -113.26,
-     595.55,
-     744.44
+     -84.81,
+     -203.35,
+     667.62,
+     834.53
     ],
-    "k": 593.48,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 604.72,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 249.9,
-    "stretch": 1.06,
+    "stretch": 1.034,
     "lean_px": 1,
-    "drop_m": 0.669,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "natural-linen-suit-0": {
    "kodak": {
     "file": "kodak/natural-linen-suit-0.png",
     "frame": [
-     -58.69,
-     -122.38,
-     597.38,
-     746.72
+     -91.56,
+     -204.55,
+     663.11,
+     828.89
     ],
     "yaw_deg": 23.4,
     "k": 655.24,
@@ -392,10 +392,10 @@
    "birch": {
     "file": "birch/natural-linen-suit-0.png",
     "frame": [
-     -58.69,
-     -122.38,
-     597.38,
-     746.72
+     -91.56,
+     -204.55,
+     663.11,
+     828.89
     ],
     "yaw_deg": 23.4,
     "k": 655.24,
@@ -409,10 +409,10 @@
    "park": {
     "file": "park/natural-linen-suit-0.png",
     "frame": [
-     -58.69,
-     -122.38,
-     597.38,
-     746.72
+     -91.56,
+     -204.55,
+     663.11,
+     828.89
     ],
     "yaw_deg": 23.4,
     "k": 655.24,
@@ -428,540 +428,540 @@
    "kodak": {
     "file": "kodak/oatmeal-taupe-suit-0.png",
     "frame": [
-     -87.57,
-     -145.68,
-     655.14,
-     818.92
+     -129.02,
+     -249.3,
+     738.03,
+     922.54
     ],
-    "k": 682.61,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 638.4,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 237.0,
-    "stretch": 0.947,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.614,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/oatmeal-taupe-suit-0.png",
     "frame": [
-     -87.57,
-     -145.68,
-     655.14,
-     818.92
+     -129.02,
+     -249.3,
+     738.03,
+     922.54
     ],
-    "k": 682.61,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 638.4,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 237.0,
-    "stretch": 0.947,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.614,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/oatmeal-taupe-suit-0.png",
     "frame": [
-     -87.57,
-     -145.68,
-     655.14,
-     818.92
+     -129.02,
+     -249.3,
+     738.03,
+     922.54
     ],
-    "k": 682.61,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 638.4,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 237.0,
-    "stretch": 0.947,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.614,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "off-white-dinner-jacket-0": {
    "kodak": {
     "file": "kodak/off-white-dinner-jacket-0.png",
     "frame": [
-     -28.58,
-     -94.34,
-     567.17,
-     708.96
+     -62.51,
+     -179.15,
+     635.02,
+     793.77
     ],
-    "k": 558.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 581.75,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 250.9,
-    "stretch": 1.09,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.684,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/off-white-dinner-jacket-0.png",
     "frame": [
-     -28.58,
-     -94.34,
-     567.17,
-     708.96
+     -62.51,
+     -179.15,
+     635.02,
+     793.77
     ],
-    "k": 558.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 581.75,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 250.9,
-    "stretch": 1.09,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.684,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/off-white-dinner-jacket-0.png",
     "frame": [
-     -28.58,
-     -94.34,
-     567.17,
-     708.96
+     -62.51,
+     -179.15,
+     635.02,
+     793.77
     ],
-    "k": 558.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 581.75,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 250.9,
-    "stretch": 1.09,
+    "stretch": 1.034,
     "lean_px": 0,
-    "drop_m": 0.684,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "product-1-x2ec7-0": {
    "kodak": {
     "file": "kodak/product-1-x2ec7-0.png",
     "frame": [
-     -51.46,
-     -116.06,
-     550.91,
-     688.64
+     -86.17,
+     -202.85,
+     620.34,
+     775.43
     ],
-    "k": 571.74,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 538.89,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 225.2,
-    "stretch": 0.957,
+    "stretch": 1.034,
     "lean_px": -4,
-    "drop_m": 0.619,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/product-1-x2ec7-0.png",
     "frame": [
-     -51.46,
-     -116.06,
-     550.91,
-     688.64
+     -86.17,
+     -202.85,
+     620.34,
+     775.43
     ],
-    "k": 571.74,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 538.89,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 225.2,
-    "stretch": 0.957,
+    "stretch": 1.034,
     "lean_px": -4,
-    "drop_m": 0.619,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/product-1-x2ec7-0.png",
     "frame": [
-     -51.46,
-     -116.06,
-     550.91,
-     688.64
+     -86.17,
+     -202.85,
+     620.34,
+     775.43
     ],
-    "k": 571.74,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 538.89,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 225.2,
-    "stretch": 0.957,
+    "stretch": 1.034,
     "lean_px": -4,
-    "drop_m": 0.619,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "product-2-tszn4-0": {
    "kodak": {
     "file": "kodak/product-2-tszn4-0.png",
     "frame": [
-     -72.71,
-     -128.62,
-     627.42,
-     784.28
+     -112.44,
+     -227.95,
+     706.89,
+     883.61
     ],
-    "k": 654.35,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 610.84,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 238.2,
-    "stretch": 0.945,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.613,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/product-2-tszn4-0.png",
     "frame": [
-     -72.71,
-     -128.62,
-     627.42,
-     784.28
+     -112.44,
+     -227.95,
+     706.89,
+     883.61
     ],
-    "k": 654.35,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 610.84,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 238.2,
-    "stretch": 0.945,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.613,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/product-2-tszn4-0.png",
     "frame": [
-     -72.71,
-     -128.62,
-     627.42,
-     784.28
+     -112.44,
+     -227.95,
+     706.89,
+     883.61
     ],
-    "k": 654.35,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 610.84,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 238.2,
-    "stretch": 0.945,
+    "stretch": 1.034,
     "lean_px": -7,
-    "drop_m": 0.613,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "product-3-2za6w-0": {
    "kodak": {
     "file": "kodak/product-3-2za6w-0.png",
     "frame": [
-     -65.59,
-     -131.42,
-     637.18,
-     796.48
+     -104.0,
+     -227.45,
+     714.01,
+     892.51
     ],
-    "k": 632.61,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 649.11,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 254.5,
-    "stretch": 1.069,
+    "stretch": 1.034,
     "lean_px": 3,
-    "drop_m": 0.674,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/product-3-2za6w-0.png",
     "frame": [
-     -65.59,
-     -131.42,
-     637.18,
-     796.48
+     -104.0,
+     -227.45,
+     714.01,
+     892.51
     ],
-    "k": 632.61,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 649.11,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 254.5,
-    "stretch": 1.069,
+    "stretch": 1.034,
     "lean_px": 3,
-    "drop_m": 0.674,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/product-3-2za6w-0.png",
     "frame": [
-     -65.59,
-     -131.42,
-     637.18,
-     796.48
+     -104.0,
+     -227.45,
+     714.01,
+     892.51
     ],
-    "k": 632.61,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 649.11,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 254.5,
-    "stretch": 1.069,
+    "stretch": 1.034,
     "lean_px": 3,
-    "drop_m": 0.674,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "product-5-yd35j-0": {
    "kodak": {
     "file": "kodak/product-5-yd35j-0.png",
     "frame": [
-     -55.76,
-     -123.6,
-     603.52,
-     754.4
+     -92.72,
+     -216.0,
+     677.44,
+     846.8
     ],
-    "k": 608.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 606.25,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.9,
-    "stretch": 1.029,
+    "stretch": 1.034,
     "lean_px": -2,
-    "drop_m": 0.654,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/product-5-yd35j-0.png",
     "frame": [
-     -55.76,
-     -123.6,
-     603.52,
-     754.4
+     -92.72,
+     -216.0,
+     677.44,
+     846.8
     ],
-    "k": 608.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 606.25,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.9,
-    "stretch": 1.029,
+    "stretch": 1.034,
     "lean_px": -2,
-    "drop_m": 0.654,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/product-5-yd35j-0.png",
     "frame": [
-     -55.76,
-     -123.6,
-     603.52,
-     754.4
+     -92.72,
+     -216.0,
+     677.44,
+     846.8
     ],
-    "k": 608.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 606.25,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.9,
-    "stretch": 1.029,
+    "stretch": 1.034,
     "lean_px": -2,
-    "drop_m": 0.654,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "product-5-yd35j-l8s85-1": {
    "kodak": {
     "file": "kodak/product-5-yd35j-l8s85-1.png",
     "frame": [
-     -55.76,
-     -123.6,
-     603.52,
-     754.4
+     -92.72,
+     -216.0,
+     677.44,
+     846.8
     ],
-    "k": 608.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 606.25,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.9,
-    "stretch": 1.029,
+    "stretch": 1.034,
     "lean_px": -2,
-    "drop_m": 0.654,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/product-5-yd35j-l8s85-1.png",
     "frame": [
-     -55.76,
-     -123.6,
-     603.52,
-     754.4
+     -92.72,
+     -216.0,
+     677.44,
+     846.8
     ],
-    "k": 608.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 606.25,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.9,
-    "stretch": 1.029,
+    "stretch": 1.034,
     "lean_px": -2,
-    "drop_m": 0.654,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/product-5-yd35j-l8s85-1.png",
     "frame": [
-     -55.76,
-     -123.6,
-     603.52,
-     754.4
+     -92.72,
+     -216.0,
+     677.44,
+     846.8
     ],
-    "k": 608.7,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 606.25,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.9,
-    "stretch": 1.029,
+    "stretch": 1.034,
     "lean_px": -2,
-    "drop_m": 0.654,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "product-6-3xgh6-0": {
    "kodak": {
     "file": "kodak/product-6-3xgh6-0.png",
     "frame": [
-     -60.08,
-     -130.3,
-     560.16,
-     700.2
+     -95.06,
+     -217.75,
+     630.12,
+     787.65
     ],
-    "k": 576.09,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 552.66,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 223.5,
-    "stretch": 0.98,
+    "stretch": 1.034,
     "lean_px": -4,
-    "drop_m": 0.63,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/product-6-3xgh6-0.png",
     "frame": [
-     -60.08,
-     -130.3,
-     560.16,
-     700.2
+     -95.06,
+     -217.75,
+     630.12,
+     787.65
     ],
-    "k": 576.09,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 552.66,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 223.5,
-    "stretch": 0.98,
+    "stretch": 1.034,
     "lean_px": -4,
-    "drop_m": 0.63,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/product-6-3xgh6-0.png",
     "frame": [
-     -60.08,
-     -130.3,
-     560.16,
-     700.2
+     -95.06,
+     -217.75,
+     630.12,
+     787.65
     ],
-    "k": 576.09,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 552.66,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 223.5,
-    "stretch": 0.98,
+    "stretch": 1.034,
     "lean_px": -4,
-    "drop_m": 0.63,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "snow-white-dinner-jacket-0": {
    "kodak": {
     "file": "kodak/snow-white-dinner-jacket-0.png",
     "frame": [
-     -63.95,
-     -112.02,
-     599.9,
-     749.88
+     -99.72,
+     -201.45,
+     671.45,
+     839.31
     ],
-    "k": 589.13,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 616.96,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 237.6,
-    "stretch": 1.098,
+    "stretch": 1.034,
     "lean_px": -1,
-    "drop_m": 0.688,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/snow-white-dinner-jacket-0.png",
     "frame": [
-     -63.95,
-     -112.02,
-     599.9,
-     749.88
+     -99.72,
+     -201.45,
+     671.45,
+     839.31
     ],
-    "k": 589.13,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 616.96,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 237.6,
-    "stretch": 1.098,
+    "stretch": 1.034,
     "lean_px": -1,
-    "drop_m": 0.688,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/snow-white-dinner-jacket-0.png",
     "frame": [
-     -63.95,
-     -112.02,
-     599.9,
-     749.88
+     -99.72,
+     -201.45,
+     671.45,
+     839.31
     ],
-    "k": 589.13,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 616.96,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 237.6,
-    "stretch": 1.098,
+    "stretch": 1.034,
     "lean_px": -1,
-    "drop_m": 0.688,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "solid-brown-suit-0": {
    "kodak": {
     "file": "kodak/solid-brown-suit-0.png",
     "frame": [
-     -66.82,
-     -137.16,
-     629.63,
-     787.04
+     -108.79,
+     -242.1,
+     713.58,
+     891.98
     ],
-    "k": 691.3,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 581.75,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 247.4,
-    "stretch": 0.822,
+    "stretch": 1.034,
     "lean_px": -8,
-    "drop_m": 0.553,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/solid-brown-suit-0.png",
     "frame": [
-     -66.82,
-     -137.16,
-     629.63,
-     787.04
+     -108.79,
+     -242.1,
+     713.58,
+     891.98
     ],
-    "k": 691.3,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 581.75,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 247.4,
-    "stretch": 0.822,
+    "stretch": 1.034,
     "lean_px": -8,
-    "drop_m": 0.553,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/solid-brown-suit-0.png",
     "frame": [
-     -66.82,
-     -137.16,
-     629.63,
-     787.04
+     -108.79,
+     -242.1,
+     713.58,
+     891.98
     ],
-    "k": 691.3,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 581.75,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 247.4,
-    "stretch": 0.822,
+    "stretch": 1.034,
     "lean_px": -8,
-    "drop_m": 0.553,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "solid-camel-suit-0": {
    "kodak": {
     "file": "kodak/solid-camel-suit-0.png",
     "frame": [
-     -55.54,
-     -107.86,
-     579.07,
-     723.84
+     -88.93,
+     -191.35,
+     645.86,
+     807.33
     ],
     "yaw_deg": 17.8,
     "k": 612.37,
@@ -975,10 +975,10 @@
    "birch": {
     "file": "birch/solid-camel-suit-0.png",
     "frame": [
-     -55.54,
-     -107.86,
-     579.07,
-     723.84
+     -88.93,
+     -191.35,
+     645.86,
+     807.33
     ],
     "yaw_deg": 17.8,
     "k": 612.37,
@@ -992,10 +992,10 @@
    "park": {
     "file": "park/solid-camel-suit-0.png",
     "frame": [
-     -55.54,
-     -107.86,
-     579.07,
-     723.84
+     -88.93,
+     -191.35,
+     645.86,
+     807.33
     ],
     "yaw_deg": 17.8,
     "k": 612.37,
@@ -1011,265 +1011,265 @@
    "kodak": {
     "file": "kodak/solid-light-gray-suit-0.png",
     "frame": [
-     -39.51,
-     -90.12,
-     573.02,
-     716.28
+     -75.94,
+     -181.2,
+     645.89,
+     807.36
     ],
-    "k": 600.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 555.73,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 238.4,
-    "stretch": 0.935,
+    "stretch": 1.034,
     "lean_px": -9,
-    "drop_m": 0.608,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/solid-light-gray-suit-0.png",
     "frame": [
-     -39.51,
-     -90.12,
-     573.02,
-     716.28
+     -75.94,
+     -181.2,
+     645.89,
+     807.36
     ],
-    "k": 600.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 555.73,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 238.4,
-    "stretch": 0.935,
+    "stretch": 1.034,
     "lean_px": -9,
-    "drop_m": 0.608,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/solid-light-gray-suit-0.png",
     "frame": [
-     -39.51,
-     -90.12,
-     573.02,
-     716.28
+     -75.94,
+     -181.2,
+     645.89,
+     807.36
     ],
-    "k": 600.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 555.73,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 238.4,
-    "stretch": 0.935,
+    "stretch": 1.034,
     "lean_px": -9,
-    "drop_m": 0.608,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "solid-navy-suit-0": {
    "kodak": {
     "file": "kodak/solid-navy-suit-0.png",
     "frame": [
-     -76.49,
-     -144.38,
-     646.98,
-     808.72
+     -115.96,
+     -243.05,
+     725.91,
+     907.39
     ],
-    "k": 650.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 652.17,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 240.6,
-    "stretch": 1.039,
+    "stretch": 1.034,
     "lean_px": -13,
-    "drop_m": 0.659,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/solid-navy-suit-0.png",
     "frame": [
-     -76.49,
-     -144.38,
-     646.98,
-     808.72
+     -115.96,
+     -243.05,
+     725.91,
+     907.39
     ],
-    "k": 650.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 652.17,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 240.6,
-    "stretch": 1.039,
+    "stretch": 1.034,
     "lean_px": -13,
-    "drop_m": 0.659,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/solid-navy-suit-0.png",
     "frame": [
-     -76.49,
-     -144.38,
-     646.98,
-     808.72
+     -115.96,
+     -243.05,
+     725.91,
+     907.39
     ],
-    "k": 650.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 652.17,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 240.6,
-    "stretch": 1.039,
+    "stretch": 1.034,
     "lean_px": -13,
-    "drop_m": 0.659,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "solid-navy-suit-bhhzc-0": {
    "kodak": {
     "file": "kodak/solid-navy-suit-bhhzc-0.png",
     "frame": [
-     -76.49,
-     -144.38,
-     646.98,
-     808.72
+     -115.96,
+     -243.05,
+     725.91,
+     907.39
     ],
-    "k": 650.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 652.17,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 240.6,
-    "stretch": 1.039,
+    "stretch": 1.034,
     "lean_px": -13,
-    "drop_m": 0.659,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/solid-navy-suit-bhhzc-0.png",
     "frame": [
-     -76.49,
-     -144.38,
-     646.98,
-     808.72
+     -115.96,
+     -243.05,
+     725.91,
+     907.39
     ],
-    "k": 650.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 652.17,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 240.6,
-    "stretch": 1.039,
+    "stretch": 1.034,
     "lean_px": -13,
-    "drop_m": 0.659,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/solid-navy-suit-bhhzc-0.png",
     "frame": [
-     -76.49,
-     -144.38,
-     646.98,
-     808.72
+     -115.96,
+     -243.05,
+     725.91,
+     907.39
     ],
-    "k": 650.0,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 652.17,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 240.6,
-    "stretch": 1.039,
+    "stretch": 1.034,
     "lean_px": -13,
-    "drop_m": 0.659,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "solid-olive-suit-0": {
    "kodak": {
     "file": "kodak/solid-olive-suit-0.png",
     "frame": [
-     -37.64,
-     -103.4,
-     581.28,
-     726.6
+     -73.28,
+     -192.5,
+     652.56,
+     815.7
     ],
-    "k": 586.96,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 583.28,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 261.6,
-    "stretch": 1.026,
+    "stretch": 1.034,
     "lean_px": -11,
-    "drop_m": 0.653,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/solid-olive-suit-0.png",
     "frame": [
-     -37.64,
-     -103.4,
-     581.28,
-     726.6
+     -73.28,
+     -192.5,
+     652.56,
+     815.7
     ],
-    "k": 586.96,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 583.28,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 261.6,
-    "stretch": 1.026,
+    "stretch": 1.034,
     "lean_px": -11,
-    "drop_m": 0.653,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/solid-olive-suit-0.png",
     "frame": [
-     -37.64,
-     -103.4,
-     581.28,
-     726.6
+     -73.28,
+     -192.5,
+     652.56,
+     815.7
     ],
-    "k": 586.96,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 583.28,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 261.6,
-    "stretch": 1.026,
+    "stretch": 1.034,
     "lean_px": -11,
-    "drop_m": 0.653,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   },
   "sterling-gray-suit-0": {
    "kodak": {
     "file": "kodak/sterling-gray-suit-0.png",
     "frame": [
-     -65.75,
-     -121.52,
-     621.5,
-     776.88
+     -104.82,
+     -219.2,
+     699.65,
+     874.56
     ],
-    "k": 643.48,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 609.31,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.2,
-    "stretch": 0.963,
+    "stretch": 1.034,
     "lean_px": -6,
-    "drop_m": 0.622,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "birch": {
     "file": "birch/sterling-gray-suit-0.png",
     "frame": [
-     -65.75,
-     -121.52,
-     621.5,
-     776.88
+     -104.82,
+     -219.2,
+     699.65,
+     874.56
     ],
-    "k": 643.48,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 609.31,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.2,
-    "stretch": 0.963,
+    "stretch": 1.034,
     "lean_px": -6,
-    "drop_m": 0.622,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    },
    "park": {
     "file": "park/sterling-gray-suit-0.png",
     "frame": [
-     -65.75,
-     -121.52,
-     621.5,
-     776.88
+     -104.82,
+     -219.2,
+     699.65,
+     874.56
     ],
-    "k": 643.48,
-    "scale_from": "sw",
+    "yaw_deg": 0.0,
+    "k": 609.31,
+    "scale_from": "length",
     "narrow": 1.0,
     "neck_px": 245.2,
-    "stretch": 0.963,
+    "stretch": 1.034,
     "lean_px": -6,
-    "drop_m": 0.622,
-    "yaw_deg": 0.0
+    "drop_m": 0.657
    }
   }
  },
@@ -1277,5 +1277,5 @@
   800,
   1000
  ],
- "frame_rule": "S=sw; y0=top-0.62S; H=hem+0.66S-y0; W=0.8H; x0=cx-W/2"
+ "frame_rule": "S=sw; y0=top-0.95S; H=hem+0.66S-y0; W=0.8H; x0=cx-W/2"
 }
