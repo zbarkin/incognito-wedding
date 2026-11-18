@@ -9,7 +9,9 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
+a.kk-shutter,a.kk-shutter:hover{color:#15130F}.kk-pick .kk-circle path{stroke-dasharray:1200;stroke-dashoffset:1200}a.kk-leader:hover,a.kk-grease:hover{color:#EEE7D9}
 body{margin:0;background:#121110}
 a{color:#C9A66B}a:hover{color:#E2C48E}
 .fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
@@ -28,21 +30,21 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 
 <main style="flex:999 1 600px; min-width:0; box-sizing:border-box; padding:28px 40px 56px; display:flex; flex-direction:column; gap:24px;">
 
-<nav aria-label="Breadcrumb" style="font-size:14px; color:#A39A8B;"><a href="Parties.dc.html" style="font-weight:600;">Wedding parties</a><span aria-hidden="true" style="margin:0 8px; color:#4A4237;">/</span><span aria-current="page" style="color:#EEE7D9;">Okafor &amp; Whitman</span></nav>
+<nav aria-label="Breadcrumb" style="font-size:14px; color:#A39A8B;"><a href="Parties.dc.html" class="kk-grease">Wedding parties</a><span aria-hidden="true" style="margin:0 8px; color:#4A4237;">/</span><span aria-current="page" style="color:#EEE7D9;">Okafor &amp; Whitman</span></nav>
 
 <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:18px 32px;">
 <div style="flex:1 1 520px; min-width:0; display:flex; flex-direction:column; gap:12px;">
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px;">
 <h1 style="margin:0; font-family:Rokkitt, serif; font-weight:700; font-size:46px; line-height:1; color:#EEE7D9;">Okafor &amp; Whitman</h1>
-<span style="display:inline-flex; align-items:center; height:28px; padding:0 10px; border:1px solid #C9A66B; font-size:12px; font-weight:700; color:#C9A66B;">Measurements stage</span>
-<span style="display:inline-flex; align-items:center; height:28px; padding:0 10px; border:1px solid #4A4237; font-size:12px; font-weight:700; color:#EEE7D9;">52 days out</span>
+<span class="kk-cap">Measurements stage</span>
+<span class="kk-cap is-grey">52 days out</span>
 </div>
-<p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">Saturday, January 23, 2027 · Ceremony 4:30 PM · Woodcliff Hotel &amp; Spa, Fairport · Party of 9 · No. IC-27-0123</p>
+<p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;"><span class="kk-date">Saturday, January 23, 2027</span> · Ceremony 4:30 PM · Woodcliff Hotel &amp; Spa, Fairport · Party of 9 · No. IC-27-0123</p>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#EEE7D9;">Daniel Okafor, groom · <a href="tel:+15855550142" style="font-weight:600;">(585) 555-0142</a> · daniel.okafor@example.com · prefers texts</p>
 </div>
-<div style="display:flex; flex-wrap:wrap; gap:10px;">
-<a href="Status.dc.html" class="ghost" style="display:inline-flex; align-items:center; gap:8px; height:44px; padding:0 16px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:14px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>Customer view</a>
-<button type="button" class="btn" style="display:inline-flex; align-items:center; gap:8px; height:44px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg>Message party</button>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+<a href="Status.dc.html" class="kk-leader"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>Customer view</a>
+<button type="button" class="kk-shutter"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg>Message party</button>
 </div>
 </div>
 
@@ -70,8 +72,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <li style="display:flex; gap:16px; align-items:flex-start; padding:18px 0; border-top:1px solid #2A2621; opacity:{{it.opacity}};">
 <span aria-hidden="true" style="flex:0 0 28px; height:28px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{it.tileBg}}; border:1px solid {{it.tileBd}}; font-family:Rokkitt, serif; font-weight:700; font-size:14px; color:{{it.tileFg}};">{{it.mark}}</span>
 <div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:8px;">
-<div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:700; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:{{it.levelColor}};">{{it.level}}</span>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;">
+<span class="{{it.levelClass}}">{{it.level}}</span>
 <h3 style="margin:0; font-size:16px; font-weight:700; color:#EEE7D9;">{{it.title}}</h3>
 </div>
 <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;">
@@ -105,8 +107,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <ul style="list-style:none; margin:0; padding:0;">
 <sc-for list="{{members}}" as="m" hint-placeholder-count="9">
 <li style="border-bottom:1px solid #2A2621;">
-<button type="button" class="row" aria-pressed="{{m.sel}}" onClick="{{m.pick}}" style="width:100%; display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1.3fr) minmax(0, .8fr) minmax(0, .6fr) minmax(0, 1fr); gap:14px; align-items:center; padding:12px 12px 12px 9px; text-align:left; background:{{m.bg}}; border:0; border-left:3px solid {{m.bar}}; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:14px; cursor:pointer;">
-<span style="display:flex; flex-direction:column; gap:2px; min-width:0;"><span style="font-size:15px; font-weight:700;">{{m.name}}</span><span style="font-size:12px; color:#A39A8B;">{{m.role}}</span></span>
+<button type="button" class="row" aria-pressed="{{m.sel}}" onClick="{{m.pick}}" style="width:100%; display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1.3fr) minmax(0, .8fr) minmax(0, .6fr) minmax(0, 1fr); gap:14px; align-items:center; padding:12px; text-align:left; background:{{m.bg}}; border:0; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:14px; cursor:pointer;">
+<span class="kk-pick {{m.picked}}" style="display:flex; flex-direction:column; gap:2px; min-width:0; padding:2px 6px;"><span style="font-size:15px; font-weight:700;">{{m.name}}</span><span style="font-size:12px; color:#A39A8B;">{{m.role}}</span><svg class="kk-circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true" style="inset:-5px -2px; width:calc(100% + 4px); height:calc(100% + 10px);"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"></path></svg></span>
 <span style="font-size:13px; line-height:1.4; color:{{m.measColor}};">{{m.measText}}</span>
 <span style="font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:{{m.sizeColor}};">{{m.size}}</span>
 <span style="font-size:13px; color:{{m.depColor}};">{{m.dep}}</span>
@@ -126,7 +128,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <span style="font-size:14px; color:#A39A8B;">Not placed · due Sat, Dec 19 · 17 days</span>
 </div>
 <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-<button type="button" disabled style="height:44px; padding:0 18px; background:#2A2621; color:#A39A8B; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase;">Place order</button>
+<button type="button" class="kk-shutter kk-small" disabled>Place order</button>
 <span style="font-size:12px; color:#A39A8B;">{{orderBlock}}</span>
 </div>
 </div>
@@ -157,14 +159,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <sc-for list="{{sel.flags}}" as="fl" hint-placeholder-count="1">
 <p style="margin:0; display:flex; gap:10px; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E86A5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 18px; margin-top:1px;"><path d="M12 3 2 21h20Z"></path><path d="M12 10v4M12 17.5v.5"></path></svg><span>{{fl.text}}</span></p>
 </sc-for>
-<div style="display:flex; flex-wrap:wrap; gap:8px;">
-<button type="button" class="btn" onClick="{{sel.ask}}" style="height:40px; padding:0 14px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;">{{sel.askLabel}}</button>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+<button type="button" class="kk-shutter kk-small" onClick="{{sel.ask}}">{{sel.askLabel}}</button>
 <button type="button" class="ghost" onClick="{{sel.confirm}}" style="height:40px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Numbers are right</button>
 </div>
 </div>
 </sc-if>
 <sc-if value="{{sel.resolvedNote}}" hint-placeholder-val="{{false}}">
-<p style="margin:0; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:#C9A66B;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{sel.resolvedText}}</p>
+<div class="kk-envelope" role="status"><span class="kk-stamp">Checked</span><p>{{sel.resolvedText}}</p></div>
 </sc-if>
 
 <dl style="margin:0; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:0 16px;">
@@ -196,12 +198,12 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </sc-if>
 
 <sc-if value="{{sel.noM}}" hint-placeholder-val="{{false}}">
-<div style="display:flex; flex-direction:column; gap:8px; padding:16px; border:1px dashed #4A4237;">
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#EEE7D9;">No measurements yet</span>
-<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{sel.missingNote}}</span>
+<div class="kk-negative">
+<span class="kk-neg" aria-hidden="true" style="width:72px; height:56px; flex-basis:72px;"></span>
+<p style="flex:1 1 160px;"><strong>No measurements yet</strong>{{sel.missingNote}}</p>
 </div>
 <div style="display:flex; flex-wrap:wrap; gap:8px;">
-<button type="button" class="btn" onClick="{{sel.ask}}" style="flex:1 1 140px; height:42px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;">{{sel.askLabel}}</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{sel.ask}}" style="flex:1 1 140px;">{{sel.askLabel}}</button>
 <a href="Book.dc.html" class="ghost" style="flex:1 1 140px; display:inline-flex; align-items:center; justify-content:center; height:42px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:13px; font-weight:600;">Book a measuring visit</a>
 </div>
 </sc-if>
@@ -214,16 +216,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </div>
 
 <div role="group" aria-labelledby="tpl-l" style="display:flex; flex-direction:column; gap:8px;">
-<span id="tpl-l" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Message</span>
+<span id="tpl-l" class="kk-dymo">Message</span>
 <div style="display:flex; flex-wrap:wrap; gap:6px;">
 <sc-for list="{{msg.tpls}}" as="tp" hint-placeholder-count="6">
-<button type="button" class="ghost" aria-pressed="{{tp.on}}" onClick="{{tp.pick}}" style="height:36px; padding:0 12px; background:{{tp.bg}}; color:{{tp.fg}}; border:1px solid {{tp.bd}}; border-radius:18px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{tp.label}}</button>
+<button type="button" class="kk-dial-opt" aria-pressed="{{tp.on}}" onClick="{{tp.pick}}" style="font-size:13px;">{{tp.label}}</button>
 </sc-for>
 </div>
 </div>
 
 <fieldset style="margin:0; padding:0; border:0; display:flex; flex-direction:column; gap:8px; min-width:0;">
-<legend style="padding:0; margin-bottom:8px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">To · {{msg.toCount}}</legend>
+<legend class="kk-dymo" style="margin-bottom:8px;">To · {{msg.toCount}}</legend>
 <div style="display:flex; flex-wrap:wrap; gap:6px;">
 <sc-for list="{{msg.groups}}" as="g" hint-placeholder-count="4">
 <button type="button" class="ghost" onClick="{{g.pick}}" style="height:32px; padding:0 10px; background:transparent; color:#C9A66B; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">{{g.label}}</button>
@@ -248,37 +250,41 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </fieldset>
 
 <div role="group" aria-labelledby="ch-l" style="display:flex; flex-direction:column; gap:8px;">
-<span id="ch-l" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Send by</span>
-<div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); border:1px solid #38322A; border-radius:2px;">
+<span id="ch-l" class="kk-dymo">Send by</span>
+<div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:6px;">
 <sc-for list="{{msg.channels}}" as="c" hint-placeholder-count="3">
-<button type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="height:40px; padding:0 8px; background:{{c.bg}}; color:{{c.fg}}; border:0; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{c.label}}</button>
+<button type="button" class="kk-dial-opt" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="justify-content:center;">{{c.label}}</button>
 </sc-for>
 </div>
 </div>
 
 <sc-if value="{{msg.showSubject}}" hint-placeholder-val="{{false}}">
-<div style="display:flex; flex-direction:column; gap:6px;">
-<label for="msg-subject" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Email subject</label>
-<input id="msg-subject" class="fld" type="text" value="{{msg.subject}}" onChange="{{msg.setSubject}}" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+<div class="kk-field">
+<label for="msg-subject" class="kk-dymo">Email subject</label>
+<input id="msg-subject" class="kk-input" type="text" value="{{msg.subject}}" onChange="{{msg.setSubject}}">
 </div>
 </sc-if>
 
-<div style="display:flex; flex-direction:column; gap:6px;">
-<label for="msg-body" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Words</label>
-<textarea id="msg-body" class="fld" rows="5" value="{{msg.body}}" onChange="{{msg.setBody}}" aria-describedby="msg-help" style="box-sizing:border-box; width:100%; min-height:128px; padding:10px 12px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; line-height:1.5;"></textarea>
-<span id="msg-help" style="font-size:12px; line-height:1.5; color:#8E8676;">{first} becomes each person’s first name. {link} becomes their own party-page link.</span>
+<div class="kk-field">
+<label for="msg-body" class="kk-dymo">Words</label>
+<textarea id="msg-body" class="kk-input" rows="5" value="{{msg.body}}" onChange="{{msg.setBody}}" aria-describedby="msg-help" style="min-height:128px;"></textarea>
+<span id="msg-help" class="kk-help" style="font-size:12px; line-height:1.5;">{first} becomes each person’s first name. {link} becomes their own party-page link.</span>
 </div>
 
 <sc-if value="{{msg.hasPreview}}" hint-placeholder-val="{{true}}">
 <div style="display:flex; flex-direction:column; gap:8px;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">What {{msg.previewName}} gets</span>
+<span class="kk-dymo">What {{msg.previewName}} gets</span>
 <div style="align-self:flex-start; max-width:92%; padding:10px 14px; background:#2B2620; border-radius:16px 16px 16px 4px; font-size:14px; line-height:1.5; color:#EEE7D9; white-space:pre-wrap; overflow-wrap:anywhere;">{{msg.preview}}</div>
 <span style="font-size:12px; color:#8E8676;">{{msg.lengthNote}}</span>
 </div>
 </sc-if>
 
-<button type="button" class="btn" onClick="{{msg.send}}" disabled="{{msg.cantSend}}" style="height:48px; padding:0 18px; background:{{msg.sendBg}}; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:14px; cursor:{{msg.sendCursor}};">{{msg.sendLabel}}</button>
-<p aria-live="polite" style="margin:0; font-size:13px; line-height:1.5; color:#C9A66B;">{{msg.status}}</p>
+<button type="button" class="kk-shutter" onClick="{{msg.send}}" disabled="{{msg.cantSend}}" style="padding-top:8px; padding-bottom:8px; line-height:1.3;">{{msg.sendLabel}}</button>
+<div aria-live="polite">
+<sc-if value="{{msg.hasStatus}}" hint-placeholder-val="{{false}}">
+<div class="kk-envelope" role="status"><span class="kk-stamp">Sent</span><p>{{msg.status}}</p></div>
+</sc-if>
+</div>
 
 <div style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:1px solid #2A2621;">
 <button type="button" class="ghost" aria-expanded="{{msg.ownOpen}}" aria-controls="own-list" onClick="{{msg.toggleOwn}}" style="align-self:flex-start; height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{msg.ownLabel}}</button>
@@ -313,9 +319,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 
 <section aria-labelledby="notes-h" style="background:#1A1816; border:1px solid #38322A; padding:24px; display:flex; flex-direction:column; gap:14px;">
 <h2 id="notes-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">Staff notes</h2>
-<label for="note-input" class="sr">Add a staff note</label>
-<textarea id="note-input" class="fld" rows="2" placeholder="Add a note for the team…" value="{{draft}}" onChange="{{setDraft}}" style="box-sizing:border-box; width:100%; min-height:72px; padding:10px 12px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; line-height:1.5;"></textarea>
-<button type="button" class="ghost" onClick="{{addNote}}" style="align-self:flex-end; height:40px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Add note</button>
+<div class="kk-field">
+<label for="note-input" class="kk-dymo">Add a staff note</label>
+<textarea id="note-input" class="kk-input" rows="2" placeholder="Add a note for the team…" value="{{draft}}" onChange="{{setDraft}}" style="min-height:72px;"></textarea>
+</div>
+<button type="button" class="kk-shutter kk-small" onClick="{{addNote}}" style="align-self:flex-end;">Add note</button>
 <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
 <sc-for list="{{notes}}" as="n" hint-placeholder-count="3">
 <li style="display:flex; gap:12px; padding:12px 0; border-top:1px solid #2A2621;">
@@ -416,7 +424,7 @@ class Component extends DCLogic {
     return {
       tpls: Object.keys(T).map((k) => {
         const on = s.msgTpl === k;
-        return { label: T[k].label, on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', bd: on ? '#C29E62' : '#4A4237',
+        return { label: T[k].label, on: on,
           pick: () => this.compose(k, null) };
       }),
       groups: groups,
@@ -437,7 +445,7 @@ class Component extends DCLogic {
       }),
       channels: [['text', 'Text'], ['email', 'Email'], ['both', 'Both']].map((c) => {
         const on = s.msgCh === c[0];
-        return { label: c[1], on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', pick: () => this.setState({ msgCh: c[0] }) };
+        return { label: c[1], on: on, pick: () => this.setState({ msgCh: c[0] }) };
       }),
       showSubject: useEmail,
       subject: s.msgSubject,
@@ -449,10 +457,9 @@ class Component extends DCLogic {
       preview: pv,
       lengthNote: useText ? pv.length + ' characters · ' + (segs === 1 ? 'fits in one text' : 'sends as ' + segs + ' texts') : 'Sent from hello@incognitomenswear.com',
       cantSend: to.length === 0 || !s.msgBody.trim(),
-      sendBg: to.length && s.msgBody.trim() ? '#C29E62' : '#4A4237',
-      sendCursor: to.length && s.msgBody.trim() ? 'pointer' : 'not-allowed',
       sendLabel: to.length ? 'Send to ' + (to.length === 1 ? first(to[0]) : to.length + ' people') + ' by ' + how : 'Pick who gets it',
       status: s.msgStatus,
+      hasStatus: !!s.msgStatus,
       send: () => {
         if (!to.length || !s.msgBody.trim()) return;
         const done = Object.assign({}, s.done);
@@ -603,7 +610,7 @@ class Component extends DCLogic {
         tileBd: it.resolved ? '#C29E62' : blocked ? '#4A4237' : '#8C7247',
         tileFg: it.resolved ? '#15130F' : blocked ? '#A39A8B' : '#C9A66B',
         level: it.level,
-        levelColor: it.resolved ? '#C9A66B' : blocked ? '#A39A8B' : it.key === 'review' ? '#E86A5E' : '#C9A66B',
+        levelClass: it.resolved ? 'kk-cap is-green' : blocked ? 'kk-cap is-grey' : it.key === 'review' ? 'kk-cap is-red' : 'kk-cap',
         title: it.title,
         lines: it.lines,
         actions: it.actions,
@@ -622,7 +629,7 @@ class Component extends DCLogic {
         role: p.role,
         sel: sel,
         bg: sel ? '#221F1B' : 'transparent',
-        bar: sel ? '#C29E62' : 'transparent',
+        picked: sel ? 'is-picked' : '',
         measText: p.m ? p.source.split(' · ').slice(0, 2).join(' · ') : 'Missing',
         measColor: p.m ? '#EEE7D9' : '#E86A5E',
         size: p.m ? this.coat(p.m) + ' · ' + p.m.waist : '—',

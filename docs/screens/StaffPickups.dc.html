@@ -10,6 +10,7 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
 a{color:#C9A66B}a:hover{color:#E2C48E}
@@ -35,9 +36,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:42px; line-height:1; color:#EEE7D9;">Pickups &amp; returns</h1>
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; min-width:0; max-width:100%;">
-<div role="group" aria-label="Show" style="display:flex; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px;">
+<div role="group" aria-label="Show" style="display:flex; gap:6px;">
 <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
-<button type="button" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="height:38px; padding:0 16px; background:{{t.bg}}; color:{{t.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer; white-space:nowrap;">{{t.label}} <span style="font-family:Rokkitt, serif; font-weight:700; font-size:16px; margin-left:4px;">{{t.count}}</span></button>
+<button type="button" class="kk-dial-opt" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="white-space:nowrap;">{{t.label}} <span style="font-family:Rokkitt, serif; font-weight:700; font-size:16px;">{{t.count}}</span></button>
 </sc-for>
 </div>
 <label for="search" class="sr">Search by name or bag number</label>
@@ -67,10 +68,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </div>
 
 <sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}">
-<div style="display:flex; flex-direction:column; gap:8px; padding:20px; margin:8px 0 12px; border:1px dashed #4A4237;">
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#EEE7D9;">No one matches “{{q}}”</span>
-<span style="font-size:14px; line-height:1.5; color:#A39A8B;">Try a last name or a bag number like B-14. {{otherTabHint}}</span>
-<button type="button" class="ghost" onClick="{{clearQ}}" style="align-self:flex-start; height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Clear search</button>
+<div class="kk-negative" style="margin:8px 0 12px;">
+<div class="kk-neg" aria-hidden="true">Undeveloped</div>
+<p><strong>No one matches “{{q}}”</strong>Try a last name or a bag number like B-14. {{otherTabHint}}</p>
+<button type="button" class="ghost" onClick="{{clearQ}}" style="height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Clear search</button>
 </div>
 </sc-if>
 
@@ -82,7 +83,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </div>
 <ul style="list-style:none; margin:0; padding:0;">
 <sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="4">
-<li style="display:flex; flex-wrap:wrap; align-items:center; border-top:1px solid #2A2621; background:{{r.bg}}; border-left:3px solid {{r.bar}};">
+<li style="display:flex; flex-wrap:wrap; align-items:center; border-top:1px solid #2A2621; background:{{r.bg}}; border-left:3px solid {{r.bar}}; box-shadow:{{r.ring}};">
 <button type="button" class="row" aria-pressed="{{r.sel}}" onClick="{{r.pick}}" style="flex:1 1 300px; min-width:0; display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; padding:13px 12px; background:transparent; border:0; text-align:left; color:#EEE7D9; font-family:Archivo, sans-serif; cursor:pointer;">
 <span style="flex:1 1 200px; min-width:0; display:flex; flex-direction:column; gap:3px;">
 <span style="font-size:15px; font-weight:700;">{{r.name}}</span>
@@ -92,14 +93,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <span style="flex:0 0 92px; font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:{{r.bagColor}};">{{r.bag}}</span>
 <span style="flex:0 0 auto; display:flex; flex-wrap:wrap; gap:6px;">
 <sc-for list="{{r.pills}}" as="pl" hint-placeholder-count="1">
-<span style="display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 9px; border:1px solid {{pl.bd}}; background:{{pl.bg}}; font-size:12px; font-weight:700; color:{{pl.fg}}; white-space:nowrap;">{{pl.text}}</span>
+<span class="{{pl.cls}}">{{pl.text}}</span>
 </sc-for>
 </span>
 </button>
 <sc-if value="{{r.hasActions}}" hint-placeholder-val="{{false}}">
 <div style="flex:0 0 auto; display:flex; gap:8px; padding:0 12px 12px 12px; margin-left:auto;">
 <sc-for list="{{r.actions}}" as="ac" hint-placeholder-count="2">
-<button type="button" class="ghost" aria-pressed="{{ac.on}}" onClick="{{ac.run}}" style="height:38px; padding:0 14px; background:{{ac.bg}}; color:{{ac.fg}}; border:1px solid {{ac.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">{{ac.label}}<span class="sr"> {{r.name}}</span></button>
+<button type="button" class="{{ac.cls}}" aria-pressed="{{ac.on}}" onClick="{{ac.run}}" style="{{ac.style}}">{{ac.label}}<span class="sr"> {{r.name}}</span></button>
 </sc-for>
 </div>
 </sc-if>
@@ -113,24 +114,24 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <aside id="panel" aria-label="{{panelLabel}}" style="flex:1 1 340px; min-width:0; max-width:460px; box-sizing:border-box;">
 
 <sc-if value="{{showEmpty}}" hint-placeholder-val="{{false}}">
-<section style="background:#1A1816; border:1px dashed #4A4237; padding:24px; display:flex; flex-direction:column; gap:8px;">
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:22px; color:#EEE7D9;">Pick someone from the list</span>
-<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{emptyText}}</span>
+<section class="kk-negative" style="padding:24px;">
+<div class="kk-neg" aria-hidden="true">Undeveloped</div>
+<p><strong>Pick someone from the list</strong>{{emptyText}}</p>
 </section>
 </sc-if>
 
 <sc-if value="{{showPickup}}" hint-placeholder-val="{{true}}">
 <section aria-labelledby="hp-h" style="background:#1A1816; border:1px solid #C9A66B; padding:24px; display:flex; flex-direction:column; gap:18px;">
 <div style="display:flex; flex-direction:column; gap:4px;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Hand-off · {{hp.day}}</span>
+<span style="display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px;"><span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">Hand-off ·</span><span class="kk-date">{{hp.day}}</span></span>
 <h2 id="hp-h" aria-live="polite" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:30px; line-height:1.05; color:#EEE7D9;">{{hp.name}}</h2>
 <span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{hp.role}}</span>
 <span style="font-size:14px; color:#A39A8B;">{{hp.phone}}</span>
 </div>
-<div style="display:flex; align-items:center; gap:12px; padding:12px 14px; background:#0F0E0D; border:1px solid #38322A;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; padding:12px 14px; background:#0F0E0D; border:1px solid #38322A;">
 <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a2 2 0 0 1 2 2c0 1.2-2 1.6-2 3M12 8 3 15h18Z"></path><path d="M6 15v6h12v-6"></path></svg>
 <span style="display:flex; flex-direction:column; gap:1px;"><span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Bag</span><span style="font-family:Rokkitt, serif; font-weight:700; font-size:22px; color:#EEE7D9;">{{hp.bag}}</span></span>
-<span style="margin-left:auto; display:inline-flex; align-items:center; height:24px; padding:0 9px; border:1px solid {{hp.pill.bd}}; font-size:12px; font-weight:700; color:{{hp.pill.fg}}; white-space:nowrap;">{{hp.pill.text}}</span>
+<span class="{{hp.pill.cls}}" style="margin-left:auto;">{{hp.pill.text}}</span>
 </div>
 
 <sc-if value="{{hp.notReady}}" hint-placeholder-val="{{false}}">
@@ -143,13 +144,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </sc-if>
 
 <sc-if value="{{hp.done}}" hint-placeholder-val="{{false}}">
-<div style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid #8C7247; background:#221F1B;">
-<p style="margin:0; display:flex; align-items:center; gap:8px; font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#C9A66B;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{hp.doneTitle}}</p>
+<div class="kk-envelope" role="status" style="display:flex; flex-direction:column; gap:6px;">
+<span class="kk-stamp" aria-hidden="true">Handed over</span>
+<h3>{{hp.doneTitle}}</h3>
 <sc-for list="{{hp.doneLines}}" as="dl" hint-placeholder-count="3">
-<span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{dl}}</span>
+<p>{{dl}}</p>
 </sc-for>
 <sc-if value="{{hp.canUndo}}" hint-placeholder-val="{{false}}">
-<button type="button" class="ghost" onClick="{{hp.undo}}" style="align-self:flex-start; height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo hand-off</button>
+<button type="button" onClick="{{hp.undo}}" style="align-self:flex-start; margin-top:6px; height:36px; padding:0 12px; background:transparent; color:#2A1C10; border:1px solid rgba(42,28,16,.55); border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo hand-off</button>
 </sc-if>
 </div>
 </sc-if>
@@ -158,15 +160,21 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <fieldset style="margin:0; padding:0; border:0; min-width:0; display:flex; flex-direction:column;">
 <div style="display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:8px;">
 <legend style="padding:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">In the bag · {{hp.tickText}}</legend>
-<button type="button" onClick="{{hp.tickAll}}" disabled="{{hp.lock}}" style="height:30px; padding:0 4px; background:transparent; border:0; color:{{hp.tickAllColor}}; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{hp.tickAllLabel}}</button>
+<button type="button" class="kk-grease" onClick="{{hp.tickAll}}" disabled="{{hp.lock}}" style="height:30px; padding:0 0 5px; font-size:13px; opacity:{{hp.tickAllOpacity}}; cursor:{{hp.tickAllCursor}};">{{hp.tickAllLabel}}</button>
 </div>
-<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<ul class="kk-sleeve">
 <sc-for list="{{hp.items}}" as="it" hint-placeholder-count="8">
-<li style="border-bottom:1px solid #2A2621;">
-<label style="display:flex; align-items:center; gap:12px; min-height:44px; padding:4px 0; cursor:{{it.cursor}}; opacity:{{it.opacity}};">
+<li>
+<label class="kk-sleeve-row" style="min-height:44px; padding:4px 14px; cursor:{{it.cursor}}; opacity:{{it.opacity}};">
+<span class="kk-no" aria-hidden="true">{{it.no}}</span>
+<span style="display:flex; align-items:center; gap:12px; min-width:0;">
 <input type="checkbox" checked="{{it.on}}" disabled="{{it.off}}" onChange="{{it.toggle}}" style="width:20px; height:20px; margin:0; accent-color:#C29E62; flex:0 0 20px;">
 <span style="flex:1 1 auto; min-width:0; font-size:15px; color:#EEE7D9;">{{it.label}}</span>
-<span style="flex:0 0 auto; font-family:Rokkitt, serif; font-weight:600; font-size:17px; color:#C9A66B;">{{it.size}}</span>
+</span>
+<span style="display:flex; align-items:center; gap:10px;">
+<span style="font-family:Rokkitt, serif; font-weight:600; font-size:17px; color:#C9A66B;">{{it.size}}</span>
+<span class="kk-mark is-ok" aria-hidden="true" style="min-width:14px;">{{it.mark}}</span>
+</span>
 </label>
 </li>
 </sc-for>
@@ -180,14 +188,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 
 <div role="group" aria-labelledby="who-l" style="display:flex; flex-direction:column; gap:8px;">
 <span id="who-l" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Who’s picking up</span>
-<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); border:1px solid #38322A; border-radius:2px;">
+<div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:6px;">
 <sc-for list="{{hp.whoOpts}}" as="w" hint-placeholder-count="2">
-<button type="button" aria-pressed="{{w.on}}" onClick="{{w.pick}}" style="height:40px; padding:0 8px; background:{{w.bg}}; color:{{w.fg}}; border:0; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{w.label}}</button>
+<button type="button" class="kk-dial-opt" aria-pressed="{{w.on}}" onClick="{{w.pick}}" style="justify-content:center; padding:0 8px; font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{w.label}}</button>
 </sc-for>
 </div>
 <sc-if value="{{hp.isOther}}" hint-placeholder-val="{{false}}">
 <label for="other-name" class="sr">Name of the person picking up</label>
-<input id="other-name" class="fld" type="text" placeholder="Their name, e.g. Mateo Castillo" value="{{hp.other}}" onChange="{{hp.setOther}}" style="box-sizing:border-box; width:100%; height:44px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+<input id="other-name" class="kk-input" type="text" placeholder="Their name, e.g. Mateo Castillo" value="{{hp.other}}" onChange="{{hp.setOther}}" style="font-size:15px;">
 <span style="font-size:12px; line-height:1.5; color:#8E8676;">Check their ID. {{hp.firstName}} stays responsible for the return.</span>
 </sc-if>
 </div>
@@ -195,7 +203,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <sc-if value="{{hp.hasReturn}}" hint-placeholder-val="{{true}}">
 <div style="display:flex; gap:12px; padding:12px 14px; border:1px solid #38322A; background:#0F0E0D;">
 <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 20px; margin-top:2px;"><rect x="3" y="5" width="18" height="16" rx="1"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
-<span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:15px; font-weight:700; color:#EEE7D9;">Due back {{hp.returnBy}}</span><span style="font-size:13px; line-height:1.5; color:#A39A8B;">Say it out loud. Everything goes back on the hangers, in this bag. We text a reminder the day before.</span></span>
+<span style="display:flex; flex-direction:column; gap:2px;"><span style="display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 8px; font-size:15px; font-weight:700; color:#EEE7D9;">Due back <span class="kk-date" style="font-size:16px;">{{hp.returnBy}}</span></span><span style="font-size:13px; line-height:1.5; color:#A39A8B;">Say it out loud. Everything goes back on the hangers, in this bag. We text a reminder the day before.</span></span>
 </div>
 </sc-if>
 <sc-if value="{{hp.isBuy}}" hint-placeholder-val="{{false}}">
@@ -203,7 +211,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </sc-if>
 
 <div style="display:flex; flex-direction:column; gap:6px;">
-<button type="button" class="btn" onClick="{{hp.hand}}" disabled="{{hp.cant}}" style="height:48px; padding:0 18px; background:{{hp.handBg}}; color:{{hp.handFg}}; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.06em; text-transform:uppercase; cursor:{{hp.handCursor}};">Hand over</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{hp.hand}}" disabled="{{hp.cant}}" style="align-self:flex-start;"><span class="kk-dot" aria-hidden="true"></span>Hand over</button>
 <span aria-live="polite" style="font-size:12px; line-height:1.5; color:#A39A8B;">{{hp.handHint}}</span>
 </div>
 </sc-if>
@@ -220,25 +228,26 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </div>
 
 <sc-if value="{{rp.notOut}}" hint-placeholder-val="{{false}}">
-<div style="display:flex; flex-direction:column; gap:6px; padding:16px; border:1px dashed #4A4237;">
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#EEE7D9;">Not picked up yet</span>
-<span style="font-size:14px; line-height:1.5; color:#A39A8B;">{{rp.notOutText}}</span>
-<button type="button" class="ghost" onClick="{{rp.goPickup}}" style="align-self:flex-start; margin-top:4px; height:38px; padding:0 14px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Open the pickup</button>
+<div class="kk-negative">
+<div class="kk-neg" aria-hidden="true">Not out</div>
+<p><strong>Not picked up yet</strong>{{rp.notOutText}}</p>
+<button type="button" class="kk-grease" onClick="{{rp.goPickup}}" style="font-size:14px;">Open the pickup</button>
 </div>
 </sc-if>
 
 <sc-if value="{{rp.done}}" hint-placeholder-val="{{false}}">
-<div style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px solid #8C7247; background:#221F1B;">
-<p style="margin:0; display:flex; align-items:center; gap:8px; font-family:Rokkitt, serif; font-weight:600; font-size:20px; color:#C9A66B;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>{{rp.doneTitle}}</p>
+<div class="kk-envelope" role="status" style="display:flex; flex-direction:column; gap:8px;">
+<span class="kk-stamp" aria-hidden="true">Checked in</span>
+<h3>{{rp.doneTitle}}</h3>
 <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
 <sc-for list="{{rp.doneItems}}" as="di" hint-placeholder-count="8">
-<li style="display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-top:1px solid #38322A; font-size:14px;"><span style="color:#EEE7D9;">{{di.label}}</span><span style="font-weight:600; color:{{di.color}};">{{di.cond}}</span></li>
+<li style="display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-top:1px solid rgba(42,28,16,.25); font-size:14px;"><span style="color:#2A1C10;">{{di.label}}</span><span style="font-weight:700; color:{{di.ink}};">{{di.cond}}</span></li>
 </sc-for>
 </ul>
-<sc-if value="{{rp.hasDoneNote}}" hint-placeholder-val="{{false}}"><span style="font-size:14px; line-height:1.5; color:#A39A8B;">Note: {{rp.doneNote}}</span></sc-if>
-<sc-if value="{{rp.doneFlag}}" hint-placeholder-val="{{false}}"><span style="font-size:14px; font-weight:600; line-height:1.5; color:#E86A5E;">{{rp.doneFlagText}}</span></sc-if>
+<sc-if value="{{rp.hasDoneNote}}" hint-placeholder-val="{{false}}"><p>Note: {{rp.doneNote}}</p></sc-if>
+<sc-if value="{{rp.doneFlag}}" hint-placeholder-val="{{false}}"><p style="font-weight:700; color:#8E2219;">{{rp.doneFlagText}}</p></sc-if>
 <sc-if value="{{rp.canUndo}}" hint-placeholder-val="{{false}}">
-<button type="button" class="ghost" onClick="{{rp.undo}}" style="align-self:flex-start; height:36px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo check-in</button>
+<button type="button" onClick="{{rp.undo}}" style="align-self:flex-start; margin-top:4px; height:36px; padding:0 12px; background:transparent; color:#2A1C10; border:1px solid rgba(42,28,16,.55); border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Undo check-in</button>
 </sc-if>
 </div>
 </sc-if>
@@ -249,11 +258,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </sc-if>
 <div style="display:flex; flex-direction:column;">
 <span style="margin-bottom:8px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Check each item</span>
-<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<ul class="kk-sleeve">
 <sc-for list="{{rp.items}}" as="it" hint-placeholder-count="8">
-<li style="display:flex; flex-direction:column; gap:8px; padding:10px 0; border-bottom:1px solid #2A2621;">
-<span style="display:flex; justify-content:space-between; gap:12px;"><span id="{{it.id}}" style="font-size:15px; color:#EEE7D9;">{{it.label}}</span><span style="font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:#C9A66B;">{{it.size}}</span></span>
-<span role="group" aria-labelledby="{{it.id}}" style="display:flex; flex-wrap:wrap; gap:4px;">
+<li class="kk-sleeve-row" style="row-gap:8px;">
+<span class="kk-no" aria-hidden="true">{{it.no}}</span>
+<span style="display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 10px; min-width:0;"><span id="{{it.id}}" style="font-size:15px; color:#EEE7D9;">{{it.label}}</span><span style="font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:#C9A66B;">{{it.size}}</span></span>
+<span class="{{it.markCls}}" aria-hidden="true">{{it.mark}}</span>
+<span role="group" aria-labelledby="{{it.id}}" style="grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:4px;">
 <sc-for list="{{it.opts}}" as="o" hint-placeholder-count="4">
 <button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="flex:1 1 auto; height:32px; padding:0 9px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer; white-space:nowrap;">{{o.label}}</button>
 </sc-for>
@@ -262,14 +273,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </sc-for>
 </ul>
 </div>
-<div style="display:flex; flex-direction:column; gap:6px;">
-<label for="ret-note" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Note</label>
-<textarea id="ret-note" class="fld" rows="2" placeholder="e.g. Wine stain on left cuff" value="{{rp.note}}" onChange="{{rp.setNote}}" style="box-sizing:border-box; width:100%; min-height:68px; padding:10px 12px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px; line-height:1.5;"></textarea>
+<div class="kk-field">
+<label for="ret-note" class="kk-dymo">Note</label>
+<textarea id="ret-note" class="kk-input" rows="2" placeholder="e.g. Wine stain on left cuff" value="{{rp.note}}" onChange="{{rp.setNote}}" style="min-height:68px; font-size:15px; line-height:1.5;"></textarea>
 </div>
 <sc-if value="{{rp.flag}}" hint-placeholder-val="{{false}}">
 <p aria-live="polite" style="margin:0; display:flex; gap:10px; padding:12px 14px; border:1px solid #E86A5E; background:#211614; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E86A5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 18px; margin-top:1px;"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg><span>{{rp.flagText}}</span></p>
 </sc-if>
-<button type="button" class="btn" onClick="{{rp.checkIn}}" style="height:48px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer;">Check in</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{rp.checkIn}}" style="align-self:flex-start;"><span class="kk-dot" aria-hidden="true"></span>Check in</button>
 <span style="font-size:12px; line-height:1.5; color:#8E8676;">{{rp.summary}}</span>
 </sc-if>
 </section>
@@ -430,7 +441,8 @@ class Component extends DCLogic {
         grey: { fg: '#A39A8B', bd: '#4A4237', bg: 'transparent' },
         done: { fg: '#15130F', bd: '#C29E62', bg: '#C29E62' }
       }[kind];
-      return { text: text, fg: K.fg, bd: K.bd, bg: K.bg };
+      const cls = { brass: 'kk-cap', red: 'kk-cap is-red', grey: 'kk-cap is-grey', done: 'kk-cap is-green' }[kind];
+      return { text: text, fg: K.fg, bd: K.bd, bg: K.bg, cls: cls };
     };
 
     let sections = [];
@@ -450,12 +462,12 @@ class Component extends DCLogic {
         const rows = PICK.filter((p) => p.day === d.key && match(p)).map((p) => {
           const st = pState(p);
           const sel = s.selP === p.id;
-          const pills = st === 'picked' ? [pill('Picked up ' + pickedAt(p), 'grey')] : st === 'notready' ? [pill('Not ready', 'red')] : [pill('Staged', 'brass')];
+          const pills = st === 'picked' ? [pill('Picked up ' + pickedAt(p), 'done')] : st === 'notready' ? [pill('Not ready', 'red')] : [pill('Staged', 'brass')];
           const note = st === 'notready' ? (p.id === 'ac' ? 'Waiting on Lou’s sleeve hem · check-in 4:30' : 'Order arrives Mon, Dec 7') : '';
           return {
             name: p.name, role: p.role, bag: p.bag, bagColor: st === 'notready' && p.bag.indexOf('No') === 0 ? '#8E8676' : '#C9A66B',
             hasNote: !!note, note: note, noteColor: '#E86A5E',
-            pills: pills, sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent',
+            pills: pills, sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent', ring: sel ? 'inset 0 0 0 1px #C29E62' : 'none',
             hasActions: false, actions: [],
             pick: () => { this.setState({ selP: p.id }); this.scrollPanel(); }
           };
@@ -487,7 +499,7 @@ class Component extends DCLogic {
           let pills = [];
           let note = '';
           if (d) {
-            pills = [pill('Checked in ' + d.at, 'grey')];
+            pills = [pill('Checked in ' + d.at, 'done')];
             const bad = r.items.some((_, i) => d.cond[i] === 'damaged' || d.cond[i] === 'missing');
             if (bad) pills.push(pill('Flagged for ' + first(r.lead), 'red'));
           } else if (r.group === 'overdue') {
@@ -504,6 +516,8 @@ class Component extends DCLogic {
             return {
               label: on ? doneLabel + ' ' + c[key] : label, on: on,
               bg: on ? '#221F1B' : 'transparent', fg: on ? '#C9A66B' : '#EEE7D9', bd: on ? '#8C7247' : '#4A4237',
+              cls: on ? 'ghost' : 'kk-shutter kk-small',
+              style: on ? 'height:44px; padding:0 14px; background:#221F1B; color:#C9A66B; border:1px solid #8C7247; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;' : 'white-space:nowrap;',
               run: () => {
                 const cur = Object.assign({}, this.state.contact[r.id] || {});
                 if (cur[key]) delete cur[key];
@@ -518,7 +532,7 @@ class Component extends DCLogic {
           return {
             name: r.name, role: (r.party ? r.party + ' · ' : '') + r.role, bag: r.bag, bagColor: '#C9A66B',
             hasNote: !!note, note: note, noteColor: '#A39A8B',
-            pills: pills, sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent',
+            pills: pills, sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent', ring: sel ? 'inset 0 0 0 1px #C29E62' : 'none',
             hasActions: showActs,
             actions: showActs ? [act('call', 'Call', '✓ Called'), act('text', 'Text', '✓ Texted')] : [],
             pick: () => { this.setState({ selR: r.id }); this.scrollPanel(); }
@@ -559,7 +573,7 @@ class Component extends DCLogic {
         day: P.dayLabel, name: P.name,
         role: (P.party ? P.party + ' · ' : '') + P.role,
         phone: P.phone, bag: P.bag,
-        pill: st === 'picked' ? pill('Picked up ' + pickedAt(P), 'grey') : st === 'notready' ? pill('Not ready', 'red') : pill('Staged', 'brass'),
+        pill: st === 'picked' ? pill('Picked up ' + pickedAt(P), 'done') : st === 'notready' ? pill('Not ready', 'red') : pill('Staged', 'brass'),
         notReady: st === 'notready', reason: P.reason || '',
         hasFix: st === 'notready' && !!P.fix, fixLabel: P.fix || '',
         fix: () => this.setState(this.setIn('fixed', P.id, true)),
@@ -570,6 +584,7 @@ class Component extends DCLogic {
         tickText: nTicked + ' of ' + P.items.length + ' ticked',
         tickAllLabel: allTicked ? 'Clear all' : 'Tick all',
         tickAllColor: lock ? '#8E8676' : '#C9A66B',
+        tickAllOpacity: lock ? 0.45 : 1, tickAllCursor: lock ? 'default' : 'pointer',
         tickAll: () => {
           if (lock) return;
           const next = {};
@@ -578,6 +593,7 @@ class Component extends DCLogic {
         },
         items: P.items.map((it, i) => ({
           label: it[0], size: it[1], on: !!ticks[i], off: lock,
+          no: String(i + 1).padStart(2, '0'), mark: ticks[i] ? '✓' : '',
           cursor: lock ? 'default' : 'pointer', opacity: lock ? 0.55 : 1,
           toggle: () => {
             const cur = Object.assign({}, this.state.ticks[P.id] || {});
@@ -638,7 +654,8 @@ class Component extends DCLogic {
         doneTitle: d ? 'Checked in ' + d.at : '',
         doneItems: d ? R.items.map((it, i) => {
           const c = d.cond[i] || 'good';
-          return { label: it[0] + (it[1] ? ' · ' + it[1] : ''), cond: COND[c][0], color: COND[c][1] };
+          return { label: it[0] + (it[1] ? ' · ' + it[1] : ''), cond: COND[c][0], color: COND[c][1],
+            ink: c === 'damaged' || c === 'missing' ? '#8E2219' : c === 'clean' ? '#5E3A12' : '#2A1C10' };
         }) : [],
         hasDoneNote: !!(d && d.note), doneNote: d ? d.note : '',
         doneFlag: doneBad.length > 0,
@@ -652,6 +669,8 @@ class Component extends DCLogic {
           const cur = condOf(R, i);
           return {
             id: 'ri-' + R.id + '-' + i, label: it[0], size: it[1],
+            no: String(i + 1).padStart(2, '0'), mark: COND[cur][0],
+            markCls: 'kk-mark ' + (cur === 'good' ? 'is-ok' : cur === 'clean' ? 'is-wait' : 'is-no'),
             opts: Object.keys(COND).map((k) => {
               const on = cur === k;
               const red = k === 'damaged' || k === 'missing';

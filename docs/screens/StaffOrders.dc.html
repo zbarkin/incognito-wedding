@@ -10,6 +10,7 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
 a{color:#C9A66B}a:hover{color:#E2C48E}
@@ -20,6 +21,12 @@ a{color:#C9A66B}a:hover{color:#E2C48E}
 .row:hover{background:#1F1C18 !important}
 .nav:hover{background:#1A1816 !important}
 a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2px}
+.kk-date.sm{font-size:14px}
+.so-strip{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 6px;padding:13px 6px}
+.so-strip .kk-frame{font-size:12px;position:relative}
+.so-strip .kk-frame b{margin-bottom:4px}
+.so-strip .kk-frame small{font:11px/1.3 Archivo, sans-serif;margin-top:3px;opacity:.85}
+@media (max-width:640px){.so-counter{display:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </helmet>
@@ -58,25 +65,25 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <section aria-labelledby="list-h" style="flex:999 1 560px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:22px 24px 8px;">
 <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px; margin-bottom:16px;">
 <h2 id="list-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#EEE7D9;">{{listTitle}}</h2>
-<div role="group" aria-label="Show orders" style="display:flex; flex-wrap:wrap; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px; max-width:100%;">
+<div role="group" aria-label="Show orders" style="display:flex; flex-wrap:wrap; gap:4px; max-width:100%;">
 <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
-<button type="button" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 12px; background:{{t.bg}}; color:{{t.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap;">{{t.label}}<span style="min-width:20px; height:20px; padding:0 5px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background:{{t.cBg}}; color:{{t.cFg}}; font-size:11px; font-weight:700;">{{t.count}}</span></button>
+<button type="button" class="kk-dial-opt" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="gap:8px; padding:0 12px; font-size:13px; white-space:nowrap;">{{t.label}}<span style="min-width:20px; height:20px; padding:0 5px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background:{{t.cBg}}; color:{{t.cFg}}; font-size:11px; font-weight:700;">{{t.count}}</span></button>
 </sc-for>
 </div>
 </div>
 <div style="position:relative; overflow-x:auto;">
 <div style="min-width:980px;">
-<div aria-hidden="true" style="display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .85fr) minmax(0, .5fr) minmax(0, 1.05fr) minmax(0, 1.7fr); gap:14px; padding:0 12px 10px 15px; border-bottom:1px solid #38322A; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
+<div aria-hidden="true" style="display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .85fr) minmax(0, .5fr) minmax(0, 1.2fr) minmax(0, 1.55fr); gap:14px; padding:0 12px 10px 15px; border-bottom:1px solid #38322A; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
 <span>Order</span><span>Party or customer</span><span>Event</span><span>Order by</span><span>Pieces</span><span>Status</span><span>Next step</span>
 </div>
 <ul style="list-style:none; margin:0; padding:0;">
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
 <li style="border-bottom:1px solid #2A2621;">
-<button type="button" class="row" aria-pressed="{{r.sel}}" onClick="{{r.pick}}" style="width:100%; display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .85fr) minmax(0, .5fr) minmax(0, 1.05fr) minmax(0, 1.7fr); gap:14px; align-items:center; padding:14px 12px; text-align:left; background:{{r.bg}}; border:0; border-left:3px solid {{r.bar}}; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:14px; cursor:pointer;">
+<button type="button" class="row" aria-pressed="{{r.sel}}" onClick="{{r.pick}}" style="width:100%; display:grid; grid-template-columns:minmax(0, .85fr) minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .85fr) minmax(0, .5fr) minmax(0, 1.2fr) minmax(0, 1.55fr); gap:14px; align-items:center; padding:14px 12px; text-align:left; background:{{r.bg}}; border:0; border-left:3px solid {{r.bar}}; box-shadow:{{r.ring}}; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:14px; cursor:pointer;">
 <span style="font-family:Rokkitt, serif; font-weight:600; font-size:16px; color:#C9A66B;">{{r.no}}</span>
 <span style="display:flex; flex-direction:column; gap:2px; min-width:0;"><span style="font-size:15px; font-weight:700;">{{r.party}}</span><span style="font-size:12px; color:#A39A8B;">{{r.kind}}</span></span>
 <span style="display:flex; flex-direction:column; gap:2px;"><span>{{r.event}}</span><span style="font-size:12px; color:#A39A8B;">{{r.eventSub}}</span></span>
-<span style="display:flex; flex-direction:column; gap:2px;"><span style="color:{{r.dlColor}};">{{r.deadline}}</span><span style="font-size:12px; color:{{r.dlSubColor}};">{{r.dlSub}}</span></span>
+<span style="display:flex; flex-direction:column; gap:2px;"><sc-if value="{{r.placed}}" hint-placeholder-val="{{false}}"><span style="color:{{r.dlColor}};">{{r.deadline}}</span></sc-if><sc-if value="{{r.due}}" hint-placeholder-val="{{true}}"><span class="kk-date sm">{{r.deadline}}</span></sc-if><span style="font-size:12px; color:{{r.dlSubColor}};">{{r.dlSub}}</span></span>
 <span style="display:flex; flex-direction:column; gap:2px;"><span style="font-family:Rokkitt, serif; font-weight:600; font-size:17px;">{{r.pieces}}</span><span style="font-size:12px; color:#A39A8B;">{{r.piecesSub}}</span></span>
 <span style="display:flex; flex-direction:column; gap:6px;">
 <span aria-hidden="true" style="display:flex; gap:3px;">
@@ -84,18 +91,21 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <span style="flex:0 0 auto; width:14px; height:11px; box-sizing:border-box; background:{{c.bg}}; border:1px solid {{c.bd}};"></span>
 </sc-for>
 </span>
-<span style="font-size:12px; font-weight:600; color:{{r.stageColor}};"><span class="sr">Status: </span>{{r.stageName}}</span>
+<span class="kk-cap {{r.cap}}" style="align-self:flex-start;"><span class="sr">Status: </span>{{r.stageName}}</span>
 </span>
 <span style="font-size:13px; line-height:1.45; color:{{r.nextColor}};"><span class="sr">Next step: </span>{{r.next}}</span>
 </button>
 </li>
 </sc-for>
 </ul>
+</div>
+</div>
 <sc-if value="{{noRows}}" hint-placeholder-val="{{false}}">
-<p style="margin:0; padding:28px 12px; font-size:14px; color:#A39A8B;">{{noRowsText}}</p>
+<div class="kk-negative" style="margin:14px 0 16px;">
+<div class="kk-neg" aria-hidden="true">Undeveloped</div>
+<p>{{noRowsText}}</p>
+</div>
 </sc-if>
-</div>
-</div>
 </section>
 
 <sc-if value="{{hasSel}}" hint-placeholder-val="{{true}}">
@@ -111,46 +121,46 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <button type="button" class="ghost" onClick="{{d.close}}" aria-label="Close order details" style="flex:0 0 auto; width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:1px solid #4A4237; border-radius:2px; cursor:pointer;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EEE7D9" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
 </div>
 
-<ol aria-label="Order status" style="list-style:none; margin:0; padding:14px; display:flex; flex-wrap:wrap; gap:12px 6px; background:#0F0E0D; border:1px solid #38322A;">
+<div class="kk-steps">
+<div class="kk-counter so-counter" aria-hidden="true">{{d.frameNo}}</div>
+<ol class="kk-strip so-strip" aria-label="Order status">
 <sc-for list="{{d.steps}}" as="st" hint-placeholder-count="6">
-<li style="flex:1 1 64px; min-width:0; display:flex; flex-direction:column; gap:6px;">
-<span aria-hidden="true" style="height:24px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{st.bg}}; border:{{st.bd}}; font-family:Rokkitt, serif; font-weight:700; font-size:13px; color:{{st.fg}};">{{st.mark}}</span>
-<span style="font-size:12px; font-weight:600; line-height:1.25; color:{{st.labelColor}};">{{st.label}}<span class="sr">{{st.sr}}</span></span>
-<span style="font-size:11px; line-height:1.3; color:#8E8676;">{{st.sub}}</span>
-</li>
+<li class="kk-frame {{st.cls}}"><b aria-hidden="true">{{st.frame}}</b>{{st.label}}<span class="sr">{{st.sr}}</span><small>{{st.sub}}</small></li>
 </sc-for>
 </ol>
+</div>
 
 <sc-if value="{{d.hasNote}}" hint-placeholder-val="{{false}}">
-<p role="status" style="margin:0; display:flex; gap:10px; align-items:flex-start; padding:12px 14px; border:1px solid #8C7247; background:#1F1B15; font-size:14px; line-height:1.5; color:#EEE7D9;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 16px; margin-top:3px;"><path d="M20 6 9 17l-5-5"></path></svg><span>{{d.note}}</span></p>
+<div class="kk-envelope" role="status"><span class="kk-stamp">2:40 PM</span><p>{{d.note}}</p></div>
 </sc-if>
 
 <section aria-labelledby="blk-h" style="display:flex; flex-direction:column; gap:10px;">
-<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 12px;">
 <h3 id="blk-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Before the order</h3>
-<span style="font-size:13px; font-weight:600; color:{{d.blockColor}};">{{d.blockSummary}}</span>
+<span class="kk-dx {{d.blockDx}}">{{d.blockSummary}}</span>
 </div>
-<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<ul class="kk-sleeve">
 <sc-for list="{{d.checks}}" as="ck" hint-placeholder-count="4">
-<li style="display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-bottom:1px solid #2A2621;">
-<span aria-hidden="true" style="flex:0 0 18px; height:18px; margin-top:1px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{ck.boxBg}}; border:1px solid {{ck.boxBd}}; border-radius:2px;"><sc-if value="{{ck.done}}" hint-placeholder-val="{{true}}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span>
-<span style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:3px;">
+<li class="kk-sleeve-row" style="grid-template-columns:28px minmax(0, 1fr) auto; align-items:start; padding:10px 12px;">
+<span class="kk-no" aria-hidden="true" style="padding-top:3px;">{{ck.no}}</span>
+<span style="min-width:0; display:flex; flex-direction:column; gap:3px;">
 <span style="font-size:14px; line-height:1.4; color:{{ck.color}};"><span class="sr">{{ck.sr}}</span><span style="font-weight:700;">{{ck.who}}</span> {{ck.text}}</span>
 <sc-if value="{{ck.hasSub}}" hint-placeholder-val="{{true}}"><span style="font-size:12px; line-height:1.4; color:{{ck.subColor}};">{{ck.sub}}</span></sc-if>
-</span>
-<span style="flex:0 0 auto; display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px;">
+<sc-if value="{{ck.hasActions}}" hint-placeholder-val="{{true}}"><span style="display:flex; flex-wrap:wrap; gap:6px; margin-top:5px;">
 <sc-for list="{{ck.actions}}" as="ac" hint-placeholder-count="1">
 <button type="button" class="ghost" onClick="{{ac.run}}" style="height:32px; padding:0 10px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer; white-space:nowrap;">{{ac.label}}<span class="sr"> {{ac.sr}}</span></button>
 </sc-for>
+</span></sc-if>
 </span>
+<span class="kk-mark {{ck.markCls}}" aria-hidden="true">{{ck.mark}}</span>
 </li>
 </sc-for>
 </ul>
 <sc-if value="{{d.showOrderActions}}" hint-placeholder-val="{{true}}">
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding-top:4px;">
-<button type="button" class="btn" onClick="{{d.place}}" disabled="{{d.placeOff}}" style="height:46px; padding:0 18px; background:{{d.placeBg}}; color:{{d.placeFg}}; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:{{d.placeCursor}};">Place order</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{d.place}}" disabled="{{d.placeOff}}" style="cursor:{{d.placeCursor}};">Place order</button>
 <sc-if value="{{d.showLinks}}" hint-placeholder-val="{{true}}">
-<button type="button" class="ghost" onClick="{{d.sendLinks}}" style="height:46px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #8C7247; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{d.linksLabel}}</button>
+<button type="button" class="ghost" onClick="{{d.sendLinks}}" style="height:44px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #8C7247; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{d.linksLabel}}</button>
 </sc-if>
 <span style="flex:1 1 100%; font-size:12px; line-height:1.5; color:#A39A8B;">{{d.placeHelp}}</span>
 </div>
@@ -159,13 +169,13 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 
 <sc-if value="{{d.showShipped}}" hint-placeholder-val="{{false}}">
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
-<button type="button" class="ghost" onClick="{{d.markShipped}}" style="height:44px; padding:0 16px; background:transparent; color:#EEE7D9; border:1px solid #8C7247; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">Mark shipped</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{d.markShipped}}">Mark shipped</button>
 <span style="font-size:12px; color:#A39A8B;">When the rental warehouse sends the shipping notice.</span>
 </div>
 </sc-if>
 <sc-if value="{{d.showReceived}}" hint-placeholder-val="{{false}}">
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
-<button type="button" class="btn" onClick="{{d.markReceived}}" style="height:46px; padding:0 18px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;">Mark received</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{d.markReceived}}">Mark received</button>
 <span style="font-size:12px; line-height:1.5; color:#A39A8B;">When the boxes are in the back room. Then check in each piece.</span>
 </div>
 </sc-if>
@@ -180,13 +190,12 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <div style="display:flex; flex-wrap:wrap; gap:8px;">
 <button type="button" class="ghost" onClick="{{d.checkAll}}" style="height:34px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:12px; cursor:pointer;">{{d.checkAllLabel}}</button>
 </div>
-<ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
+<ul class="kk-sleeve">
 <sc-for list="{{d.ciGroups}}" as="g" hint-placeholder-count="5">
-<li style="padding:10px 0; border-bottom:1px solid #2A2621; display:flex; flex-direction:column; gap:8px;">
-<div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+<li class="kk-sleeve-row" style="grid-template-columns:28px minmax(0, 1fr) auto; align-items:start; padding:10px 12px;">
+<span class="kk-no" aria-hidden="true" style="padding-top:3px;">{{g.no}}</span>
+<div style="min-width:0; display:flex; flex-direction:column; gap:8px;">
 <span style="font-size:14px; font-weight:700; color:#EEE7D9;">{{g.name}} <span style="font-weight:400; font-size:12px; color:#A39A8B;">{{g.count}}</span></span>
-<sc-if value="{{g.canAll}}" hint-placeholder-val="{{true}}"><button type="button" class="ghost" onClick="{{g.all}}" style="height:28px; padding:0 8px; background:transparent; color:#C9A66B; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:11px; cursor:pointer;">All {{g.total}}<span class="sr"> for {{g.name}}</span></button></sc-if>
-</div>
 <div style="display:flex; flex-wrap:wrap; gap:6px;">
 <sc-for list="{{g.pieces}}" as="pc" hint-placeholder-count="7">
 <label style="display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:0 9px; box-sizing:border-box; background:{{pc.bg}}; border:1px solid {{pc.bd}}; border-radius:2px; font-size:12px; font-weight:600; color:{{pc.fg}}; cursor:pointer;">
@@ -195,6 +204,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 </label>
 </sc-for>
 </div>
+</div>
+<sc-if value="{{g.canAll}}" hint-placeholder-val="{{true}}"><button type="button" class="ghost" onClick="{{g.all}}" style="height:28px; padding:0 8px; background:transparent; color:#C9A66B; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:11px; cursor:pointer;">All {{g.total}}<span class="sr"> for {{g.name}}</span></button></sc-if>
+<sc-if value="{{g.allDone}}" hint-placeholder-val="{{false}}"><span class="kk-mark is-ok" aria-hidden="true">✓</span></sc-if>
 </li>
 </sc-for>
 </ul>
@@ -218,9 +230,9 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 
 <sc-if value="{{d.hasOuts}}" hint-placeholder-val="{{false}}">
 <section aria-labelledby="out-h" style="display:flex; flex-direction:column; gap:8px;">
-<div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 12px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 12px;">
 <h3 id="out-h" style="margin:0; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Back from the party</h3>
-<span style="font-size:13px; font-weight:700; color:{{d.outColor}};">{{d.outText}}</span>
+<span class="kk-dx {{d.outDx}}">{{d.outText}}</span>
 </div>
 <ul style="list-style:none; margin:0; padding:0; border-top:1px solid #2A2621;">
 <sc-for list="{{d.outs}}" as="ot" hint-placeholder-count="6">
@@ -242,8 +254,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <span style="font-size:14px; line-height:1.5; color:#EEE7D9;">{{d.pickupText}}</span>
 <sc-if value="{{d.pickupOpen}}" hint-placeholder-val="{{true}}">
 <div style="display:flex; flex-wrap:wrap; gap:8px;">
-<button type="button" class="ghost" onClick="{{d.pickupRemind}}" style="height:38px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{d.pickupRemindLabel}}</button>
-<button type="button" class="btn" onClick="{{d.pickupDone}}" style="height:38px; padding:0 14px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-weight:700; font-size:13px; cursor:pointer;">Mark picked up</button>
+<button type="button" class="ghost" onClick="{{d.pickupRemind}}" style="height:44px; padding:0 12px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;">{{d.pickupRemindLabel}}</button>
+<button type="button" class="kk-shutter kk-small" onClick="{{d.pickupDone}}">Mark picked up</button>
 </div>
 </sc-if>
 </section>
@@ -296,7 +308,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:2p
 <li style="display:flex; gap:12px; padding:8px 0; border-bottom:1px solid #2A2621; font-size:13px; line-height:1.45;"><span style="flex:0 0 72px; color:#C9A66B; font-weight:600;">{{lg.when}}</span><span style="flex:1 1 auto; min-width:0; color:#A39A8B;">{{lg.what}}</span></li>
 </sc-for>
 </ol>
-<sc-if value="{{d.hasPartyLink}}" hint-placeholder-val="{{false}}"><a href="PartyAdmin.dc.html" style="align-self:flex-start; font-size:13px; font-weight:600;">Open the party page</a></sc-if>
+<sc-if value="{{d.hasPartyLink}}" hint-placeholder-val="{{false}}"><a href="PartyAdmin.dc.html" class="kk-grease" style="align-self:flex-start; font-size:13px;">Open the party page</a></sc-if>
 </section>
 
 </aside>
@@ -562,7 +574,9 @@ class Component extends DCLogic {
         stageName: STEPS[e],
         stageColor: e === 0 ? '#A39A8B' : '#C9A66B',
         next: n.text, nextColor: n.color,
-        sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent',
+        sel: sel, bg: sel ? '#221F1B' : 'transparent', bar: sel ? '#C29E62' : 'transparent', ring: sel ? 'inset 0 0 0 1px #C29E62' : 'none',
+        placed: placed, due: !placed,
+        cap: e === 0 ? (o.dlDays <= 7 ? 'is-red' : 'is-grey') : e === 5 ? 'is-green' : '',
         pick: () => this.setState({ sel: sel ? null : o.id })
       };
     });
@@ -594,6 +608,8 @@ class Component extends DCLogic {
         if (i === 2 && o.stage >= 2 && o.placedSub) sub = o.placedSub;
         return {
           label: label, sub: sub,
+          cls: done ? 'is-done' : now ? 'is-now' : '',
+          frame: (done ? '✓ ' : '') + String(i + 1).padStart(2, '0'),
           mark: done ? '✓' : String(i + 1),
           bg: done ? '#C29E62' : '#1F1C18',
           bd: now ? '2px solid #E2C48E' : done ? '1px solid #C29E62' : '1px solid #3A342C',
@@ -620,6 +636,7 @@ class Component extends DCLogic {
           actions: actions, sr: b.done ? 'Done: ' : 'Blocking: '
         });
       });
+      checks.forEach((ck, i) => { ck.no = String(i + 1).padStart(2, '0'); ck.mark = ck.done ? '✓' : '✗'; ck.markCls = ck.done ? 'is-ok' : 'is-no'; ck.hasActions = ck.actions.length > 0; });
       const ready = e === 1;
       const placeHelp = e === 0
         ? 'Place order unlocks when nothing is blocking. Waiting on ' + open.length + (open.length === 1 ? ' item.' : ' items.') + ' Due ' + o.deadline + '.'
@@ -633,7 +650,7 @@ class Component extends DCLogic {
         const k = names.map((_, j) => i + '-' + j);
         const n = k.filter((x) => c[x]).length;
         return {
-          name: p.name, count: n + ' of ' + names.length, total: names.length, canAll: n < names.length,
+          name: p.name, no: String(i + 1).padStart(2, '0'), count: n + ' of ' + names.length, total: names.length, canAll: n < names.length, allDone: n === names.length,
           all: () => this.upd(o.id, (cc) => { cc.checkin = cc.checkin || {}; k.forEach((x) => { cc.checkin[x] = true; }); this.afterCheck(cc); }),
           pieces: names.map((label, j) => {
             const on = !!c[i + '-' + j];
@@ -671,8 +688,10 @@ class Component extends DCLogic {
         meta: (o.rental ? 'Event ' + o.event + ' · ' + o.venue + ' · ' + (o.people.length === 1 ? '1 person' : 'Party of ' + o.people.length) : 'Bought ' + o.event + ' · in store') + ' · ' + o.staff,
         look: o.look,
         steps: steps,
+        frameNo: String(Math.min(e + 1, 6)).padStart(2, '0'),
         hasNote: !!o.note, note: o.note || '',
         blockSummary: o.stage >= 2 ? 'Placed · nothing blocking' : open.length ? open.length + ' blocking' : 'Nothing blocking',
+        blockDx: open.length && o.stage < 2 ? 'is-out' : '',
         blockColor: open.length && o.stage < 2 ? '#E86A5E' : '#C9A66B',
         checks: checks,
         showOrderActions: o.stage < 2,
@@ -716,6 +735,7 @@ class Component extends DCLogic {
         })),
         hasOuts: !!o.outs, outs: outs,
         outText: outLeft ? (6 - outLeft) + ' of 6 back · ' + outLeft + ' still out' : 'All 6 back',
+        outDx: outLeft ? 'is-out' : '',
         outColor: outLeft ? '#E86A5E' : '#C9A66B',
         hasPickup: !!o.pickup,
         pickupOpen: !!(o.pickup && !o.pickup.done),

@@ -9,11 +9,10 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
-a{color:#C9A66B}a:hover{color:#E2C48E}
-.btn:hover{background:#D4B47A !important}
-.ghost:hover{border-color:#C9A66B !important}
+a{color:#C9A66B}a:not([class*="kk-"]):hover{color:#E2C48E}
 a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
@@ -67,20 +66,18 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 
 <div style="background:#15130F; border-radius:4px; padding:20px 20px 18px; box-shadow:inset 0 0 0 1px #000, 0 0 0 1px #F2EFE8;">
 <h2 class="sr">Where things stand</h2>
-<ol style="list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:18px 10px;">
+<div class="kk-steps">
+<div class="kk-counter" aria-hidden="true">{{stageNo}}</div>
+<ol class="kk-strip">
 <sc-for list="{{stages}}" as="st" hint-placeholder-count="8">
-<li style="flex:1 1 104px; min-width:0; display:flex; flex-direction:column; gap:10px;">
-<span aria-hidden="true" style="position:relative; height:52px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; overflow:hidden; background:{{st.bg}}; border:{{st.border}};">
-<span style="position:absolute; left:0; right:0; bottom:0; height:{{st.fill}}; background:#C29E62;"></span>
-<span style="position:relative; font-family:Rokkitt, serif; font-weight:700; font-size:17px; color:{{st.numColor}};">{{st.mark}}</span>
-</span>
-<span style="display:flex; flex-direction:column; gap:2px;">
-<span style="font-size:14px; font-weight:600; line-height:1.3; color:{{st.labelColor}};">{{st.label}}<span class="sr">{{st.srState}}</span></span>
-<span style="font-size:13px; line-height:1.3; color:#A39A8B;">{{st.date}}</span>
-</span>
+<li class="{{st.cls}}" aria-current="{{st.current}}" style="justify-content:flex-start; padding:6px 8px;">
+<b>{{st.no}}</b>
+<span style="font-weight:600;">{{st.label}}<span class="sr">{{st.srState}}</span></span>
+<span style="font-size:.92em; opacity:.85;">{{st.date}}</span>
 </li>
 </sc-for>
 </ol>
+</div>
 </div>
 
 </div>
@@ -94,23 +91,24 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 20px; margin-bottom:20px;">
 <h2 id="roster-title" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:30px; color:#EEE7D9;">The party</h2>
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
-<div role="group" aria-label="Show" style="display:flex; border:1px solid #4A4237; border-radius:2px; padding:3px; gap:3px;">
+<div role="group" aria-label="Show" style="display:flex; gap:4px;">
 <sc-for list="{{filters}}" as="f" hint-placeholder-count="2">
-<button type="button" aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="height:38px; padding:0 14px; background:{{f.bg}}; color:{{f.fg}}; border:0; border-radius:1px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">{{f.label}}</button>
+<button type="button" class="kk-dial-opt" aria-pressed="{{f.on}}" onClick="{{f.pick}}">{{f.label}}</button>
 </sc-for>
 </div>
-<a href="Party.dc.html" class="ghost" style="display:inline-flex; align-items:center; gap:8px; height:46px; padding:0 16px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:14px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add someone</a>
+<a href="Party.dc.html" class="kk-leader"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add someone</a>
 </div>
 </div>
 
 <div style="overflow-x:auto;">
-<div style="min-width:820px;">
-<div aria-hidden="true" style="display:grid; grid-template-columns:minmax(0, 1.7fr) minmax(0, .9fr) minmax(0, 1.25fr) minmax(0, .7fr) minmax(0, 1.5fr); gap:16px; padding:0 0 12px; border-bottom:1px solid #38322A; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
-<span>Member</span><span>Invite</span><span>Measurements</span><span>Deposit</span><span>Next step</span>
+<div style="min-width:900px;">
+<div aria-hidden="true" style="display:grid; grid-template-columns:44px minmax(0, 1.7fr) minmax(0, .9fr) minmax(0, 1.25fr) minmax(0, .7fr) minmax(0, 1.5fr); gap:12px; padding:0 14px 12px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
+<span>No.</span><span>Member</span><span>Invite</span><span>Measurements</span><span>Deposit</span><span>Next step</span>
 </div>
-<ul style="list-style:none; margin:0; padding:0;">
+<ul class="kk-sleeve">
 <sc-for list="{{rows}}" as="m" hint-placeholder-count="9">
-<li style="display:grid; grid-template-columns:minmax(0, 1.7fr) minmax(0, .9fr) minmax(0, 1.25fr) minmax(0, .7fr) minmax(0, 1.5fr); gap:16px; align-items:center; padding:14px 0; border-bottom:1px solid #2A2621; font-size:14px;">
+<li class="kk-sleeve-row" style="grid-template-columns:44px minmax(0, 1.7fr) minmax(0, .9fr) minmax(0, 1.25fr) minmax(0, .7fr) minmax(0, 1.5fr); font-size:14px;">
+<span class="kk-no">{{m.no}}</span>
 <span style="display:flex; align-items:center; gap:12px; min-width:0;">
 <span aria-hidden="true" style="flex:0 0 38px; height:38px; box-sizing:border-box; border-radius:50%; border:1px solid #8C7247; display:flex; align-items:center; justify-content:center; font-family:Rokkitt, serif; font-weight:600; font-size:14px; color:#C9A66B;">{{m.initials}}</span>
 <span style="display:flex; flex-direction:column; gap:2px; min-width:0;">
@@ -118,16 +116,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <span style="font-size:13px; color:#A39A8B;">{{m.role}}</span>
 </span>
 </span>
-<span style="display:flex; align-items:center; gap:8px; color:{{m.inviteColor}};"><span class="sr">Invite: </span><span aria-hidden="true" style="width:8px; height:8px; border-radius:50%; background:{{m.inviteDot}};"></span>{{m.invite}}</span>
-<span style="display:flex; align-items:center; gap:10px; color:{{m.measColor}};"><span class="sr">Measurements: </span><span aria-hidden="true" style="flex:0 0 18px; height:18px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{m.measBg}}; border:1.5px solid {{m.measBd}}; border-radius:{{m.measRad}};"><svg display="{{m.measCheck}}" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{m.meas}}</span>
-<span style="display:flex; align-items:center; gap:10px; color:{{m.depColor}};"><span class="sr">Deposit: </span><span aria-hidden="true" style="flex:0 0 18px; height:18px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; background:{{m.depBg}}; border:1.5px solid {{m.depBd}}; border-radius:2px;"><svg display="{{m.depCheck}}" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{m.dep}}</span>
+<span style="min-width:0;"><span class="{{m.inviteCls}}"><span class="sr">Invite: </span>{{m.invite}}</span></span>
+<span style="min-width:0;"><span class="{{m.measCls}}" style="max-width:100%;"><span class="sr">Measurements: </span>{{m.meas}}</span></span>
+<span style="min-width:0;"><span class="{{m.depCls}}"><span class="sr">Deposit: </span>{{m.dep}}</span></span>
 <span style="display:flex; align-items:center; justify-content:space-between; gap:10px; min-width:0;">
-<span style="color:{{m.nextColor}};"><span class="sr">Next step: </span>{{m.next}}</span>
+<span class="{{m.nextCls}}" style="white-space:normal; min-width:0;"><span class="sr">Next step: </span>{{m.next}}</span>
 <sc-if value="{{m.canRemind}}" hint-placeholder-val="{{false}}">
-<button type="button" class="ghost" aria-label="{{m.remindLabel}}" onClick="{{m.remind}}" style="flex:0 0 auto; height:44px; padding:0 14px; display:inline-flex; align-items:center; gap:6px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:13px; cursor:pointer;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg>Remind</button>
+<button type="button" class="kk-leader" aria-label="{{m.remindLabel}}" onClick="{{m.remind}}" style="flex:0 0 auto; min-height:44px; padding:0 44px 0 14px; gap:6px; font-size:13px;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg>Remind</button>
 </sc-if>
 <sc-if value="{{m.wasReminded}}" hint-placeholder-val="{{false}}">
-<span style="flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:#C9A66B;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Texted</span>
+<span class="kk-cap" style="flex:0 0 auto;">Texted</span>
 </sc-if>
 </span>
 </li>
@@ -142,7 +140,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
 <sc-for list="{{activity}}" as="a" hint-placeholder-count="6">
 <li style="display:flex; gap:20px; align-items:baseline; padding:12px 0; border-top:1px solid #2A2621; font-size:15px; line-height:1.45;">
-<span style="flex:0 0 64px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#C9A66B;">{{a.date}}</span>
+<span class="kk-date" style="flex:0 0 78px;">{{a.date}}</span>
 <span style="color:#EEE7D9;">{{a.text}}</span>
 </li>
 </sc-for>
@@ -166,17 +164,17 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </div>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#EEE7D9;"><strong style="font-weight:700; color:#C9A66B;">5 of 9 in.</strong> Still waiting on Sam, Luis, Richard and Owen.</p>
 <sc-if value="{{notSent}}" hint-placeholder-val="{{true}}">
-<button type="button" class="btn" onClick="{{sendAll}}" style="display:flex; align-items:center; justify-content:center; gap:10px; height:52px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"></path></svg>Text all 4 a reminder</button>
+<button type="button" class="kk-shutter" onClick="{{sendAll}}"><span class="kk-dot" aria-hidden="true"></span>Text all 4 a reminder</button>
 </sc-if>
 <sc-if value="{{sent}}" hint-placeholder-val="{{false}}">
-<p aria-live="polite" style="margin:0; display:flex; align-items:center; justify-content:center; gap:10px; height:52px; border:1px solid #8C7247; font-size:15px; font-weight:600; color:#C9A66B;"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Reminders sent just now</p>
+<div class="kk-envelope" role="status" aria-live="polite"><span class="kk-stamp" aria-hidden="true">Sent</span><p style="font-weight:600;">Reminders sent just now</p></div>
 </sc-if>
 </section>
 
 <section aria-labelledby="look-title" style="background:#1A1816; border:1px solid #38322A; padding:26px; display:flex; flex-direction:column; gap:16px;">
 <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
 <h2 id="look-title" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">The look</h2>
-<a href="Look.dc.html" style="font-size:14px; font-weight:600;">Change</a>
+<a href="Look.dc.html" class="kk-grease" style="font-size:14px;">Change</a>
 </div>
 <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;">
 <li style="display:flex; gap:14px; align-items:flex-start;"><span aria-hidden="true" style="flex:0 0 30px; height:30px; box-sizing:border-box; border-radius:50%; background:#141414; border:1px solid rgba(238,231,217,.3);"></span><span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:15px; font-weight:600; color:#EEE7D9;">Groomsmen &amp; fathers</span><span style="font-size:14px; line-height:1.45; color:#A39A8B;">Black tuxedo, peak lapel, bow tie, vest</span></span></li>
@@ -195,8 +193,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <dt style="color:#A39A8B;">Tue</dt><dd style="margin:0; color:#EEE7D9;">Closed</dd>
 </dl>
 <div style="display:flex; flex-wrap:wrap; gap:10px;">
-<a href="tel:+15855867846" class="ghost" style="flex:1 1 140px; display:inline-flex; align-items:center; justify-content:center; gap:8px; height:46px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:14px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"></path></svg>(585) 586-7846</a>
-<a href="Book.dc.html" class="ghost" style="flex:1 1 140px; display:inline-flex; align-items:center; justify-content:center; gap:8px; height:46px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:14px; font-weight:600;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="1"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Book a visit</a>
+<a href="tel:+15855867846" class="kk-leader" style="flex:1 1 140px;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"></path></svg>(585) 586-7846</a>
+<a href="Book.dc.html" class="kk-leader" style="flex:1 1 140px;"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="1"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Book a visit</a>
 </div>
 </section>
 
@@ -237,12 +235,9 @@ class Component extends DCLogic {
       return {
         label: st.label,
         date: st.date,
-        mark: done ? '✓' : now ? '5/9' : String(i + 1).padStart(2, '0'),
-        bg: done ? '#C29E62' : '#1F1C18',
-        border: now ? '2px solid #C29E62' : done ? '1px solid #C29E62' : '1px solid #3A342C',
-        fill: now ? st.fill : '0%',
-        numColor: done || now ? '#15130F' : '#8E8676',
-        labelColor: done || now ? '#EEE7D9' : '#A39A8B',
+        no: (done ? '✓ ' : '') + String(i + 1).padStart(2, '0'),
+        cls: 'kk-frame' + (done ? ' is-done' : now ? ' is-now' : ''),
+        current: now ? 'step' : false,
         srState: done ? ', done' : now ? ', in progress' : ', coming up'
       };
     });
@@ -259,14 +254,15 @@ class Component extends DCLogic {
       { id: 9, name: 'Owen Whitman', role: 'Ring bearer, age 7', invite: 'parent', meas: 'todo', measText: 'Measure in store', dep: 'due', next: 'Book a measuring visit' }
     ];
     const INVITE = {
-      joined: { label: 'Joined', color: '#EEE7D9', dot: '#C29E62' },
-      opened: { label: 'Opened', color: '#A39A8B', dot: '#8E8676' },
-      unopened: { label: 'Not opened', color: '#E86A5E', dot: '#E86A5E' },
-      parent: { label: 'Via Sam', color: '#A39A8B', dot: '#8E8676' }
+      joined: { label: 'Joined', cap: 'kk-cap is-green' },
+      opened: { label: 'Opened', cap: 'kk-cap' },
+      unopened: { label: 'Not opened', cap: 'kk-cap is-red' },
+      parent: { label: 'Via Sam', cap: 'kk-cap is-grey' }
     };
     const needs = (m) => m.meas === 'todo' || m.dep === 'due';
     const list = s.filter === 'needs' ? M.filter(needs) : M;
     const rows = list.map((m) => {
+      const no = String(m.id).padStart(2, '0');
       const inv = INVITE[m.invite];
       const measDone = m.meas === 'done';
       const paid = m.dep === 'paid';
@@ -277,22 +273,15 @@ class Component extends DCLogic {
         name: m.name,
         role: m.role,
         initials: (words[0][0] + words[words.length - 1][0]).toUpperCase(),
+        no: no,
         invite: inv.label,
-        inviteColor: inv.color,
-        inviteDot: inv.dot,
+        inviteCls: inv.cap,
         meas: m.measText,
-        measColor: measDone ? '#EEE7D9' : '#E86A5E',
-        measBg: measDone ? '#C29E62' : 'transparent',
-        measBd: measDone ? '#C29E62' : '#E86A5E',
-        measRad: measDone ? '2px' : '50%',
-        measCheck: measDone ? 'inline' : 'none',
+        measCls: measDone ? 'kk-cap is-green' : 'kk-cap is-red',
         dep: paid ? 'Paid' : 'Due',
-        depColor: paid ? '#EEE7D9' : '#A39A8B',
-        depBg: paid ? '#C29E62' : 'transparent',
-        depBd: paid ? '#C29E62' : '#8E8676',
-        depCheck: paid ? 'inline' : 'none',
+        depCls: paid ? 'kk-cap is-green' : 'kk-cap is-grey',
         next: m.next,
-        nextColor: actionable ? '#EEE7D9' : '#A39A8B',
+        nextCls: 'kk-mark ' + (!actionable ? 'is-ok' : reminded ? 'is-wait' : 'is-no'),
         canRemind: actionable && !reminded,
         wasReminded: actionable && reminded,
         remindLabel: 'Text ' + words[0] + ' a reminder',
@@ -305,7 +294,7 @@ class Component extends DCLogic {
       { id: 'needs', label: 'Needs action · ' + needCount }
     ].map((f) => {
       const on = s.filter === f.id;
-      return { label: f.label, on: on, bg: on ? '#C29E62' : 'transparent', fg: on ? '#15130F' : '#EEE7D9', pick: () => this.setState({ filter: f.id }) };
+      return { label: f.label, on: on, pick: () => this.setState({ filter: f.id }) };
     });
     const meter = [];
     for (let i = 0; i < 9; i++) {
@@ -321,6 +310,7 @@ class Component extends DCLogic {
     ];
     return {
       stages: stages,
+      stageNo: String(STAGES.findIndex((st) => st.state === 'now') + 1).padStart(2, '0'),
       rows: rows,
       filters: filters,
       meter: meter,

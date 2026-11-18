@@ -11,6 +11,7 @@
 <helmet>
 <link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;600;700&amp;family=Jost:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0}
 .sh-card{position:relative}
@@ -72,7 +73,8 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 </div>
 
 <sc-if value="{{loading}}" hint-placeholder-val="{{false}}">
-<p style="margin:0; font-size:16px; color:{{t.muted}};">Loading the collection…</p>
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}"><div class="kk-loading" role="status"><svg class="kk-reel" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#2A2621" stroke="#C29E62" stroke-width="2"></circle><circle cx="32" cy="32" r="6" fill="#0B0A09" stroke="#C29E62" stroke-width="2"></circle><g fill="#0B0A09"><circle cx="32" cy="14" r="7"></circle><circle cx="49" cy="26" r="7"></circle><circle cx="43" cy="46" r="7"></circle><circle cx="21" cy="46" r="7"></circle><circle cx="15" cy="26" r="7"></circle></g></svg>Loading the collection…</div></sc-if>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><p style="margin:0; font-size:16px; color:{{t.muted}};">Loading the collection…</p></sc-if>
 </sc-if>
 <sc-if value="{{loadError}}" hint-placeholder-val="{{false}}">
 <p role="alert" style="margin:0; padding:14px 16px; border:1px solid {{t.red}}; color:{{t.text}}; font-size:15px;">{{loadError}}</p>
@@ -82,7 +84,7 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px;">
 <div role="group" aria-label="Type" style="display:flex; gap:6px; flex-wrap:wrap;">
 <sc-for list="{{types}}" as="o" hint-placeholder-count="3">
-<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; padding:0 18px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
+<button type="button" class="{{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:44px; padding:0 18px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">{{o.name}}</button>
 </sc-for>
 </div>
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;">
@@ -98,7 +100,7 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 <div role="group" aria-label="Collection" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
 <span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}}; margin-right:6px;">Collection</span>
 <sc-for list="{{lines}}" as="o" hint-placeholder-count="3">
-<button type="button" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:36px; padding:0 14px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:18px; font-family:{{t.body}}; font-weight:600; font-size:13px; cursor:pointer;">{{o.name}}</button>
+<button type="button" class="{{o.cls}}" aria-pressed="{{o.on}}" onClick="{{o.pick}}" style="height:36px; padding:0 14px; background:{{o.bg}}; color:{{o.fg}}; border:1px solid {{o.bd}}; border-radius:{{o.pill}}; font-family:{{t.body}}; font-weight:600; font-size:13px; cursor:pointer;">{{o.name}}</button>
 </sc-for>
 </div>
 <div role="group" aria-label="Color" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
@@ -112,24 +114,39 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 </section>
 
 <sc-if value="{{empty}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
+<div class="kk-negative">
+<div class="kk-neg" aria-hidden="true">Undeveloped</div>
+<p><strong>Nothing matches those filters.</strong></p>
+<button type="button" class="sh-ghost" onClick="{{resetFilters}}" style="height:44px; padding:0 18px; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">Show everything</button>
+</div>
+</sc-if>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}">
 <div style="padding:40px 0; display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
 <p style="margin:0; font-size:18px;">Nothing matches those filters.</p>
 <button type="button" class="sh-ghost" onClick="{{resetFilters}}" style="height:44px; padding:0 18px; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-family:{{t.body}}; font-weight:600; font-size:14px; cursor:pointer;">Show everything</button>
 </div>
 </sc-if>
+</sc-if>
 
 <section aria-label="Products" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap:28px 22px;">
 <sc-for list="{{products}}" as="p" hint-placeholder-count="8">
 <article class="sh-card" style="display:flex; flex-direction:column; gap:12px; min-width:0;">
-<button type="button" onClick="{{p.open}}" aria-label="{{p.aria}}" style="position:relative; display:block; padding:0; border:1px solid {{t.line}}; background:{{t.stage}}; aspect-ratio:4 / 5; width:100%; overflow:hidden; cursor:pointer; border-radius:{{t.radius}};">
+<div class="{{k.mount}}" style="{{k.mountStyle}}">
+<button type="button" class="{{k.win}}" onClick="{{p.open}}" aria-label="{{p.aria}}" style="position:relative; display:block; padding:0; border:{{k.winBorder}}; background:{{t.stage}}; aspect-ratio:4 / 5; width:100%; overflow:hidden; cursor:pointer; border-radius:{{k.winRadius}};">
 <svg viewBox="{{p.vb}}" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; display:{{p.figShow}};"><image href="{{p.render}}" x="{{p.rx}}" y="{{p.ry}}" width="{{p.rw}}" height="{{p.rh}}" display="{{p.renderShow}}"></image><path d="{{p.m.a.d}}" fill="{{p.m.a.fill}}" stroke="{{p.m.a.stroke}}" stroke-width="{{p.m.a.sw}}" opacity="{{p.m.a.op}}"></path><path d="{{p.m.b.d}}" fill="{{p.m.b.fill}}" stroke="{{p.m.b.stroke}}" stroke-width="{{p.m.b.sw}}" opacity="{{p.m.b.op}}"></path><path d="{{p.m.c.d}}" fill="{{p.m.c.fill}}" stroke="{{p.m.c.stroke}}" stroke-width="{{p.m.c.sw}}" opacity="{{p.m.c.op}}"></path><path d="{{p.m.d.d}}" fill="{{p.m.d.fill}}" stroke="{{p.m.d.stroke}}" stroke-width="{{p.m.d.sw}}" opacity="{{p.m.d.op}}"></path><path d="{{p.m.e.d}}" fill="{{p.m.e.fill}}" stroke="{{p.m.e.stroke}}" stroke-width="{{p.m.e.sw}}" opacity="{{p.m.e.op}}"></path><path d="{{p.m.f.d}}" fill="{{p.m.f.fill}}" stroke="{{p.m.f.stroke}}" stroke-width="{{p.m.f.sw}}" opacity="{{p.m.f.op}}"></path><path d="{{p.m.g.d}}" fill="{{p.m.g.fill}}" stroke="{{p.m.g.stroke}}" stroke-width="{{p.m.g.sw}}" opacity="{{p.m.g.op}}"></path><path d="{{p.m.h.d}}" fill="{{p.m.h.fill}}" stroke="{{p.m.h.stroke}}" stroke-width="{{p.m.h.sw}}" opacity="{{p.m.h.op}}"></path><path d="{{p.m.i.d}}" fill="{{p.m.i.fill}}" stroke="{{p.m.i.stroke}}" stroke-width="{{p.m.i.sw}}" opacity="{{p.m.i.op}}"></path><path d="{{p.m.j.d}}" fill="{{p.m.j.fill}}" stroke="{{p.m.j.stroke}}" stroke-width="{{p.m.j.sw}}" opacity="{{p.m.j.op}}"></path><path d="{{p.m.k.d}}" fill="{{p.m.k.fill}}" stroke="{{p.m.k.stroke}}" stroke-width="{{p.m.k.sw}}" opacity="{{p.m.k.op}}"></path><path d="{{p.m.l.d}}" fill="{{p.m.l.fill}}" stroke="{{p.m.l.stroke}}" stroke-width="{{p.m.l.sw}}" opacity="{{p.m.l.op}}"></path><path d="{{p.m.m.d}}" fill="{{p.m.m.fill}}" stroke="{{p.m.m.stroke}}" stroke-width="{{p.m.m.sw}}" opacity="{{p.m.m.op}}"></path><path d="{{p.m.n.d}}" fill="{{p.m.n.fill}}" stroke="{{p.m.n.stroke}}" stroke-width="{{p.m.n.sw}}" opacity="{{p.m.n.op}}"></path><image href="{{p.cut}}" x="0" y="0" width="{{p.w}}" height="{{p.h}}" mask="{{p.mask}}"></image></svg>
 <img class="sh-swap" src="{{p.swatch}}" alt="" loading="lazy" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:{{t.stage}};">
-<sc-if value="{{p.soldOut}}" hint-placeholder-val="{{false}}"><span style="position:absolute; left:10px; top:10px; padding:5px 9px; background:{{t.onAccent}}; color:{{t.text}}; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;">Sold out</span></sc-if>
+<sc-if value="{{p.soldOut}}" hint-placeholder-val="{{false}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{true}}"><span class="kk-dx is-out" style="position:absolute; left:10px; top:10px; z-index:1;">Sold out</span></sc-if><sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><span style="position:absolute; left:10px; top:10px; padding:5px 9px; background:{{t.onAccent}}; color:{{t.text}}; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;">Sold out</span></sc-if></sc-if>
 </button>
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
+<button type="button" class="kk-mount-hand" onClick="{{p.open}}" tabindex="-1" aria-hidden="true" style="padding:0; background:none; border:0; text-align:left; white-space:normal; text-overflow:clip; line-height:1.15; cursor:pointer;">{{p.title}} · {{p.price}}</button>
+<span class="kk-mount-print" aria-hidden="true">INCOGNITO PROCESSING · PENFIELD NY</span>
+</sc-if>
+</div>
 <div style="display:flex; flex-direction:column; gap:4px;">
 <span style="font-family:{{t.body}}; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{t.muted}};">{{p.kicker}}</span>
-<button type="button" class="sh-name" onClick="{{p.open}}" style="padding:0; background:none; border:0; text-align:left; color:{{t.text}}; font-family:{{t.display}}; font-weight:600; font-size:22px; line-height:1.15; cursor:pointer;">{{p.title}}</button>
-<span style="display:flex; align-items:center; gap:10px; font-size:15px;"><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{p.price}}</span><span aria-hidden="true" style="width:12px; height:12px; border-radius:50%; background:{{p.dot}}; border:1px solid {{t.ring}};"></span><span style="color:{{t.muted}}; font-size:13px;">{{p.sizeLine}}</span></span>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><button type="button" class="sh-name" onClick="{{p.open}}" style="padding:0; background:none; border:0; text-align:left; color:{{t.text}}; font-family:{{t.display}}; font-weight:600; font-size:22px; line-height:1.15; cursor:pointer;">{{p.title}}</button></sc-if>
+<span style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; font-size:15px;"><sc-if value="{{k.off}}" hint-placeholder-val="{{false}}"><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{p.price}}</span></sc-if><span aria-hidden="true" style="width:12px; height:12px; border-radius:50%; background:{{p.dot}}; border:1px solid {{t.ring}};"></span><span class="{{p.sizeCls}}" style="{{p.sizeStyle}}">{{p.sizeLine}}</span></span>
 </div>
 </article>
 </sc-for>
@@ -183,7 +200,7 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 <span style="font-size:13px; color:{{t.muted}};">{{row.name}}</span>
 <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(76px, 1fr)); gap:6px;">
 <sc-for list="{{row.sizes}}" as="sz" hint-placeholder-count="6">
-<button type="button" role="radio" class="sh-size" aria-checked="{{sz.on}}" aria-label="{{sz.aria}}" disabled="{{sz.out}}" onClick="{{sz.pick}}" style="height:48px; padding:0 4px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; background:{{sz.bg}}; color:{{sz.fg}}; border:1px solid {{sz.bd}}; border-radius:2px; font-family:{{t.body}}; cursor:{{sz.cursor}}; text-decoration:{{sz.deco}};"><span style="font-weight:700; font-size:14px;">{{sz.jacket}}</span><span style="font-size:11px; opacity:.75;">{{sz.waist}}</span></button>
+<button type="button" role="radio" class="{{k.sizeCls}}" aria-checked="{{sz.on}}" aria-label="{{sz.aria}}" disabled="{{sz.out}}" onClick="{{sz.pick}}" style="height:48px; padding:0 4px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; background:{{sz.bg}}; color:{{sz.fg}}; border:1px solid {{sz.bd}}; border-radius:2px; font-family:{{t.body}}; cursor:{{sz.cursor}}; text-decoration:{{sz.deco}};"><span style="font-weight:700; font-size:14px;">{{sz.jacket}}</span><span style="font-size:11px; opacity:.75;">{{sz.waist}}</span><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><svg class="kk-circle" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"></path></svg></sc-if></button>
 </sc-for>
 </div>
 </div>
@@ -192,8 +209,8 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 </div>
 
 <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
-<button type="button" class="sh-btn" onClick="{{detail.add}}" disabled="{{detail.addDisabled}}" style="flex:1 1 220px; height:54px; padding:0 22px; background:{{detail.addBg}}; color:{{t.onAccent}}; border:0; border-radius:2px; font-family:{{t.body}}; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:{{detail.addCursor}};">{{detail.addLabel}}</button>
-<a href="Book.dc.html" class="sh-ghost" style="flex:0 1 auto; height:54px; padding:0 20px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid {{t.border}}; border-radius:2px; color:{{t.text}}; text-decoration:none; font-weight:600; font-size:14px;">Book a fitting</a>
+<button type="button" class="{{k.btn}}" onClick="{{detail.add}}" disabled="{{detail.addDisabled}}" style="{{detail.addStyle}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><span class="kk-dot" aria-hidden="true"></span></sc-if>{{detail.addLabel}}</button>
+<a href="Book.dc.html" class="{{k.leader}}" style="{{k.bookStyle}}">Book a fitting</a>
 </div>
 <span aria-live="polite" style="font-size:14px; color:{{detail.noteColor}};">{{detail.note}}</span>
 </div>
@@ -234,9 +251,14 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 <div style="padding:18px 22px 22px; border-top:1px solid {{t.line}}; display:flex; flex-direction:column; gap:12px;">
 <div style="display:flex; justify-content:space-between; font-size:17px;"><span>Subtotal</span><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{cart.subtotal}}</span></div>
 <span style="font-size:13px; color:{{t.muted}};">Tax and alterations are figured at checkout and your fitting.</span>
-<button type="button" class="sh-btn" onClick="{{cart.checkout}}" disabled="{{cart.empty}}" style="height:54px; background:{{cart.checkoutBg}}; color:{{t.onAccent}}; border:0; border-radius:2px; font-family:{{t.body}}; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;">Check out</button>
+<button type="button" class="{{k.btn}}" onClick="{{cart.checkout}}" disabled="{{cart.empty}}" style="{{cart.checkoutStyle}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><span class="kk-dot" aria-hidden="true"></span></sc-if>Check out</button>
 <sc-if value="{{cart.message}}" hint-placeholder-val="{{false}}">
+<sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
+<div class="kk-envelope" role="status"><span class="kk-stamp" aria-hidden="true">By phone</span><p>{{cart.message}} To order now, call <a href="tel:+15855867846">(585) 586-7846</a> or stop in at 1823 Penfield Rd.</p></div>
+</sc-if>
+<sc-if value="{{k.off}}" hint-placeholder-val="{{false}}">
 <p role="status" style="margin:0; padding:12px 14px; border:1px solid {{t.brandDim}}; font-size:14px; line-height:1.5; color:{{t.text}};">{{cart.message}} To order now, call <a href="tel:+15855867846" style="color:{{t.brand}};">(585) 586-7846</a> or stop in at 1823 Penfield Rd.</p>
+</sc-if>
 </sc-if>
 </div>
 </aside>
@@ -271,7 +293,7 @@ class Component extends DCLogic {
     const T = {
       kodak: {
         kicker: 'The shop', title: 'SUITS TO OWN', sub: 'The wedding suits and dinner jackets we fit in Penfield, to buy and keep. Order online, then come in and we’ll tailor it to you.',
-        home: 'Main.dc.html', prom: 'PromKodak.dc.html', self: 'Shop.dc.html', scheme: 'dark', radius: '2px',
+        home: 'Main.dc.html', prom: 'PromKodak.dc.html', self: 'Shop.dc.html', scheme: 'dark', radius: '2px', kit: true,
         bg: '#121110', bar: '#0C0B0A', line: '#2E2923', line2: '#38322A', brand: '#C9A66B', brandDim: '#8C7247', red: '#E86A5E', text: '#EEE7D9', muted: '#A39A8B',
         border: '#4A4237', accent: '#C29E62', onAccent: '#15130F', field: '#0F0E0D', panel: '#1A1816', desc: '#D9D2C2', note: '#7E7668', disabled: '#5E574C', ring: 'rgba(238,231,217,.3)',
         head: 'norman-stencil-fat, Rokkitt, serif', headWeight: 800, display: 'Rokkitt, serif', body: 'Archivo, sans-serif',
@@ -279,7 +301,7 @@ class Component extends DCLogic {
       },
       birch: {
         kicker: 'The collection', title: 'Dressed for the occasion.', sub: 'Our wedding suits and dinner jackets, to buy and keep. Order here, then come to Penfield for the final fit.',
-        home: 'SilverBirchSignup.dc.html', prom: 'PromBirch.dc.html', self: 'ShopBirch.dc.html', scheme: 'dark', radius: '0',
+        home: 'SilverBirchSignup.dc.html', prom: 'PromBirch.dc.html', self: 'ShopBirch.dc.html', scheme: 'dark', radius: '0', kit: false,
         bg: '#0A0A0B', bar: '#050506', line: '#2E2F31', line2: '#2E2F31', brand: '#C9A24B', brandDim: '#6B6E71', red: '#E0584C', text: '#F4F1EA', muted: '#B9BDBF',
         border: '#3A3B3E', accent: '#C9A24B', onAccent: '#0A0A0B', field: '#111112', panel: '#111112', desc: '#D7D9DA', note: '#8F9396', disabled: '#4A4B4E', ring: 'rgba(244,241,234,.3)',
         head: 'cesso, Plaster, Jost, sans-serif', headWeight: 400, display: 'Jost, sans-serif', body: 'Jost, sans-serif',
@@ -287,7 +309,7 @@ class Component extends DCLogic {
       },
       park: {
         kicker: 'The wardrobe', title: 'The Wardrobe', sub: 'Evening and wedding dress from our own rail, to purchase and keep. Order here, and we shall finish the fit in Penfield.',
-        home: 'TuxedoParkSignup.dc.html', prom: 'PromPark.dc.html', self: 'ShopPark.dc.html', scheme: 'dark', radius: '0',
+        home: 'TuxedoParkSignup.dc.html', prom: 'PromPark.dc.html', self: 'ShopPark.dc.html', scheme: 'dark', radius: '0', kit: false,
         bg: '#13241D', bar: '#0E1B16', line: '#2F463A', line2: '#2F463A', brand: '#C6A867', brandDim: '#8F7440', red: '#E0806F', text: '#F2EAD8', muted: '#A9B39F',
         border: '#3D5A4B', accent: '#C6A867', onAccent: '#1F1A14', field: '#0E1B16', panel: '#0E1B16', desc: '#E2D9C4', note: '#8C9A88', disabled: '#4E6357', ring: 'rgba(242,234,216,.35)',
         head: "vivaldi-mn, 'Playfair Display', Georgia, serif", headWeight: 400, display: "'Playfair Display', Georgia, serif", body: "'EB Garamond', Georgia, serif",
@@ -390,7 +412,9 @@ class Component extends DCLogic {
     const t = this.t;
     return list.map((o) => {
       const on = this.state[key] === o[0];
-      return { name: o[1], on: on, bg: on ? t.accent : 'transparent', fg: on ? t.onAccent : t.text, bd: on ? t.accent : t.border, pick: () => this.setState(Object.assign({ [key]: o[0] }, extra || {})) };
+      // Kodak: the kit's dial-option class takes over, so the inline colours and the pill radius go empty.
+      if (t.kit) return { name: o[1], on: on, cls: 'kk-dial-opt', bg: '', fg: '', bd: '', pill: '0', pick: () => this.setState(Object.assign({ [key]: o[0] }, extra || {})) };
+      return { name: o[1], on: on, cls: '', bg: on ? t.accent : 'transparent', fg: on ? t.onAccent : t.text, bd: on ? t.accent : t.border, pill: '18px', pick: () => this.setState(Object.assign({ [key]: o[0] }, extra || {})) };
     });
   }
   openProduct(handle) {
@@ -424,7 +448,9 @@ class Component extends DCLogic {
     const swatchOf = (p) => (p.images.find((i) => i.kind === 'swatch') || p.images[0]).src.replace(/^img\//, '../shop/img/');
     const products = list.map((p) => {
       const avail = p.variants.filter((v) => v.available).length;
+      const low = t.kit && p.available && avail < 5;
       return Object.assign(this.scene(p, t.mannequin), {
+        sizeCls: low ? 'kk-dx is-low' : '', sizeStyle: low ? '' : 'color:' + t.muted + '; font-size:13px;',
         title: p.title.replace(/ Wedding Suit$/, '').replace(/ Dinner Jacket$/, ' Dinner Jacket'),
         kicker: (p.line ? p.line + ' · ' : '') + (p.type === 'suit' ? 'Suit' : 'Dinner jacket') + (p.fabric ? ' · ' + p.fabric : ''),
         price: this.money(p.price), dot: famHex[p.colorFamily], photo: photoOf(p), swatch: swatchOf(p),
@@ -469,6 +495,7 @@ class Component extends DCLogic {
         sizeName: s.size || 'pick one', sizeRows: rows,
         addLabel: !p.available ? 'Sold out' : s.size ? 'Add to cart · ' + this.money(p.price) : 'Pick a size',
         addDisabled: !ready, addBg: ready ? t.accent : t.border, addCursor: ready ? 'pointer' : 'not-allowed',
+        addStyle: t.kit ? 'flex:1 1 220px;' : 'flex:1 1 220px; height:54px; padding:0 22px; background:' + (ready ? t.accent : t.border) + '; color:' + t.onAccent + '; border:0; border-radius:2px; font-family:' + t.body + '; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:' + (ready ? 'pointer' : 'not-allowed') + ';',
         add: () => this.addToCart(p),
         note: s.note, noteColor: s.noteOk ? t.brand : t.red
       };
@@ -485,8 +512,21 @@ class Component extends DCLogic {
     const count = (s.cart.lines || []).reduce((a, l) => a + l.quantity, 0);
     const subtotal = (s.cart.lines || []).reduce((a, l) => a + l.price * l.quantity, 0);
 
+    // Kit parts, Kodak only. Silver Birch and Tuxedo Park get their original classes and inline styles back.
+    const k = t.kit ? {
+      on: true, off: false,
+      mount: 'kk-mount', mountStyle: 'padding-bottom:56px;', win: 'kk-mount-win', winBorder: '0', winRadius: '10px',
+      sizeCls: 'sh-size kk-pick', btn: 'kk-shutter', leader: 'kk-leader', bookStyle: 'flex:0 1 auto;'
+    } : {
+      on: false, off: true,
+      mount: '', mountStyle: '', win: '', winBorder: '1px solid ' + t.line, winRadius: t.radius,
+      sizeCls: 'sh-size', btn: 'sh-btn', leader: 'sh-ghost',
+      bookStyle: 'flex:0 1 auto; height:54px; padding:0 20px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid ' + t.border + '; border-radius:2px; color:' + t.text + '; text-decoration:none; font-weight:600; font-size:14px;'
+    };
+    const checkoutStyle = t.kit ? '' : 'height:54px; background:' + (lines.length ? t.accent : t.border) + '; color:' + t.onAccent + '; border:0; border-radius:2px; font-family:' + t.body + '; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;';
+
     return {
-      t: t,
+      t: t, k: k,
       loading: s.loading, loadError: s.error,
       countLine: s.catalog ? list.length + ' of ' + all.length + ' pieces' : '',
       types: this.seg([['all', 'Everything'], ['suit', 'Suits'], ['dinner-jacket', 'Dinner jackets']], 'type'),
@@ -500,7 +540,7 @@ class Component extends DCLogic {
       resetFilters: () => this.setState({ type: 'all', line: 'all', family: '', inStock: false }),
       products: products,
       detail: detail,
-      cart: { show: s.cartOpen, empty: !lines.length, lines: lines, subtotal: this.money(subtotal), checkout: () => this.checkout(), checkoutBg: lines.length ? t.accent : t.border, message: s.cartMsg },
+      cart: { show: s.cartOpen, empty: !lines.length, lines: lines, subtotal: this.money(subtotal), checkout: () => this.checkout(), checkoutBg: lines.length ? t.accent : t.border, checkoutStyle: checkoutStyle, message: s.cartMsg },
       cartCount: String(count), cartBadgeBg: count ? t.accent : t.border, cartAria: 'Cart, ' + count + (count === 1 ? ' item' : ' items'),
       openCart: () => this.setState({ cartOpen: true, open: '', cartMsg: '' }),
       closeAll: () => this.setState({ open: '', cartOpen: false, cartMsg: '' })

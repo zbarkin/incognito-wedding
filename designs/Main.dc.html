@@ -10,14 +10,12 @@
 <helmet>
 <link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
-a{color:#C9A66B}a:hover{color:#E2C48E}
-.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
-.fld::placeholder{color:#8E8676}
-.btn:hover{background:#D4B47A !important}
-.ghost:hover{border-color:#C9A66B !important}
+a{color:#C9A66B}a:not([class*="kk-"]):hover{color:#E2C48E}
 a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
+.kk-leader:focus-visible{background:#3A2418;box-shadow:inset 0 -3px 0 #E2C48E}
 </style>
 </helmet>
 <div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-direction:column;">
@@ -35,7 +33,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </a>
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px;">
 <span style="font-size:14px; color:#A39A8B;">Questions? <a href="tel:+15855867846" style="color:#C9A66B; text-decoration:none; font-weight:600;">(585) 586-7846</a></span>
-<button type="button" class="ghost" style="height:44px; padding:0 18px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">Save &amp; finish later</button>
+<button type="button" class="kk-leader">Save &amp; finish later</button>
 </div>
 </div>
 </header>
@@ -71,24 +69,15 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <section aria-labelledby="step-title" style="flex:999 1 560px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:36px 40px 32px; display:flex; flex-direction:column; gap:36px;">
 
 <nav aria-label="Registration progress">
-<ol style="list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px;">
-<li aria-current="step" style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #C29E62;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#C9A66B;">01</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#EEE7D9;">The wedding</span>
-</li>
-<li style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #38322A;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#8E8676;">02</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#A39A8B;">The party</span>
-</li>
-<li style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #38322A;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#8E8676;">03</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#A39A8B;">The look</span>
-</li>
-<li style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #38322A;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#8E8676;">04</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#A39A8B;">Book a visit</span>
-</li>
+<div class="kk-steps">
+<div class="kk-counter" aria-hidden="true">01</div>
+<ol class="kk-strip">
+<li class="kk-frame is-now" aria-current="step"><b>FRAME 1</b>The wedding</li>
+<li class="kk-frame"><b>FRAME 2</b>The party</li>
+<li class="kk-frame"><b>FRAME 3</b>The look</li>
+<li class="kk-frame"><b>FRAME 4</b>Book a visit</li>
 </ol>
+</div>
 </nav>
 
 <div style="display:flex; flex-direction:column; gap:10px;">
@@ -100,14 +89,14 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <fieldset style="margin:0; padding:0; border:0; min-width:0;">
 <legend style="float:left; width:100%; box-sizing:border-box; padding:0 0 14px; margin:0 0 22px; border-bottom:1px solid #2A2621; font-family:Rokkitt, serif; font-weight:600; font-size:21px; color:#EEE7D9;">About you</legend>
 <div style="clear:both; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:22px 24px;">
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-name" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Your name</label>
-<input id="f-name" class="fld" type="text" autocomplete="name" value="{{f.name}}" onChange="{{set.name}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<div class="kk-field">
+<label for="f-name" class="kk-dymo is-red">Your name</label>
+<input id="f-name" class="kk-input" type="text" autocomplete="name" value="{{f.name}}" onChange="{{set.name}}">
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-role" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">You are the</label>
+<div class="kk-field">
+<label for="f-role" class="kk-dymo">You are the</label>
 <div style="position:relative;">
-<select id="f-role" class="fld" value="{{f.role}}" onChange="{{set.role}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 40px 0 14px; appearance:none; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<select id="f-role" class="kk-input" value="{{f.role}}" onChange="{{set.role}}" style="appearance:none; padding-right:40px;">
 <option>Groom</option>
 <option>Bride</option>
 <option>Partner</option>
@@ -115,27 +104,43 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <option>Wedding planner</option>
 <option>Other</option>
 </select>
-<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:14px; top:17px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:14px; top:16px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
 </div>
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-partner" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Partner’s name</label>
-<input id="f-partner" class="fld" type="text" value="{{f.partner}}" onChange="{{set.partner}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<div class="kk-field">
+<label for="f-partner" class="kk-dymo">Partner’s name</label>
+<input id="f-partner" class="kk-input" type="text" value="{{f.partner}}" onChange="{{set.partner}}">
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-email" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Email</label>
-<input id="f-email" class="fld" type="email" autocomplete="email" value="{{f.email}}" onChange="{{set.email}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<div class="kk-field">
+<label for="f-email" class="kk-dymo">Email</label>
+<input id="f-email" class="kk-input" type="email" autocomplete="email" value="{{f.email}}" onChange="{{set.email}}">
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-phone" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Mobile</label>
-<input id="f-phone" class="fld" type="tel" autocomplete="tel" value="{{f.phone}}" onChange="{{set.phone}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<div class="kk-field">
+<label for="f-phone" class="kk-dymo">Mobile</label>
+<input id="f-phone" class="kk-input" type="tel" autocomplete="tel" value="{{f.phone}}" onChange="{{set.phone}}">
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<span id="contact-label" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Best way to reach you</span>
-<div role="group" aria-labelledby="contact-label" style="display:flex; gap:8px;">
+<div class="kk-field">
+<span id="contact-label" class="kk-dymo">Best way to reach you</span>
+<div class="kk-dialwrap">
+<svg class="kk-dial" viewBox="0 0 170 170" aria-hidden="true">
+<defs><radialGradient id="dg-contact" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#3A3A3A"></stop><stop offset="1" stop-color="#0E0E0E"></stop></radialGradient></defs>
+<circle cx="85" cy="85" r="80" fill="#0B0A09"></circle>
+<g class="kk-dial-ring" style="--kk-angle:{{contactAngle}}deg">
+<circle cx="85" cy="85" r="74" fill="url(#dg-contact)" stroke="#5A5248" stroke-width="2"></circle>
+<circle cx="85" cy="85" r="70.5" fill="none" stroke="#7A7268" stroke-width="7" stroke-dasharray="2 4.152"></circle>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12">TEXT</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(120 85 85)">EMAIL</text>
+<text x="85" y="34" text-anchor="middle" fill="#EEE7D9" font-family="Archivo" font-weight="700" font-size="12" transform="rotate(240 85 85)">CALL</text>
+</g>
+<path d="M85 4 L79 16 L91 16 Z" fill="#E2463A"></path>
+<circle cx="85" cy="85" r="22" fill="#C29E62" stroke="#8C7247" stroke-width="2"></circle>
+<text x="85" y="89" text-anchor="middle" fill="#15130F" font-family="Rokkitt" font-weight="700" font-size="12">REACH</text>
+</svg>
+<div class="kk-dial-opts" role="radiogroup" aria-labelledby="contact-label">
 <sc-for list="{{contacts}}" as="c" hint-placeholder-count="3">
-<button type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="flex:1 1 0; height:50px; background:{{c.bg}}; color:{{c.fg}}; border:1px solid {{c.bd}}; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:15px; cursor:pointer;">{{c.label}}</button>
+<button type="button" class="kk-dial-opt" role="radio" aria-checked="{{c.on}}" onClick="{{c.pick}}">{{c.label}}</button>
 </sc-for>
+</div>
 </div>
 </div>
 </div>
@@ -144,38 +149,38 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <fieldset style="margin:0; padding:0; border:0; min-width:0;">
 <legend style="float:left; width:100%; box-sizing:border-box; padding:0 0 14px; margin:0 0 22px; border-bottom:1px solid #2A2621; font-family:Rokkitt, serif; font-weight:600; font-size:21px; color:#EEE7D9;">The day</legend>
 <div style="clear:both; display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:22px 24px;">
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-date" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Wedding date</label>
-<input id="f-date" class="fld" type="date" value="{{f.date}}" onChange="{{set.date}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
-<span style="font-size:13px; color:#C9A66B;">{{dateHint}}</span>
+<div class="kk-field">
+<label for="f-date" class="kk-dymo is-red">Wedding date</label>
+<input id="f-date" class="kk-input" type="date" value="{{f.date}}" onChange="{{set.date}}">
+<span style="display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px;"><sc-if value="{{dateStamp}}" hint-placeholder-val="{{true}}"><span class="kk-date" aria-hidden="true">{{dateStamp}}</span></sc-if><span style="font-size:13px; color:#C9A66B;">{{dateHint}}</span></span>
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-time" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Ceremony time</label>
-<input id="f-time" class="fld" type="time" value="{{f.time}}" onChange="{{set.time}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
-<span style="font-size:13px; color:#8E8676;">Helps us plan your pickup day.</span>
+<div class="kk-field">
+<label for="f-time" class="kk-dymo">Ceremony time</label>
+<input id="f-time" class="kk-input" type="time" value="{{f.time}}" onChange="{{set.time}}">
+<span class="kk-help">Helps us plan your pickup day.</span>
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-venue" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Venue</label>
-<input id="f-venue" onBlur="{{commitMap}}" class="fld" type="text" value="{{f.venue}}" onChange="{{set.venue}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<div class="kk-field">
+<label for="f-venue" class="kk-dymo">Venue</label>
+<input id="f-venue" onBlur="{{commitMap}}" class="kk-input" type="text" value="{{f.venue}}" onChange="{{set.venue}}">
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-city" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">City</label>
-<input id="f-city" onBlur="{{commitMap}}" class="fld" type="text" autocomplete="address-level2" value="{{f.city}}" onChange="{{set.city}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 14px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<div class="kk-field">
+<label for="f-city" class="kk-dymo">City</label>
+<input id="f-city" onBlur="{{commitMap}}" class="kk-input" type="text" autocomplete="address-level2" value="{{f.city}}" onChange="{{set.city}}">
 </div>
 <dc-import name="PlaceMap" theme="kodak" kind="Your venue" q="{{mapQ}}" title="{{mapTitle}}" sub="{{mapSub}}" height="240px" hint-size="100%,330px"></dc-import>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<span id="size-label" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">People who need a tux or suit</span>
+<div class="kk-field">
+<span id="size-label" class="kk-dymo">People who need a tux or suit</span>
 <div role="group" aria-labelledby="size-label" style="display:flex; align-items:center; align-self:flex-start; height:50px; box-sizing:border-box; border:1px solid #38322A; border-radius:2px; background:#0F0E0D;">
 <button type="button" aria-label="One fewer person" onClick="{{dec}}" style="width:50px; height:48px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:0; border-right:1px solid #38322A; cursor:pointer;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"></path></svg></button>
 <output aria-live="polite" style="min-width:72px; text-align:center; font-family:Rokkitt, serif; font-weight:600; font-size:24px; color:#EEE7D9;">{{f.size}}</output>
 <button type="button" aria-label="One more person" onClick="{{inc}}" style="width:50px; height:48px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:0; border-left:1px solid #38322A; cursor:pointer;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
 </div>
-<span style="font-size:13px; color:#8E8676;">Count yourself, the fathers and any ring bearers.</span>
+<span class="kk-help">Count yourself, the fathers and any ring bearers.</span>
 </div>
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-heard" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">How did you hear about us?</label>
+<div class="kk-field">
+<label for="f-heard" class="kk-dymo">How did you hear about us?</label>
 <div style="position:relative;">
-<select id="f-heard" class="fld" value="{{f.heard}}" onChange="{{set.heard}}" style="box-sizing:border-box; width:100%; height:50px; padding:0 40px 0 14px; appearance:none; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px;">
+<select id="f-heard" class="kk-input" value="{{f.heard}}" onChange="{{set.heard}}" style="appearance:none; padding-right:40px;">
 <option value="">Optional</option>
 <option>Friend or family</option>
 <option>Our venue or planner</option>
@@ -183,20 +188,22 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <option>Instagram or Facebook</option>
 <option>I’ve rented here before</option>
 </select>
-<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:14px; top:17px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:14px; top:16px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
 </div>
 </div>
 </div>
 </fieldset>
 
-<div style="display:flex; flex-direction:column; gap:8px;">
-<label for="f-notes" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Anything we should know?</label>
-<textarea id="f-notes" class="fld" rows="3" placeholder="Out-of-town groomsmen, a color you’re matching, a date you’re working back from…" value="{{f.notes}}" onChange="{{set.notes}}" style="box-sizing:border-box; width:100%; min-height:104px; padding:12px 14px; resize:vertical; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:16px; line-height:1.5;"></textarea>
+<div class="kk-field">
+<label for="f-notes" class="kk-dymo">Anything we should know?</label>
+<textarea id="f-notes" class="kk-input" rows="3" placeholder="Out-of-town groomsmen, a color you’re matching, a date you’re working back from…" value="{{f.notes}}" onChange="{{set.notes}}" style="line-height:1.5;"></textarea>
 </div>
 
-<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:24px; border-top:1px solid #2A2621;">
-<span style="display:flex; align-items:center; gap:8px; font-size:14px; color:#A39A8B;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Draft saved</span>
-<a href="Party.dc.html" class="btn" style="display:inline-flex; align-items:center; gap:12px; height:52px; padding:0 26px; background:#C29E62; color:#15130F; text-decoration:none; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase;">Continue to the party<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<div class="kk-edge" aria-hidden="true"><span style="left:14px">INCOGNITO 400</span><span style="left:220px">▶ 01</span><span style="left:360px">01A</span><span style="left:500px">INCOGNITO 400</span></div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-top:-12px;">
+<span class="kk-cap is-green">Draft saved</span>
+<a href="Party.dc.html" class="kk-shutter"><span class="kk-dot" aria-hidden="true"></span>Continue to the party<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
 </div>
 
 </section>
@@ -240,21 +247,22 @@ class Component extends DCLogic {
     ['name', 'role', 'partner', 'email', 'phone', 'date', 'time', 'venue', 'city', 'heard', 'notes'].forEach((k) => {
       set[k] = (e) => this.setState({ [k]: e.target.value });
     });
-    const contacts = ['Text', 'Email', 'Call'].map((c) => {
+    const CONTACTS = ['Text', 'Email', 'Call'];
+    const contacts = CONTACTS.map((c) => {
       const on = s.contact === c;
       return {
         label: c,
         on: on,
-        bg: on ? '#C29E62' : 'transparent',
-        fg: on ? '#15130F' : '#EEE7D9',
-        bd: on ? '#C29E62' : '#4A4237',
         pick: () => this.setState({ contact: c })
       };
     });
+    const contactAngle = -120 * Math.max(0, CONTACTS.indexOf(s.contact));
     let dateHint = 'Pick the date of the ceremony.';
+    let dateStamp = '';
     if (s.date) {
       const d = new Date(s.date + 'T12:00:00');
       if (!isNaN(d)) {
+        dateStamp = '’' + String(d.getFullYear()).slice(-2) + ' ' + (d.getMonth() + 1) + ' ' + d.getDate();
         const today = new Date(2026, 10, 13, 12);
         const days = Math.round((d - today) / 86400000);
         const wd = d.toLocaleDateString('en-US', { weekday: 'long' });
@@ -269,7 +277,9 @@ class Component extends DCLogic {
       commitMap: () => setTimeout(() => { const n = this.state; if (n.venue !== n.mapVenue || n.city !== n.mapCity) this.setState({ mapVenue: n.venue, mapCity: n.city }); }, 0),
       set: set,
       contacts: contacts,
+      contactAngle: contactAngle,
       dateHint: dateHint,
+      dateStamp: dateStamp,
       inc: () => this.setState({ size: Math.min(40, s.size + 1) }),
       dec: () => this.setState({ size: Math.max(1, s.size - 1) })
     };

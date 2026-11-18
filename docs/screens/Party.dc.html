@@ -10,15 +10,18 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
-a{color:#C9A66B}a:hover{color:#E2C48E}
-.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
-.fld::placeholder{color:#8E8676}
-.btn:hover{background:#D4B47A !important}
+a{color:#C9A66B}a:not([class*="kk-"]):hover{color:#E2C48E}
 .ghost:hover{border-color:#C9A66B !important}
 a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
+.kk-leader:focus-visible{background:#3A2418;box-shadow:inset 0 -3px 0 #E2C48E}
+.pm-row{grid-template-columns:44px minmax(0, 1fr) 80px; gap:10px}
+.pm-end{display:flex; justify-content:flex-end}
+.pm-row .kk-cube-art{width:30px; height:30px; flex-basis:30px}
 @media (max-width:760px){.colhead{display:none !important}}
+@media (max-width:560px){.pm-row{grid-template-columns:28px minmax(0, 1fr); padding-inline:10px}.pm-end{grid-column:2; justify-content:flex-start}}
 </style>
 </helmet>
 <div style="min-height:100vh; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-direction:column;">
@@ -36,7 +39,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </a>
 <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px;">
 <span style="font-size:14px; color:#A39A8B;">Questions? <a href="tel:+15855867846" style="color:#C9A66B; text-decoration:none; font-weight:600;">(585) 586-7846</a></span>
-<button type="button" class="ghost" style="height:44px; padding:0 18px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:14px; cursor:pointer;">Save &amp; finish later</button>
+<button type="button" class="kk-leader">Save &amp; finish later</button>
 </div>
 </div>
 </header>
@@ -46,26 +49,15 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <section aria-labelledby="step-title" style="flex:999 1 600px; min-width:0; box-sizing:border-box; background:#1A1816; border:1px solid #38322A; padding:36px 40px 32px; display:flex; flex-direction:column; gap:30px;">
 
 <nav aria-label="Registration progress">
-<ol style="list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px;">
-<li style="padding-top:12px; border-top:3px solid #C29E62;">
-<a href="Main.dc.html" style="display:flex; flex-direction:column; gap:8px; text-decoration:none;">
-<span style="display:flex; align-items:center; gap:6px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#C9A66B;">01<svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#EEE7D9;">The wedding</span>
-</a>
-</li>
-<li aria-current="step" style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #C29E62;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#C9A66B;">02</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#EEE7D9;">The party</span>
-</li>
-<li style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #38322A;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#8E8676;">03</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#A39A8B;">The look</span>
-</li>
-<li style="display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:3px solid #38322A;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; color:#8E8676;">04</span>
-<span style="font-family:Rokkitt, serif; font-weight:600; font-size:18px; line-height:1.15; color:#A39A8B;">Book a visit</span>
-</li>
+<div class="kk-steps">
+<div class="kk-counter" aria-hidden="true">02</div>
+<ol class="kk-strip">
+<li class="kk-frame is-done"><a href="Main.dc.html" style="display:flex; flex-direction:column;"><b>FRAME 1</b>The wedding</a></li>
+<li class="kk-frame is-now" aria-current="step"><b>FRAME 2</b>The party</li>
+<li class="kk-frame"><b>FRAME 3</b>The look</li>
+<li class="kk-frame"><b>FRAME 4</b>Book a visit</li>
 </ol>
+</div>
 </nav>
 
 <div style="display:flex; flex-direction:column; gap:10px;">
@@ -75,25 +67,29 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </div>
 
 <div style="display:flex; flex-direction:column;">
-<div class="colhead" style="display:flex; gap:12px; padding:0 0 10px; border-bottom:1px solid #38322A; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
-<span style="flex:0 0 40px;"></span>
-<span style="flex:1.4 1 190px;">Name</span>
-<span style="flex:1 1 150px;">Role</span>
-<span style="flex:1 1 150px;">Mobile</span>
-<span style="flex:0 0 116px;">Travel</span>
+<div class="colhead kk-sleeve-row pm-row" style="padding-top:0; padding-bottom:10px; font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">
+<span></span>
+<span style="display:flex; gap:12px;">
+<span style="flex:1.4 1 150px;">Name</span>
+<span style="flex:1 1 120px;">Role</span>
+<span style="flex:1 1 120px;">Mobile</span>
+<span style="flex:0 0 120px;">Travel</span>
 <span style="flex:0 0 44px;"></span>
+</span>
+<span></span>
 </div>
-<ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<ol class="kk-sleeve">
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="9">
-<li style="display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #2A2621;">
-<span aria-hidden="true" style="flex:0 0 40px; height:40px; box-sizing:border-box; border-radius:50%; border:1px solid #8C7247; display:flex; align-items:center; justify-content:center; font-family:Rokkitt, serif; font-weight:600; font-size:15px; color:#C9A66B;">{{r.initials}}</span>
-<input class="fld" type="text" aria-label="{{r.nameLabel}}" placeholder="Full name" value="{{r.name}}" onChange="{{r.setName}}" style="flex:1.4 1 190px; min-width:0; box-sizing:border-box; height:46px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+<li class="kk-sleeve-row pm-row">
+<span class="kk-no" aria-hidden="true">{{r.no}}</span>
+<span style="display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; min-width:0;">
+<input class="kk-input" type="text" aria-label="{{r.nameLabel}}" placeholder="Full name" value="{{r.name}}" onChange="{{r.setName}}" style="flex:1.4 1 150px; min-width:0; width:auto;">
 <sc-if value="{{r.locked}}" hint-placeholder-val="{{false}}">
-<span style="flex:1 1 150px; min-width:0; box-sizing:border-box; height:46px; display:flex; align-items:center; gap:8px; padding:0 12px; border:1px dashed #38322A; border-radius:2px; font-size:15px; color:#EEE7D9;">Groom<span style="font-size:13px; color:#C9A66B;">· you</span></span>
+<span style="flex:1 1 120px; min-width:0; box-sizing:border-box; min-height:48px; display:flex; align-items:center; gap:8px; padding:0 2px; border-bottom:2px dashed #38322A; font-size:17px; color:#EEE7D9;">Groom<span style="font-size:13px; color:#C9A66B;">· you</span></span>
 </sc-if>
 <sc-if value="{{r.free}}" hint-placeholder-val="{{true}}">
-<span style="flex:1 1 150px; min-width:0; position:relative; display:block;">
-<select class="fld" aria-label="{{r.roleLabel}}" value="{{r.role}}" onChange="{{r.setRole}}" style="box-sizing:border-box; width:100%; height:46px; padding:0 36px 0 12px; appearance:none; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
+<span style="flex:1 1 120px; min-width:0; position:relative; display:block;">
+<select class="kk-input" aria-label="{{r.roleLabel}}" value="{{r.role}}" onChange="{{r.setRole}}" style="appearance:none; padding-right:26px;">
 <option>Best man</option>
 <option>Groomsman</option>
 <option>Usher</option>
@@ -102,17 +98,19 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <option>Ring bearer</option>
 <option>Other</option>
 </select>
-<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:16px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+<svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:6px; top:16px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
 </span>
 </sc-if>
-<input class="fld" type="tel" aria-label="{{r.phoneLabel}}" placeholder="Mobile" value="{{r.phone}}" onChange="{{r.setPhone}}" style="flex:1 1 150px; min-width:0; box-sizing:border-box; height:46px; padding:0 12px; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:15px;">
-<label style="flex:0 0 116px; display:flex; align-items:center; gap:8px; height:46px; font-size:14px; color:#A39A8B; cursor:pointer;"><input type="checkbox" checked="{{r.away}}" onChange="{{r.toggleAway}}" style="width:18px; height:18px; margin:0; accent-color:#C29E62;">Out of town</label>
+<input class="kk-input" type="tel" aria-label="{{r.phoneLabel}}" placeholder="Mobile" value="{{r.phone}}" onChange="{{r.setPhone}}" style="flex:1 1 120px; min-width:0; width:auto;">
+<label class="kk-cube" style="flex:0 0 120px; gap:10px; font-size:14px; color:#A39A8B;"><input type="checkbox" checked="{{r.away}}" onChange="{{r.toggleAway}}"><svg class="kk-cube-art" viewBox="0 0 58 58" aria-hidden="true"><rect x="4" y="10" width="50" height="44" rx="3" fill="#0E0E0E"></rect><rect class="kk-face" x="9" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="9" y="34" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="34" width="18" height="16" rx="2"></rect><rect x="22" y="2" width="14" height="9" rx="1" fill="#2A2621"></rect></svg><span>Out of town</span></label>
 <sc-if value="{{r.free}}" hint-placeholder-val="{{true}}">
 <button type="button" class="ghost" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex:0 0 44px; height:44px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:1px solid #38322A; border-radius:2px; cursor:pointer;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A39A8B" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
 </sc-if>
 <sc-if value="{{r.locked}}" hint-placeholder-val="{{false}}">
 <span aria-hidden="true" style="flex:0 0 44px; height:44px;"></span>
 </sc-if>
+</span>
+<span class="pm-end"><span class="kk-mark {{r.markCls}}">{{r.mark}}</span></span>
 </li>
 </sc-for>
 </ol>
@@ -125,9 +123,11 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </sc-for>
 </div>
 
-<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:24px; border-top:1px solid #2A2621;">
-<a href="Main.dc.html" class="ghost" style="display:inline-flex; align-items:center; gap:10px; height:52px; padding:0 22px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</a>
-<a href="Look.dc.html" class="btn" style="display:inline-flex; align-items:center; gap:12px; height:52px; padding:0 26px; background:#C29E62; color:#15130F; text-decoration:none; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase;">Continue to the look<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<div class="kk-edge" aria-hidden="true"><span style="left:14px">INCOGNITO 400</span><span style="left:220px">▶ 02</span><span style="left:360px">02A</span><span style="left:500px">INCOGNITO 400</span></div>
+
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-top:-8px;">
+<a href="Main.dc.html" class="kk-leader"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</a>
+<a href="Look.dc.html" class="kk-shutter"><span class="kk-dot" aria-hidden="true"></span>Continue to the look<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
 </div>
 
 </section>
@@ -158,7 +158,7 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <li style="display:flex; gap:14px; align-items:flex-start; font-size:14px; line-height:1.5; color:#A39A8B;"><span style="flex:0 0 26px; height:26px; display:flex; align-items:center; justify-content:center; border:1px solid #8C7247; font-family:Rokkitt, serif; font-weight:700; font-size:14px; color:#C9A66B;">3</span><span>They send measurements and pay their own deposit.</span></li>
 <li style="display:flex; gap:14px; align-items:flex-start; font-size:14px; line-height:1.5; color:#A39A8B;"><span style="flex:0 0 26px; height:26px; display:flex; align-items:center; justify-content:center; border:1px solid #8C7247; font-family:Rokkitt, serif; font-weight:700; font-size:14px; color:#C9A66B;">4</span><span>You watch it all come together on your party page.</span></li>
 </ol>
-<label style="display:flex; align-items:center; gap:12px; min-height:44px; padding-top:14px; border-top:1px solid #2A2621; font-size:15px; color:#EEE7D9; cursor:pointer;"><input type="checkbox" checked="{{textInvites}}" onChange="{{toggleInvites}}" style="width:18px; height:18px; margin:0; accent-color:#C29E62;">Text the invites when I finish</label>
+<label class="kk-cube" style="padding-top:14px; border-top:1px solid #2A2621; font-size:15px; color:#EEE7D9;"><input type="checkbox" checked="{{textInvites}}" onChange="{{toggleInvites}}"><svg class="kk-cube-art" viewBox="0 0 58 58" aria-hidden="true"><rect x="4" y="10" width="50" height="44" rx="3" fill="#0E0E0E"></rect><rect class="kk-face" x="9" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="15" width="18" height="16" rx="2"></rect><rect class="kk-face" x="9" y="34" width="18" height="16" rx="2"></rect><rect class="kk-face" x="31" y="34" width="18" height="16" rx="2"></rect><rect x="22" y="2" width="14" height="9" rx="1" fill="#2A2621"></rect></svg><span>Text the invites when I finish</span></label>
 </div>
 
 </aside>
@@ -205,8 +205,15 @@ class Component extends DCLogic {
       const words = (r.name || '').trim().split(/\s+/).filter(Boolean);
       const initials = words.length ? words.slice(0, 2).map((w) => w[0]).join('').toUpperCase() : '+';
       const who = r.name || 'person ' + (i + 1);
+      let mark = '✓ ready';
+      let markCls = 'is-ok';
+      if (!(r.name || '').trim()) { mark = '✗ name'; markCls = 'is-no'; }
+      else if (!(r.phone || '').trim()) { mark = 'mobile?'; markCls = 'is-wait'; }
       return Object.assign({}, r, {
         initials: initials,
+        no: String(i + 1).padStart(2, '0'),
+        mark: mark,
+        markCls: markCls,
         locked: !!r.locked,
         free: !r.locked,
         nameLabel: 'Name, person ' + (i + 1),

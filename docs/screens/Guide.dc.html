@@ -10,14 +10,12 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
-a{color:#C9A66B}a:hover{color:#E2C48E}
-.fld:focus{outline:none;border-color:#C9A66B !important;box-shadow:0 0 0 3px rgba(201,166,107,.25)}
-.fld::placeholder{color:#8E8676}
+a{color:#C9A66B}a:not([class*="kk-"]):hover{color:#E2C48E}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 input[type=number]{-moz-appearance:textfield}
-.btn:hover{background:#D4B47A !important}
 .ghost:hover{border-color:#C9A66B !important}
 a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -26,22 +24,27 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <div style="width:390px; min-height:1320px; box-sizing:border-box; background:#121110; color:#EEE7D9; font-family:Archivo, sans-serif; color-scheme:dark; display:flex; flex-direction:column;">
 
 <header style="background:#0C0B0A; border-bottom:1px solid #2E2923; padding:12px 20px 12px 12px; display:flex; align-items:center; justify-content:space-between;">
-<a href="Member.dc.html" style="display:flex; align-items:center; gap:6px; height:44px; padding:0 8px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>Close</a>
+<a href="Member.dc.html" class="kk-leader"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>Close</a>
 <span aria-live="polite" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C9A66B;">{{stepText}}</span>
 </header>
 
 <main style="flex:1 0 auto; padding:20px 20px 28px; display:flex; flex-direction:column; gap:20px;">
 
-<div role="img" aria-label="{{progressLabel}}" style="display:grid; grid-template-columns:repeat(10, minmax(0, 1fr)); gap:4px;">
+<div role="img" aria-label="{{progressLabel}}">
+<ol class="kk-strip" aria-hidden="true" style="padding-inline:6px; gap:4px;">
 <sc-for list="{{tiles}}" as="t" hint-placeholder-count="10">
-<span style="height:14px; box-sizing:border-box; background:{{t.bg}}; border:{{t.border}};"></span>
+<li class="{{t.cls}}" style="min-height:30px; padding:0; align-items:center;"><b style="margin:0;">{{t.no}}</b></li>
 </sc-for>
+</ol>
 </div>
 
 <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px;">
-<div style="display:flex; flex-direction:column; gap:6px;">
+<div style="display:flex; flex-direction:column; gap:10px; min-width:0;">
 <span style="font-size:14px; color:#A39A8B;">Grab a soft tape measure and a friend.</span>
-<h1 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:40px; line-height:1; color:#EEE7D9;">{{cur.name}}</h1>
+<div style="display:flex; align-items:center; gap:14px; min-width:0;">
+<div class="kk-counter" aria-hidden="true">{{stepNo}}</div>
+<h1 style="margin:0; min-width:0; font-family:Rokkitt, serif; font-weight:600; font-size:40px; line-height:1; color:#EEE7D9;">{{cur.name}}</h1>
+</div>
 </div>
 <button type="button" class="ghost" aria-pressed="{{paused}}" aria-label="{{pauseLabel}}" onClick="{{togglePause}}" style="flex:0 0 44px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:1px solid #4A4237; border-radius:2px; cursor:pointer;"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="#C9A66B"><path d="{{pauseIcon}}"></path></svg></button>
 </div>
@@ -50,17 +53,20 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 
 <div style="display:flex; flex-direction:column; gap:10px; padding:18px; background:#1A1816; border:1px solid #38322A;">
 <sc-if value="{{cur.isNum}}" hint-placeholder-val="{{true}}">
-<label for="g-input" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Your {{cur.lower}}<span class="sr">{{cur.srUnit}}</span></label>
+<div class="kk-field">
+<label for="g-input" class="kk-dymo is-red">Your {{cur.lower}}<span class="sr">{{cur.srUnit}}</span></label>
 <div style="position:relative;">
-<input id="g-input" class="fld" type="number" step="{{cur.step}}" min="0" placeholder="{{cur.ph}}" value="{{cur.value}}" onChange="{{cur.set}}" style="box-sizing:border-box; width:100%; height:56px; padding:0 52px 0 16px; background:#0F0E0D; border:1px solid {{cur.bd}}; border-radius:2px; color:#EEE7D9; font-family:Rokkitt, serif; font-weight:600; font-size:24px;">
-<span aria-hidden="true" style="position:absolute; right:16px; top:19px; font-size:15px; color:#8E8676;">{{cur.unit}}</span>
+<input id="g-input" class="kk-input" type="number" step="{{cur.step}}" min="0" placeholder="{{cur.ph}}" value="{{cur.value}}" onChange="{{cur.set}}" style="padding-right:46px;">
+<span aria-hidden="true" style="position:absolute; right:4px; top:15px; font-size:15px; color:#8E8676;">{{cur.unit}}</span>
+</div>
 </div>
 </sc-if>
 <sc-if value="{{cur.isHeight}}" hint-placeholder-val="{{false}}">
-<span id="g-height" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Your height</span>
+<div class="kk-field">
+<span id="g-height" class="kk-dymo is-red">Your height</span>
 <div role="group" aria-labelledby="g-height" style="display:flex; gap:8px;">
-<div style="position:relative; flex:1 1 0;">
-<select class="fld" aria-label="Feet" value="{{vals.ft}}" onChange="{{setFt}}" style="box-sizing:border-box; width:100%; height:56px; padding:0 34px 0 14px; appearance:none; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:18px;">
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="kk-input" aria-label="Feet" value="{{vals.ft}}" onChange="{{setFt}}" style="padding-right:34px; appearance:none;">
 <option value="">ft</option>
 <option value="4">4 ft</option>
 <option value="5">5 ft</option>
@@ -69,8 +75,8 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 </select>
 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:21px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
 </div>
-<div style="position:relative; flex:1 1 0;">
-<select class="fld" aria-label="Inches" value="{{vals.inch}}" onChange="{{setInch}}" style="box-sizing:border-box; width:100%; height:56px; padding:0 34px 0 14px; appearance:none; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:18px;">
+<div style="position:relative; flex:1 1 0; min-width:0;">
+<select class="kk-input" aria-label="Inches" value="{{vals.inch}}" onChange="{{setInch}}" style="padding-right:34px; appearance:none;">
 <option value="">in</option>
 <option value="0">0 in</option>
 <option value="1">1 in</option>
@@ -85,14 +91,16 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <option value="10">10 in</option>
 <option value="11">11 in</option>
 </select>
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:21px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
 </div>
 </div>
 </sc-if>
 <sc-if value="{{cur.isShoe}}" hint-placeholder-val="{{false}}">
-<label for="g-shoe" style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Your dress shoe size</label>
+<div class="kk-field">
+<label for="g-shoe" class="kk-dymo is-red">Your dress shoe size</label>
 <div style="position:relative;">
-<select id="g-shoe" class="fld" value="{{vals.shoe}}" onChange="{{setShoe}}" style="box-sizing:border-box; width:100%; height:56px; padding:0 34px 0 14px; appearance:none; background:#0F0E0D; border:1px solid #38322A; border-radius:2px; color:#EEE7D9; font-family:Archivo, sans-serif; font-size:18px;">
+<select id="g-shoe" class="kk-input" value="{{vals.shoe}}" onChange="{{setShoe}}" style="padding-right:34px; appearance:none;">
 <option value="">Choose a size</option>
 <option>7</option>
 <option>7.5</option>
@@ -110,27 +118,28 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <option>15</option>
 <option value="none">I don’t need shoes</option>
 </select>
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:21px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:12px; top:18px; pointer-events:none;"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
 </div>
 </sc-if>
 </div>
 
 <div style="display:flex; gap:10px;">
 <sc-if value="{{hasPrev}}" hint-placeholder-val="{{true}}">
-<button type="button" class="ghost" onClick="{{prev}}" aria-label="{{prevLabel}}" style="flex:0 0 56px; height:56px; display:flex; align-items:center; justify-content:center; padding:0; background:transparent; border:1px solid #4A4237; border-radius:2px; cursor:pointer;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
+<button type="button" class="kk-leader" onClick="{{prev}}" aria-label="{{prevLabel}}" style="flex:0 0 auto; min-height:54px; padding:0 40px 0 14px;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A66B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></button>
 </sc-if>
 <sc-if value="{{notLast}}" hint-placeholder-val="{{true}}">
-<button type="button" class="btn" onClick="{{next}}" style="flex:1 1 auto; height:56px; display:flex; align-items:center; justify-content:center; gap:10px; background:#C29E62; color:#15130F; border:0; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;">{{nextLabel}}<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+<button type="button" class="kk-shutter" onClick="{{next}}" style="flex:1 1 auto; min-width:0; padding-right:16px;"><span class="kk-dot" aria-hidden="true"></span>{{nextLabel}}</button>
 </sc-if>
 <sc-if value="{{isLast}}" hint-placeholder-val="{{false}}">
-<a href="Measure.dc.html" class="btn" style="flex:1 1 auto; height:56px; display:flex; align-items:center; justify-content:center; gap:10px; background:#C29E62; color:#15130F; text-decoration:none; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase;">Review &amp; send<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15130F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a href="Measure.dc.html" class="kk-shutter" style="flex:1 1 auto; min-width:0;"><span class="kk-dot" aria-hidden="true"></span>Review &amp; send</a>
 </sc-if>
 </div>
 <sc-if value="{{notLast}}" hint-placeholder-val="{{true}}">
-<button type="button" onClick="{{next}}" style="align-self:center; height:44px; padding:0 12px; background:transparent; border:0; color:#C9A66B; font-family:Archivo, sans-serif; font-size:15px; font-weight:600; text-decoration:underline; text-underline-offset:3px; cursor:pointer;">Not sure? Skip this one</button>
+<button type="button" class="kk-grease" onClick="{{next}}" style="align-self:center; min-height:44px; font-size:15px;">Not sure? Skip this one</button>
 </sc-if>
 
-<p style="margin:0; padding:14px 16px; border:1px dashed #38322A; font-size:14px; line-height:1.5; color:#A39A8B;">A pro measuring you is always most accurate. Close to Penfield? <a href="Book.dc.html" style="font-weight:600;">Book a visit</a> and we’ll do it in a few minutes.</p>
+<p style="margin:0; padding:14px 16px; border:1px dashed #38322A; font-size:14px; line-height:1.5; color:#A39A8B;">A pro measuring you is always most accurate. Close to Penfield? <a href="Book.dc.html" class="kk-grease">Book a visit</a> and we’ll do it in a few minutes.</p>
 
 </main>
 </div>
@@ -169,8 +178,8 @@ class Component extends DCLogic {
       const done = filled(st);
       const now = j === i;
       return {
-        bg: done ? '#C29E62' : '#0F0E0D',
-        border: now ? '2px solid #E2C48E' : done ? '1px solid #C29E62' : '1px solid #4A4237'
+        no: String(j + 1).padStart(2, '0'),
+        cls: 'kk-frame' + (now ? ' is-now' : done ? ' is-done' : '')
       };
     });
     const doneCount = STEPS.filter(filled).length;
@@ -178,6 +187,7 @@ class Component extends DCLogic {
     const last = i === STEPS.length - 1;
     return {
       stepText: 'Step ' + (i + 1) + ' of ' + STEPS.length,
+      stepNo: String(i + 1).padStart(2, '0'),
       tiles: tiles,
       progressLabel: doneCount + ' of ' + STEPS.length + ' measurements entered',
       cur: {
@@ -192,7 +202,6 @@ class Component extends DCLogic {
         ph: c.ph || '',
         step: c.step || '1',
         value: value,
-        bd: value ? '#8C7247' : '#38322A',
         set: this.setVal(c.key)
       },
       vals: s.vals,

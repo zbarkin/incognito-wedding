@@ -9,10 +9,10 @@
 <x-dc>
 <helmet>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Rokkitt:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="../kodak-kit.css">
 <style>
 body{margin:0;background:#121110}
-a{color:#C9A66B}a:hover{color:#E2C48E}
-.btn:hover{background:#D4B47A !important}
+a{color:#C9A66B}a:not([class*="kk-"]):hover{color:#E2C48E}
 .ghost:hover{border-color:#C9A66B !important}
 a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3px}
 </style>
@@ -68,65 +68,61 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 
 <section aria-labelledby="todo-h" style="display:flex; flex-direction:column; gap:18px;">
 <h2 id="todo-h" style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:26px; color:#EEE7D9;">Your to-do list</h2>
-<ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+<ol class="kk-sleeve">
 
-<li style="display:flex; gap:16px;">
-<span style="flex:0 0 36px; display:flex; flex-direction:column; align-items:center;">
-<span style="width:36px; height:36px; display:flex; align-items:center; justify-content:center; background:#C29E62; font-family:Rokkitt, serif; font-weight:700; font-size:18px; color:#15130F;">1</span>
-<span aria-hidden="true" style="flex:1 1 auto; width:1px; margin:6px 0; background:#8C7247;"></span>
-</span>
-<div style="flex:1 1 auto; min-width:0; padding-bottom:28px; display:flex; flex-direction:column; gap:10px;">
-<span style="align-self:flex-start; display:inline-flex; align-items:center; height:26px; padding:0 10px; border:1px solid #E86A5E; font-size:12px; font-weight:700; color:#E86A5E;">Due Sat, Dec 12 · 11 days</span>
+<li class="kk-sleeve-row" style="grid-template-columns:26px minmax(0, 1fr); align-items:start; row-gap:14px; padding:16px 12px;">
+<span class="kk-no" style="padding-top:7px;">01</span>
+<div style="min-width:0; display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 10px;">
+<span class="kk-cap is-red">Due Sat, Dec 12 · 11 days</span>
+<span class="kk-mark is-no">✗ to do</span>
+</div>
 <h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:23px; line-height:1.1; color:#EEE7D9;">Send your measurements</h3>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">Enter them here, or come by the shop and we’ll measure you.</p>
-<a href="Measure.dc.html" class="btn" style="display:flex; align-items:center; justify-content:center; height:52px; margin-top:4px; background:#C29E62; color:#15130F; text-decoration:none; border-radius:2px; font-family:Archivo, sans-serif; font-stretch:112%; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase;">Enter my measurements</a>
-<a href="Book.dc.html" class="ghost" style="display:flex; align-items:center; justify-content:center; height:48px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;">Book a measuring visit</a>
+</div>
+<div style="grid-column:1 / -1; display:flex; flex-direction:column; gap:10px;">
+<a href="Measure.dc.html" class="kk-shutter kk-small"><span class="kk-dot" aria-hidden="true"></span>Enter my measurements</a>
+<a href="Book.dc.html" class="kk-leader">Book a measuring visit</a>
 </div>
 </li>
 
-<li style="display:flex; gap:16px;">
-<span style="flex:0 0 36px; display:flex; flex-direction:column; align-items:center;">
-<span style="width:36px; height:36px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; border:1px solid #8C7247; font-family:Rokkitt, serif; font-weight:700; font-size:18px; color:#C9A66B;">2</span>
-<span aria-hidden="true" style="flex:1 1 auto; width:1px; margin:6px 0; background:#38322A;"></span>
-</span>
-<div style="flex:1 1 auto; min-width:0; padding-bottom:28px; display:flex; flex-direction:column; gap:10px;">
-<span style="align-self:flex-start; display:inline-flex; align-items:center; height:26px; padding:0 10px; border:1px solid #4A4237; font-size:12px; font-weight:700; color:#A39A8B;">Due by Dec 19</span>
+<li class="kk-sleeve-row" style="grid-template-columns:26px minmax(0, 1fr); align-items:start; row-gap:14px; padding:16px 12px;">
+<span class="kk-no" style="padding-top:7px;">02</span>
+<div style="min-width:0; display:flex; flex-direction:column; gap:10px;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 10px;">
+<span class="kk-cap is-grey">Due by Dec 19</span>
+<span class="kk-mark is-wait">to do</span>
+</div>
 <h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:23px; line-height:1.1; color:#EEE7D9;">Pay your deposit</h3>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">Holds your size in the party order. Deposit: [AMOUNT]</p>
-<button type="button" class="ghost" style="height:48px; margin-top:4px; background:transparent; color:#EEE7D9; border:1px solid #4A4237; border-radius:2px; font-family:Archivo, sans-serif; font-weight:600; font-size:15px; cursor:pointer;">Pay deposit</button>
+</div>
+<div style="grid-column:1 / -1; display:flex; flex-direction:column;">
+<button type="button" class="kk-leader">Pay deposit</button>
 </div>
 </li>
 
-<li style="display:flex; gap:16px;">
-<span style="flex:0 0 36px; display:flex; flex-direction:column; align-items:center;">
-<span style="width:36px; height:36px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; border:1px solid #38322A; font-family:Rokkitt, serif; font-weight:700; font-size:18px; color:#8E8676;">3</span>
-<span aria-hidden="true" style="flex:1 1 auto; width:1px; margin:6px 0; background:#38322A;"></span>
-</span>
-<div style="flex:1 1 auto; min-width:0; padding-bottom:24px; display:flex; flex-direction:column; gap:6px;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Jan 14–20</span>
+<li class="kk-sleeve-row" style="grid-template-columns:26px minmax(0, 1fr); align-items:start; padding:16px 12px;">
+<span class="kk-no" style="padding-top:3px;">03</span>
+<div style="min-width:0; display:flex; flex-direction:column; gap:6px;">
+<span class="kk-date">Jan 14–20</span>
 <h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:21px; line-height:1.1; color:#EEE7D9;">Try it on</h3>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">We’ll text you when your tux is in so you can book a fitting.</p>
 </div>
 </li>
 
-<li style="display:flex; gap:16px;">
-<span style="flex:0 0 36px; display:flex; flex-direction:column; align-items:center;">
-<span style="width:36px; height:36px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; border:1px solid #38322A; font-family:Rokkitt, serif; font-weight:700; font-size:18px; color:#8E8676;">4</span>
-<span aria-hidden="true" style="flex:1 1 auto; width:1px; margin:6px 0; background:#38322A;"></span>
-</span>
-<div style="flex:1 1 auto; min-width:0; padding-bottom:24px; display:flex; flex-direction:column; gap:6px;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Thu, Jan 21</span>
+<li class="kk-sleeve-row" style="grid-template-columns:26px minmax(0, 1fr); align-items:start; padding:16px 12px;">
+<span class="kk-no" style="padding-top:3px;">04</span>
+<div style="min-width:0; display:flex; flex-direction:column; gap:6px;">
+<span class="kk-date">Thu, Jan 21</span>
 <h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:21px; line-height:1.1; color:#EEE7D9;">Pick it up</h3>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">At the shop, two days before the wedding.</p>
 </div>
 </li>
 
-<li style="display:flex; gap:16px;">
-<span style="flex:0 0 36px; display:flex; flex-direction:column; align-items:center;">
-<span style="width:36px; height:36px; box-sizing:border-box; display:flex; align-items:center; justify-content:center; border:1px solid #38322A; font-family:Rokkitt, serif; font-weight:700; font-size:18px; color:#8E8676;">5</span>
-</span>
-<div style="flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:6px;">
-<span style="font-family:Archivo, sans-serif; font-stretch:125%; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#A39A8B;">Mon, Jan 25</span>
+<li class="kk-sleeve-row" style="grid-template-columns:26px minmax(0, 1fr); align-items:start; padding:16px 12px;">
+<span class="kk-no" style="padding-top:3px;">05</span>
+<div style="min-width:0; display:flex; flex-direction:column; gap:6px;">
+<span class="kk-date">Mon, Jan 25</span>
 <h3 style="margin:0; font-family:Rokkitt, serif; font-weight:600; font-size:21px; line-height:1.1; color:#EEE7D9;">Bring it back</h3>
 <p style="margin:0; font-size:15px; line-height:1.5; color:#A39A8B;">Drop everything off at the shop after the weekend.</p>
 </div>
@@ -141,16 +137,17 @@ a:focus-visible,button:focus-visible{outline:2px solid #E2C48E;outline-offset:3p
 <p style="margin:0; font-size:14px; line-height:1.6; color:#A39A8B;">Mon, Wed, Thu 12–7 · Fri &amp; Sat 10–5<br>Sun 12–5 · Closed Tuesdays</p>
 <dc-import name="PlaceMap" theme="kodak" kind="Our shop" caption="none" height="180px" hint-size="100%,192px"></dc-import>
 <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px;">
-<a href="tel:+15855867846" class="ghost" style="display:flex; align-items:center; justify-content:center; gap:8px; height:48px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;">Call</a>
-<a href="https://maps.google.com/?q=1823+Penfield+Rd+Penfield+NY+14526" class="ghost" style="display:flex; align-items:center; justify-content:center; gap:8px; height:48px; box-sizing:border-box; border:1px solid #4A4237; border-radius:2px; color:#EEE7D9; text-decoration:none; font-size:15px; font-weight:600;">Directions</a>
+<a href="tel:+15855867846" class="kk-leader" style="padding:0 44px 0 16px;">Call</a>
+<a href="https://maps.google.com/?q=1823+Penfield+Rd+Penfield+NY+14526" class="kk-leader" style="padding:0 44px 0 16px;">Directions</a>
 </div>
 </section>
 
 </main>
 
-<footer style="padding:18px 20px 26px; border-top:1px solid #2A2621; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:12px; color:#A39A8B;">
+<div class="kk-edge" aria-hidden="true"><span style="left:14px">INCOGNITO 400</span><span style="left:168px">▶ 05</span><span style="left:238px">PENFIELD NY</span></div>
+<footer style="padding:18px 20px 26px; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:12px; color:#A39A8B;">
 <span>Penfield, N.Y. · Since 1985</span>
-<span>Not Sam? <a href="tel:+15855867846" style="color:#C9A66B;">Let us know</a></span>
+<span>Not Sam? <a href="tel:+15855867846" class="kk-grease">Let us know</a></span>
 </footer>
 
 </div>
