@@ -1,3 +1,6 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Full-quality Blender renders; the site uses the .webp copies (scripts/render_webp.py)
+docs/shop/render/*/*.png
