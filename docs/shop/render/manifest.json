@@ -65,8 +65,8 @@
     "yaw_deg": 43.5,
     "k": 586.34,
     "scale_from": "length",
-    "narrow": 0.842,
-    "neck_px": 225.5,
+    "narrow": 0.638,
+    "neck_px": 243,
     "stretch": 1.034,
     "lean_px": 24,
     "drop_m": 0.657
@@ -83,7 +83,7 @@
     "k": 586.34,
     "scale_from": "length",
     "narrow": 0.55,
-    "neck_px": 225.5,
+    "neck_px": 243,
     "stretch": 1.034,
     "lean_px": 24,
     "drop_m": 0.657
@@ -99,8 +99,8 @@
     "yaw_deg": 43.5,
     "k": 586.34,
     "scale_from": "length",
-    "narrow": 0.842,
-    "neck_px": 225.5,
+    "narrow": 0.638,
+    "neck_px": 243,
     "stretch": 1.034,
     "lean_px": 24,
     "drop_m": 0.657
