@@ -7,7 +7,7 @@ window.SCREEN_GROUPS = [
     ['silver-birch', 'SilverBirchSignup', 'Silver Birch', 'Black, silver and ivory, with Cesso for titles'],
     ['tuxedo-park-green', 'TuxedoParkSignup', 'Tuxedo Park · green', 'Bottle-green walls, engraved stationery and gilt'],
     ['tuxedo-park-burgundy', 'TuxedoParkBurgundySignup', 'Tuxedo Park · burgundy', 'The Tuxedo Park burgundy set'],
-    ['kodak-kit', 'KodakKit', 'Kodak component kit', 'Buttons, fields, selectors and cards rebuilt with darkroom details']
+    ['kodak-kit', 'KodakKit', 'Kodak component kit · first pass', 'The first, more playful take; the screens now use a sleeker version']
   ]],
   ['Prom', [
     ['prom-kodak', 'PromKodak', 'Prom · Kodak, the squad', 'Prom crew sign-up in the Kodak style: a 1970s city detective, armed with a camera'],

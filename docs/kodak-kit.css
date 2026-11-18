@@ -1,104 +1,102 @@
 /* Kodak component kit: shared parts for every Kodak-style screen.
-   Linked from each screen's <helmet> as ../kodak-kit.css. Demo and captions: screens/KodakKit.dc.html.
-   Class names all start with kk-. Inline styles win over these classes, so when a screen uses a
-   kk- class, its inline color/border/background/font rules for that element are removed. */
+   Linked from each screen's <helmet> as ../kodak-kit.css. Class names all start with kk-.
+   Inline styles win over these classes, so where a screen uses a kk- class its conflicting
+   inline colour/border/background/font rules have been removed.
+
+   Direction (v2): sleek and grown-up. Camera-body precision rather than props: brushed brass,
+   hairline rules, engraved small caps, an amber counter and date readout, a precise dial.
+   The cream slide-mount product card is the one deliberately tactile piece and stays as it was. */
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --kk-bg:#121110; --kk-panel:#1A1816; --kk-field:#0F0E0D; --kk-line:#38322A;
-  --kk-text:#EEE7D9; --kk-muted:#A39A8B; --kk-brass:#C29E62; --kk-brass-hi:#E2C48E; --kk-brass-lo:#8C7247;
-  --kk-safelight:#E2463A; --kk-safelight-glow:rgba(226,70,58,.35); --kk-amber:#FF8A1E; --kk-film:#F2B11A; --kk-edge:#E7A33E;
-  --kk-kraft:#B48A5A; --kk-mount:#EDE6D6; --kk-negative:#1C120E;
+  --kk-bg:#121110; --kk-panel:#1A1816; --kk-field:#0F0E0D; --kk-line:#38322A; --kk-hair:rgba(238,231,217,.12);
+  --kk-text:#EEE7D9; --kk-muted:#A39A8B; --kk-brass:#C29E62; --kk-brass-hi:#D9BC85; --kk-brass-lo:#8C7247;
+  --kk-red:#C8574B; --kk-amber:#E8963A; --kk-green:#8DB07E; --kk-film:#D9A441; --kk-edge:#B98F52;
+  --kk-mount:#EDE6D6; --kk-negative:#17110D;
   --kk-display:Rokkitt, serif; --kk-body:Archivo, sans-serif; --kk-mono:'Share Tech Mono', ui-monospace, monospace; --kk-hand:'Permanent Marker', cursive;
 }
 @media (prefers-reduced-motion: reduce) { [class*="kk-"], [class*="kk-"]::before, [class*="kk-"]::after { animation:none !important; transition:none !important; } }
 
 /* 01 Buttons ------------------------------------------------------------------------------- */
-/* Main action. Works on <button> and <a>. Optional <span class="kk-dot"></span> first. */
-.kk-shutter { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:54px; padding:0 26px 0 46px; box-sizing:border-box;
-  border:0; border-radius:3px; cursor:pointer; text-decoration:none; color:#15130F; font:700 14px/1 var(--kk-body); font-stretch:112%; letter-spacing:.1em; text-transform:uppercase;
-  background:linear-gradient(180deg, var(--kk-brass-hi), var(--kk-brass) 55%, var(--kk-brass-lo));
-  box-shadow:0 3px 0 #5E4A2A, 0 8px 18px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.4); transition:transform .08s, box-shadow .08s, filter .15s; }
-.kk-shutter::before { content:""; position:absolute; left:0; top:0; bottom:0; width:28px; border-radius:3px 0 0 3px; background:repeating-linear-gradient(0deg, #6E5A35 0 2px, #D9BE86 2px 4px); box-shadow:inset -1px 0 0 rgba(0,0,0,.35); }
-.kk-shutter:hover { filter:brightness(1.06); }
-.kk-shutter:active { transform:translateY(3px); box-shadow:0 0 0 #5E4A2A, 0 3px 8px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.3); }
-.kk-shutter[disabled], .kk-shutter[aria-disabled="true"] { filter:grayscale(.85) brightness(.6); cursor:not-allowed; transform:none; }
-.kk-dot { width:10px; height:10px; flex:0 0 10px; border-radius:50%; background:var(--kk-safelight); box-shadow:0 0 0 2px rgba(0,0,0,.25), 0 0 10px var(--kk-safelight-glow); }
-.kk-shutter.kk-small { min-height:44px; padding:0 18px 0 38px; font-size:12px; }
-.kk-shutter.kk-small::before { width:22px; }
-/* Back / secondary. Works on <button> and <a>. */
-.kk-leader { position:relative; display:inline-flex; align-items:center; gap:10px; min-height:50px; padding:0 52px 0 20px; box-sizing:border-box; border:0; cursor:pointer; text-decoration:none;
-  color:var(--kk-text); background:#2A1A12; font:600 14px/1 var(--kk-body); letter-spacing:.06em;
-  clip-path:polygon(0 0, calc(100% - 40px) 0, calc(100% - 18px) 30%, 100% 30%, 100% 100%, 0 100%); }
-.kk-leader::after { content:""; position:absolute; left:10px; right:46px; top:5px; height:5px; background:repeating-linear-gradient(90deg, transparent 0 6px, #0B0A09 6px 12px); }
-.kk-leader:hover { background:#3A2418; }
-/* Text link with a grease-pencil underline drawn on hover/focus. */
-.kk-grease { color:var(--kk-text); text-decoration:none; font-weight:600; padding-bottom:5px; cursor:pointer; background:none; border:0; font-family:inherit; font-size:inherit;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M2 7 C 20 2, 40 10, 60 5 S 90 3, 98 6' stroke='%23E2463A' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:0 100%; background-size:0% 9px; transition:background-size .3s ease; }
-.kk-grease:hover, .kk-grease:focus-visible { background-size:100% 9px; }
-
-/* Screens' own a:hover colour rules must not recolour kit links. */
+/* Main action: brushed brass with a fine engraved grip line on the left. Works on <button> and <a>. */
+.kk-shutter { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:52px; padding:0 26px 0 30px; box-sizing:border-box;
+  border:0; border-radius:2px; cursor:pointer; text-decoration:none; color:#15130F; font:700 13px/1.15 var(--kk-body); font-stretch:108%; letter-spacing:.1em; text-transform:uppercase; text-align:center;
+  background:linear-gradient(180deg, var(--kk-brass-hi) 0%, var(--kk-brass) 60%, #B38F55 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(0,0,0,.18), 0 1px 2px rgba(0,0,0,.5); transition:background .2s, transform .08s; }
+.kk-shutter::before { content:""; position:absolute; left:12px; top:14px; bottom:14px; width:4px; background:repeating-linear-gradient(0deg, rgba(21,19,15,.55) 0 1px, transparent 1px 3px); }
+.kk-shutter:hover { background:linear-gradient(180deg, #E4C994 0%, #CDA96C 60%, #B8945A 100%); }
+.kk-shutter:active { transform:translateY(1px); }
+.kk-shutter[disabled], .kk-shutter[aria-disabled="true"] { background:#3A342C; color:#7E7668; box-shadow:none; cursor:not-allowed; transform:none; }
+.kk-shutter[disabled]::before, .kk-shutter[aria-disabled="true"]::before { opacity:.3; }
+.kk-dot { display:none; }
+.kk-shutter.kk-small { min-height:42px; padding:0 18px 0 26px; font-size:12px; letter-spacing:.12em; }
+.kk-shutter.kk-small::before { left:10px; top:12px; bottom:12px; width:3px; }
+/* Secondary / back: a quiet outline with a brass hairline on hover. */
+.kk-leader { position:relative; display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 20px; box-sizing:border-box; cursor:pointer; text-decoration:none;
+  color:var(--kk-text); background:transparent; border:1px solid var(--kk-line); border-radius:2px; font:600 14px/1 var(--kk-body); letter-spacing:.02em; transition:border-color .2s, color .2s; }
+.kk-leader:hover { border-color:var(--kk-brass); color:#fff; }
+/* Text link: a brass hairline that extends on hover. */
+.kk-grease { color:var(--kk-text); text-decoration:none; font-weight:600; padding-bottom:3px; cursor:pointer; background:none; border:0; font-family:inherit; font-size:inherit;
+  background-image:linear-gradient(var(--kk-brass), var(--kk-brass)); background-repeat:no-repeat; background-position:0 100%; background-size:24% 1px; transition:background-size .3s ease; }
+.kk-grease:hover, .kk-grease:focus-visible { background-size:100% 1px; }
 a.kk-shutter, a.kk-shutter:hover, a.kk-shutter:visited { color:#15130F; text-decoration:none; }
 a.kk-leader, a.kk-leader:hover, a.kk-leader:visited { color:var(--kk-text); text-decoration:none; }
 a.kk-grease, a.kk-grease:hover, a.kk-grease:visited { color:var(--kk-text); text-decoration:none; }
 
-/* 02 Step progress: frame counter + film strip -------------------------------------------- */
-/* <div class="kk-steps"><div class="kk-counter">03</div><ol class="kk-strip"><li class="kk-frame is-done"><b>FRAME 1</b>The wedding</li>…</ol></div> */
+/* 02 Step progress: amber frame counter + a restrained film strip ------------------------- */
 .kk-steps { display:flex; align-items:center; gap:16px; min-width:0; }
-.kk-counter { flex:0 0 70px; width:70px; height:50px; box-sizing:border-box; border-radius:25px; background:radial-gradient(circle at 50% 40%, #241A12, #0B0705); border:3px solid #3A322A;
-  box-shadow:inset 0 2px 6px rgba(0,0,0,.8), 0 1px 0 #4A4237; display:flex; align-items:center; justify-content:center; font:26px/1 var(--kk-mono); color:var(--kk-amber); text-shadow:0 0 8px rgba(255,138,30,.65); }
-.kk-strip { flex:1 1 auto; min-width:0; list-style:none; margin:0; background:var(--kk-negative); padding:10px 6px; position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:6px; }
-.kk-strip::before, .kk-strip::after { content:""; position:absolute; left:0; right:0; height:5px; background:repeating-linear-gradient(90deg, transparent 0 7px, #E9DCC4 7px 15px, transparent 15px 22px); }
-.kk-strip::before { top:2px; } .kk-strip::after { bottom:2px; }
-.kk-frame { min-height:56px; border:1px solid #3A2A20; background:#0B0705; color:#6E6252; display:flex; flex-direction:column; justify-content:center; padding:4px 8px; font:500 12px/1.25 var(--kk-body); min-width:0; }
-.kk-frame b { font:600 10px/1 var(--kk-mono); color:var(--kk-edge); letter-spacing:.1em; margin-bottom:4px; }
+.kk-counter { flex:0 0 58px; width:58px; height:40px; box-sizing:border-box; border-radius:3px; background:#0A0807; border:1px solid var(--kk-line);
+  box-shadow:inset 0 1px 4px rgba(0,0,0,.8); display:flex; align-items:center; justify-content:center; font:22px/1 var(--kk-mono); color:var(--kk-amber); letter-spacing:.06em; }
+.kk-strip { flex:1 1 auto; min-width:0; list-style:none; margin:0; padding:8px 0; position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:2px; background:none; }
+.kk-strip::before, .kk-strip::after { content:""; position:absolute; left:0; right:0; height:3px; background:repeating-linear-gradient(90deg, transparent 0 9px, rgba(238,231,217,.18) 9px 15px, transparent 15px 22px); }
+.kk-strip::before { top:0; } .kk-strip::after { bottom:0; }
+.kk-frame { min-height:48px; border:0; border-top:2px solid var(--kk-line); background:transparent; color:#6E6658; display:flex; flex-direction:column; justify-content:center; padding:8px 4px 4px; font:500 13px/1.25 var(--kk-body); min-width:0; }
+.kk-frame b { font:600 10px/1 var(--kk-mono); color:#6E6658; letter-spacing:.14em; margin-bottom:5px; }
 .kk-frame a { color:inherit; text-decoration:none; }
-.kk-frame.is-done { color:var(--kk-muted); background:#1E1712; }
-.kk-frame.is-now { color:#15130F; background:linear-gradient(180deg, #F3E3BE, #D9C08A); border-color:var(--kk-brass); font-weight:600; }
-.kk-frame.is-now b { color:#6E4A12; }
+.kk-frame.is-done { color:var(--kk-muted); border-top-color:var(--kk-brass-lo); }
+.kk-frame.is-done b { color:var(--kk-brass-lo); }
+.kk-frame.is-now { color:var(--kk-text); border-top-color:var(--kk-brass); font-weight:600; }
+.kk-frame.is-now b { color:var(--kk-amber); }
 @media (max-width: 560px) { .kk-frame { font-size:0; } .kk-frame b { font-size:10px; margin:0; } .kk-frame.is-now { font-size:12px; } }
 
-/* 03 Fields: Dymo labels + safelight focus ------------------------------------------------- */
-/* <label class="kk-field"><span class="kk-dymo">Your name</span><input class="kk-input"></label> */
+/* 03 Fields: engraved small-caps labels, hairline inputs ---------------------------------- */
 .kk-field { display:flex; flex-direction:column; gap:8px; min-width:0; }
-.kk-dymo { align-self:flex-start; display:inline-block; padding:5px 11px 4px; border-radius:4px; background:linear-gradient(180deg, #232323, #0B0B0B); color:#F4F1EA;
-  font:700 11px/1.1 var(--kk-body); font-stretch:115%; letter-spacing:.2em; text-transform:uppercase; text-shadow:0 1px 0 rgba(255,255,255,.35), 0 -1px 0 rgba(0,0,0,.9);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 2px 3px rgba(0,0,0,.5); }
-.kk-dymo.is-red { background:linear-gradient(180deg, #B4231A, #7E140E); }
-.kk-input { width:100%; min-height:48px; box-sizing:border-box; padding:10px 2px; background:transparent; color:var(--kk-text); border:0; border-bottom:2px solid var(--kk-line);
-  border-radius:0; font:500 17px/1.3 var(--kk-body); outline:none; transition:border-color .2s, box-shadow .2s; color-scheme:dark; }
+.kk-dymo { align-self:flex-start; display:inline-block; padding:0; background:none; color:var(--kk-muted); font:600 11px/1.2 var(--kk-body); font-stretch:120%; letter-spacing:.2em; text-transform:uppercase; }
+.kk-dymo.is-red { color:var(--kk-brass); }
+.kk-dymo.is-red::after { content:" *"; color:var(--kk-brass-lo); letter-spacing:0; }
+.kk-input { width:100%; min-height:46px; box-sizing:border-box; padding:10px 0; background:transparent; color:var(--kk-text); border:0; border-bottom:1px solid var(--kk-line);
+  border-radius:0; font:500 17px/1.3 var(--kk-body); outline:none; transition:border-color .2s; color-scheme:dark; }
 textarea.kk-input { min-height:96px; resize:vertical; }
-select.kk-input { cursor:pointer; background:var(--kk-field); padding:10px 8px; }
-.kk-input::placeholder { color:#6E6252; }
-.kk-input:focus { border-bottom-color:var(--kk-safelight); box-shadow:0 12px 18px -14px var(--kk-safelight-glow); }
-.kk-field:focus-within .kk-dymo:not(.is-red) { background:linear-gradient(180deg, #3A1512, #1A0806); }
+select.kk-input { cursor:pointer; background:transparent; padding:10px 0; }
+.kk-input::placeholder { color:#5E574C; }
+.kk-input:focus { border-bottom-color:var(--kk-brass); box-shadow:0 1px 0 0 var(--kk-brass); }
+.kk-field:focus-within .kk-dymo { color:var(--kk-brass-hi); }
 .kk-help { font-size:13px; color:var(--kk-muted); }
 
-/* 04 Exposure dial ------------------------------------------------------------------------- */
-/* A rotating ring (SVG) plus radio buttons. Set style="--kk-angle:-120deg" on .kk-dial-ring from state. */
+/* 04 Dial: a precise machined selector ---------------------------------------------------- */
 .kk-dialwrap { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
-.kk-dial { width:132px; height:132px; flex:0 0 132px; }
-.kk-dial-ring { transform:rotate(var(--kk-angle, 0deg)); transform-origin:50% 50%; transform-box:fill-box; transition:transform .45s cubic-bezier(.3,1.4,.5,1); }
-.kk-dial-opts { display:flex; flex-direction:column; gap:6px; flex:1 1 140px; min-width:0; }
-.kk-dial-opt { display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:42px; padding:0 14px; background:transparent; color:var(--kk-muted); border:1px solid var(--kk-line);
-  cursor:pointer; font:600 14px var(--kk-body); text-align:left; }
-.kk-dial-opt small { font:11px var(--kk-mono); opacity:.8; }
-.kk-dial-opt[aria-checked="true"], .kk-dial-opt[aria-pressed="true"] { color:#15130F; background:var(--kk-brass); border-color:var(--kk-brass); }
-.kk-dial-opt:hover:not([aria-checked="true"]):not([aria-pressed="true"]) { color:var(--kk-text); border-color:var(--kk-brass-lo); }
+.kk-dial { width:116px; height:116px; flex:0 0 116px; filter:saturate(.6); }
+.kk-dial-ring { transform:rotate(var(--kk-angle, 0deg)); transform-origin:50% 50%; transform-box:fill-box; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+.kk-dial-opts { display:flex; flex-direction:column; gap:0; flex:1 1 140px; min-width:0; border-top:1px solid var(--kk-line); }
+.kk-dial-opt { display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:42px; padding:0 2px; background:transparent; color:var(--kk-muted); border:0; border-bottom:1px solid var(--kk-line);
+  cursor:pointer; font:500 14px var(--kk-body); text-align:left; transition:color .15s; }
+.kk-dial-opt small { font:11px var(--kk-mono); opacity:.7; letter-spacing:.06em; }
+.kk-dial-opt[aria-checked="true"], .kk-dial-opt[aria-pressed="true"] { color:var(--kk-text); font-weight:600; box-shadow:inset 3px 0 0 var(--kk-brass); padding-left:12px; }
+.kk-dial-opt:hover:not([aria-checked="true"]):not([aria-pressed="true"]) { color:var(--kk-text); }
+/* Dial-opt also styles tab rows and filter chips; give those a gap and outline when laid out in a row. */
+:not(.kk-dial-opts) > .kk-dial-opt { border:1px solid var(--kk-line); padding:0 14px; border-radius:2px; min-height:40px; }
+:not(.kk-dial-opts) > .kk-dial-opt[aria-checked="true"], :not(.kk-dial-opts) > .kk-dial-opt[aria-pressed="true"] { box-shadow:none; padding-left:14px; border-color:var(--kk-brass); color:var(--kk-brass-hi); background:rgba(194,158,98,.08); }
 
-/* 05 Flashcube toggle ---------------------------------------------------------------------- */
-/* <label class="kk-cube"><input type="checkbox"><svg …class="kk-cube-art">…<rect class="kk-face">…</svg><span>Label</span></label> */
+/* 05 Toggle: a slim brass switch (the markup's cube art is hidden) ------------------------ */
 .kk-cube { display:flex; align-items:center; gap:14px; cursor:pointer; user-select:none; position:relative; }
-.kk-cube input { position:absolute; opacity:0; width:1px; height:1px; margin:0; }
-.kk-cube-art { width:46px; height:46px; flex:0 0 46px; }
-.kk-face { fill:#2A2621; transition:fill .2s; }
-.kk-cube input:checked + .kk-cube-art .kk-face { fill:#FFF6D8; }
-.kk-cube input:checked + .kk-cube-art { filter:drop-shadow(0 0 10px rgba(255,236,170,.7)); }
-.kk-cube input:focus-visible + .kk-cube-art { outline:2px solid var(--kk-brass-hi); outline-offset:4px; }
+.kk-cube input { position:relative; appearance:none; -webkit-appearance:none; width:40px; height:22px; flex:0 0 40px; margin:0; border-radius:11px; background:#2A2621; border:1px solid var(--kk-line); cursor:pointer; transition:background .2s, border-color .2s; }
+.kk-cube input::after { content:""; position:absolute; top:3px; left:3px; width:14px; height:14px; border-radius:50%; background:#8E8676; transition:transform .2s, background .2s; }
+.kk-cube input:checked { background:rgba(194,158,98,.25); border-color:var(--kk-brass); }
+.kk-cube input:checked::after { transform:translateX(18px); background:var(--kk-brass-hi); }
+.kk-cube input:focus-visible { outline:2px solid var(--kk-brass-hi); outline-offset:3px; }
+.kk-cube-art { display:none; }
 
-/* 06 Slide-mount card ---------------------------------------------------------------------- */
-/* <article class="kk-mount"><div class="kk-mount-win">image</div><span class="kk-mount-hand">Name · $</span><span class="kk-mount-print">…</span></article> */
+/* 06 Slide-mount card (kept as is: the one tactile piece) --------------------------------- */
 .kk-mount { position:relative; background:linear-gradient(160deg, #F4EEDF, var(--kk-mount)); border-radius:8px; padding:14px 14px 38px; box-shadow:0 10px 22px rgba(0,0,0,.5), inset 0 0 0 1px rgba(0,0,0,.08);
   color:#2A241C; transition:transform .2s; }
 .kk-mount:hover, .kk-mount:focus-within { transform:rotate(-1deg) translateY(-3px); }
@@ -106,61 +104,58 @@ select.kk-input { cursor:pointer; background:var(--kk-field); padding:10px 8px; 
 .kk-mount-hand { position:absolute; left:14px; right:28px; bottom:10px; font:15px/1.1 var(--kk-hand); color:#22324F; transform:rotate(-1.5deg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .kk-mount-print { position:absolute; right:3px; top:50%; transform:translate(50%, -50%) rotate(90deg); font:700 8px/1 var(--kk-body); letter-spacing:.18em; color:#8C7E66; white-space:nowrap; pointer-events:none; }
 
-/* 07 Contact-sheet pick: red grease-pencil circle on the picked item ----------------------- */
-/* Put .kk-pick on any button/card with aria-pressed or aria-checked, and add <svg class="kk-circle" viewBox="0 0 120 120"><path d="M60 8 C 96 6, 114 34, 110 62 C 106 94, 74 114, 50 110 C 20 106, 6 80, 10 52 C 14 26, 36 10, 66 12"/></svg> inside. */
+/* 07 Picked items: a clean brass ring instead of a drawn circle -------------------------- */
 .kk-pick { position:relative; }
-.kk-circle { position:absolute; inset:-8%; width:116%; height:116%; pointer-events:none; overflow:visible; z-index:2; }
-.kk-circle { visibility:hidden; }
-.kk-circle path { fill:none; stroke:var(--kk-safelight); stroke-width:3.5; stroke-linecap:round; vector-effect:non-scaling-stroke; }
-.kk-pick[aria-pressed="true"] .kk-circle, .kk-pick[aria-checked="true"] .kk-circle, .kk-pick[aria-current="true"] .kk-circle, .kk-pick[aria-current="page"] .kk-circle, .kk-pick.is-picked .kk-circle { visibility:visible; }
+.kk-circle { display:none; }
+.kk-pick[aria-pressed="true"], .kk-pick[aria-checked="true"], .kk-pick[aria-current="true"], .kk-pick[aria-current="page"], .kk-pick.is-picked {
+  box-shadow:0 0 0 1px var(--kk-brass), 0 0 0 4px rgba(194,158,98,.16); }
 .kk-sheet { background:#0B0A09; padding:10px; }
 
 /* 08 Badges -------------------------------------------------------------------------------- */
-.kk-date { font:18px/1 var(--kk-mono); color:var(--kk-amber); text-shadow:0 0 6px rgba(255,138,30,.7); letter-spacing:.08em; white-space:nowrap; }
-.kk-dx { display:inline-flex; align-items:center; gap:9px; height:28px; padding:0 10px 0 0; background:#EDE6D6; color:#15130F; font:700 10px/1 var(--kk-body); letter-spacing:.14em; text-transform:uppercase; white-space:nowrap; }
-.kk-dx::before { content:""; width:34px; align-self:stretch; background:conic-gradient(#15130F 25%, #EDE6D6 0 50%, #15130F 0 75%, #EDE6D6 0) 0 0 / 9px 9px; }
-.kk-dx.is-low::before { background:conic-gradient(var(--kk-safelight) 25%, #EDE6D6 0 50%, var(--kk-safelight) 0 75%, #EDE6D6 0) 0 0 / 9px 9px; }
-.kk-dx.is-out { background:#3A322A; color:var(--kk-text); }
-.kk-dx.is-out::before { background:repeating-linear-gradient(45deg, var(--kk-safelight) 0 3px, transparent 3px 6px); }
-.kk-cap { display:inline-flex; align-items:center; gap:7px; height:28px; padding:0 12px 0 5px; border-radius:14px; background:linear-gradient(180deg, #2C2C2C, #0E0E0E); color:#EEE7D9;
-  font:600 12px/1 var(--kk-body); white-space:nowrap; box-shadow:inset 0 1px 0 rgba(255,255,255,.15); }
-.kk-cap::before { content:""; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #FFD769, var(--kk-film) 55%, #A9760C); box-shadow:inset 0 -2px 3px rgba(0,0,0,.35); }
-.kk-cap.is-red::before { background:radial-gradient(circle at 40% 35%, #FF8C80, var(--kk-safelight) 55%, #8E2219); }
-.kk-cap.is-grey::before { background:radial-gradient(circle at 40% 35%, #8E8676, #4A4237 60%, #2A2621); }
-.kk-cap.is-green::before { background:radial-gradient(circle at 40% 35%, #B7E3A6, #5FA35A 55%, #2E5C2A); }
+.kk-date { font:16px/1 var(--kk-mono); color:var(--kk-amber); letter-spacing:.1em; white-space:nowrap; }
+.kk-dx { display:inline-flex; align-items:center; gap:8px; height:24px; padding:0 9px; border:1px solid var(--kk-line); color:var(--kk-muted); font:600 10px/1 var(--kk-body); letter-spacing:.16em; text-transform:uppercase; white-space:nowrap; background:transparent; }
+.kk-dx::before { content:""; width:6px; height:6px; background:var(--kk-green); }
+.kk-dx.is-low::before { background:var(--kk-amber); }
+.kk-dx.is-out { color:#7E7668; }
+.kk-dx.is-out::before { background:var(--kk-red); }
+.kk-cap { display:inline-flex; align-items:center; gap:7px; height:24px; padding:0 10px; border-radius:12px; background:rgba(238,231,217,.06); color:var(--kk-text);
+  font:600 11px/1 var(--kk-body); letter-spacing:.04em; white-space:nowrap; border:1px solid rgba(238,231,217,.1); }
+.kk-cap::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--kk-film); }
+.kk-cap.is-red::before { background:var(--kk-red); } .kk-cap.is-red { color:#E8B4AC; }
+.kk-cap.is-grey::before { background:#6E6658; } .kk-cap.is-grey { color:var(--kk-muted); }
+.kk-cap.is-green::before { background:var(--kk-green); }
 
-/* 09 Photo-envelope notification ----------------------------------------------------------- */
-/* <div class="kk-envelope" role="status"><span class="kk-stamp">Ready</span><h3>…</h3><p>…</p></div> */
-.kk-envelope { position:relative; background:linear-gradient(180deg, #C69B68, var(--kk-kraft)); color:#2A1C10; padding:44px 20px 18px; border-radius:3px; box-shadow:0 12px 24px rgba(0,0,0,.45); }
-.kk-envelope::before { content:""; position:absolute; left:0; right:0; top:0; height:32px; background:linear-gradient(180deg, #A97E4E, #B98F5C); clip-path:polygon(0 0, 100% 0, 100% 40%, 50% 100%, 0 40%); }
-.kk-envelope h3, .kk-envelope h2 { margin:0 0 4px; font:700 20px/1.2 var(--kk-display); color:#2A1C10; }
-.kk-envelope p { margin:0; font-size:14px; line-height:1.5; color:#3A2814; }
-.kk-envelope a { color:#5E1A12; font-weight:700; }
-.kk-stamp { position:absolute; top:9px; right:14px; z-index:1; padding:3px 8px; border:2px solid #8E2219; color:#8E2219; font:700 11px/1.2 var(--kk-body); letter-spacing:.18em; text-transform:uppercase; transform:rotate(6deg); opacity:.85; }
-.kk-ticks { display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px; font:12px var(--kk-mono); }
-.kk-ticks span::before { content:"\2610  "; } .kk-ticks span.is-done::before { content:"\2612  "; }
+/* 09 Confirmation panel ------------------------------------------------------------------- */
+.kk-envelope { position:relative; background:#16130F; color:var(--kk-text); padding:18px 20px 18px 22px; border:1px solid var(--kk-line); border-left:2px solid var(--kk-brass); border-radius:2px; }
+.kk-envelope::before { content:none; }
+.kk-envelope h3, .kk-envelope h2 { margin:0 0 4px; font:700 19px/1.25 var(--kk-display); color:var(--kk-text); }
+.kk-envelope p { margin:0; font-size:14px; line-height:1.55; color:var(--kk-muted); }
+.kk-envelope a { color:var(--kk-brass-hi); font-weight:600; }
+.kk-stamp { position:static; display:inline-block; margin-bottom:8px; padding:0; border:0; color:var(--kk-brass); font:600 10px/1.2 var(--kk-mono); letter-spacing:.2em; text-transform:uppercase; transform:none; opacity:1; }
+.kk-ticks { display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:10px; font:11px var(--kk-mono); letter-spacing:.08em; color:var(--kk-muted); }
+.kk-ticks span::before { content:"\25CB  "; } .kk-ticks span.is-done::before { content:"\25CF  "; color:var(--kk-brass); }
 
-/* 10 Loading reel + undeveloped empty state ------------------------------------------------ */
-.kk-reel { width:48px; height:48px; animation:kk-spin 1.6s linear infinite; }
+/* 10 Loading and empty --------------------------------------------------------------------- */
+.kk-reel { width:36px; height:36px; animation:kk-spin 1.8s linear infinite; opacity:.85; }
 @keyframes kk-spin { to { transform:rotate(360deg); } }
 .kk-loading { display:flex; align-items:center; gap:14px; color:var(--kk-muted); font-size:15px; }
-.kk-negative { display:flex; align-items:center; gap:16px; flex-wrap:wrap; background:var(--kk-negative); padding:16px; }
-.kk-neg { width:120px; height:84px; flex:0 0 120px; background:linear-gradient(135deg, #5A3416, #7A4A20 60%, #4E2C12); border:2px solid #2A160A; display:flex; align-items:center; justify-content:center;
-  color:#D9B37A; font:700 12px var(--kk-display); letter-spacing:.1em; text-transform:uppercase; }
-.kk-negative p { margin:0; color:var(--kk-muted); max-width:380px; font-size:15px; }
-.kk-negative strong { display:block; color:var(--kk-text); font-family:var(--kk-display); font-size:19px; }
+.kk-negative { display:flex; align-items:center; gap:16px; flex-wrap:wrap; background:transparent; border:1px dashed var(--kk-line); padding:18px; }
+.kk-neg { width:56px; height:40px; flex:0 0 56px; background:linear-gradient(135deg, #3A2414, #2A1A0E); border:1px solid #4A3020; color:transparent; font-size:0; position:relative; }
+.kk-neg::after { content:""; position:absolute; inset:6px 8px; border:1px solid rgba(217,179,122,.35); }
+.kk-negative p { margin:0; color:var(--kk-muted); max-width:420px; font-size:15px; }
+.kk-negative strong { display:block; color:var(--kk-text); font-family:var(--kk-display); font-size:18px; margin-bottom:2px; }
 
-/* 11 Negative-sleeve list ------------------------------------------------------------------ */
-.kk-sleeve { list-style:none; margin:0; padding:0; background:rgba(237,230,214,.04); border:1px solid rgba(237,230,214,.12); }
-.kk-sleeve > * { border-top:1px dashed rgba(237,230,214,.14); }
-.kk-sleeve > *:first-child { border-top:0; }
-.kk-sleeve-row { display:grid; grid-template-columns:44px minmax(0, 1fr) auto; align-items:center; gap:12px; padding:11px 14px; }
-.kk-no { font:12px var(--kk-mono); color:var(--kk-edge); }
-.kk-mark { font:15px/1.1 var(--kk-hand); white-space:nowrap; }
-.kk-mark.is-ok { color:#7BC47F; } .kk-mark.is-wait { color:var(--kk-film); } .kk-mark.is-no { color:var(--kk-safelight); }
+/* 11 Lists --------------------------------------------------------------------------------- */
+.kk-sleeve { list-style:none; margin:0; padding:0; background:transparent; border-top:1px solid var(--kk-line); }
+.kk-sleeve > * { border-bottom:1px solid var(--kk-hair); }
+.kk-sleeve-row { display:grid; grid-template-columns:40px minmax(0, 1fr) auto; align-items:center; gap:12px; padding:12px 4px; }
+.kk-no { font:12px var(--kk-mono); color:var(--kk-brass-lo); letter-spacing:.06em; }
+.kk-mark { font:600 13px/1.25 var(--kk-body); letter-spacing:0; color:var(--kk-muted); }
+.kk-mark.is-ok { color:var(--kk-green); } .kk-mark.is-wait { color:var(--kk-film); } .kk-mark.is-no { color:var(--kk-red); }
 
-/* Edge-print divider ----------------------------------------------------------------------- */
-.kk-edge { height:30px; background:var(--kk-negative); position:relative; overflow:hidden; border-radius:2px; }
-.kk-edge::before, .kk-edge::after { content:""; position:absolute; left:0; right:0; height:6px; background:repeating-linear-gradient(90deg, transparent 0 8px, #E9DCC4 8px 18px, transparent 18px 26px); }
-.kk-edge::before { top:3px; } .kk-edge::after { bottom:3px; }
-.kk-edge span { position:absolute; top:9px; font:700 10px/1 var(--kk-body); letter-spacing:.16em; color:var(--kk-edge); white-space:nowrap; }
+/* Edge-print divider: a quiet hairline with a frame number -------------------------------- */
+.kk-edge { height:18px; background:none; position:relative; overflow:hidden; border-top:1px solid var(--kk-line); }
+.kk-edge::before { content:""; position:absolute; left:0; right:0; top:4px; height:3px; background:repeating-linear-gradient(90deg, transparent 0 9px, rgba(238,231,217,.1) 9px 15px, transparent 15px 22px); }
+.kk-edge::after { content:none; }
+.kk-edge span { display:none; }
+.kk-edge span:first-child { display:block; position:absolute; right:0; top:7px; left:auto; font:600 9px/1 var(--kk-mono); letter-spacing:.2em; color:#5E574C; }
