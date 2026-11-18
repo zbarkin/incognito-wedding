@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Incognito · Style Options</title>
+<link rel="stylesheet" href="https://use.typekit.net/euq1ofl.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rokkitt:wght@600;700&family=Jost:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@500&display=swap">
+<style>
+/* Layout: a neutral presentation shell. Left: the chosen style's story, palette, type and signature
+   details. Right: its screens in a device frame, stepped one at a time. A second view lines up the
+   same step across all three styles. The shell itself stays neutral so no option is favoured. */
+:root { --bg:#111213; --panel:#18191B; --line:#2A2C2F; --text:#F1EFEA; --muted:#9A9C9F; --accent:#E9E4D8; --body:Inter, system-ui, sans-serif; color-scheme:dark; }
+* { box-sizing:border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 var(--body); }
+.shell { min-height:100%; display:flex; flex-direction:column; }
+header.top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; padding:16px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); border-bottom:1px solid var(--line); }
+.brand { display:flex; flex-direction:column; gap:2px; }
+.brand b { font-weight:700; letter-spacing:.18em; font-size:13px; }
+.brand span { color:var(--muted); font-size:13px; }
+.seg { display:flex; border:1px solid var(--line); border-radius:999px; padding:3px; gap:2px; flex-wrap:wrap; }
+.seg button { border:0; background:transparent; color:var(--muted); font:600 13px var(--body); padding:8px 16px; border-radius:999px; cursor:pointer; min-height:38px; }
+.seg button[aria-pressed="true"] { background:var(--accent); color:#111; }
+.seg button:focus-visible, button:focus-visible, a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.styles { display:flex; gap:8px; flex-wrap:wrap; }
+.styles button { display:flex; align-items:center; gap:10px; border:1px solid var(--line); background:transparent; color:var(--text); padding:8px 14px 8px 8px; border-radius:6px; cursor:pointer; font:600 14px var(--body); min-height:44px; }
+.styles button i { width:26px; height:26px; border-radius:4px; display:block; }
+.styles button[aria-pressed="true"] { border-color:var(--accent); background:#1F2023; }
+
+/* Walkthrough view */
+.walk { flex:1; display:grid; grid-template-columns:minmax(300px, 380px) minmax(0, 1fr); min-height:0; }
+.story { border-right:1px solid var(--line); padding:28px 24px 32px max(24px, env(safe-area-inset-left, 0px)); display:flex; flex-direction:column; gap:22px; overflow:auto; }
+.story .kicker { font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+.story h1 { margin:6px 0 0; font-size:44px; line-height:1; font-weight:400; }
+.story p.mood { margin:0; font-size:16px; color:#D6D3CC; }
+.story h3 { margin:0 0 10px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+.palette { display:flex; gap:6px; flex-wrap:wrap; }
+.palette div { width:calc((100% - 30px) / 6); min-width:40px; display:flex; flex-direction:column; gap:5px; font-size:10px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.palette span { height:42px; border-radius:3px; border:1px solid rgba(255,255,255,.08); }
+.type { display:flex; flex-direction:column; gap:8px; }
+.type .d { font-size:30px; line-height:1.05; }
+.type .b { font-size:15px; color:#D6D3CC; }
+.type small { color:var(--muted); font-size:12px; }
+.details { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
+.details li { display:grid; grid-template-columns:18px 1fr; gap:8px; font-size:14px; color:#D6D3CC; }
+.details li::before { content:"—"; color:var(--muted); }
+.variant { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:13px; color:var(--muted); }
+
+.stage { display:flex; flex-direction:column; min-width:0; min-height:0; padding:18px 24px 22px; gap:14px; }
+.steps { display:flex; gap:6px; overflow-x:auto; padding-bottom:4px; scrollbar-width:thin; }
+.steps button { flex:0 0 auto; display:flex; flex-direction:column; align-items:flex-start; gap:2px; border:1px solid var(--line); background:transparent; color:var(--muted); padding:8px 12px; border-radius:6px; cursor:pointer; font:500 13px var(--body); min-height:44px; text-align:left; }
+.steps button b { font-size:11px; font-weight:600; letter-spacing:.08em; }
+.steps button[aria-current="step"] { border-color:var(--accent); color:var(--text); background:#1F2023; }
+.frame-wrap { flex:1; min-height:420px; position:relative; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#0C0C0D; }
+.frame-wrap .chrome { height:30px; display:flex; align-items:center; gap:6px; padding:0 12px; border-bottom:1px solid var(--line); background:#161719; }
+.frame-wrap .chrome i { width:9px; height:9px; border-radius:50%; background:#2E3034; }
+.frame-wrap .chrome span { margin-left:10px; font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.viewport { position:absolute; left:0; right:0; top:30px; bottom:0; overflow:hidden; }
+.viewport iframe { position:absolute; left:0; top:0; border:0; transform-origin:0 0; background:#000; }
+.viewport.phone { display:flex; justify-content:center; align-items:flex-start; padding-top:16px; background:radial-gradient(circle at 50% 30%, #1C1D20, #0C0C0D); }
+.viewport.phone iframe { position:relative; border-radius:28px; box-shadow:0 0 0 10px #050506, 0 0 0 11px #2A2C2F, 0 30px 60px rgba(0,0,0,.6); }
+.nav { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.nav .note { color:var(--muted); font-size:13px; max-width:620px; }
+.nav .btns { display:flex; gap:8px; }
+.btn { border:1px solid var(--line); background:transparent; color:var(--text); font:600 13px var(--body); padding:0 16px; min-height:40px; border-radius:6px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+.btn.primary { background:var(--accent); color:#111; border-color:var(--accent); }
+
+/* Side-by-side view */
+.compare { flex:1; display:flex; flex-direction:column; gap:14px; padding:18px max(24px, env(safe-area-inset-right, 0px)) 22px max(24px, env(safe-area-inset-left, 0px)); min-height:0; }
+.cols { flex:1; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; min-height:520px; }
+.col { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.col h2 { margin:0; font-size:22px; font-weight:400; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+.col h2 a { font:500 12px var(--body); color:var(--muted); }
+.col .frame-wrap { min-height:480px; }
+[hidden] { display:none !important; }
+@media (max-width: 980px) {
+  .walk { grid-template-columns:1fr; }
+  .story { border-right:0; border-bottom:1px solid var(--line); }
+  .cols { grid-template-columns:1fr; }
+  .frame-wrap { min-height:560px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand"><b>INCOGNITO MENSWEAR &amp; TUX</b><span>Three directions for the new site · for review</span></div>
+    <div class="styles" role="group" aria-label="Style" id="styleBtns"></div>
+    <div class="seg" role="group" aria-label="View"><button type="button" id="vWalk" aria-pressed="true">Walk through one</button><button type="button" id="vComp" aria-pressed="false">Side by side</button></div>
+  </header>
+
+  <main class="walk" id="walk">
+    <aside class="story" id="story" aria-live="polite"></aside>
+    <section class="stage" aria-label="Screens">
+      <div class="steps" id="steps" role="group" aria-label="Screens in this path"></div>
+      <div class="frame-wrap"><div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span id="url"></span></div><div class="viewport" id="vp"><iframe id="frame" title="Screen preview"></iframe></div></div>
+      <div class="nav"><span class="note" id="note"></span><span class="btns"><button type="button" class="btn" id="prev">← Previous</button><button type="button" class="btn primary" id="next">Next →</button><a class="btn" id="open" target="_blank" rel="noopener">Open full screen ↗</a></span></div>
+    </section>
+  </main>
+
+  <main class="compare" id="compare" hidden>
+    <div class="steps" id="cSteps" role="group" aria-label="Screen to compare"></div>
+    <div class="cols" id="cols"></div>
+  </main>
+</div>
+<script>
+(function () {
+  var STEPS = [
+    { id: 'wedding', name: 'The wedding', n: 'Sign-up 1', note: 'The first thing a couple sees: tell us about the wedding.' },
+    { id: 'party', name: 'The party', n: 'Sign-up 2', note: 'Add the groomsmen and fathers; invites go out by text.' },
+    { id: 'look', name: 'The look', n: 'Sign-up 3', note: 'Pick tuxedo or suit, colour, lapel, neckwear. The preview updates live.' },
+    { id: 'book', name: 'Book a visit', n: 'Sign-up 4', note: 'Choose the consultation day and time.' },
+    { id: 'status', name: 'Party status', n: 'Groom', note: 'The groom’s dashboard: who has measured, who has paid, what’s next.' },
+    { id: 'member', name: 'Groomsman', n: 'Phone', note: 'What each groomsman sees on his phone from the invite link.', phone: true },
+    { id: 'shop', name: 'The shop', n: 'Store', note: 'Suits to buy and keep, on the style’s own mannequin.' },
+    { id: 'prom', name: 'Prom', n: 'Prom', note: 'The prom crew sign-up, pitched at high-school seniors.' },
+    { id: 'game', name: 'Suit Up', n: 'Game', note: 'The dress-the-mannequin minigame for the prom crew.' }
+  ];
+  var STYLES = {
+    kodak: {
+      name: 'Kodak', kicker: 'Option A', chip: 'linear-gradient(135deg,#121110 50%,#C29E62 50%)',
+      display: "norman-stencil-fat, Rokkitt, serif", displayTxt: 'SUITED, SINCE 1985', dWeight: 800, body: 'Archivo, sans-serif', bodyTxt: 'Rokkitt and Archivo. Warm, confident, a little cinematic.',
+      mood: 'Rochester in 1985: a camera store’s brass and chrome, darkroom amber, the city at night. Grown-up and warm, with a wink of local history.',
+      palette: [['#121110', 'Charcoal'], ['#1A1816', 'Panel'], ['#C29E62', 'Brass'], ['#EEE7D9', 'Cream'], ['#E8963A', 'Amber'], ['#E86A5E', 'Signal']],
+      details: ['Brushed-brass main buttons with an engraved grip line', 'Sign-up steps on a quiet film strip with an amber frame counter', 'Engraved selector scales and pinked fabric swatches for choices', 'Shop suits in cream slide mounts, on a knit form with a wood cap'],
+      screens: { wedding: 'Main', party: 'Party', look: 'Look', book: 'Book', status: 'Status', member: 'Member', shop: 'Shop', prom: 'PromKodak', game: 'PromGameKodak' }
+    },
+    birch: {
+      name: 'Silver Birch', kicker: 'Option B', chip: 'linear-gradient(135deg,#0A0A0B 50%,#B9BDBF 50%)',
+      display: "cesso, Plaster, Jost, sans-serif", displayTxt: 'Black tie, handled.', dWeight: 400, body: 'Jost, sans-serif', bodyTxt: 'Cesso and Jost. Precise, modern, quietly expensive.',
+      mood: 'Modern black tie: black, silver and ivory, sharp edges and lots of air. Secret-agent cool without the gadgets.',
+      palette: [['#0A0A0B', 'Black'], ['#111112', 'Panel'], ['#B9BDBF', 'Silver'], ['#F4F1EA', 'Ivory'], ['#C9A24B', 'Gold'], ['#2E2F31', 'Line']],
+      details: ['Sharp, 0-radius edges and hairline silver rules', 'Gold kept for the one key action on each screen', 'A minimal numbered progress line', 'Shop suits on a faceless charcoal form with a steel post'],
+      screens: { wedding: 'SilverBirchSignup', party: 'BirchParty', look: 'BirchLook', book: 'BirchBook', status: 'BirchStatus', member: 'BirchMember', shop: 'ShopBirch', prom: 'PromBirch', game: 'PromGameBirch' }
+    },
+    park: {
+      name: 'Tuxedo Park', kicker: 'Option C', chip: 'linear-gradient(135deg,#13241D 50%,#C6A867 50%)',
+      display: "vivaldi-mn, 'Playfair Display', Georgia, serif", displayTxt: 'The whole party, properly dressed.', dWeight: 400, body: "'EB Garamond', Georgia, serif", bodyTxt: 'Vivaldi, Playfair and Garamond. Engraved, traditional, gracious.',
+      mood: 'The Gilded Age club: bottle-green walls, engraved stationery and gilt, with a consulting detective’s eye for detail.',
+      palette: [['#13241D', 'Bottle green'], ['#0E1B16', 'Panel'], ['#C6A867', 'Gilt'], ['#F2EAD8', 'Stationery'], ['#7B2D26', 'Claret'], ['#5E1F2A', 'Burgundy']],
+      details: ['Engraved double rules and gilt hairlines', 'Roman-numeral steps and stationery-card confirmations', 'Cream cards and Garamond small caps throughout', 'Shop suits on a linen dress form with a turned wood stand'],
+      variant: { name: 'Burgundy', wedding: 'TuxedoParkBurgundySignup', sheet: 'TuxedoParkBurgundy' },
+      screens: { wedding: 'TuxedoParkSignup', party: 'ParkParty', look: 'ParkLook', book: 'ParkBook', status: 'ParkStatus', member: 'ParkMember', shop: 'ShopPark', prom: 'PromPark', game: 'PromGamePark' }
+    }
+  };
+  var ORDER = ['kodak', 'birch', 'park'];
+  var state = { style: 'kodak', step: 0, view: 'walk', burgundy: false };
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+  function src(styleKey, stepIdx) {
+    var st = STYLES[styleKey], step = STEPS[stepIdx];
+    var file = st.screens[step.id];
+    if (styleKey === 'park' && state.burgundy && step.id === 'wedding') file = st.variant.wedding;
+    return file + '.dc.html';
+  }
+  // Hash: #kodak-3 or #compare-3
+  function readHash() {
+    var m = (location.hash || '').match(/^#(kodak|birch|park|compare)(?:-(\d+))?$/);
+    if (!m) return;
+    if (m[1] === 'compare') state.view = 'compare'; else { state.view = 'walk'; state.style = m[1]; }
+    if (m[2]) state.step = Math.max(0, Math.min(STEPS.length - 1, +m[2] - 1));
+  }
+  function writeHash() {
+    var h = '#' + (state.view === 'compare' ? 'compare' : state.style) + '-' + (state.step + 1);
+    if (location.hash !== h) history.replaceState(null, '', h);
+  }
+  function fit(vp, frame, phone) {
+    if (phone) { frame.style.width = '390px'; frame.style.height = Math.max(400, vp.clientHeight - 32) + 'px'; frame.style.transform = 'none'; return; }
+    var w = 1280, s = vp.clientWidth / w;
+    frame.style.width = w + 'px'; frame.style.height = (vp.clientHeight / s) + 'px'; frame.style.transform = 'scale(' + s + ')';
+  }
+  function renderStyles() {
+    $('styleBtns').innerHTML = ORDER.map(function (k) {
+      var st = STYLES[k];
+      return '<button type="button" data-k="' + k + '" aria-pressed="' + (state.style === k && state.view === 'walk') + '"><i style="background:' + st.chip + '"></i>' + esc(st.kicker) + ' · ' + esc(st.name) + '</button>';
+    }).join('');
+    $('styleBtns').querySelectorAll('button').forEach(function (b) { b.onclick = function () { state.style = b.dataset.k; state.view = 'walk'; render(); }; });
+    $('vWalk').setAttribute('aria-pressed', state.view === 'walk'); $('vComp').setAttribute('aria-pressed', state.view === 'compare');
+  }
+  function renderStory() {
+    var st = STYLES[state.style];
+    var html = '<div><div class="kicker">' + esc(st.kicker) + '</div><h1 style="font-family:' + st.display + '; font-weight:' + st.dWeight + '">' + esc(st.name) + '</h1></div>'
+      + '<p class="mood">' + esc(st.mood) + '</p>'
+      + '<div><h3>Palette</h3><div class="palette">' + st.palette.map(function (p) { return '<div><span style="background:' + p[0] + '"></span>' + esc(p[1]) + '<br>' + p[0] + '</div>'; }).join('') + '</div></div>'
+      + '<div class="type"><h3>Type</h3><div class="d" style="font-family:' + st.display + '; font-weight:' + st.dWeight + '">' + esc(st.displayTxt) + '</div><div class="b" style="font-family:' + st.body + '">' + esc(st.bodyTxt) + '</div></div>'
+      + '<div><h3>Signature details</h3><ul class="details">' + st.details.map(function (d) { return '<li>' + esc(d) + '</li>'; }).join('') + '</ul></div>';
+    if (st.variant) html += '<div><h3>Colourway</h3><div class="seg" role="group" aria-label="Tuxedo Park colourway" style="display:inline-flex"><button type="button" id="cwG" aria-pressed="' + !state.burgundy + '">Green</button><button type="button" id="cwB" aria-pressed="' + state.burgundy + '">Burgundy</button></div><p class="variant" style="margin:8px 0 0">The burgundy colourway is drawn for the sign-up and the detail sheet; the rest of the path is shown in green.</p></div>';
+    $('story').innerHTML = html;
+    if (st.variant) { $('cwG').onclick = function () { state.burgundy = false; render(); }; $('cwB').onclick = function () { state.burgundy = true; state.step = 0; render(); }; }
+  }
+  function stepButtons(el, onPick) {
+    el.innerHTML = STEPS.map(function (s, i) { return '<button type="button" data-i="' + i + '"' + (i === state.step ? ' aria-current="step"' : '') + '><b>' + (i + 1) + ' · ' + esc(s.n) + '</b>' + esc(s.name) + '</button>'; }).join('');
+    el.querySelectorAll('button').forEach(function (b) { b.onclick = function () { onPick(+b.dataset.i); }; });
+    var cur = el.querySelector('[aria-current]'); if (cur) cur.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+  function renderWalk() {
+    var step = STEPS[state.step], url = src(state.style, state.step);
+    stepButtons($('steps'), function (i) { state.step = i; render(); });
+    var f = $('frame'), vp = $('vp');
+    vp.className = 'viewport' + (step.phone ? ' phone' : '');
+    if (f.getAttribute('src') !== url) f.setAttribute('src', url);
+    f.title = STYLES[state.style].name + ': ' + step.name;
+    fit(vp, f, step.phone);
+    $('url').textContent = 'incognitomenswear.com · ' + STYLES[state.style].name + ' · ' + step.name;
+    $('note').textContent = step.note;
+    $('open').href = url;
+    $('prev').disabled = state.step === 0; $('next').textContent = state.step === STEPS.length - 1 ? 'Side by side →' : 'Next →';
+  }
+  function renderCompare() {
+    var step = STEPS[state.step];
+    stepButtons($('cSteps'), function (i) { state.step = i; render(); });
+    var cols = $('cols');
+    if (cols.dataset.step !== String(state.step)) {
+      cols.dataset.step = state.step;
+      cols.innerHTML = ORDER.map(function (k) {
+        var st = STYLES[k], url = src(k, state.step);
+        return '<div class="col"><h2 style="font-family:' + st.display + '; font-weight:' + st.dWeight + '">' + esc(st.name) + ' <a href="#' + k + '-' + (state.step + 1) + '" data-walk="' + k + '">Walk through</a></h2><div class="frame-wrap"><div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>' + esc(step.name) + '</span></div><div class="viewport' + (step.phone ? ' phone' : '') + '"><iframe src="' + url + '" title="' + esc(st.name) + ': ' + esc(step.name) + '" loading="lazy"></iframe></div></div></div>';
+      }).join('');
+      cols.querySelectorAll('[data-walk]').forEach(function (a) { a.onclick = function (e) { e.preventDefault(); state.style = a.dataset.walk; state.view = 'walk'; render(); }; });
+    }
+    cols.querySelectorAll('.viewport').forEach(function (vp) {
+      var f = vp.querySelector('iframe');
+      if (step.phone) { f.style.width = '390px'; var s = Math.min(1, vp.clientWidth / 410); f.style.transform = 'scale(' + s + ')'; f.style.transformOrigin = '50% 0'; f.style.height = (vp.clientHeight / s - 30) + 'px'; }
+      else { var s2 = vp.clientWidth / 1280; f.style.width = '1280px'; f.style.height = (vp.clientHeight / s2) + 'px'; f.style.transform = 'scale(' + s2 + ')'; f.style.transformOrigin = '0 0'; }
+    });
+  }
+  function render() {
+    renderStyles();
+    $('walk').hidden = state.view !== 'walk'; $('compare').hidden = state.view !== 'compare';
+    if (state.view === 'walk') { renderStory(); renderWalk(); } else renderCompare();
+    writeHash();
+  }
+  $('vWalk').onclick = function () { state.view = 'walk'; render(); };
+  $('vComp').onclick = function () { state.view = 'compare'; render(); };
+  $('prev').onclick = function () { if (state.step > 0) { state.step--; render(); } };
+  $('next').onclick = function () { if (state.step < STEPS.length - 1) state.step++; else state.view = 'compare'; render(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    if (e.key === 'ArrowRight' && state.step < STEPS.length - 1) { state.step++; render(); }
+    if (e.key === 'ArrowLeft' && state.step > 0) { state.step--; render(); }
+  });
+  window.addEventListener('resize', function () { if (state.view === 'walk') fit($('vp'), $('frame'), STEPS[state.step].phone); else { $('cols').dataset.step = ''; renderCompare(); } });
+  window.addEventListener('hashchange', function () { readHash(); render(); });
+  readHash(); render();
+})();
+</script>
+</body>
+</html>

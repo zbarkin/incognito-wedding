@@ -2,6 +2,23 @@
 // picker shown on each screen when it's opened on its own.
 // Each entry: [link id, design file name, menu name, one-line note, phone screen?]
 window.SCREEN_GROUPS = [
+  ['For the client', [
+    ['present', 'Present', 'Style options · presentation', 'Walk through each style path, or compare them side by side']
+  ]],
+  ['Silver Birch path', [
+    ['birch-party', 'BirchParty', 'Silver Birch · the party', 'Step 2'],
+    ['birch-look', 'BirchLook', 'Silver Birch · the look', 'Step 3'],
+    ['birch-book', 'BirchBook', 'Silver Birch · book a visit', 'Step 4'],
+    ['birch-status', 'BirchStatus', 'Silver Birch · party status', 'The groom’s view'],
+    ['birch-member', 'BirchMember', 'Silver Birch · groomsman', 'Phone', true]
+  ]],
+  ['Tuxedo Park path', [
+    ['park-party', 'ParkParty', 'Tuxedo Park · the party', 'Step 2'],
+    ['park-look', 'ParkLook', 'Tuxedo Park · the look', 'Step 3'],
+    ['park-book', 'ParkBook', 'Tuxedo Park · book a visit', 'Step 4'],
+    ['park-status', 'ParkStatus', 'Tuxedo Park · party status', 'The groom’s view'],
+    ['park-member', 'ParkMember', 'Tuxedo Park · groomsman', 'Phone', true]
+  ]],
   ['Style options · sign-up step 1', [
     ['kodak', 'Main', 'Kodak', 'Charcoal, brass and brushed aluminum, with a Rochester feel'],
     ['silver-birch', 'SilverBirchSignup', 'Silver Birch', 'Black, silver and ivory, with Cesso for titles'],

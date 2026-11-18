@@ -1,0 +1,215 @@
+/* Tuxedo Park component kit: shared parts for every Tuxedo Park screen.
+   Linked from each screen's <helmet> as ../park-kit.css. It uses the SAME class names as
+   kodak-kit.css (kk-*), so a Kodak screen and its Park twin share markup and differ in look.
+
+   Direction: Gilded Age stationery. Bottle-green walls, cream card stock, engraver's ink,
+   gilt hairlines, one oxblood accent. Engraved double rules, Roman numerals, tracked small caps
+   in EB Garamond, italic for anything written in. Refined, never costume.
+
+   Two grounds. Parts sit either on the green wall / a green panel (the default) or on cream
+   card stock (.tp-card / .pk-paper). Every part reads its colours from the --kk-* variables
+   below, and the cream ground swaps them, so the same class works on either. */
+
+:root, .pk-green {
+  --kk-ground:#13241D; --kk-ink:#F2EAD8; --kk-muted:#A9B39F; --kk-faint:#5F7064;
+  --kk-line:#2F463A; --kk-rule:#C6A867; --kk-hair:#2F463A; --kk-accent:#C6A867; --kk-gilt:#C6A867;
+  --kk-alert:#E0A396; --kk-ok:#B8C9A4; --kk-tint:rgba(198,168,103,.10); --kk-placeholder:#7F8B7A;
+  --kk-btn-bg:#C6A867; --kk-btn-fg:#1F1A14; --kk-btn-rule:#1F1A14; --kk-btn-hover:#D9BE82;
+  --kk-off-bg:#24372E; --kk-off-fg:#7F8B7A; --kk-track:#0A1410; --kk-knob:#4C6656;
+  --kk-display:vivaldi-mn, 'Playfair Display', Georgia, serif; --kk-serif:'Playfair Display', Georgia, serif;
+  --kk-body:'EB Garamond', Georgia, serif; --kk-script:'Pinyon Script', cursive;
+  --kk-seal:#7B2D26; --kk-seal-hi:#9A3A31; --kk-seal-lo:#5E211B;
+}
+.pk-panel { --kk-ground:#0E1B16; background:#0E1B16; border:1px solid #2F463A; }
+.tp-card, .pk-paper {
+  --kk-ground:#F2EAD8; --kk-ink:#1F1A14; --kk-muted:#4E463A; --kk-faint:#9A9080;
+  --kk-line:#1F1A14; --kk-rule:#1F1A14; --kk-hair:#CFC3A6; --kk-accent:#7B2D26; --kk-gilt:#A88B50;
+  --kk-alert:#7B2D26; --kk-ok:#2F5A3F; --kk-tint:rgba(123,45,38,.07); --kk-placeholder:#6A6152;
+  --kk-btn-bg:#1F1A14; --kk-btn-fg:#F2EAD8; --kk-btn-rule:#C6A867; --kk-btn-hover:#7B2D26;
+  --kk-off-bg:#DDD2B8; --kk-off-fg:#5A5244; --kk-track:#1F1A14; --kk-knob:#EDE4CF;
+}
+
+/* Grounds (the same recipes as TuxedoParkSignup) */
+.tp-wall { background-color:#13241D; background-image:radial-gradient(circle at 14px 14px, rgba(198,168,103,.18) 1.3px, rgba(0,0,0,0) 1.9px), linear-gradient(45deg, rgba(0,0,0,0) 49.3%, rgba(198,168,103,.07) 49.3%, rgba(198,168,103,.07) 50.7%, rgba(0,0,0,0) 50.7%), linear-gradient(-45deg, rgba(0,0,0,0) 49.3%, rgba(198,168,103,.07) 49.3%, rgba(198,168,103,.07) 50.7%, rgba(0,0,0,0) 50.7%); background-size:28px 28px; }
+.tp-card { background:radial-gradient(circle at 0 0, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) top left/51% 51% no-repeat, radial-gradient(circle at 100% 0, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) top right/51% 51% no-repeat, radial-gradient(circle at 0 100%, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) bottom left/51% 51% no-repeat, radial-gradient(circle at 100% 100%, rgba(0,0,0,0) 13px, #F2EAD8 13.5px) bottom right/51% 51% no-repeat; color:#1F1A14; color-scheme:light; }
+.pk-paper { background:#F2EAD8; color:#1F1A14; color-scheme:light; }
+
+@media (prefers-reduced-motion: reduce) { [class*="kk-"], [class*="kk-"]::before, [class*="kk-"]::after { animation:none !important; transition:none !important; } }
+
+/* 01 Buttons ------------------------------------------------------------------------------- */
+/* Main action: an engraved plate. Ink with a gilt inner rule on cream; gilt with an ink rule on green. */
+.kk-shutter { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:56px; padding:0 30px; box-sizing:border-box;
+  border:0; border-radius:0; cursor:pointer; text-decoration:none; text-align:center; color:var(--kk-btn-fg); background:var(--kk-btn-bg);
+  box-shadow:inset 0 0 0 4px var(--kk-btn-bg), inset 0 0 0 5px var(--kk-btn-rule);
+  font:600 15px/1.15 var(--kk-body); letter-spacing:.16em; text-transform:uppercase; transition:background .2s, box-shadow .2s; }
+.kk-shutter:hover { background:var(--kk-btn-hover); box-shadow:inset 0 0 0 4px var(--kk-btn-hover), inset 0 0 0 5px var(--kk-btn-rule); }
+.kk-shutter:active { transform:translateY(1px); }
+.kk-shutter[disabled], .kk-shutter[aria-disabled="true"] { background:var(--kk-off-bg); color:var(--kk-off-fg); box-shadow:none; cursor:not-allowed; transform:none; }
+.kk-dot { display:none; }
+.kk-shutter.kk-small { min-height:48px; padding:0 22px; font-size:14px; }
+/* Secondary / back: a ruled outline, a thin line, a gap, a thin line. */
+.kk-leader { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:0 24px; box-sizing:border-box; cursor:pointer; text-decoration:none;
+  color:var(--kk-ink); background:transparent; border:0; border-radius:0;
+  box-shadow:inset 0 0 0 1px var(--kk-rule), inset 0 0 0 4px var(--kk-ground), inset 0 0 0 5px var(--kk-rule);
+  font:600 14px/1.1 var(--kk-body); letter-spacing:.16em; text-transform:uppercase; transition:background-color .2s; }
+.kk-leader:hover { background-color:var(--kk-tint); }
+/* Text link: written in, in italic, with a fine underline. */
+.kk-grease { color:var(--kk-accent); background:none; border:0; padding:0; cursor:pointer; font-family:var(--kk-body); font-style:italic; font-size:inherit;
+  text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px; }
+.kk-grease:hover, .kk-grease:focus-visible { text-decoration-thickness:2px; }
+a.kk-shutter, a.kk-shutter:hover, a.kk-shutter:visited { color:var(--kk-btn-fg); text-decoration:none; }
+a.kk-leader, a.kk-leader:hover, a.kk-leader:visited { color:var(--kk-ink); text-decoration:none; }
+a.kk-grease, a.kk-grease:hover, a.kk-grease:visited { color:var(--kk-accent); }
+
+/* 02 Step progress: Roman numerals on an engraved rule; the current part takes a double rule -- */
+.kk-steps { display:block; min-width:0; }
+.kk-counter { display:none; }
+.kk-strip { list-style:none; margin:0; padding:0; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0, 1fr); gap:16px; }
+.kk-frame { display:flex; flex-direction:column; gap:2px; min-width:0; padding-top:9px; border-top:1px solid var(--kk-faint); color:var(--kk-muted); font:400 20px/1.2 var(--kk-serif); }
+.kk-frame b { display:flex; align-items:center; gap:8px; font:italic 700 16px/1.2 var(--kk-serif); color:var(--kk-muted); letter-spacing:0; }
+.kk-frame a { color:inherit; text-decoration:none; }
+.kk-frame a:hover { color:var(--kk-ink); }
+.kk-frame.is-done { color:var(--kk-ink); border-top-color:var(--kk-line); }
+.kk-frame.is-done b { color:var(--kk-accent); }
+.kk-frame.is-done b::after { content:"\2713"; flex:0 0 18px; width:18px; height:18px; border-radius:50%; background:var(--kk-seal); color:#F2EAD8;
+  font:normal 700 10px/18px var(--kk-body); text-align:center; box-shadow:0 0 0 1.5px rgba(123,45,38,.28); }
+.kk-frame.is-now { padding-top:7px; border-top:3px double var(--kk-line); color:var(--kk-ink); font-weight:700; }
+.kk-frame.is-now b { color:var(--kk-accent); }
+@media (max-width: 560px) {
+  .kk-strip { gap:8px; }
+  .kk-frame { font-size:0; gap:0; }
+  .kk-frame b { font-size:15px; }
+  .kk-frame.is-now { font-size:15px; gap:2px; }
+}
+
+/* 03 Fields: tracked caps labels, registry lines written in italic ------------------------- */
+.kk-field { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.kk-dymo { align-self:flex-start; display:inline-block; padding:0; background:none; color:var(--kk-muted); font:600 12px/1.3 var(--kk-body); letter-spacing:.18em; text-transform:uppercase; }
+.kk-dymo.is-red { color:var(--kk-accent); }
+.kk-dymo.is-red::after { content:" *"; letter-spacing:0; }
+.kk-input { width:100%; min-height:46px; box-sizing:border-box; padding:0 2px; background:transparent; color:var(--kk-ink); border:0; border-bottom:1px solid var(--kk-line);
+  border-radius:0; font:italic 500 21px/1.3 var(--kk-body); outline:none; -webkit-appearance:none; appearance:none; }
+textarea.kk-input { min-height:102px; resize:vertical; line-height:34px; }
+select.kk-input { cursor:pointer; appearance:none; -webkit-appearance:none; padding-right:28px; }
+.kk-input::placeholder { color:var(--kk-placeholder); font-style:italic; }
+.kk-input:focus { border-bottom:2px solid var(--kk-accent); background:var(--kk-tint); }
+.kk-field:focus-within .kk-dymo { color:var(--kk-accent); }
+.kk-help { font-style:italic; font-size:17px; color:var(--kk-muted); }
+
+/* 04 Choice scale: an engraved double rule with a gilt diamond index under the pick -------- */
+.kk-dialwrap { display:block; }
+.kk-dial { display:none; }
+.kk-dial-opts { display:flex; flex-direction:row; gap:0; position:relative; padding-bottom:20px; border:0; min-width:0;
+  background:
+    linear-gradient(var(--kk-line), var(--kk-line)) 0 calc(100% - 10px) / 100% 1px no-repeat,
+    linear-gradient(var(--kk-line), var(--kk-line)) 0 calc(100% - 7px) / 100% 1px no-repeat; }
+.kk-dial-opt { position:relative; flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; min-height:46px; padding:0 6px;
+  background:transparent; border:0; color:var(--kk-muted); cursor:pointer; font:400 19px/1.2 var(--kk-body); text-align:center; transition:color .15s; }
+.kk-dial-opt small { font:600 11px var(--kk-body); letter-spacing:.16em; text-transform:uppercase; }
+.kk-dial-opts > .kk-dial-opt::before { content:""; position:absolute; left:50%; bottom:-11px; width:1px; height:6px; background:var(--kk-line); opacity:.55; }
+.kk-dial-opts > .kk-dial-opt::after { content:""; position:absolute; left:50%; bottom:-17px; width:9px; height:9px; transform:translateX(-50%) rotate(45deg) scale(.4);
+  background:var(--kk-gilt); box-shadow:0 0 0 2px var(--kk-ground); opacity:0; transition:opacity .2s, transform .2s; }
+.kk-dial-opt[aria-checked="true"], .kk-dial-opt[aria-pressed="true"] { color:var(--kk-ink); font-style:italic; font-weight:600; }
+.kk-dial-opts > .kk-dial-opt[aria-checked="true"]::after, .kk-dial-opts > .kk-dial-opt[aria-pressed="true"]::after { opacity:1; transform:translateX(-50%) rotate(45deg) scale(1); }
+.kk-dial-opts > .kk-dial-opt[aria-checked="true"]::before, .kk-dial-opts > .kk-dial-opt[aria-pressed="true"]::before { opacity:0; }
+.kk-dial-opt:hover:not([aria-checked="true"]):not([aria-pressed="true"]) { color:var(--kk-ink); }
+/* Outside a scale, dial-opt is a ruled tab: a hairline box; the pick gets an engraved double rule. */
+:not(.kk-dial-opts) > .kk-dial-opt { flex:0 0 auto; flex-direction:row; padding:0 16px; min-height:44px; font-size:17px; box-shadow:inset 0 0 0 1px var(--kk-hair); }
+:not(.kk-dial-opts) > .kk-dial-opt[aria-checked="true"], :not(.kk-dial-opts) > .kk-dial-opt[aria-pressed="true"] {
+  color:var(--kk-ink); font-style:normal; box-shadow:inset 0 0 0 1px var(--kk-rule), inset 0 0 0 3px var(--kk-ground), inset 0 0 0 4px var(--kk-rule); }
+
+/* Cloth swatch: a cut of the cloth, mounted with a fine gilt hairline; the pick is framed. */
+.kk-swatch { display:flex; flex-direction:column; align-items:center; gap:8px; width:92px; padding:4px 2px; background:transparent; border:0; cursor:pointer; color:var(--kk-muted); font:400 16px/1.25 var(--kk-body); text-align:center; }
+.kk-swatch-ring { display:block; padding:5px; border:3px double transparent; transition:border-color .2s; }
+.kk-swatch-chip { display:block; width:62px; height:44px; position:relative; outline:1px solid var(--kk-gilt); outline-offset:2px;
+  background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.14) 0 1px, transparent 1px 3px);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.18); transition:transform .2s; }
+.kk-swatch-name { padding-bottom:2px; }
+.kk-swatch:hover .kk-swatch-chip { transform:translateY(-1px); }
+.kk-swatch[aria-pressed="true"], .kk-swatch[aria-checked="true"] { color:var(--kk-ink); font-style:italic; font-weight:600; }
+.kk-swatch[aria-pressed="true"] .kk-swatch-ring, .kk-swatch[aria-checked="true"] .kk-swatch-ring { border-color:var(--kk-line); }
+.kk-swatch.is-small { width:82px; }
+.kk-swatch.is-small .kk-swatch-chip { width:50px; height:36px; }
+
+/* 05 Toggle: a gaslight switch; the globe lights amber when on ------------------------------- */
+.kk-cube { display:flex; align-items:center; gap:14px; cursor:pointer; user-select:none; position:relative; }
+.kk-cube input { position:relative; appearance:none; -webkit-appearance:none; width:54px; height:30px; flex:0 0 54px; margin:0; box-sizing:border-box; border-radius:15px;
+  background:transparent; border:1.5px solid var(--kk-gilt); cursor:pointer; transition:background .2s; }
+.kk-cube input::after { content:""; position:absolute; top:2.5px; left:2.5px; width:22px; height:22px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #FFFFFF 0, var(--kk-knob) 60%); box-shadow:inset 0 0 0 1px rgba(0,0,0,.18); transition:transform .2s, background .2s, box-shadow .2s; }
+.kk-cube input:checked { background:var(--kk-track); }
+.kk-cube input:checked::after { transform:translateX(24px); background:radial-gradient(circle at 40% 35%, #FFE2A8 0, #E3A54A 55%, #B9802E 100%); box-shadow:0 0 10px rgba(227,165,74,.6); }
+.kk-cube input:focus-visible { outline:2px solid var(--kk-accent); outline-offset:3px; }
+.kk-cube-art { display:none; }
+
+/* 06 Mounted card: a cream card with an engraved double rule -------------------------------- */
+.kk-mount { position:relative; background:#F2EAD8; color:#1F1A14; padding:12px 12px 36px; box-shadow:0 10px 24px rgba(0,0,0,.4); }
+.kk-mount-win { position:relative; overflow:hidden; outline:3px double #1F1A14; outline-offset:-1px; }
+.kk-mount-hand { position:absolute; left:14px; right:14px; bottom:8px; font:24px/1.1 var(--kk-script); color:#1F1A14; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.kk-mount-print { display:none; }
+
+/* 07 Picked items: a gilt hairline frame set just outside -------------------------------- */
+.kk-pick { position:relative; }
+.kk-circle { display:none; }
+.kk-pick[aria-pressed="true"], .kk-pick[aria-checked="true"], .kk-pick[aria-current="true"], .kk-pick[aria-current="page"], .kk-pick.is-picked {
+  box-shadow:0 0 0 3px var(--kk-ground), 0 0 0 4px var(--kk-gilt); }
+.kk-sheet { background:#0E1B16; padding:10px; }
+
+/* 08 Marks and badges ---------------------------------------------------------------------- */
+/* Dates are written in Playfair italic. */
+.kk-date { font:italic 700 17px/1.15 var(--kk-serif); color:var(--kk-accent); white-space:nowrap; }
+.kk-dx { display:inline-flex; align-items:center; gap:8px; height:26px; padding:0 10px; box-shadow:inset 0 0 0 1px var(--kk-hair); color:var(--kk-muted);
+  font:600 11px/1 var(--kk-body); letter-spacing:.18em; text-transform:uppercase; white-space:nowrap; }
+.kk-dx::before { content:""; width:6px; height:6px; transform:rotate(45deg); background:var(--kk-ok); }
+.kk-dx.is-low::before { background:var(--kk-gilt); }
+.kk-dx.is-out { color:var(--kk-faint); }
+.kk-dx.is-out::before { background:var(--kk-alert); }
+/* Status marks, after the dance card: a wax seal for done, a ring for in hand, a diamond for
+   needs attention, a dashed ring for waiting. Text only, no pills. */
+.kk-cap { display:inline-flex; align-items:center; gap:8px; min-height:24px; color:var(--kk-ink); font:400 16px/1.2 var(--kk-body); white-space:nowrap; }
+.kk-cap::before { content:""; flex:0 0 auto; width:13px; height:13px; box-sizing:border-box; border-radius:50%; border:1.5px solid var(--kk-gilt); }
+.kk-cap.is-green::before { content:"\2713"; width:18px; height:18px; border:0; background:var(--kk-seal); color:#F2EAD8; font:700 10px/18px var(--kk-body); text-align:center; box-shadow:0 0 0 1.5px rgba(123,45,38,.25); }
+.kk-cap.is-red { color:var(--kk-alert); }
+.kk-cap.is-red::before { width:10px; height:10px; margin:0 3px 0 2px; border:0; border-radius:0; transform:rotate(45deg); background:var(--kk-alert); }
+.kk-cap.is-grey { color:var(--kk-muted); font-style:italic; }
+.kk-cap.is-grey::before { border:1.5px dashed var(--kk-muted); }
+
+/* 09 Confirmation: a calling card with a small gilt-ringed wax seal ------------------------- */
+.kk-envelope { position:relative; background:#F2EAD8; color:#1F1A14; padding:18px 60px 18px 22px; border:0; border-radius:0;
+  box-shadow:inset 0 0 0 4px #F2EAD8, inset 0 0 0 5px #A88B50, 0 8px 18px rgba(0,0,0,.3); }
+.kk-envelope::after { content:"I"; position:absolute; right:18px; top:50%; width:26px; height:26px; margin-top:-13px; border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, #9A3A31 0, #7B2D26 55%, #5E211B 100%); box-shadow:0 0 0 1.5px #C6A867, 0 1px 3px rgba(0,0,0,.3);
+  color:#E8D3A2; font:italic 700 13px/26px 'Playfair Display', Georgia, serif; text-align:center; }
+.kk-envelope::before { content:none; }
+.kk-envelope h3, .kk-envelope h2 { margin:0 0 4px; font:700 20px/1.25 'Playfair Display', Georgia, serif; color:#1F1A14; }
+.kk-envelope p { margin:0; font-size:17px; line-height:1.5; color:#1F1A14; }
+.kk-envelope a { color:#7B2D26; font-style:italic; }
+.kk-stamp { display:block; margin-bottom:4px; padding:0; border:0; color:#7B2D26; font:600 11px/1.2 'EB Garamond', Georgia, serif; letter-spacing:.2em; text-transform:uppercase; transform:none; opacity:1; }
+.kk-ticks { display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:10px; font:italic 15px 'EB Garamond', Georgia, serif; color:#4E463A; }
+.kk-ticks span::before { content:"\25C7  "; color:#A88B50; } .kk-ticks span.is-done::before { content:"\25C6  "; color:#7B2D26; }
+
+/* 10 Loading and empty --------------------------------------------------------------------- */
+.kk-reel { width:36px; height:36px; animation:kk-spin 2.4s linear infinite; opacity:.85; }
+@keyframes kk-spin { to { transform:rotate(360deg); } }
+.kk-loading { display:flex; align-items:center; gap:14px; color:var(--kk-muted); font-style:italic; font-size:18px; }
+/* Empty: a blank calling card waiting to be written on. */
+.kk-negative { display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:transparent; border:1px dashed var(--kk-faint); padding:20px; }
+.kk-neg { width:58px; height:40px; flex:0 0 58px; box-sizing:border-box; background:transparent; border:1px solid var(--kk-line); color:transparent; font-size:0; position:relative; }
+.kk-neg::after { content:""; position:absolute; inset:4px; border:1px solid var(--kk-gilt); }
+.kk-negative p { margin:0; color:var(--kk-muted); max-width:420px; font-style:italic; font-size:19px; }
+.kk-negative strong { display:block; color:var(--kk-ink); font:700 20px 'Playfair Display', Georgia, serif; font-style:normal; margin-bottom:2px; }
+
+/* 11 Lists: a dance card ------------------------------------------------------------------- */
+.kk-sleeve { list-style:none; margin:0; padding:0; background:transparent; border-top:1px solid var(--kk-line); }
+.kk-sleeve > * { border-bottom:1px solid var(--kk-hair); }
+.kk-sleeve-row { display:grid; grid-template-columns:40px minmax(0, 1fr) auto; align-items:center; gap:12px; padding:12px 4px; }
+.kk-no { font:italic 700 18px/1.2 var(--kk-serif); color:var(--kk-accent); }
+.kk-mark { font:italic 400 17px/1.25 var(--kk-body); color:var(--kk-muted); white-space:nowrap; }
+.kk-mark.is-ok { color:var(--kk-ok); } .kk-mark.is-wait { color:var(--kk-muted); } .kk-mark.is-no { color:var(--kk-alert); }
+
+/* Divider: an engraved hairline with a diamond ornament ------------------------------------- */
+.kk-edge { position:relative; height:9px; overflow:visible; border:0; background:linear-gradient(var(--kk-line), var(--kk-line)) 0 50% / 100% 1px no-repeat; }
+.kk-edge::after { content:""; position:absolute; left:50%; top:50%; width:8px; height:8px; box-sizing:border-box; transform:translate(-50%, -50%) rotate(45deg);
+  border:1px solid var(--kk-line); background:var(--kk-ground); box-shadow:0 0 0 6px var(--kk-ground); }
+.kk-edge::before { content:none; }
+.kk-edge span { display:none; }
