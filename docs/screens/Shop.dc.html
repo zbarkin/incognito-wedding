@@ -520,7 +520,7 @@ class Component extends DCLogic {
       sizeCls: 'sh-size kk-pick', btn: 'kk-shutter', leader: 'kk-leader', bookStyle: 'flex:0 1 auto;'
     } : {
       on: false, off: true,
-      mount: '', mountStyle: '', win: '', winBorder: '1px solid ' + t.line, winRadius: t.radius,
+      mount: '', mountStyle: '', win: '', winBorder: this.props.theme === 'birch' ? '0' : '1px solid ' + t.line, winRadius: t.radius,
       sizeCls: 'sh-size', btn: 'sh-btn', leader: 'sh-ghost',
       bookStyle: 'flex:0 1 auto; height:54px; padding:0 20px; box-sizing:border-box; display:inline-flex; align-items:center; border:1px solid ' + t.border + '; border-radius:2px; color:' + t.text + '; text-decoration:none; font-weight:600; font-size:14px;'
     };
