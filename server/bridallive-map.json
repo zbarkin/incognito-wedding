@@ -1,0 +1,5 @@
+{
+  "_about": "Links our catalog to BridalLive items. 'products': our product handle -> the item name in BridalLive, when it differs from our title. 'variants': our variant id -> BridalLive item id, for any size the name/size match gets wrong. Run node scripts/bridallive-match.mjs to see what still needs linking.",
+  "products": {},
+  "variants": {}
+}

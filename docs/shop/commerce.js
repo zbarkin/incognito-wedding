@@ -14,9 +14,18 @@
 //   3. Create a Storefront API access token (Shopify admin > Apps > Develop apps).
 //      It is a public, read-and-cart-only token, made to live in browser code.
 //   4. Set provider to 'shopify' and fill in shopDomain and storefrontToken.
+//
+//   provider: 'bridallive' - the shop's own system (BridalLive) through our server API
+//                         (server/shop-api.mjs): live stock and prices, orders created in
+//                         BridalLive, payment on BridalLive's Client Portal. The cart stays in
+//                         this browser until checkout. Set apiBase to the deployed API.
+//   provider: 'auto'    - (the default) 'bridallive' on the local preview server, which runs the
+//                         API against a stand-in BridalLive; 'bridallive' anywhere apiBase is set;
+//                         otherwise 'local'.
 (function () {
   var CONFIG = {
-    provider: 'local',
+    provider: 'auto',
+    apiBase: '',             // e.g. 'https://incognito-shop-api.example.workers.dev/api/shop'
     // Next to this script, so pages at any depth find it.
     catalogUrl: document.currentScript ? new URL('catalog.json', document.currentScript.src).href : '../shop/catalog.json',
     shopDomain: '',          // e.g. 'incognito-menswear.myshopify.com'
@@ -135,8 +144,75 @@
     }
   };
 
-  var api = CONFIG.provider === 'shopify' && CONFIG.shopDomain && CONFIG.storefrontToken ? shopify : local;
+  // ---- BridalLive, through our server API ---------------------------------------------
+  // The browser never talks to BridalLive: the API key stays on the server. The catalog comes
+  // back as our catalog.json with each size's live stock and price; checkout sends the cart and
+  // the customer's details, and the server answers with the payment page to go to.
+  var apiBase = CONFIG.apiBase || (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && location.port ? location.origin + '/api/shop' : '');
+  var blCatalog = null;
+  var bridallive = {
+    name: 'bridallive',
+    connected: true,
+    needsCustomer: true,
+    getCatalog: function () {
+      if (!blCatalog) {
+        blCatalog = fetch(apiBase + '/catalog').then(function (r) {
+          if (!r.ok) throw new Error('Could not load the shop (' + r.status + ').');
+          return r.json();
+        }).catch(function (e) { blCatalog = null; throw e; });
+      }
+      return blCatalog;
+    },
+    getCart: local.getCart,
+    addToCart: function (variantId, quantity) {
+      return this.getCatalog().then(function (catalog) {
+        var hit = findVariant(catalog, variantId);
+        if (!hit) throw new Error('That size isn’t in the catalog.');
+        if (!hit.variant.available) throw new Error('That size is sold out.');
+        var cart = getCart();
+        var line = cart.lines.filter(function (l) { return l.variantId === variantId; })[0];
+        var want = (line ? line.quantity : 0) + (quantity || 1);
+        if (hit.variant.stock && want > hit.variant.stock) throw new Error('Only ' + hit.variant.stock + ' left in that size.');
+        if (line) line.quantity = want;
+        else cart.lines.push({ variantId: variantId, handle: hit.product.handle, title: hit.product.title, size: hit.variant.size, color: hit.variant.color, price: hit.variant.price, image: hit.product.images[0] && hit.product.images[0].src, quantity: quantity || 1 });
+        return writeCart(cart);
+      });
+    },
+    updateLine: local.updateLine,
+    clearCart: local.clearCart,
+    // customer: { firstName, lastName, email, phone }
+    checkout: function (customer) {
+      var cart = getCart();
+      if (!cart.lines.length) return Promise.resolve({ ok: false, reason: 'empty', message: 'Your cart is empty.' });
+      if (!customer) return Promise.resolve({ ok: false, reason: 'need-details', message: 'Add your name and email to check out.' });
+      var back = location.href.split('?')[0].split('#')[0];
+      return fetch(apiBase + '/checkout', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lines: cart.lines.map(function (l) { return { variantId: l.variantId, quantity: l.quantity }; }), customer: customer, returnUrl: back })
+      }).then(function (r) { return r.json(); }).then(function (res) {
+        if (!res.ok) { blCatalog = null; return { ok: false, reason: 'refused', message: res.message, variantId: res.variantId }; }
+        try { localStorage.setItem(CONFIG.cartKey + '-order', JSON.stringify({ id: res.order.id, number: res.order.number, email: customer.email })); } catch (e) { /* fine */ }
+        memoryCart = { lines: [] }; writeCart(memoryCart);
+        blCatalog = null;
+        if (res.url) return { ok: true, url: new URL(res.url, apiBase).href, order: res.order };
+        return { ok: true, order: res.order, message: res.message };
+      }, function () {
+        return { ok: false, reason: 'offline', message: 'We couldn’t reach the shop’s system. Your cart is still saved.' };
+      });
+    },
+    // The order the customer just paid for, when they come back from the payment page.
+    lastOrder: function () {
+      var o; try { o = JSON.parse(localStorage.getItem(CONFIG.cartKey + '-order')); } catch (e) { o = null; }
+      if (!o) return Promise.resolve(null);
+      return fetch(apiBase + '/order?id=' + encodeURIComponent(o.id) + '&email=' + encodeURIComponent(o.email))
+        .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    }
+  };
+
+  var want = CONFIG.provider === 'auto' ? (apiBase ? 'bridallive' : 'local') : CONFIG.provider;
+  var api = want === 'bridallive' && apiBase ? bridallive
+    : want === 'shopify' && CONFIG.shopDomain && CONFIG.storefrontToken ? shopify : local;
   api.onCartChange = function (fn) { listeners.push(fn); };
-  api.config = { provider: api.name, connected: api.connected };
+  api.config = { provider: api.name, connected: api.connected, needsCustomer: !!api.needsCustomer };
   window.IncognitoCommerce = api;
 })();

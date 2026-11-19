@@ -4,3 +4,7 @@ Thumbs.db
 
 # Full-quality Blender renders; the site uses the .webp copies (scripts/render_webp.py)
 docs/shop/render/*/*.png
+
+# Shop API reports and local secrets: hold the shop's own data
+server/.reports/
+.env

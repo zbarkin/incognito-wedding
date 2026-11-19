@@ -74,6 +74,9 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 </header>
 
 <main style="flex:1 0 auto; width:100%; max-width:1280px; margin:0 auto; box-sizing:border-box; padding:48px 32px 72px; display:flex; flex-direction:column; gap:28px;">
+<sc-if value="{{paidNote}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin:0; padding:14px 16px; border:1px solid {{t.brand}}; color:{{t.text}}; font-size:15px; line-height:1.5;">{{paidNote}}</p>
+</sc-if>
 
 <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 40px;">
 <div style="display:flex; flex-direction:column; gap:10px; max-width:640px;">
@@ -164,7 +167,7 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 </sc-for>
 </section>
 
-<p style="margin:0; font-size:13px; line-height:1.5; color:{{t.note}}; max-width:760px;">Preview: products, photos and prices come from the current online store. Size labels are cleaned up and the descriptions are drafts. Checkout isn’t connected yet: carts are saved in this browser only.</p>
+<p style="margin:0; font-size:13px; line-height:1.5; color:{{t.note}}; max-width:760px;">{{previewNote}}</p>
 </main>
 
 <sc-if value="{{detail.show}}" hint-placeholder-val="{{false}}">
@@ -232,7 +235,7 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 
 <sc-if value="{{cart.show}}" hint-placeholder-val="{{false}}">
 <div onClick="{{closeAll}}" style="position:fixed; inset:0; z-index:40; background:rgba(243,236,221,0.6);"></div>
-<aside role="dialog" aria-modal="true" aria-labelledby="sh-cart-h" style="position:fixed; z-index:41; top:0; right:0; bottom:0; width:min(440px, 100vw); box-sizing:border-box; background:{{t.panel}}; border-left:1px solid {{t.line2}}; display:flex; flex-direction:column;">
+<aside role="dialog" aria-modal="true" aria-labelledby="sh-cart-h" style="position:fixed; z-index:41; top:0; right:0; bottom:0; width:min(440px, 100vw); box-sizing:border-box; background:{{t.panel}}; border-left:1px solid {{t.line2}}; display:flex; flex-direction:column; overflow-y:auto;">
 <div style="display:flex; justify-content:space-between; align-items:center; padding:20px 22px; border-bottom:1px solid {{t.line}};">
 <h2 id="sh-cart-h" style="margin:0; font-family:{{t.display}}; font-weight:700; font-size:26px;">Your cart</h2>
 <button type="button" onClick="{{closeAll}}" aria-label="Close cart" style="width:44px; height:44px; padding:0; background:transparent; color:{{t.text}}; border:1px solid {{t.border}}; border-radius:2px; font-size:22px; cursor:pointer;">×</button>
@@ -263,7 +266,18 @@ Cart<span style="min-width:22px; height:22px; padding:0 6px; box-sizing:border-b
 <div style="padding:18px 22px 22px; border-top:1px solid {{t.line}}; display:flex; flex-direction:column; gap:12px;">
 <div style="display:flex; justify-content:space-between; font-size:17px;"><span>Subtotal</span><span style="font-weight:700; font-variant-numeric:tabular-nums;">{{cart.subtotal}}</span></div>
 <span style="font-size:13px; color:{{t.muted}};">Tax and alterations are figured at checkout and your fitting.</span>
-<button type="button" class="{{k.btn}}" onClick="{{cart.checkout}}" disabled="{{cart.empty}}" style="{{cart.checkoutStyle}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><span class="kk-dot" aria-hidden="true"></span></sc-if>Check out</button>
+<sc-if value="{{cart.ask}}" hint-placeholder-val="{{false}}">
+<fieldset style="margin:0; padding:0; border:0; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+<legend style="padding:0 0 8px; font-size:14px; font-weight:600; color:{{t.text}};">Your details, for the order and the receipt</legend>
+<sc-for list="{{cart.fields}}" as="f" hint-placeholder-count="4">
+<label style="display:flex; flex-direction:column; gap:4px; grid-column:{{f.span}}; font-size:13px; color:{{t.muted}};">{{f.label}}<input type="{{f.type}}" autocomplete="{{f.auto}}" value="{{f.value}}" onChange="{{f.set}}" style="height:44px; padding:0 12px; box-sizing:border-box; width:100%; background:{{t.field}}; color:{{t.text}}; border:1px solid {{t.line2}}; border-radius:2px; font-family:{{t.body}}; font-size:16px;"></label>
+</sc-for>
+</fieldset>
+</sc-if>
+<sc-if value="{{cart.done}}" hint-placeholder-val="{{false}}">
+<p role="status" style="margin:0; padding:12px 14px; border:1px solid {{t.brand}}; font-size:14px; line-height:1.5; color:{{t.text}};">{{cart.done}}</p>
+</sc-if>
+<button type="button" class="{{k.btn}}" onClick="{{cart.checkout}}" disabled="{{cart.blocked}}" style="{{cart.checkoutStyle}}"><sc-if value="{{k.on}}" hint-placeholder-val="{{false}}"><span class="kk-dot" aria-hidden="true"></span></sc-if>{{cart.label}}</button>
 <sc-if value="{{cart.message}}" hint-placeholder-val="{{false}}">
 <sc-if value="{{k.on}}" hint-placeholder-val="{{true}}">
 <div class="kk-envelope" role="status"><span class="kk-stamp" aria-hidden="true">By phone</span><p>{{cart.message}} To order now, call <a href="tel:+15855867846">(585) 586-7846</a> or stop in at 1823 Penfield Rd.</p></div>
@@ -285,7 +299,8 @@ class Component extends DCLogic {
     this.state = {
       loading: true, error: '', catalog: null, cart: { lines: [] }, renders: {},
       type: 'all', line: 'all', family: '', inStock: false, sort: 'featured',
-      open: '', img: 0, color: '', size: '', note: '', noteOk: true, cartOpen: false, cartMsg: ''
+      open: '', img: 0, color: '', size: '', note: '', noteOk: true, cartOpen: false, cartMsg: '',
+      buyer: { firstName: '', lastName: '', email: '', phone: '' }, busy: false, done: '', paidNote: ''
     };
   }
   componentDidMount() {
@@ -296,6 +311,15 @@ class Component extends DCLogic {
       .catch((e) => this.setState({ loading: false, error: e.message }));
     fetch('../../shop/render/manifest.json').then((r) => (r.ok ? r.json() : null)).then((m) => { if (m) this.setState({ renders: m.renders || {} }); }).catch(() => {});
     C.onCartChange((cart) => this.setState({ cart: { lines: cart.lines.slice() } }));
+    // Back from the payment page: confirm the order, then tidy the address bar.
+    const q = new URLSearchParams(location.search);
+    if (q.get('paid') && C.lastOrder) {
+      C.lastOrder().then((o) => {
+        const n = (o && o.number) || q.get('order');
+        this.setState({ paidNote: 'Thank you. Order ' + n + ' is paid' + (o && o.balanceDue > 0 ? ' (deposit received, ' + this.money(o.balanceDue) + ' due at your fitting)' : '') + '. We’ll email you to set up your fitting.' });
+      });
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
     this.onKey = (e) => { if (e.key === 'Escape' && (this.state.open || this.state.cartOpen)) this.setState({ open: '', cartOpen: false, cartMsg: '' }); };
     document.addEventListener('keydown', this.onKey);
   }
@@ -442,14 +466,28 @@ class Component extends DCLogic {
       .catch((e) => this.setState({ note: e.message, noteOk: false }));
   }
   checkout() {
-    window.IncognitoCommerce.checkout().then((r) => {
+    const C = window.IncognitoCommerce;
+    if (this.state.busy) return;
+    const b = this.state.buyer;
+    if (C.config.needsCustomer) {
+      if (!b.firstName.trim() || !b.lastName.trim()) { this.setState({ cartMsg: 'Please add your first and last name.' }); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(b.email.trim())) { this.setState({ cartMsg: 'Please add a valid email address.' }); return; }
+    }
+    this.setState({ busy: true, cartMsg: '', done: '' });
+    C.checkout(C.config.needsCustomer ? b : undefined).then((r) => {
       if (r.ok && r.url) { window.location.href = r.url; return; }
-      this.setState({ cartMsg: r.message });
+      if (r.ok) { this.setState({ busy: false, done: r.message + ' Order ' + r.order.number + '.' }); return; }
+      this.setState({ busy: false, cartMsg: r.message });
+      if (r.reason === 'refused') C.getCatalog().then((catalog) => this.setState({ catalog: catalog }));
     });
+  }
+  field(name, label, type, auto, span) {
+    return { label: label, type: type, auto: auto, span: span, value: this.state.buyer[name], set: (e) => this.setState({ buyer: Object.assign({}, this.state.buyer, { [name]: e.target.value }), cartMsg: '' }) };
   }
   renderVals() {
     const s = this.state;
     const t = this.theme(); this.t = t;
+    const C = window.IncognitoCommerce, live = !!(C && C.config.needsCustomer);
     const all = s.catalog ? s.catalog.products.filter((p) => !p.hidden) : [];
     const famHex = {}; this.families().forEach((f) => { famHex[f[0]] = f[2]; });
     let list = all.filter((p) => (s.type === 'all' || p.type === s.type) && (s.line === 'all' || p.line === s.line) && (!s.family || p.colorFamily === s.family) && (!s.inStock || p.available));
@@ -553,7 +591,17 @@ class Component extends DCLogic {
       resetFilters: () => this.setState({ type: 'all', line: 'all', family: '', inStock: false }),
       products: products,
       detail: detail,
-      cart: { show: s.cartOpen, empty: !lines.length, lines: lines, subtotal: this.money(subtotal), checkout: () => this.checkout(), checkoutBg: lines.length ? t.accent : t.border, checkoutStyle: checkoutStyle, message: s.cartMsg },
+      cart: {
+        show: s.cartOpen, empty: !lines.length, lines: lines, subtotal: this.money(subtotal), checkout: () => this.checkout(), checkoutBg: lines.length ? t.accent : t.border, checkoutStyle: checkoutStyle, message: s.cartMsg,
+        ask: live && lines.length > 0, done: s.done, blocked: !lines.length || s.busy,
+        label: s.busy ? 'One moment…' : live ? 'Check out · pay securely' : 'Check out',
+        fields: [this.field('firstName', 'First name', 'text', 'given-name', 'auto'), this.field('lastName', 'Last name', 'text', 'family-name', 'auto'),
+          this.field('email', 'Email', 'email', 'email', '1 / -1'), this.field('phone', 'Mobile (optional)', 'tel', 'tel', '1 / -1')]
+      },
+      paidNote: s.paidNote,
+      previewNote: live
+        ? 'Stock and prices come live from the shop’s system. Payment is on the shop’s secure payment page.' + (C && C.config.provider === 'bridallive' && /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? ' This local preview uses a test stand-in: no card is charged.' : '')
+        : 'Preview: products, photos and prices come from the current online store. Size labels are cleaned up and the descriptions are drafts. Checkout isn’t connected yet: carts are saved in this browser only.',
       cartCount: String(count), cartBadgeBg: count ? t.accent : t.border, cartAria: 'Cart, ' + count + (count === 1 ? ' item' : ' items'),
       openCart: () => this.setState({ cartOpen: true, open: '', cartMsg: '' }),
       closeAll: () => this.setState({ open: '', cartOpen: false, cartMsg: '' })
