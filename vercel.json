@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "echo \"docs/ is prebuilt: node scripts/build.mjs runs before each commit\"",
+  "outputDirectory": "docs",
+  "functions": {
+    "api/shop/[...path].mjs": {
+      "includeFiles": "{docs/shop/catalog.json,server/**}"
+    }
+  }
+}

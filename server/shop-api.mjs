@@ -100,8 +100,13 @@ export function createShopApi({ loadCatalog, client, map = {}, env = process.env
     }
     const portal = await client.portalUrl(contact.id);
     if (!portal || !portal.url) return ok({ ok: true, mode: 'request', order, message: 'Your order is in. We’ll email you a secure link to pay.' });
-    if (body.returnUrl && allowedReturn(body.returnUrl)) returns.set(trx.id, body.returnUrl);
-    return ok({ ok: true, mode: 'portal', order, url: portal.url });
+    const back = body.returnUrl && allowedReturn(body.returnUrl) ? body.returnUrl : null;
+    if (back) returns.set(trx.id, back);
+    let url = portal.url;
+    // Stand-in only: carry the order in the link too, because on Vercel the payment page can be
+    // served by a different copy of the server that never saw this order.
+    if (client.name === 'mock') url += '&d=' + b64(JSON.stringify({ n: trx.trxNumber, total, payNow, items: lineItems.map((l) => l.itemName + ', ' + l.itemSize), back }));
+    return ok({ ok: true, mode: 'portal', order, url });
   }
 
   async function order(id, email) {
@@ -115,21 +120,27 @@ export function createShopApi({ loadCatalog, client, map = {}, env = process.env
   // Test payment page for the mock BridalLive: stands in for the Client Portal.
   async function mockPay(req, url) {
     const id = Number(url.searchParams.get('trx'));
-    const t = await client.getTransaction(id);
+    let d = null; try { d = JSON.parse(unb64(url.searchParams.get('d') || '')); } catch { /* none */ }
+    const real = await client.getTransaction(id);
+    const t = real || (d && { trxNumber: d.n, totalAmount: d.total, requestedPaymentAmount: d.payNow, balanceDue: d.total, lineItems: d.items.map((s) => ({ itemName: s, itemSize: '' })) });
     if (!t) return new Response('No such order', { status: 404 });
-    const back = returns.get(id) || '/screens/Shop.dc.html';
+    const back = returns.get(id) || (d && d.back && allowedReturn(d.back) && d.back) || '/screens/Shop.dc.html';
+    const payNow = t.requestedPaymentAmount || t.balanceDue;
     if (req.method === 'POST') {
-      await client.addPayment(id, { amount: t.requestedPaymentAmount || t.balanceDue, methodDescription: 'Test card', provider: 'mock' });
-      const to = new URL(back, url); to.searchParams.set('order', t.trxNumber); to.searchParams.set('paid', '1');
+      if (real) await client.addPayment(id, { amount: payNow, methodDescription: 'Test card', provider: 'mock' });
+      let to = new URL(back, url);
+      if (to.origin !== url.origin) to = new URL('/screens/Shop.dc.html', url);   // only back to this site
+      to.searchParams.set('order', t.trxNumber); to.searchParams.set('paid', '1');
+      if (t.totalAmount > payNow) to.searchParams.set('due', String(t.totalAmount - payNow));
       return new Response(null, { status: 303, headers: { location: to.href } });
     }
-    const amt = (t.requestedPaymentAmount || t.balanceDue).toFixed(2);
+    const amt = payNow.toFixed(2);
     return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Test payment</title>
 <body style="font:16px/1.5 system-ui,sans-serif;max-width:440px;margin:48px auto;padding:0 16px;color:#1d1d1f;background:#fafaf7">
 <p style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#a33">Test mode: no card is charged</p>
 <h1 style="font-size:24px;margin:0 0 4px">Pay Incognito Menswear</h1>
 <p style="margin:0 0 20px;color:#555">Stands in for BridalLive’s Client Portal until the shop’s account is connected.</p>
-<p>Order ${t.trxNumber} · ${t.lineItems.map((l) => esc(l.itemName + ', ' + l.itemSize)).join(' · ')}</p>
+<p>Order ${t.trxNumber} · ${t.lineItems.map((l) => esc(l.itemName + (l.itemSize ? ', ' + l.itemSize : ''))).join(' · ')}</p>
 <p style="font-size:20px"><b>Due now: $${amt}</b>${t.totalAmount > Number(amt) ? ' <span style="color:#555">of $' + t.totalAmount.toFixed(2) + '</span>' : ''}</p>
 <form method="post"><button style="height:48px;padding:0 24px;font:inherit;font-weight:600;background:#1d1d1f;color:#fff;border:0;border-radius:4px;cursor:pointer">Pay $${amt} (test)</button>
 <a href="${esc(back)}" style="margin-left:16px;color:#555">Cancel</a></form></body>`, { headers: { 'content-type': 'text/html; charset=utf-8' } });
@@ -173,4 +184,6 @@ export function createShopApi({ loadCatalog, client, map = {}, env = process.env
 function ok(data, headers = {}) { return new Response(JSON.stringify(data), { headers: { 'content-type': 'application/json', ...headers } }); }
 function fail(status, message, extra = {}) { return new Response(JSON.stringify({ ok: false, message, ...extra }), { status, headers: { 'content-type': 'application/json' } }); }
 function clean(s, n) { return String(s || '').trim().slice(0, n); }
+function b64(s) { return btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+function unb64(s) { return new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))); }
 function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }

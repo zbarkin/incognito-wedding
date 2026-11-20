@@ -19,9 +19,9 @@
 //                         (server/shop-api.mjs): live stock and prices, orders created in
 //                         BridalLive, payment on BridalLive's Client Portal. The cart stays in
 //                         this browser until checkout. Set apiBase to the deployed API.
-//   provider: 'auto'    - (the default) 'bridallive' on the local preview server, which runs the
-//                         API against a stand-in BridalLive; 'bridallive' anywhere apiBase is set;
-//                         otherwise 'local'.
+//   provider: 'auto'    - (the default) 'bridallive' on the local preview server and the Vercel
+//                         test site, which run the API against a stand-in BridalLive;
+//                         'bridallive' anywhere apiBase is set; otherwise 'local'.
 (function () {
   var CONFIG = {
     provider: 'auto',
@@ -148,7 +148,8 @@
   // The browser never talks to BridalLive: the API key stays on the server. The catalog comes
   // back as our catalog.json with each size's live stock and price; checkout sends the cart and
   // the customer's details, and the server answers with the payment page to go to.
-  var apiBase = CONFIG.apiBase || (/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && location.port ? location.origin + '/api/shop' : '');
+  // The local preview server and the Vercel test site both serve the API next to the pages.
+  var apiBase = CONFIG.apiBase || ((/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && location.port) || /\.vercel\.app$/.test(location.hostname) ? location.origin + '/api/shop' : '');
   var blCatalog = null;
   var bridallive = {
     name: 'bridallive',

@@ -315,7 +315,8 @@ class Component extends DCLogic {
     if (q.get('paid') && C.lastOrder) {
       C.lastOrder().then((o) => {
         const n = (o && o.number) || q.get('order');
-        this.setState({ paidNote: 'Thank you. Order ' + n + ' is paid' + (o && o.balanceDue > 0 ? ' (deposit received, ' + this.money(o.balanceDue) + ' due at your fitting)' : '') + '. We’ll email you to set up your fitting.' });
+        const due = o ? o.balanceDue : Number(q.get('due') || 0);
+        this.setState({ paidNote: 'Thank you. Order ' + n + ' is paid' + (due > 0 ? ' (deposit received, ' + this.money(due) + ' due at your fitting)' : '') + '. We’ll email you to set up your fitting.' });
       });
       history.replaceState(null, '', location.pathname + location.hash);
     }
@@ -599,7 +600,7 @@ class Component extends DCLogic {
       },
       paidNote: s.paidNote,
       previewNote: live
-        ? 'Stock and prices come live from the shop’s system. Payment is on the shop’s secure payment page.' + (C && C.config.provider === 'bridallive' && /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? ' This local preview uses a test stand-in: no card is charged.' : '')
+        ? 'Stock and prices come live from the shop’s system. Payment is on the shop’s secure payment page.' + (s.catalog && /mock/.test(s.catalog.source || '') ? ' Test preview: the shop’s system is a stand-in and no card is charged.' : '')
         : 'Preview: products, photos and prices come from the current online store. Size labels are cleaned up and the descriptions are drafts. Checkout isn’t connected yet: carts are saved in this browser only.',
       cartCount: String(count), cartBadgeBg: count ? t.accent : t.border, cartAria: 'Cart, ' + count + (count === 1 ? ' item' : ' items'),
       openCart: () => this.setState({ cartOpen: true, open: '', cartMsg: '' }),
